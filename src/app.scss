@@ -1,0 +1,25 @@
+@import "./variables.scss";
+
+@import "material-components-web/material-components-web";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: $mdc-theme-background;
+}
+
+.show-structure {
+  div {
+    box-sizing: border-box;
+    border: 1px dotted #f00;
+    margin: 1px;
+  }
+}
+
+.cell {
+  &--center {
+    text-align: center;
+  }
+}
