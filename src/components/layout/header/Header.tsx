@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import "./index.scss";
+import "./header.scss";
 
 const Header: React.FC = () => (
   <div className="layout-header">
