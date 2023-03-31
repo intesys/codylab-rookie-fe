@@ -1,33 +1,39 @@
+import {
+  Dataset,
+  NotificationsNone,
+  QuestionAnswer,
+  Search,
+  Settings,
+} from "@mui/icons-material";
+import { Grid } from "@mui/material";
 import React from "react";
-import { Cell, Row } from "@material/react-layout-grid";
-import MaterialIcon from "@material/react-material-icon";
 
-const Toolbar: React.FunctionComponent = () => (
-  <Row className='layout-header-toolbar'>
-    <Cell columns={6} className='layout-header-toolbar-welcome-message'>
+const Toolbar: React.FC = () => (
+  <Grid container spacing={4} className="layout-header-toolbar">
+    <Grid item xs={6} className="layout-header-toolbar-welcome-message">
       Hospital St. Democrito - Welcome back, Mario Rossi
-    </Cell>
-    <Cell columns={6} className='layout-header-toolbar-menu'>
-      <div className='layout-header-toolbar-menu-search'>
-        <MaterialIcon icon='search' />
-        <input type='text' placeholder='search' />
+    </Grid>
+    <Grid item xs={6} className="layout-header-toolbar-menu">
+      <div className="layout-header-toolbar-menu-search">
+        <Search />
+        <input type="text" placeholder="search" />
       </div>
       <ul>
         <li>
-          <MaterialIcon icon='notifications_none' />
+          <NotificationsNone />
         </li>
         <li>
-          <MaterialIcon icon='question_answer' />
+          <QuestionAnswer />
         </li>
         <li>
-          <MaterialIcon icon='date_range' />
+          <Dataset />
         </li>
         <li>
-          <MaterialIcon icon='settings' />
+          <Settings />
         </li>
       </ul>
-    </Cell>
-  </Row>
+    </Grid>
+  </Grid>
 );
 
 export default Toolbar;

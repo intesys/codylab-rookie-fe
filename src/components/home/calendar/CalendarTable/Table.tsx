@@ -1,15 +1,15 @@
+import moment from "moment";
 import React, { useContext } from "react";
 import { CalendarContext } from "..";
 import { week_subs } from "../utils";
 import { CalendarTableData, IDay } from "./lib";
-import moment from "moment";
 import "./table.scss";
 
-const Table: React.FunctionComponent = () => {
+const Table: React.FC = () => {
   const { date, dispatch } = useContext(CalendarContext);
   const calendar = new CalendarTableData(date);
 
-  const Day: React.FunctionComponent<{ day: IDay }> = ({ day }) => {
+  const Day: React.FC<{ day: IDay }> = ({ day }) => {
     if (day.num === null) {
       return null;
     }
@@ -31,7 +31,7 @@ const Table: React.FunctionComponent = () => {
     );
   };
 
-  const Week: React.FunctionComponent<{ days: IDay[] }> = ({ days }) => (
+  const Week: React.FC<{ days: IDay[] }> = ({ days }) => (
     <tr>
       {days.map((day: IDay, i) => (
         <td key={i}>

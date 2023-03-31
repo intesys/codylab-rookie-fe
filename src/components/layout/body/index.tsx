@@ -1,12 +1,14 @@
-import { Cell, Row } from "@material/react-layout-grid";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import "./index.scss";
 
-const Body: React.FunctionComponent = props => (
+interface IProps extends React.PropsWithChildren {}
+
+const Body: React.FC<IProps> = ({ children }) => (
   <div className="layout-body">
-    <Row>
-      <Cell columns={12}>{props.children}</Cell>
-    </Row>
+    <Grid item xs={12}>
+      {children}
+    </Grid>
   </div>
 );
 

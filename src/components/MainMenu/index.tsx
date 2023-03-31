@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MainMenu: React.FunctionComponent = () => (
+const MainMenu: React.FC = () => (
   <ul>
     <li>
       <Link to="/">Dashboard</Link>

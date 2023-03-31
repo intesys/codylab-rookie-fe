@@ -1,20 +1,18 @@
+import { Grid } from "@mui/material";
 import React from "react";
-import { Row, Cell } from "@material/react-layout-grid";
-import logo from "../../../assets/logo.png";
-import MainMenu from "../../main_menu";
 import { Link } from "react-router-dom";
+// import logo from "../../../assets/logo.png";
+import MainMenu from "../../MainMenu";
 
-const Menu: React.FunctionComponent = () => (
-  <Row className='layout-header-menu'>
-    <Cell columns={2} className='logo'>
-      <Link to='/'>
-        <img src={logo} alt='open hospital' />
-      </Link>
-    </Cell>
-    <Cell columns={10} className='menu'>
+const Menu: React.FC = () => (
+  <Grid container className="layout-header-menu">
+    <Grid item xs={2} className="logo">
+      <Link to="/">{/* <img src={logo} alt="open hospital" /> */}</Link>
+    </Grid>
+    <Grid columns={10} className="menu">
       <MainMenu />
-    </Cell>
-  </Row>
+    </Grid>
+  </Grid>
 );
 
 export default Menu;

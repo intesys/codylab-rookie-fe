@@ -1,9 +1,8 @@
 import React from "react";
-import Toolbar from "./toolbar";
-import Menu from "./menu";
+import Menu from "./Menu";
 import "./index.scss";
 
-const Header: React.FunctionComponent = () => (
+const Header: React.FC = () => (
   <div className="layout-header">
     {/* <Toolbar /> */}
     <Menu />

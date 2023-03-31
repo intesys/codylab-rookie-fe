@@ -1,8 +1,8 @@
 import React from "react";
-import Breadcrumb from "../breadcrumb/breadcrumb";
-import BreadcrumbEl from "../breadcrumb/breadcrumb-el";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 
-const Ward: React.FunctionComponent = () => {
+const Ward: React.FC = () => {
   return (
     <div>
       <Breadcrumb>

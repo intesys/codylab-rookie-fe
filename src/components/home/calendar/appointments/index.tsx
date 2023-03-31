@@ -1,11 +1,11 @@
 import moment from "moment";
 import React, { useContext } from "react";
 import { CalendarContext } from "..";
+import { AppointmentsContext, IAppointment } from "../AppointmentsProvider";
 import Appointment from "./appointment";
 import "./index.scss";
-import { AppointmentsContext, IAppointment } from "../appointments_provider";
 
-const Appointments: React.FunctionComponent = () => {
+const Appointments: React.FC = () => {
   const { date } = useContext(CalendarContext);
   const appointments = useContext(AppointmentsContext);
   const selectedDate = moment(date).format("YYYY-MM-DD");

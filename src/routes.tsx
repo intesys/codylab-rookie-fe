@@ -1,16 +1,16 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import Billing from "./components/billing";
 import Home from "./components/home";
-import Patients from "./components/patients";
+import News from "./components/news";
 import Patient from "./components/patient";
+import Patients from "./components/patients";
+import Pharmacy from "./components/pharmacy";
 import Staff from "./components/staff";
 import StaffMember from "./components/staff_member";
-import Pharmacy from "./components/pharmacy";
 import Ward from "./components/ward";
-import Billing from "./components/billing";
-import News from "./components/news";
 
-const Routes: React.FunctionComponent = () => {
+const Routes: React.FC = () => {
   return (
     <Routes>
       <Route path="/">

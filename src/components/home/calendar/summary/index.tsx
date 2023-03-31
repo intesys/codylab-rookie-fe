@@ -1,14 +1,20 @@
-import { Cell, Row } from "@material/react-layout-grid";
+import { Grid } from "@mui/material";
 import React from "react";
 import "./index.scss";
 
-const Summary: React.FunctionComponent = () => (
+const Summary: React.FC = () => (
   <div className="calendar__appointment_summary">
-    <Row>
-      <Cell columns={4}>-</Cell>
-      <Cell columns={4}>-</Cell>
-      <Cell columns={4}>-</Cell>
-    </Row>
+    <Grid container spacing={4}>
+      <Grid item xs={4}>
+        -
+      </Grid>
+      <Grid item xs={4}>
+        -
+      </Grid>
+      <Grid item xs={4}>
+        -
+      </Grid>
+    </Grid>
   </div>
 );
 

@@ -18,7 +18,9 @@ export const AppointmentsContext: React.Context<IAppointmentList> =
 const getAppointments = (): Promise<IAppointmentList> =>
   fetch(apiEndpoint).then((r) => r.json());
 
-const AppointmentsProvider: React.FunctionComponent = ({ children }) => {
+const AppointmentsProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const [appointments, setAppointments] = useState({});
 
   useEffect(() => {

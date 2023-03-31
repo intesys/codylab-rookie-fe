@@ -4,7 +4,7 @@ import { CalendarContext } from "..";
 import { isToday } from "../utils";
 import "./selected_date.scss";
 
-const SelectedDate: React.FunctionComponent = () => {
+const SelectedDate: React.FC = () => {
   const { date } = useContext(CalendarContext);
   return (
     <div className="calendar__selected_date">

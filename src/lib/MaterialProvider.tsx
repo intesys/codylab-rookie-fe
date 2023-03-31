@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IMaterialList } from "../components/home/materials/types";
+import { IMaterialList } from "../components/Home/Materials/Types";
 import { basePath } from "../config/api";
 
 const apiEndpoint = `${basePath}/materials`;
@@ -12,7 +12,9 @@ export const MaterialContext = React.createContext({
 export const getMaterials = (): Promise<IMaterialList> =>
   fetch(apiEndpoint).then((r) => r.json());
 
-export const MaterialProvider: React.FunctionComponent = ({ children }) => {
+export const MaterialProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const [materials, setMaterials] = useState({
     drugs: [],
     nursing: [],

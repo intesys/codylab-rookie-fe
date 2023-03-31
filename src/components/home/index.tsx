@@ -1,15 +1,13 @@
-import Card from "@material/react-card";
-import { Cell, Row } from "@material/react-layout-grid";
-import { Overline } from "@material/react-typography";
+import { Card, Grid, Typography } from "@mui/material";
 import React from "react";
-import Breadcrumb from "../breadcrumb/breadcrumb";
-import BreadcrumbEl from "../breadcrumb/breadcrumb-el";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import CallToActions from "./CallToActions";
+import MaterialList from "./Materials/MaterialList";
 import Calendar from "./calendar";
-import CallToActions from "./call_to_actions";
 import "./index.scss";
-import MaterialList from "./materials/material_list";
 
-const Home: React.FunctionComponent = () => {
+const Home: React.FC = () => {
   return (
     <div className="home">
       <Breadcrumb>
@@ -18,20 +16,20 @@ const Home: React.FunctionComponent = () => {
 
       <CallToActions />
 
-      <Row className="home__row home__main">
-        <Cell columns={6}>
-          <Overline>Materials are running out</Overline>
+      <Grid container spacing={4} className="home__row home__main">
+        <Grid item xs={6}>
+          <Typography variant="overline">Materials are running out</Typography>
           <Card>
             <MaterialList />
           </Card>
-        </Cell>
-        <Cell columns={6}>
-          <Overline>Calendar</Overline>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="overline">Calendar</Typography>
           <Card>
             <Calendar />
           </Card>
-        </Cell>
-      </Row>
+        </Grid>
+      </Grid>
     </div>
   );
 };

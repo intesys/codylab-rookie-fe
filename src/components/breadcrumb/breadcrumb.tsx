@@ -1,9 +1,11 @@
 import React from "react";
 import "./breadcrumb.scss";
 
-const Breadcrumb: React.FunctionComponent = props => (
-  <div className='breadcrumb'>
-    <ul>{props.children}</ul>
+interface IProps extends React.PropsWithChildren {}
+
+const Breadcrumb: React.FC<IProps> = ({ children }) => (
+  <div className="breadcrumb">
+    <ul>{children}</ul>
   </div>
 );
 
