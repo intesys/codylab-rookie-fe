@@ -1,7 +1,5 @@
-import { Card, Grid, Typography } from "@mui/material";
+import { Box, Card, Grid, Typography } from "@mui/material";
 import React from "react";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import CallToActions from "./CallToActions";
 import MaterialList from "./Materials/MaterialList";
 import Calendar from "./calendar";
@@ -10,21 +8,29 @@ import "./index.scss";
 const Home: React.FC = () => {
   return (
     <div className="home">
-      <Breadcrumb>
-        <BreadcrumbEl>Home</BreadcrumbEl>
-      </Breadcrumb>
-
+      <Box textAlign="center">
+        <Typography variant="h5">
+          Welcome{" "}
+          <Typography variant="h5" color="primary" component="span">
+            Mario Rossi
+          </Typography>
+        </Typography>
+      </Box>
       <CallToActions />
 
       <Grid container spacing={4} className="home__row home__main">
         <Grid item xs={6}>
-          <Typography variant="overline">Materials are running out</Typography>
+          <Typography variant="overline" fontSize="medium">
+            Materials are running out
+          </Typography>
           <Card>
             <MaterialList />
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Typography variant="overline">Calendar</Typography>
+          <Typography variant="overline" fontSize="medium">
+            Calendar
+          </Typography>
           <Card>
             <Calendar />
           </Card>

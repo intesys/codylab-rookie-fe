@@ -2,28 +2,43 @@ import { Button, Grid } from "@mui/material";
 import React from "react";
 import { IMaterialItem } from "./Types";
 
-const MaterialItem: React.FC<IMaterialItem> = (props) => (
+const MaterialItem: React.FC<IMaterialItem> = ({
+  name,
+  alert,
+  quantity,
+  weeksForRefueling,
+}) => (
   <section className="drug_list__item">
     <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <h3>{props.name}</h3>
+      <Grid item xs={alert ? 6 : 12}>
+        <h3>{name}</h3>
       </Grid>
+      {alert && (
+        <Grid item xs={6}>
+          <h3>{alert}</h3>
+        </Grid>
+      )}
     </Grid>
-    <Grid container spacing={4}>
-      <Grid item xs={4} alignItems="center" className="cell--center">
-        <div className="drug_list__item__quantity">{props.quantity}</div>
+    <Grid
+      container
+      flexDirection="row"
+      alignItems="flex-end"
+      alignContent="center"
+      textAlign="center"
+      spacing={4}
+    >
+      <Grid item xs={4}>
+        <div className="drug_list__item__quantity">{quantity}</div>
         <div className="drug_list__item__caption">Vials remaining</div>
       </Grid>
-      <Grid item xs={4} alignItems="center" className="cell--center">
-        <div className="drug_list__item__quantity">
-          {props.weeksForRefueling}
-        </div>
+      <Grid item xs={4}>
+        <div className="drug_list__item__quantity">{weeksForRefueling}</div>
         <div className="drug_list__item__caption">
           weeks for the next refueling
         </div>
       </Grid>
-      <Grid item xs={4} alignItems="center" className="cell--center">
-        <Button>Go to details</Button>
+      <Grid item xs={4}>
+        <Button variant="outlined">Go to details</Button>
       </Grid>
     </Grid>
   </section>

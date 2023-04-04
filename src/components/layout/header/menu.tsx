@@ -5,7 +5,14 @@ import logo from "../../../assets/logo.png";
 import MainMenu from "../../MainMenu";
 
 const Menu: React.FC = () => (
-  <Grid container spacing={4} className="layout-header-menu">
+  <Grid
+    container
+    spacing={0}
+    className="layout-header-menu"
+    direction="row"
+    justifyContent="center"
+    alignItems="center"
+  >
     <Grid item xs={2} className="logo">
       <Link to="/">
         <img src={logo} alt="open hospital" />

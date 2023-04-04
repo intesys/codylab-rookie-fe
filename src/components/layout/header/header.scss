@@ -2,12 +2,7 @@
 $toolbar-height: 56px;
 $toolbar-horizontal-padding: 15px;
 $menu-height: 76px;
-$menu-horizontal-padding: 30px;
-
-@mixin height($height) {
-  height: $height;
-  line-height: $height;
-}
+$menu-horizontal-padding: 0;
 
 @mixin horizontal-menu($height, $item-padding: 20px) {
   ul {
@@ -36,9 +31,7 @@ $menu-horizontal-padding: 30px;
   &-header {
     background: $app-header-background;
     box-shadow: 0 5px 10px $app-shadow;
-    margin-bottom: 35px;
     &-toolbar {
-      // @include height($toolbar-height);
       padding: 0 $menu-horizontal-padding;
       border-bottom: 1px solid #eee;
       &-welcome-message {
@@ -46,7 +39,6 @@ $menu-horizontal-padding: 30px;
         color: $secondary-color;
       }
       &-menu {
-        // @include horizontal-menu($toolbar-height, 15px);
         display: flex;
         justify-content: space-between;
         &-search {
@@ -72,7 +64,6 @@ $menu-horizontal-padding: 30px;
       }
     }
     &-menu {
-      // @include height($menu-height);
       padding: 0 $menu-horizontal-padding;
       img {
         vertical-align: middle;

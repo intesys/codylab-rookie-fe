@@ -24,6 +24,7 @@ const MaterialList: React.FC = () => {
       <Tabs
         className="drug_list__header"
         value={activeTab}
+        variant="fullWidth"
         onChange={handleChange}
       >
         <Tab label="Running out drugs" />
