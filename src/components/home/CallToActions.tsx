@@ -24,7 +24,6 @@ const CallToActions: React.FC = () => (
       item
       xs={6}
       display="flex"
-      direction="row"
       justifyContent="flex-end"
       alignItems="center"
     >
@@ -37,7 +36,6 @@ const CallToActions: React.FC = () => (
       item
       xs={6}
       display="flex"
-      direction="row"
       justifyContent="flex-start"
       alignItems="center"
     >

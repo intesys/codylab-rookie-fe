@@ -21,7 +21,7 @@ const MaterialItem: React.FC<IMaterialItem> = ({
     </Grid>
     <Grid
       container
-      flexDirection="row"
+      // flexDirection="row"
       alignItems="flex-end"
       alignContent="center"
       textAlign="center"
