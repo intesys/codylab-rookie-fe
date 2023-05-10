@@ -13,7 +13,7 @@ const Toolbar: React.FC = () => (
     container
     spacing={4}
     className="layout-header-toolbar"
-    direction="row"
+    // direction="row"
     justifyContent="center"
     alignItems="center"
     padding={1}

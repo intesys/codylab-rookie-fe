@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import React, { Dispatch, useReducer } from "react";
+
 import Appointments from "./Appointments";
 import AppointmentsProvider from "./AppointmentsProvider";
 import CalendarTable from "./CalendarTable";

@@ -1,5 +1,4 @@
 import { rest } from "msw";
-import { IMaterialList } from "../components/home/materials/types";
 import { appointments } from "./fixtures/appointments";
 import { materials } from "./fixtures/materials";
 

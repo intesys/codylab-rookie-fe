@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es5",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["./src", "./src/declarations.d.ts"]
+}

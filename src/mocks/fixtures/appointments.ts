@@ -1,4 +1,4 @@
-import { IAppointmentList } from "../../components/home/calendar/appointments_provider";
+import { IAppointmentList } from "../../components/Home/Calendar/AppointmentsProvider";
 
 const moment = require("moment");
 

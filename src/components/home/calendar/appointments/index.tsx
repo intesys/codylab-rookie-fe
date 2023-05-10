@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { useContext } from "react";
 import { CalendarContext } from "..";
 import { AppointmentsContext, IAppointment } from "../AppointmentsProvider";
-import Appointment from "./appointment";
+import Appointment from "./Appointment";
 import "./index.scss";
 
 const Appointments: React.FC = () => {

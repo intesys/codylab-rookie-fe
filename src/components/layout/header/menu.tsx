@@ -9,7 +9,7 @@ const Menu: React.FC = () => (
     container
     spacing={0}
     className="layout-header-menu"
-    direction="row"
+    // direction="row"
     justifyContent="center"
     alignItems="center"
   >
