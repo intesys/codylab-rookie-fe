@@ -16,6 +16,17 @@ You need **nodejs** and **git** installed on your machine.
 
     npm start
 
+### `npm run build:api`
+
+before export TS_POST_PROCESS_FILE enabling prettier on generated files.
+
+```shell
+export TS_POST_PROCESS_FILE='./node_modules/.bin/prettier.cmd --write'
+npm run build:api
+```
+
+Generate API Rest client from openapi specification file (api.yml)
+
 ### Built with
 
 - [react](https://reactjs.org/)

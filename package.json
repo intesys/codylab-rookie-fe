@@ -10,6 +10,9 @@
     "start": "parcel src/index.html --port 3100",
     "build": "parcel build src/index.html",
     "test": "jest",
+    "api:generate": "openapi-generator-cli generate --enable-post-process-file -i api.yml -t src/generated/templates/ -g typescript-axios -o src/generated/axios/",
+    "api:version": "node ./scripts/api-version.js",
+    "build:api": "npm run api:generate && npm run api:version",
     "postbuild": "npm run msw:install",
     "prestart": "npm run msw:install",
     "msw:install": "msw init dist --save"
@@ -32,6 +35,7 @@
     "typescript": "^5.0.3"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "@parcel/config-default": "^2.8.3",
     "@parcel/resolver-glob": "^2.8.3",
     "@parcel/transformer-raw": "^2.8.3",
