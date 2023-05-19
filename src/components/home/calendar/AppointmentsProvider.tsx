@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { basePath } from "../../../config/api";
+import { basePathSW } from "../../../config/api";
 
-const apiEndpoint = `${basePath}/appointmentsByDate`;
+const apiEndpoint = `${basePathSW}/appointmentsByDate`;
 
 export interface IAppointment {
   id: number;
@@ -12,28 +12,18 @@ export interface IAppointment {
 
 export interface IAppointmentList extends Record<string, IAppointment[]> {}
 
-export const AppointmentsContext: React.Context<IAppointmentList> =
-  React.createContext({});
+export const AppointmentsContext: React.Context<IAppointmentList> = React.createContext({});
 
-const getAppointments = (): Promise<IAppointmentList> =>
-  fetch(apiEndpoint).then((r) => r.json());
+const getAppointments = (): Promise<IAppointmentList> => fetch(apiEndpoint).then((r) => r.json());
 
-const AppointmentsProvider: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+const AppointmentsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [appointments, setAppointments] = useState({});
 
   useEffect(() => {
-    getAppointments().then(({ appointmentList }) =>
-      setAppointments(appointmentList)
-    );
+    getAppointments().then(({ appointmentList }) => setAppointments(appointmentList));
   }, []);
 
-  return (
-    <AppointmentsContext.Provider value={appointments}>
-      {children}
-    </AppointmentsContext.Provider>
-  );
+  return <AppointmentsContext.Provider value={appointments}>{children}</AppointmentsContext.Provider>;
 };
 
 export default AppointmentsProvider;
