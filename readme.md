@@ -1,6 +1,6 @@
 # Intesys academy - React course
 
-This repository contains the code of PTCO 2022.
+This repository contains the code of CodyLab Rookie FE.
 
 ## Install
 
@@ -29,12 +29,13 @@ Generate API Rest client from openapi specification file (api.yml)
 
 ### Built with
 
-- [react](https://reactjs.org/)
+- [React](https://reactjs.org/)
 - [parcel](https://parceljs.org/)
 - [scss](https://sass-lang.com/)
-- [typescript](https://www.typescriptlang.org/)
-- UI kit: [Material components](https://github.com/material-components/material-components-web-react#components)
-- Development mock server: [msw](https://mswjs.io/)
+- [Typescript](https://www.typescriptlang.org/)
+- [MUI](https://mui.com/material-ui/)
+- [msw](https://mswjs.io/)
+- [OpenAPI Generator](https://github.com/openapitools/openapi-generator)
 
 ### Building
 
