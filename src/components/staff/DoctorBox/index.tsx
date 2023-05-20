@@ -31,7 +31,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Typography component="h4" gutterBottom>
+              <Typography component="h4" variant="h5" gutterBottom>
                 {doctor.name} <strong>{doctor.surname}</strong>
               </Typography>
             </Grid>
@@ -42,7 +42,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
                     <PhoneIcon /> <span>{doctor.phoneNumber}</span>
                   </Stack>
                 )}
-                {doctor.phoneNumber && (
+                {doctor.email && (
                   <Stack direction="row" justifyContent="center" alignItems="center" mb={1} spacing={2}>
                     <MailOutlineIcon /> <span>{doctor.email}</span>
                   </Stack>
@@ -59,7 +59,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Grid container direction="row" alignItems="center" spacing={2}>
+              <Grid container alignItems="center" spacing={2}>
                 {doctor.lastPatientsVisited?.map((patient) => (
                   <Grid item xs={6} key={patient.id}>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
