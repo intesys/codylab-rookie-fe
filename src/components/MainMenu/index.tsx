@@ -1,35 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  BILLING_PATH,
+  DASHBOARD_PATH,
+  NEWS_PATH,
+  PATIENTS_PATH,
+  PHARMACY_PATH,
+  STAFF_PATH,
+  WARD_PATH,
+} from "../../config/paths";
 
 const MainMenu: React.FC = () => {
   return (
     <ul>
       <li>
-        <Link to="/">Dashboard</Link>
+        <Link to={DASHBOARD_PATH}>Dashboard</Link>
       </li>
       <li>
-        <Link to="/patients">Patients database</Link>
+        <Link to={PATIENTS_PATH}>Patients database</Link>
       </li>
       <li>
-        <Link to="/staff">Colleagues database</Link>
+        <Link to={STAFF_PATH}>Colleagues database</Link>
       </li>
       <li>
-        <Link to="/pharmacy">Pharmacy</Link>
+        <Link to={PHARMACY_PATH}>Pharmacy</Link>
       </li>
       <li>
-        <Link to="/ward">Ward</Link>
+        <Link to={WARD_PATH}>Ward</Link>
       </li>
       <li>
-        <Link to="/billing">Billing</Link>
+        <Link to={BILLING_PATH}>Billing</Link>
       </li>
       <li>
-        <Link to="/news">News</Link>
+        <Link to={NEWS_PATH}>News</Link>
       </li>
     </ul>
   );
 };
 
 export default MainMenu;
-function matchRoutes(routes: any, location: any): [{ route: any }] {
-  throw new Error("Function not implemented.");
-}

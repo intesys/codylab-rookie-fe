@@ -1,14 +1,15 @@
-import { CircularProgress, Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import React, { Dispatch, useEffect, useMemo, useReducer, useState } from "react";
 import { api } from "../../config/api";
-import { DoctorFilter, Doctor as DoctorType } from "../../generated/axios";
+import { Doctor, DoctorFilter } from "../../generated/axios";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import Doctor from "./Doctor";
+import SectionHeader from "../Layout/SectionHeader";
+import DoctorBox from "./DoctorBox";
 import FiltersForm from "./FiltersForm";
 import { Action, staffFilterReducer } from "./lib";
 
-const demoDataDoctors: DoctorType[] = [
+const demoDataDoctors: Doctor[] = [
   {
     id: 1,
     name: "Giogio",
@@ -65,7 +66,7 @@ const Staff: React.FC = () => {
   const [filter, dispatch] = useReducer(staffFilterReducer, {});
   const staffContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
-  const [doctorsList, setDoctorsList] = useState<DoctorType[]>([]);
+  const [doctorsList, setDoctorsList] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -85,22 +86,19 @@ const Staff: React.FC = () => {
       <Breadcrumb>
         <BreadcrumbEl active>Staff</BreadcrumbEl>
       </Breadcrumb>
+      <SectionHeader title="Collegues database" />
       <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (
           <Grid direction="row" justifyContent="center" alignItems="center" item>
             <CircularProgress />
           </Grid>
-        ) : doctorsList.length > 0 ? (
+        ) : (
           doctorsList.map((doctor) => (
             <Grid item key={doctor.id} xs={4}>
-              <Doctor props={{ doctor }} />
+              <DoctorBox props={{ doctor }} />
             </Grid>
           ))
-        ) : (
-          <Typography variant="h5" textAlign="center">
-            Doctor not found
-          </Typography>
         )}
       </Grid>
     </StaffFilterContext.Provider>

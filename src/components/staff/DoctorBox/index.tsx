@@ -4,22 +4,23 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { Doctor as DoctorType } from "../../../generated/axios";
+import { HOME_PATH, STAFF_PATH, getDetailPath } from "../../../config/paths";
+import { Doctor } from "../../../generated/axios";
 import { generateAvatarImage } from "../../../lib/utils";
 
 type IProps = {
   props: {
-    doctor: DoctorType;
+    doctor: Doctor;
   };
 };
 
-const Doctor: FC<IProps> = ({ props }) => {
+const DoctorBox: FC<IProps> = ({ props }) => {
   const { doctor } = props;
   const navigate = useNavigate();
   return (
     <Card>
       <CardHeader action={<MessageIcon color="primary" />} />
-      <CardActionArea sx={{ padding: 2 }} onClick={() => navigate(`/staff/${doctor.id}`)}>
+      <CardActionArea sx={{ padding: 2 }} onClick={() => navigate(getDetailPath(HOME_PATH + STAFF_PATH, doctor.id))}>
         <CardContent>
           <Grid container direction="row" justifyContent="center" alignItems="center" textAlign="center" spacing={2}>
             <Grid item xs={12}>
@@ -82,4 +83,4 @@ const Doctor: FC<IProps> = ({ props }) => {
   );
 };
 
-export default Doctor;
+export default DoctorBox;

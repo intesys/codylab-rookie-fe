@@ -1,25 +1,25 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
-import { StaffFilterContext } from "..";
+import { PatientsFilterContext } from "..";
 
 const FiltersForm: FC = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [profession, setProfession] = useState("");
-  const { dispatch } = useContext(StaffFilterContext);
+  const [pid, setPid] = useState("");
+  const [opd, setOpd] = useState("");
+  const [idp, setIdp] = useState("");
+  const { dispatch } = useContext(PatientsFilterContext);
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const filter = {
-        ...(name && { name }),
-        ...(surname && { surname }),
-        ...(profession && { profession }),
+        ...(pid && { id: Number(pid) }),
+        ...(opd && { opd: Number(opd) }),
+        ...(idp && { idp: Number(idp) }),
       };
       dispatch({ type: "SET_FILTER", payload: filter });
     },
-    [name, surname, profession]
+    [pid, opd, idp]
   );
 
   return (
@@ -28,40 +28,43 @@ const FiltersForm: FC = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Stack direction="row" alignItems="flex-end">
-              <Typography variant="h6" mr={3}>
-                FIND A COLLEAGUES
+              <Typography variant="h6" mr={3} textTransform="uppercase">
+                Find a patient
               </Typography>
-              <Typography variant="caption">Insert the information of your colleagues</Typography>
+              <Typography variant="caption">Insert the information of patient</Typography>
             </Stack>
           </Grid>
           <Grid item xs={3}>
             <TextField
-              label="Name"
-              onChange={(e) => setName(e.target.value)}
+              label="Patient ID (PID)"
+              onChange={(e) => setPid(e.target.value)}
               variant="outlined"
+              type="number"
               size="small"
               fullWidth
-              value={name}
+              value={pid}
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
-              label="Surname"
-              onChange={(e) => setSurname(e.target.value)}
+              label="Outpatient Number (OPD)"
+              onChange={(e) => setOpd(e.target.value)}
               variant="outlined"
+              type="number"
               size="small"
               fullWidth
-              value={surname}
+              value={opd}
             />
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label="Profession/ Specialization"
-              onChange={(e) => setProfession(e.target.value)}
+              label="Inpatient Number (IDP)"
+              onChange={(e) => setIdp(e.target.value)}
               variant="outlined"
+              type="number"
               size="small"
               fullWidth
-              value={profession}
+              value={idp}
             />
           </Grid>
           <Grid item xs={2}>
