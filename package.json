@@ -15,7 +15,7 @@
     "build:api": "npm run api:generate && npm run api:version",
     "postbuild": "npm run msw:install",
     "prestart": "npm run msw:install",
-    "msw:install": "msw init dist --save"
+    "msw:install": "msw init ./dist"
   },
   "author": "Alessandro Falezza",
   "license": "MIT",

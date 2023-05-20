@@ -6,7 +6,7 @@ import { Configuration, DoctorOpenHospitalApi, PatientOpenHospitalApi } from "..
  */
 
 // Service worker basepath API
-export const basePathSW = `${window.location.protocol}//${window.location.host}`;
+export const basePathSW = `/msw`;
 
 /**
  * Axis setup

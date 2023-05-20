@@ -4,9 +4,9 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { HOME_PATH, PATIENTS_PATH, getDetailPath } from "../../../config/paths";
+import { HOME_PATH, PATIENTS_PATH } from "../../../config/paths";
 import { Patient as PatientType } from "../../../generated/axios";
-import { generateAvatarImage } from "../../../lib/utils";
+import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {

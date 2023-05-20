@@ -1,4 +1,4 @@
-import { IMaterialList } from "../../components/home/materials/types";
+import { IMaterialList } from "../../components/Home/Materials/Types";
 
 export const materials: IMaterialList = {
   drugs: [

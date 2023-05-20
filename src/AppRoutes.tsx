@@ -38,7 +38,6 @@ const AppRoutes: React.FC = () => {
         <Route path={WARD_PATH} element={<Ward />} />
         <Route path={BILLING_PATH} element={<Billing />} />
         <Route path={NEWS_PATH} element={<News />} />
-        <Route path="*" element={<Navigate to={HOME_PATH} />} />
       </Route>
     </Routes>
   );

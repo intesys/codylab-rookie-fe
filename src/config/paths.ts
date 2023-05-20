@@ -6,7 +6,3 @@ export const PHARMACY_PATH = "pharmacy";
 export const WARD_PATH = "ward";
 export const BILLING_PATH = "billing";
 export const NEWS_PATH = "news";
-
-export function getDetailPath(section: string, id?: string | number): string {
-  return `${section}/${id ?? 0}`;
-}
