@@ -6,6 +6,7 @@ import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { HOME_PATH, STAFF_PATH } from "../../../config/paths";
 import { Doctor } from "../../../generated/axios";
+import { DetailType } from "../../../lib/types";
 import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
@@ -26,7 +27,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
             <Grid item xs={12}>
               <Avatar
                 alt={`${doctor.name} ${doctor.surname}`}
-                src={generateAvatarImage(200, "d", doctor.id)}
+                src={generateAvatarImage(200, DetailType.DOCTOR, doctor.id)}
                 sx={{ width: 100, height: 100, margin: "auto" }}
               />
             </Grid>
@@ -65,7 +66,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
                       <Avatar
                         alt="Remy Sharp"
-                        src={generateAvatarImage(200, "p", patient.id)}
+                        src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
                         sx={{ width: 35, height: 35 }}
                       />
                       <div>

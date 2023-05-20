@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { DATE_FORMAT } from "../../../config/date";
 import { HOME_PATH, PATIENTS_PATH } from "../../../config/paths";
 import { Patient as PatientType } from "../../../generated/axios";
+import { DetailType } from "../../../lib/types";
 import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
@@ -35,7 +36,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
   const { patient } = props;
   const navigate = useNavigate();
 
-  const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]));
+  const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
 
   return (
     <Card>
@@ -58,7 +59,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
             <Grid item xs={12}>
               <Avatar
                 alt={`${patient.name} ${patient.surname}`}
-                src={generateAvatarImage(200, "p", patient.id)}
+                src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
                 sx={{ width: 100, height: 100, margin: "auto" }}
               />
             </Grid>
@@ -132,22 +133,22 @@ const PatientBox: FC<IProps> = ({ props }) => {
               <Stack direction="row" spacing={2}>
                 <Avatar
                   alt="Remy Sharp"
-                  src={generateAvatarImage(200, "d", lastVisit?.id)}
+                  src={generateAvatarImage(200, DetailType.DOCTOR, lastVisit?.doctor?.id)}
                   sx={{ width: 60, height: 60 }}
                 />
-                <Stack direction="column" >
+                <Stack direction="column">
                   <Typography color="primary" variant="h6" mb={3}>
-                    {lastVisit?.name} {lastVisit?.surname}
+                    {lastVisit?.doctor?.name} {lastVisit?.doctor?.surname}
                   </Typography>
                   <Typography component="h4" gutterBottom color="primary">
-                    {lastVisit?.phoneNumber && (
+                    {lastVisit?.doctor?.phoneNumber && (
                       <Stack direction="row" mb={1} spacing={2}>
-                        <PhoneIcon /> <span>{lastVisit?.phoneNumber}</span>
+                        <PhoneIcon /> <span>{lastVisit?.doctor?.phoneNumber}</span>
                       </Stack>
                     )}
-                    {lastVisit?.email && (
+                    {lastVisit?.doctor?.email && (
                       <Stack direction="row" mb={1} spacing={2}>
-                        <MailOutlineIcon /> <span>{lastVisit?.email}</span>
+                        <MailOutlineIcon /> <span>{lastVisit?.doctor?.email}</span>
                       </Stack>
                     )}
                   </Typography>

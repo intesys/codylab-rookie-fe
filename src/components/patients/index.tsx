@@ -23,10 +23,36 @@ const demoDataPatients: PatientType[] = [
         reasonVisit: "Stomachache",
         treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
         // deve essere aggiunte tutte le info del medico
-        name: "Giogio",
-        surname: "Vanni",
-        phoneNumber: "1234567890",
-        email: "giorgioVanni@ho.com",
+        doctor: {
+          id: 1,
+          name: "Giogio",
+          surname: "Vanni",
+          phoneNumber: "1234567890",
+          email: "giorgioVanni@ho.com",
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    opd: 2626,
+    name: "Giogio",
+    surname: "Vanni",
+    email: "giorgioVanni@ho.com",
+    lastAdmission: "2021-01-10T00:00:00.000+00:00",
+    patientRecords: [
+      {
+        id: 2,
+        reasonVisit: "Stomachache",
+        treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
+        // deve essere aggiunte tutte le info del medico
+        doctor: {
+          id: 2,
+          name: "Giogio",
+          surname: "Vanni",
+          phoneNumber: "1234567890",
+          email: "giorgioVanni@ho.com",
+        },
       },
     ],
   },

@@ -1,15 +1,17 @@
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Avatar, Box, Button, Card, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { Doctor } from "../../generated/axios";
+import { DetailType } from "../../lib/types";
 import { generateAvatarImage } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import DetailHeader from "../Layout/DetailHeader";
 
 const demoDoctor: Doctor = {
   id: 1,
@@ -35,22 +37,22 @@ const getDoctor = api.doctors.getDoctor;
 
 const StaffMember: React.FC = () => {
   const { id } = useParams();
-  const [doctor, setDoctor] = useState<Doctor>();
+  const [doctor, setDoctor] = useState<Doctor>(demoDoctor);
   const [loading, setLoading] = useState(false);
 
   if (!id) return null;
 
-  useEffect(() => {
-    setLoading(true);
-    getDoctor(Number(id))
-      .then((response) => {
-        response.data = demoDoctor;
-        setDoctor(response.data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [setDoctor, setLoading, id]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   getDoctor(Number(id))
+  //     .then((response) => {
+  //       response.data = demoDoctor;
+  //       setDoctor(response.data);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, [setDoctor, setLoading, id]);
 
   return (
     <div>
@@ -75,34 +77,18 @@ const StaffMember: React.FC = () => {
             </Grid>
           ) : (
             <>
-              <Card>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={6}>
-                    <Stack direction="row" alignItems="center">
-                      <Avatar
-                        alt={`${doctor?.name} ${doctor?.surname}`}
-                        src={generateAvatarImage(200, "d", doctor?.id)}
-                        sx={{ width: 80, height: 80, margin: 2 }}
-                      />
-                      <Typography variant="h3" component="h1" gutterBottom>
-                        {doctor?.name} <strong>{doctor?.surname}</strong>
-                      </Typography>
-                    </Stack>
-                  </Grid>
-                  <Grid item xs={6} textAlign="right" pr={2}>
-                    <Button variant="outlined" type="submit" startIcon={<MessageIcon />}>
-                      Chat with doctor
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Card>
+              <DetailHeader record={doctor} detailType={DetailType.PATIENT}>
+                <Button variant="outlined" type="submit" startIcon={<MessageIcon />}>
+                  Chat with doctor
+                </Button>
+              </DetailHeader>
               <Grid container>
                 <Grid item xs={3}>
-                  <Box sx={{ background: grey[800], padding: 2, color: "white" }}>
+                  <Box sx={{ background: grey[800], padding: 4, color: "white" }}>
                     <Typography variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
                       Contacts
                     </Typography>
-                    <Divider color="white" />
+                    <Divider color={grey[500]} />
                     <Typography component="h4" gutterBottom my={2}>
                       {doctor?.phoneNumber && (
                         <Stack direction="row" mb={1} spacing={2}>
@@ -118,14 +104,14 @@ const StaffMember: React.FC = () => {
                     <Typography mt={6} variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
                       Last visited patients
                     </Typography>
-                    <Divider color="white" />
+                    <Divider color={grey[500]} />
                     <Grid container direction="row" my={2} spacing={2}>
                       {doctor?.lastPatientsVisited?.map((patient) => (
                         <Grid item xs={12} key={patient.id}>
                           <Stack direction="row" spacing={2}>
                             <Avatar
                               alt="Remy Sharp"
-                              src={generateAvatarImage(200, "p", patient.id)}
+                              src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
                               sx={{ width: 35, height: 35 }}
                             />
                             <div>

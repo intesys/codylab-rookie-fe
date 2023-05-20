@@ -29,6 +29,9 @@ const AppRoutes: React.FC = () => {
         <Route path={PATIENTS_PATH}>
           <Route index element={<Patients />} />
           <Route path=":id" element={<Patient />} />
+          <Route path="new" element={<Patient />} />
+          <Route path=":id/edit" element={<Patient />} />
+          <Route path=":id/record/new" element={<Patient />} />
         </Route>
         <Route path={STAFF_PATH}>
           <Route index element={<Staff />} />
