@@ -1,7 +1,11 @@
-import { CircularProgress, Grid } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer, useState } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../../config/api";
+import { PATIENTS_PATH } from "../../config/paths";
 import { PatientFilter, Patient as PatientType } from "../../generated/axios";
+import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
@@ -21,6 +25,7 @@ const demoDataPatients: PatientType[] = [
       {
         id: 1,
         reasonVisit: "Stomachache",
+        date: new Date().toISOString(),
         treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
         // deve essere aggiunte tutte le info del medico
         doctor: {
@@ -44,6 +49,7 @@ const demoDataPatients: PatientType[] = [
       {
         id: 2,
         reasonVisit: "Stomachache",
+        date: new Date().toISOString(),
         treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
         // deve essere aggiunte tutte le info del medico
         doctor: {
@@ -94,7 +100,11 @@ const Patients: React.FC = () => {
       <Breadcrumb>
         <BreadcrumbEl>Patients</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="Patients database" />
+      <SectionHeader title="Patients database">
+        <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
+          Add new patient
+        </Button>
+      </SectionHeader>
       <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (

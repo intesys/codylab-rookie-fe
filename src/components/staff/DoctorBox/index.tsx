@@ -3,8 +3,8 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { HOME_PATH, STAFF_PATH } from "../../../config/paths";
+import { Link, useNavigate } from "react-router-dom";
+import { STAFF_PATH } from "../../../config/paths";
 import { Doctor } from "../../../generated/axios";
 import { DetailType } from "../../../lib/types";
 import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
@@ -21,7 +21,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
   return (
     <Card>
       <CardHeader action={<MessageIcon color="primary" />} />
-      <CardActionArea sx={{ padding: 2 }} onClick={() => navigate(getDetailPath(HOME_PATH + STAFF_PATH, doctor.id))}>
+      <CardActionArea sx={{ padding: 2 }} component={Link} to={getDetailPath(STAFF_PATH, doctor.id)}>
         <CardContent>
           <Grid container direction="row" justifyContent="center" alignItems="center" textAlign="center" spacing={2}>
             <Grid item xs={12}>

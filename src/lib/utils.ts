@@ -1,14 +1,19 @@
+import { HOME_PATH } from "../config/paths";
 import { PatientBloodGroupEnum } from "../generated/axios";
 
 export const generateAvatarImage = (size = 150, type: "d" | "p", id?: number) =>
   id ? `https://i.pravatar.cc/${size}?u=${type}${id}` : "";
 
+export function getPath(section: string): string {
+  return `${HOME_PATH}${section}`;
+}
+
 export function getDetailPath(section: string, id?: string | number): string {
-  return `${section}/${id ?? 0}`;
+  return `${getPath(section)}/${id ?? 0}`;
 }
 
 export function getNewDetailPath(section: string): string {
-  return `${section}/new`;
+  return `${getPath(section)}/new`;
 }
 
 export function getNewRecordPath(section: string, id?: string | number): string {

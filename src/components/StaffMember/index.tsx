@@ -6,9 +6,10 @@ import { grey } from "@mui/material/colors";
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
+import { STAFF_PATH } from "../../config/paths";
 import { Doctor } from "../../generated/axios";
 import { DetailType } from "../../lib/types";
-import { generateAvatarImage } from "../../lib/utils";
+import { generateAvatarImage, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
@@ -58,9 +59,11 @@ const StaffMember: React.FC = () => {
     <div>
       <Breadcrumb>
         <BreadcrumbEl>
-          <Link to="/staff">Staff</Link>
+          <Link to={getPath(STAFF_PATH)}>Staff</Link>
         </BreadcrumbEl>
-        <BreadcrumbEl active>Member</BreadcrumbEl>
+        <BreadcrumbEl active>
+          {doctor.name} {doctor.surname}
+        </BreadcrumbEl>
       </Breadcrumb>
       <Grid container spacing={2}>
         <Grid item xs={12}>

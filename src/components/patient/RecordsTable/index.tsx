@@ -48,19 +48,27 @@ const RecordTable: FC<IProps> = ({ patientRecord }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patientRecord.map((row) => (
-              <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {moment(row.date).format(DATE_FORMAT)}
-                </TableCell>
-                <TableCell align="right">{row.typeVisit}</TableCell>
-                <TableCell align="right">{row.reasonVisit}</TableCell>
-                <TableCell align="right">{row.treatmentMade}</TableCell>
-                <TableCell align="right">
-                  {row.doctor.name} {row.doctor.surname}
+            {patientRecord.length > 0 ? (
+              patientRecord.map((row) => (
+                <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                  <TableCell component="th" scope="row">
+                    {moment(row.date).format(DATE_FORMAT)}
+                  </TableCell>
+                  <TableCell align="right">{row.typeVisit}</TableCell>
+                  <TableCell align="right">{row.reasonVisit}</TableCell>
+                  <TableCell align="right">{row.treatmentMade}</TableCell>
+                  <TableCell align="right">
+                    {row.doctor.name} {row.doctor.surname}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow key={"noRecord"} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                <TableCell align="center" colSpan={5}>
+                  No records
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
