@@ -1,23 +1,23 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Billing from "./components/Billing";
+import Doctor from "./components/Doctor";
+import Doctors from "./components/Doctors";
 import Home from "./components/Home";
 import News from "./components/News";
 import Patient from "./components/Patient";
 import PatientNew from "./components/Patient/PatientNew";
 import Patients from "./components/Patients";
 import Pharmacy from "./components/Pharmacy";
-import Staff from "./components/Staff";
-import StaffMember from "./components/StaffMember";
 import Ward from "./components/Ward";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
+  DOCTORS_PATH,
   HOME_PATH,
   NEWS_PATH,
   PATIENTS_PATH,
   PHARMACY_PATH,
-  STAFF_PATH,
   WARD_PATH,
 } from "./config/paths";
 
@@ -34,9 +34,9 @@ const AppRoutes: React.FC = () => {
           <Route path=":id/edit" element={<Patient />} />
           <Route path=":id/record/new" element={<Patient />} />
         </Route>
-        <Route path={STAFF_PATH}>
-          <Route index element={<Staff />} />
-          <Route path=":id" element={<StaffMember />} />
+        <Route path={DOCTORS_PATH}>
+          <Route index element={<Doctors />} />
+          <Route path=":id" element={<Doctor />} />
         </Route>
         <Route path={PHARMACY_PATH} element={<Pharmacy />} />
         <Route path={WARD_PATH} element={<Ward />} />

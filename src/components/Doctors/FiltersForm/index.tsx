@@ -1,13 +1,13 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
-import { StaffFilterContext } from "..";
+import { DoctorsFilterContext } from "..";
 
 const FiltersForm: FC = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [profession, setProfession] = useState("");
-  const { dispatch } = useContext(StaffFilterContext);
+  const { dispatch } = useContext(DoctorsFilterContext);
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +28,8 @@ const FiltersForm: FC = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Stack direction="row" alignItems="flex-end">
-              <Typography variant="h6" mr={3}>
-                FIND A COLLEAGUES
+              <Typography variant="h6" mr={3} textTransform="uppercase">
+                Find a doctors
               </Typography>
               <Typography variant="caption">Insert the information of your colleagues</Typography>
             </Stack>

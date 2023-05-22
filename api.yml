@@ -63,13 +63,6 @@ paths:
       summary: Get patient
       tags:
         - Patient Open Hospital
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
     put:
       description: ""
       operationId: updatePatient
@@ -474,19 +467,10 @@ components:
           type: array
     PatientFilter:
       example:
-        opd: 0
-        id: 0
-        idp: 0
+        text: Gino Faccioli
       properties:
-        id:
-          format: int64
-          type: integer
-        opd:
-          format: int64
-          type: integer
-        idp:
-          format: int64
-          type: integer
+        text:
+          type: string
       title: PatientFilter
     Doctor:
       description: Doctor info

@@ -22,12 +22,12 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import moment from "moment";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
-import { Patient, PatientBloodGroupEnum } from "../../generated/axios";
+import { Patient } from "../../generated/axios";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getBloodType, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
@@ -36,90 +36,31 @@ import DetailHeader from "../Layout/DetailHeader";
 import SectionHeader from "../Layout/SectionHeader";
 import RecordTable from "./RecordsTable";
 
-const demoPatient: Patient = {
-  id: 1,
-  name: "Giogio",
-  surname: "Vanni",
-  email: "giorgioVanni@ho.com",
-  address: "Via Roma 1 - 00100 Roma",
-  opd: 2032,
-  bloodGroup: PatientBloodGroupEnum.APlus,
-  notes: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  chronicPatient: false,
-  lastAdmission: new Date().toISOString(),
-  patientRecords: [],
-  // patientRecords: [
-  //   {
-  //     id: 1,
-  //     date: new Date().toISOString(),
-  //     typeVisit: "Examination",
-  //     reasonVisit: "Stomachache",
-  //     treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
-  //     // deve essere aggiunte tutte le info del medico
-  //     doctor: {
-  //       id: 1,
-  //       name: "Giogio",
-  //       surname: "Vanni",
-  //       phoneNumber: "1234567890",
-  //       email: "giorgioVanni@ho.com",
-  //     },
-  //   },
-  //   {
-  //     id: 2,
-  //     date: new Date().toISOString(),
-  //     typeVisit: "Visit",
-  //     reasonVisit: "Stomachache",
-  //     treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
-  //     // deve essere aggiunte tutte le info del medico
-  //     doctor: {
-  //       id: 1,
-  //       name: "Giogio",
-  //       surname: "Vanni",
-  //       phoneNumber: "1234567890",
-  //       email: "giorgioVanni@ho.com",
-  //     },
-  //   },
-  //   {
-  //     id: 3,
-  //     date: new Date().toISOString(),
-  //     typeVisit: "Admission",
-  //     reasonVisit: "Stomachache",
-  //     treatmentMade: "Gave him some pills", // DEVE DIVENTARE UNA STRINGA
-  //     // deve essere aggiunte tutte le info del medico
-  //     doctor: {
-  //       id: 2,
-  //       name: "Giogio",
-  //       surname: "Vanni",
-  //       phoneNumber: "1234567890",
-  //       email: "giorgioVanni@ho.com",
-  //     },
-  //   },
-  // ],
-};
-
 const getPatient = api.patients.getPatient;
 const deletePatient = api.patients.deletePatient;
 
 const StaffMember: React.FC = () => {
   const { id } = useParams();
-  const [patient, setPatient] = useState<Patient>(demoPatient);
+  const [patient, setPatient] = useState<Patient>({});
   const [loading, setLoading] = useState(false);
 
-  const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
+  const lastVisit = useMemo(
+    () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : {}),
+    [patient]
+  );
 
   if (!id) return null;
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPatient(Number(id))
-  //     .then((response) => {
-  //       response.data = demoPatient;
-  //       setPatient(response.data);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, [setPatient, setLoading, id]);
+  useEffect(() => {
+    setLoading(true);
+    getPatient(Number(id))
+      .then((response) => {
+        setPatient(response.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [setPatient, setLoading, id]);
 
   return (
     <div>
@@ -248,6 +189,7 @@ const StaffMember: React.FC = () => {
                               Last doctor who visit the patient
                             </Typography>
                           </Grid>
+
                           <Grid item xs={12}>
                             <Stack direction="row" spacing={2}>
                               <Avatar
@@ -280,7 +222,7 @@ const StaffMember: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={9} p={6}>
-                  <RecordTable patientRecord={patient.patientRecords} />
+                  <RecordTable patientRecord={patient.patientRecords ? patient.patientRecords : []} />
                 </Grid>
               </Grid>
             </>

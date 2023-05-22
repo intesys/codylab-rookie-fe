@@ -1,4 +1,4 @@
-import { Add } from "@mui/icons-material";
+import { Save } from "@mui/icons-material";
 import {
   Button,
   FormControl,
@@ -132,7 +132,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={12} textAlign="right">
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" endIcon={<Add />}>
+              <Button variant="contained" type="submit" endIcon={<Save />}>
                 Save
               </Button>
               <Button variant="outlined" component={Link} to={getPath(PATIENTS_PATH)}>

@@ -248,22 +248,10 @@ export type PatientBloodGroupEnum = (typeof PatientBloodGroupEnum)[keyof typeof 
 export interface PatientFilter {
   /**
    *
-   * @type {number}
+   * @type {string}
    * @memberof PatientFilter
    */
-  id?: number;
-  /**
-   *
-   * @type {number}
-   * @memberof PatientFilter
-   */
-  opd?: number;
-  /**
-   *
-   * @type {number}
-   * @memberof PatientFilter
-   */
-  idp?: number;
+  text?: string;
 }
 /**
  * Doctor info

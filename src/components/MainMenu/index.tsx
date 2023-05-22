@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
+  DOCTORS_PATH,
   NEWS_PATH,
   PATIENTS_PATH,
   PHARMACY_PATH,
-  STAFF_PATH,
   WARD_PATH,
 } from "../../config/paths";
 
@@ -20,7 +20,7 @@ const MainMenu: React.FC = () => {
         <Link to={PATIENTS_PATH}>Patients database</Link>
       </li>
       <li>
-        <Link to={STAFF_PATH}>Colleagues database</Link>
+        <Link to={DOCTORS_PATH}>Doctors database</Link>
       </li>
       <li>
         <Link to={PHARMACY_PATH}>Pharmacy</Link>

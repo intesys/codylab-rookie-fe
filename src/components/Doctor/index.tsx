@@ -3,63 +3,42 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Box, Button, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
-import { STAFF_PATH } from "../../config/paths";
-import { Doctor } from "../../generated/axios";
+import { DOCTORS_PATH } from "../../config/paths";
+import { Doctor as DoctorType } from "../../generated/axios";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
 
-const demoDoctor: Doctor = {
-  id: 1,
-  name: "Giogio",
-  surname: "Vanni",
-  phoneNumber: "1234567890",
-  email: "giorgioVanni@ho.com",
-  lastPatientsVisited: [
-    {
-      id: 1,
-      name: "Mario",
-      surname: "Rossi",
-    },
-    {
-      id: 2,
-      name: "Luigi",
-      surname: "Verdi",
-    },
-  ],
-};
-
 const getDoctor = api.doctors.getDoctor;
 
-const StaffMember: React.FC = () => {
+const Doctor: React.FC = () => {
   const { id } = useParams();
-  const [doctor, setDoctor] = useState<Doctor>(demoDoctor);
+  const [doctor, setDoctor] = useState<DoctorType>({});
   const [loading, setLoading] = useState(false);
 
   if (!id) return null;
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getDoctor(Number(id))
-  //     .then((response) => {
-  //       response.data = demoDoctor;
-  //       setDoctor(response.data);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, [setDoctor, setLoading, id]);
+  useEffect(() => {
+    setLoading(true);
+    getDoctor(Number(id))
+      .then((response) => {
+        setDoctor(response.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [setDoctor, setLoading, id]);
 
   return (
     <div>
       <Breadcrumb>
         <BreadcrumbEl>
-          <Link to={getPath(STAFF_PATH)}>Staff</Link>
+          <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
         </BreadcrumbEl>
         <BreadcrumbEl active>
           {doctor.name} {doctor.surname}
@@ -68,8 +47,8 @@ const StaffMember: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Stack direction="row" alignItems="flex-end">
-            <Typography variant="h5" mr={3}>
-              STAFF DETAILS
+            <Typography variant="h5" mr={3} textTransform="uppercase">
+              Doctor details
             </Typography>
           </Stack>
         </Grid>
@@ -138,4 +117,4 @@ const StaffMember: React.FC = () => {
   );
 };
 
-export default StaffMember;
+export default Doctor;

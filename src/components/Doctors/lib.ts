@@ -6,7 +6,7 @@ export interface Action {
   payload?: DoctorFilter;
 }
 
-export const staffFilterReducer: Reducer<DoctorFilter, Action> = (state, action) => {
+export const doctorsFilterReducer: Reducer<DoctorFilter, Action> = (state, action) => {
   switch (action.type) {
     case "SET_FILTER":
       return action.payload || state;

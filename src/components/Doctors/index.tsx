@@ -7,64 +7,23 @@ import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
 import DoctorBox from "./DoctorBox";
 import FiltersForm from "./FiltersForm";
-import { Action, staffFilterReducer } from "./lib";
+import { Action, doctorsFilterReducer } from "./lib";
 
-const demoDataDoctors: Doctor[] = [
-  {
-    id: 1,
-    name: "Giogio",
-    surname: "Vanni",
-    phoneNumber: "1234567890",
-    email: "giorgioVanni@ho.com",
-    lastPatientsVisited: [
-      {
-        id: 1,
-        name: "Mario",
-        surname: "Rossi",
-      },
-      {
-        id: 2,
-        name: "Luigi",
-        surname: "Verdi",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Alessandro",
-    surname: "Rossi",
-    phoneNumber: "1234567890",
-    email: "alessandroRossi@ho.com",
-    lastPatientsVisited: [
-      {
-        id: 3,
-        name: "Giovanni",
-        surname: "Marroni",
-      },
-      {
-        id: 4,
-        name: "Rosa",
-        surname: "Giannini",
-      },
-    ],
-  },
-];
-
-interface IStaffFilterContext {
+interface IDoctorsFilterContext {
   filter: DoctorFilter;
   dispatch: Dispatch<Action>;
 }
 
-export const StaffFilterContext: React.Context<IStaffFilterContext> = React.createContext({
+export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
   filter: {},
   dispatch: (action) => {},
 });
 
 const getListDoctor = api.doctors.getListDoctor;
 
-const Staff: React.FC = () => {
-  const [filter, dispatch] = useReducer(staffFilterReducer, {});
-  const staffContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+const Doctors: React.FC = () => {
+  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
+  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
   const [doctorsList, setDoctorsList] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(false);
@@ -73,7 +32,6 @@ const Staff: React.FC = () => {
     setLoading(true);
     getListDoctor(filter, 0, 100, "id,asc")
       .then((response) => {
-        response.data = demoDataDoctors;
         setDoctorsList(response.data);
       })
       .finally(() => {
@@ -82,11 +40,11 @@ const Staff: React.FC = () => {
   }, [setDoctorsList, setLoading, filter]);
 
   return (
-    <StaffFilterContext.Provider value={staffContextValue}>
+    <DoctorsFilterContext.Provider value={doctorsContextValue}>
       <Breadcrumb>
-        <BreadcrumbEl active>Staff</BreadcrumbEl>
+        <BreadcrumbEl active>Doctors</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="Collegues database" />
+      <SectionHeader title="Doctors database" />
       <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (
@@ -101,8 +59,8 @@ const Staff: React.FC = () => {
           ))
         )}
       </Grid>
-    </StaffFilterContext.Provider>
+    </DoctorsFilterContext.Provider>
   );
 };
 
-export default Staff;
+export default Doctors;
