@@ -57,7 +57,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const body = {
-        date,
+        date: dayjs(date).toISOString(),
         typeVisit,
         reasonVisit,
         treatmentMade,
@@ -123,6 +123,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
               variant="outlined"
             />
           </Grid>
+          <Grid item xs={4}></Grid>
         </Grid>
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
@@ -155,14 +156,14 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
           </Grid>
           <Grid item xs={4}>
             <FormControl fullWidth>
-              <InputLabel required size="small" id="blood-group-label">
-                Blood Group
+              <InputLabel required size="small" id="doctors-label">
+                Doctor
               </InputLabel>
               <Select
-                labelId="blood-group-label"
-                id="blood-group-select"
+                labelId="doctors-label"
+                id="doctors-select"
                 value={String(doctor)}
-                label="Blood Group"
+                label="Doctor"
                 required
                 size="small"
                 onChange={(e: SelectChangeEvent) => setDoctor(e.target.value)}
