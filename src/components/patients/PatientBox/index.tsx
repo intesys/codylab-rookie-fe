@@ -22,13 +22,13 @@ import React, { FC, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DATE_FORMAT } from "../../../config/date";
 import { PATIENTS_PATH } from "../../../config/paths";
-import { Patient as PatientType } from "../../../generated/axios";
+import { PatientDTO } from "../../../generated/axios";
 import { DetailType } from "../../../lib/types";
 import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {
-    patient: PatientType;
+    patient: PatientDTO;
   };
 };
 

@@ -22,14 +22,15 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import moment from "moment";
-import React, { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
-import { Patient } from "../../generated/axios";
+import { PatientDTO } from "../../generated/axios";
 import { DetailType } from "../../lib/types";
-import { generateAvatarImage, getBloodType, getPath } from "../../lib/utils";
+import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
@@ -40,16 +41,27 @@ const getPatient = api.patients.getPatient;
 const deletePatient = api.patients.deletePatient;
 
 const StaffMember: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [patient, setPatient] = useState<Patient>({});
+  const [patient, setPatient] = useState<PatientDTO>({});
   const [loading, setLoading] = useState(false);
 
   const lastVisit = useMemo(
-    () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : {}),
+    () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : undefined),
     [patient]
   );
 
-  if (!id) return null;
+  const handleDelete = useCallback(() => {
+    deletePatient(Number(id))
+      .then(() => {
+        enqueueSnackbar(`Patient ${patient.name} ${patient.surname} deleted`, { variant: "success" });
+        navigate(getPath(PATIENTS_PATH));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
+  }, [id]);
 
   useEffect(() => {
     setLoading(true);
@@ -57,10 +69,15 @@ const StaffMember: React.FC = () => {
       .then((response) => {
         setPatient(response.data);
       })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      })
       .finally(() => {
         setLoading(false);
       });
   }, [setPatient, setLoading, id]);
+
+  if (!id) return null;
 
   return (
     <div>
@@ -75,7 +92,7 @@ const StaffMember: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <SectionHeader title="Patient details">
-            <Button variant="outlined" type="submit" startIcon={<DeleteIcon />}>
+            <Button variant="outlined" type="submit" startIcon={<DeleteIcon />} onClick={handleDelete}>
               Delete
             </Button>
           </SectionHeader>
@@ -92,7 +109,7 @@ const StaffMember: React.FC = () => {
                 subTitle={patient.address}
                 detailType={DetailType.PATIENT}
                 edit={
-                  <IconButton>
+                  <IconButton component={Link} to={getEditDetailPath(PATIENTS_PATH, patient.id)}>
                     <EditIcon color="primary" />
                   </IconButton>
                 }

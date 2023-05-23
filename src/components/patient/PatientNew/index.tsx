@@ -22,7 +22,7 @@ const PatientNew = () => {
           <SectionHeader title="New patient" />
         </Grid>
         <Grid item xs={12}>
-          <PatientForm />
+          <PatientForm record={{}} />
         </Grid>
       </Grid>
     </>

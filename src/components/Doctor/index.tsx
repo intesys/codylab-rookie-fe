@@ -3,11 +3,12 @@ import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Box, Button, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DOCTORS_PATH } from "../../config/paths";
-import { Doctor as DoctorType } from "../../generated/axios";
+import { DoctorDTO } from "../../generated/axios";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
@@ -17,8 +18,9 @@ import DetailHeader from "../Layout/DetailHeader";
 const getDoctor = api.doctors.getDoctor;
 
 const Doctor: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
-  const [doctor, setDoctor] = useState<DoctorType>({});
+  const [doctor, setDoctor] = useState<DoctorDTO>({});
   const [loading, setLoading] = useState(false);
 
   if (!id) return null;
@@ -28,6 +30,9 @@ const Doctor: React.FC = () => {
     getDoctor(Number(id))
       .then((response) => {
         setDoctor(response.data);
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
       })
       .finally(() => {
         setLoading(false);
@@ -88,7 +93,7 @@ const Doctor: React.FC = () => {
                     </Typography>
                     <Divider color={grey[500]} />
                     <Grid container direction="row" my={2} spacing={2}>
-                      {doctor?.lastPatientsVisited?.map((patient) => (
+                      {doctor?.latestPatients?.map((patient) => (
                         <Grid item xs={12} key={patient.id}>
                           <Stack direction="row" spacing={2}>
                             <Avatar

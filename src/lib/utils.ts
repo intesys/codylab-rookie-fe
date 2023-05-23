@@ -1,5 +1,5 @@
 import { HOME_PATH } from "../config/paths";
-import { PatientBloodGroupEnum } from "../generated/axios";
+import { PatientDTOBloodGroupEnum } from "../generated/axios";
 
 export const generateAvatarImage = (size = 150, type: "d" | "p", id?: number) =>
   id ? `https://i.pravatar.cc/${size}?u=${type}${id}` : "";
@@ -15,28 +15,31 @@ export function getDetailPath(section: string, id?: string | number): string {
 export function getNewDetailPath(section: string): string {
   return `${getPath(section)}/new`;
 }
+export function getEditDetailPath(section: string, id?: string | number): string {
+  return `${getDetailPath(section, id)}/edit`;
+}
 
 export function getNewRecordPath(section: string, id?: string | number): string {
   return `${getDetailPath(section, id)}/record/new`;
 }
 
-export function getBloodType(bloodType: PatientBloodGroupEnum): string {
+export function getBloodType(bloodType: PatientDTOBloodGroupEnum): string {
   switch (bloodType) {
-    case PatientBloodGroupEnum.APlus:
+    case PatientDTOBloodGroupEnum.APlus:
       return "A+";
-    case PatientBloodGroupEnum.BPlus:
+    case PatientDTOBloodGroupEnum.BPlus:
       return "B+";
-    case PatientBloodGroupEnum.AMinus:
+    case PatientDTOBloodGroupEnum.AMinus:
       return "A-";
-    case PatientBloodGroupEnum.BMinus:
+    case PatientDTOBloodGroupEnum.BMinus:
       return "B-";
-    case PatientBloodGroupEnum.AbPlus:
+    case PatientDTOBloodGroupEnum.AbPlus:
       return "AB+";
-    case PatientBloodGroupEnum.AbMinus:
+    case PatientDTOBloodGroupEnum.AbMinus:
       return "AB-";
-    case PatientBloodGroupEnum.ZeroPlus:
+    case PatientDTOBloodGroupEnum.ZeroPlus:
       return "0+";
-    case PatientBloodGroupEnum.ZeroMinus:
+    case PatientDTOBloodGroupEnum.ZeroMinus:
       return "0-";
     default:
       return "";

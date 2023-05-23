@@ -1,12 +1,12 @@
 import { Reducer } from "react";
-import { DoctorFilter } from "../../generated/axios";
+import { DoctorFilterDTO } from "../../generated/axios";
 
 export interface Action {
   type: "SET_FILTER";
-  payload?: DoctorFilter;
+  payload?: DoctorFilterDTO;
 }
 
-export const doctorsFilterReducer: Reducer<DoctorFilter, Action> = (state, action) => {
+export const doctorsFilterReducer: Reducer<DoctorFilterDTO, Action> = (state, action) => {
   switch (action.type) {
     case "SET_FILTER":
       return action.payload || state;

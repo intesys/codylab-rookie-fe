@@ -5,13 +5,13 @@ import { Avatar, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, S
 import React, { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DOCTORS_PATH } from "../../../config/paths";
-import { Doctor } from "../../../generated/axios";
+import { DoctorDTO } from "../../../generated/axios";
 import { DetailType } from "../../../lib/types";
 import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {
-    doctor: Doctor;
+    doctor: DoctorDTO;
   };
 };
 
@@ -61,7 +61,7 @@ const DoctorBox: FC<IProps> = ({ props }) => {
             </Grid>
             <Grid item xs={12}>
               <Grid container alignItems="center" spacing={2}>
-                {doctor.lastPatientsVisited?.map((patient) => (
+                {doctor.latestPatients?.map((patient) => (
                   <Grid item xs={6} key={patient.id}>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
                       <Avatar

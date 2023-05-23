@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
@@ -11,11 +12,13 @@ const App: React.FC = () => (
   <ThemeProvider theme={customTheme}>
     <div className="__show-structure">
       <MaterialProvider>
-        <BrowserRouter>
-          <Layout>
-            <AppRoutes />
-          </Layout>
-        </BrowserRouter>
+        <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
+          <BrowserRouter>
+            <Layout>
+              <AppRoutes />
+            </Layout>
+          </BrowserRouter>
+        </SnackbarProvider>
       </MaterialProvider>
     </div>
   </ThemeProvider>

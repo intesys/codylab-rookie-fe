@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Configuration, DoctorOpenHospitalApi, PatientOpenHospitalApi } from "../generated/axios";
+import { Configuration, DoctorApiApi, PatientApiApi } from "../generated/axios";
 
 /**
  * Api endpoint
@@ -15,7 +15,7 @@ export const basePathSW = `/msw`;
 axios.defaults.withCredentials = false;
 
 // API always served by ENV configuration
-const configuration = new Configuration({ basePath: `${process.env.API_PATH}` });
+const configuration = new Configuration({ basePath: `${process.env.WEB_SERVER}` });
 
 function bindMethods<T extends object>(klass: T): T {
   Object.getOwnPropertyNames(klass.constructor.prototype).forEach((method) => {
@@ -29,6 +29,6 @@ function bindMethods<T extends object>(klass: T): T {
 }
 
 export const api = {
-  doctors: bindMethods(new DoctorOpenHospitalApi(configuration)),
-  patients: bindMethods(new PatientOpenHospitalApi(configuration)),
+  doctors: bindMethods(new DoctorApiApi(configuration)),
+  patients: bindMethods(new PatientApiApi(configuration)),
 };

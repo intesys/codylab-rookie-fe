@@ -1,10 +1,11 @@
 import { Add } from "@mui/icons-material";
 import { Button, CircularProgress, Grid } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React, { Dispatch, useEffect, useMemo, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../config/api";
 import { PATIENTS_PATH } from "../../config/paths";
-import { PatientFilter, Patient as PatientType } from "../../generated/axios";
+import { PatientDTO, PatientFilterDTO } from "../../generated/axios";
 import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
@@ -14,7 +15,7 @@ import PatientBox from "./PatientBox";
 import { Action, patientsFilterReducer } from "./lib";
 
 interface IPatientsFilterContext {
-  filter: PatientFilter;
+  filter: PatientFilterDTO;
   dispatch: Dispatch<Action>;
 }
 
@@ -26,17 +27,22 @@ export const PatientsFilterContext: React.Context<IPatientsFilterContext> = Reac
 const getPatientList = api.patients.getListPatient;
 
 const Patients: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
-  const [patientList, setPatientList] = useState<PatientType[]>([]);
+  const [patientList, setPatientList] = useState<PatientDTO[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    getPatientList(filter, 0, 100, "id,asc")
+    getPatientList(0, 100, "id,asc", filter)
       .then((response) => {
         setPatientList(response.data);
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
       })
       .finally(() => {
         setLoading(false);
