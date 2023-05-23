@@ -1,4 +1,4 @@
-import { HOME_PATH } from "../config/paths";
+import { HOME_PATH, PATIENTS_RECORDS_PATH } from "../config/paths";
 import { PatientDTOBloodGroupEnum } from "../generated/axios";
 
 export const generateAvatarImage = (size = 150, type: "d" | "p", id?: number) =>
@@ -19,8 +19,16 @@ export function getEditDetailPath(section: string, id?: string | number): string
   return `${getDetailPath(section, id)}/edit`;
 }
 
-export function getNewRecordPath(section: string, id?: string | number): string {
-  return `${getDetailPath(section, id)}/record/new`;
+export function getNewRecordDetailPath(section: string, idPatient?: string | number): string {
+  return `${getDetailPath(section, idPatient)}/${PATIENTS_RECORDS_PATH}/new`;
+}
+
+export function getEditRecordDetailPath(
+  section: string,
+  idPatient?: string | number,
+  idPatientRecord?: string | number
+): string {
+  return `${getDetailPath(section, idPatient)}/${PATIENTS_RECORDS_PATH}/${idPatientRecord}/edit`;
 }
 
 export function getBloodType(bloodType: PatientDTOBloodGroupEnum): string {

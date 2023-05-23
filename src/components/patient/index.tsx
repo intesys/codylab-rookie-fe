@@ -21,7 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import moment from "moment";
+import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -166,7 +166,7 @@ const StaffMember: React.FC = () => {
                               primary="Last admission:"
                               secondary={
                                 <Typography sx={{ display: "inline" }} component="span" variant="body2">
-                                  {moment(lastVisit?.date).format(DATE_FORMAT)}
+                                  {dayjs(lastVisit?.date).format(DATE_FORMAT)}
                                 </Typography>
                               }
                             />
@@ -208,24 +208,24 @@ const StaffMember: React.FC = () => {
                           </Grid>
 
                           <Grid item xs={12}>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={generateAvatarImage(200, DetailType.DOCTOR, lastVisit?.doctor?.id)}
+                              sx={{ width: 50, height: 50 }}
+                            />
                             <Stack direction="row" spacing={2}>
-                              <Avatar
-                                alt="Remy Sharp"
-                                src={generateAvatarImage(200, DetailType.DOCTOR, lastVisit?.doctor?.id)}
-                                sx={{ width: 30, height: 30 }}
-                              />
                               <Stack direction="column">
                                 <Typography variant="h6" mb={1}>
                                   {lastVisit?.doctor?.name} {lastVisit?.doctor?.surname}
                                 </Typography>
                                 <Typography component="h4" gutterBottom>
                                   {lastVisit?.doctor?.phoneNumber && (
-                                    <Stack direction="row" mb={1} spacing={2}>
+                                    <Stack direction="row" mb={1} spacing={1}>
                                       <PhoneIcon color="primary" /> <span>{lastVisit?.doctor?.phoneNumber}</span>
                                     </Stack>
                                   )}
                                   {lastVisit?.doctor?.email && (
-                                    <Stack direction="row" mb={1} spacing={2}>
+                                    <Stack direction="row" mb={1} spacing={1}>
                                       <MailOutlineIcon color="primary" /> <span>{lastVisit?.doctor?.email}</span>
                                     </Stack>
                                   )}
@@ -239,7 +239,7 @@ const StaffMember: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={9} p={6}>
-                  <RecordTable patientRecord={patient.patientRecords ? patient.patientRecords : []} />
+                  <RecordTable patient={patient} />
                 </Grid>
               </Grid>
             </>

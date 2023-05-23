@@ -1,9 +1,8 @@
+import dayjs from "dayjs";
 import { IAppointmentList } from "../../components/Home/calendar/AppointmentsProvider";
 
-const moment = require("moment");
-
 export const appointments: IAppointmentList = {
-  [moment().subtract(2, "days").format("YYYY-MM-DD")]: [
+  [dayjs().subtract(2, "days").format("YYYY-MM-DD")]: [
     {
       id: 1,
       hour: "9.30 am",
@@ -35,7 +34,7 @@ export const appointments: IAppointmentList = {
       done: true,
     },
   ],
-  [moment().subtract(1, "day").format("YYYY-MM-DD")]: [
+  [dayjs().subtract(1, "day").format("YYYY-MM-DD")]: [
     {
       id: 1,
       hour: "10.00 am",
@@ -56,7 +55,7 @@ export const appointments: IAppointmentList = {
       done: false,
     },
   ],
-  [moment().format("YYYY-MM-DD")]: [
+  [dayjs().format("YYYY-MM-DD")]: [
     {
       id: 1,
       hour: "9.30 am",
@@ -88,7 +87,7 @@ export const appointments: IAppointmentList = {
       done: false,
     },
   ],
-  [moment().add(1, "day").format("YYYY-MM-DD")]: [
+  [dayjs().add(1, "day").format("YYYY-MM-DD")]: [
     {
       id: 1,
       hour: "10.15 am",
@@ -120,7 +119,7 @@ export const appointments: IAppointmentList = {
       done: false,
     },
   ],
-  [moment().add(2, "days").format("YYYY-MM-DD")]: [
+  [dayjs().add(2, "days").format("YYYY-MM-DD")]: [
     {
       id: 1,
       hour: "10.00 am",

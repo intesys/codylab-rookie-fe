@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -12,13 +14,15 @@ const App: React.FC = () => (
   <ThemeProvider theme={customTheme}>
     <div className="__show-structure">
       <MaterialProvider>
-        <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
-          <BrowserRouter>
-            <Layout>
-              <AppRoutes />
-            </Layout>
-          </BrowserRouter>
-        </SnackbarProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
+            <BrowserRouter>
+              <Layout>
+                <AppRoutes />
+              </Layout>
+            </BrowserRouter>
+          </SnackbarProvider>
+        </LocalizationProvider>
       </MaterialProvider>
     </div>
   </ThemeProvider>

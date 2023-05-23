@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { useContext } from "react";
 import { CalendarContext } from "..";
 import { AppointmentsContext, IAppointment } from "../AppointmentsProvider";
@@ -8,7 +8,7 @@ import "./index.scss";
 const Appointments: React.FC = () => {
   const { date } = useContext(CalendarContext);
   const appointments = useContext(AppointmentsContext);
-  const selectedDate = moment(date).format("YYYY-MM-DD");
+  const selectedDate = dayjs(date).format("YYYY-MM-DD");
   const list = appointments?.[selectedDate] || [];
   return (
     <div className="calendar__appointment_list">

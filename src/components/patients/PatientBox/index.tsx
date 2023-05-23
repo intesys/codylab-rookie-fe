@@ -17,7 +17,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { FC, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DATE_FORMAT } from "../../../config/date";
@@ -72,7 +72,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
                         primary="Last admission:"
                         secondary={
                           <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
-                            {moment(lastVisit?.date).format(DATE_FORMAT)}
+                            {dayjs(lastVisit?.date).format(DATE_FORMAT)}
                           </Typography>
                         }
                       />

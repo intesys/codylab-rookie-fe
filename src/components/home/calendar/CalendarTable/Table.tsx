@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { useContext } from "react";
 import { CalendarContext } from "..";
 import { week_subs } from "../utils";
@@ -15,7 +15,7 @@ const Table: React.FC = () => {
     }
     let className = day.isToday ? "today" : "";
 
-    const selected = moment(day.fullDate).isSame(date, "day");
+    const selected = dayjs(day.fullDate).isSame(date, "day");
     if (selected) {
       className += " selected";
     }

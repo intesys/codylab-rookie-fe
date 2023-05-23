@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Configuration, DoctorApiApi, PatientApiApi } from "../generated/axios";
+import { Configuration, DoctorApiApi, PatientApiApi, PatientRecordApiApi } from "../generated/axios";
 
 /**
  * Api endpoint
@@ -31,4 +31,5 @@ function bindMethods<T extends object>(klass: T): T {
 export const api = {
   doctors: bindMethods(new DoctorApiApi(configuration)),
   patients: bindMethods(new PatientApiApi(configuration)),
+  patientRecords: bindMethods(new PatientRecordApiApi(configuration)),
 };

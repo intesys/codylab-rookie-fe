@@ -11,16 +11,21 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { FC } from "react";
+import { Link } from "react-router-dom";
 import { DATE_FORMAT } from "../../../config/date";
-import { PatientRecord } from "../../../generated/axios";
+import { PATIENTS_PATH } from "../../../config/paths";
+import { PatientDTO } from "../../../generated/axios";
+import { getNewRecordDetailPath } from "../../../lib/utils";
 
 interface IProps extends React.PropsWithChildren {
-  patientRecord: PatientRecord[];
+  patient: PatientDTO;
 }
 
-const RecordTable: FC<IProps> = ({ patientRecord }) => {
+const RecordTable: FC<IProps> = ({ patient }) => {
+  const patientRecords = patient?.patientRecords;
+  console.log(patient);
   return (
     <Paper>
       <Toolbar
@@ -32,7 +37,12 @@ const RecordTable: FC<IProps> = ({ patientRecord }) => {
         <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div">
           Records
         </Typography>
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          component={Link}
+          to={getNewRecordDetailPath(PATIENTS_PATH, patient?.id)}
+        >
           record
         </Button>
       </Toolbar>
@@ -48,17 +58,17 @@ const RecordTable: FC<IProps> = ({ patientRecord }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patientRecord.length > 0 ? (
-              patientRecord.map((row) => (
+            {patientRecords && patientRecords.length > 0 ? (
+              patientRecords.map((row) => (
                 <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
-                    {moment(row.date).format(DATE_FORMAT)}
+                    {dayjs(row.date).format(DATE_FORMAT)}
                   </TableCell>
                   <TableCell align="right">{row.typeVisit}</TableCell>
                   <TableCell align="right">{row.reasonVisit}</TableCell>
                   <TableCell align="right">{row.treatmentMade}</TableCell>
                   <TableCell align="right">
-                    {row.doctor.name} {row.doctor.surname}
+                    {row.doctor?.name} {row.doctor?.surname}
                   </TableCell>
                 </TableRow>
               ))
