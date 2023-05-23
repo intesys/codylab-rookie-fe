@@ -1,433 +1,345 @@
-openapi: 3.0.2
+openapi: 3.0.1
 info:
-  description: Open Hospital BackOffice
-  title: Open Hospital BackOffice
-  version: 1.0.0
+  title: OpenAPI definition
+  version: v0
 servers:
-  - url: http://localhost:8080/api
+  - url: http://localhost:8090
+    description: Generated server url
 paths:
-  /patient:
+  /api/patientRecord/{id}:
+    get:
+      tags:
+        - patient-record-api
+      operationId: getPatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PatientRecordDTO"
+    put:
+      tags:
+        - patient-record-api
+      operationId: updatePatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientRecordDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - patient-record-api
+      operationId: deletePatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/patient/{id}:
+    get:
+      tags:
+        - patient-api
+      operationId: getPatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PatientDTO"
+    put:
+      tags:
+        - patient-api
+      operationId: updatePatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - patient-api
+      operationId: deletePatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/doctor/{id}:
+    get:
+      tags:
+        - doctor-api
+      operationId: getDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/DoctorDTO"
+    put:
+      tags:
+        - doctor-api
+      operationId: updateDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - doctor-api
+      operationId: deleteDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/patient:
     post:
-      description: ""
+      tags:
+        - patient-api
       operationId: createPatient
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Patient"
+              $ref: "#/components/schemas/PatientDTO"
         required: true
       responses:
         "200":
+          description: OK
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: "#/components/schemas/Patient"
-          description: Ok, patient insert
-      summary: Insert new patient
-      tags:
-        - Patient Open Hospital
-  /patient/{id}:
-    delete:
-      description: ""
-      operationId: deletePatient
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "204":
-          description: Ok, patent delete
-      summary: Delete patient
-      tags:
-        - Patient Open Hospital
-    get:
-      description: ""
-      operationId: getPatient
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Patient"
-          description: Ok, patient returned
-      summary: Get patient
-      tags:
-        - Patient Open Hospital
-    put:
-      description: ""
-      operationId: updatePatient
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Patient"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Patient"
-          description: Ok, patient updated
-      summary: Update patient
-      tags:
-        - Patient Open Hospital
-  /patient/filter:
+                $ref: "#/components/schemas/PatientDTO"
+  /api/patientRecord:
     post:
-      operationId: getListPatient
-      parameters:
-        - description: the page number
-          in: query
-          name: page
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: the page size
-          in: query
-          name: size
-          required: false
-          schema:
-            default: 20
-            format: int32
-            type: integer
-        - description: "the field to be sorted (e.g.: id,desc)"
-          in: query
-          name: sort
-          required: false
-          schema:
-            default: id,desc
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PatientFilter"
-        description: Patient filter data
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Patient"
-                type: array
-          description: Ok, patients list returned
-          headers:
-            X-Total-Count:
-              $ref: "#/components/headers/X-Total-Count"
-            X-Page-Size:
-              $ref: "#/components/headers/X-Page-Size"
-            X-Page-Number:
-              $ref: "#/components/headers/X-Page-Number"
-      summary: Get patients list
       tags:
-        - Patient Open Hospital
-  /doctor:
-    post:
-      description: ""
-      operationId: createDoctor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Doctor"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Doctor"
-          description: Ok, doctor insert
-      summary: Insert new doctor
-      tags:
-        - Doctor Open Hospital
-  /doctor/{id}:
-    delete:
-      description: ""
-      operationId: deleteDoctor
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "204":
-          description: Ok, doctor delete
-      summary: Doctor doctor
-      tags:
-        - Doctor Open Hospital
-    get:
-      description: ""
-      operationId: getDoctor
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Doctor"
-          description: Ok, doctor returned
-      summary: Get doctor
-      tags:
-        - Doctor Open Hospital
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-    put:
-      description: ""
-      operationId: updateDoctor
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            format: int64
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Doctor"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Doctor"
-          description: Ok, doctor updated
-      summary: Update doctor
-      tags:
-        - Doctor Open Hospital
-  /doctor/filter:
-    post:
-      operationId: getListDoctor
-      parameters:
-        - description: the page number
-          in: query
-          name: page
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: the page size
-          in: query
-          name: size
-          required: false
-          schema:
-            default: 20
-            format: int32
-            type: integer
-        - description: "the field to be sorted (e.g.: id,desc)"
-          in: query
-          name: sort
-          required: false
-          schema:
-            default: id,desc
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DoctorFilter"
-        description: doctor filter data
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/Doctor"
-                type: array
-          description: Ok, doctor list returned
-          headers:
-            X-Total-Count:
-              $ref: "#/components/headers/X-Total-Count"
-            X-Page-Size:
-              $ref: "#/components/headers/X-Page-Size"
-            X-Page-Number:
-              $ref: "#/components/headers/X-Page-Number"
-      summary: Get doctors list
-      tags:
-        - Doctor Open Hospital
-  /patientRecord:
-    post:
-      description: ""
+        - patient-record-api
       operationId: createPatientRecord
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PatientRecord"
+              $ref: "#/components/schemas/PatientRecordDTO"
         required: true
       responses:
         "200":
+          description: OK
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: "#/components/schemas/PatientRecord"
-          description: Ok, patient record insert
-      summary: Insert new patient record
+                $ref: "#/components/schemas/PatientRecordDTO"
+  /api/patient/filter:
+    post:
       tags:
-        - Patient Record Open Hospital
-  /patientRecord/{id}:
-    delete:
-      description: ""
-      operationId: deletePatientRecord
+        - patient-api
+      operationId: getListPatient
       parameters:
-        - in: path
-          name: id
+        - name: page
+          in: query
           required: true
           schema:
-            format: int64
             type: integer
-      responses:
-        "204":
-          description: Ok, patent record delete
-      summary: Delete patient
-      tags:
-        - Patient Record Open Hospital
-    get:
-      description: ""
-      operationId: getPatientRecord
-      parameters:
-        - in: path
-          name: id
+            format: int32
+        - name: size
+          in: query
           required: true
           schema:
-            format: int64
             type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PatientRecord"
-          description: Ok, patient record returned
-      summary: Get patient record
-      tags:
-        - Patient Record Open Hospital
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: int64
-          type: integer
-    put:
-      description: ""
-      operationId: updatePatientRecord
-      parameters:
-        - in: path
-          name: id
+            format: int32
+        - name: sort
+          in: query
           required: true
           schema:
-            format: int64
-            type: integer
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PatientRecord"
+              $ref: "#/components/schemas/PatientFilterDTO"
         required: true
       responses:
         "200":
+          description: OK
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: "#/components/schemas/PatientRecord"
-          description: Ok, patient record updated
-      summary: Update patient record
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientDTO"
+  /api/doctor:
+    post:
       tags:
-        - Patient Record Open Hospital
-
+        - doctor-api
+      operationId: createDoctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/DoctorDTO"
+  /api/doctor/filter:
+    post:
+      tags:
+        - doctor-api
+      operationId: getListDoctor
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorFilterDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DoctorDTO"
 components:
-  headers:
-    X-Total-Count:
-      description: Total element count
-      schema:
-        format: int32
-        type: integer
-    X-Page-Size:
-      description: Page size
-      schema:
-        format: int32
-        type: integer
-    X-Page-Number:
-      description: Page number (from 0)
-      schema:
-        format: int32
-        type: integer
   schemas:
-    Patient:
-      description: Patient info
-      example:
-        id: 0
-        opd: 0
-        idp: 0
-        name: name
-        surname: surname
-        phoneNumber: phoneNumber
-        address: address
-        email: email
-        avatar: avatar
-        bloodGroup: bloodGroup
-        notes: notes
-        chronicPatient: false
-        lastAdmission: lastAdmission
-        patientRecords: patientRecords
-        doctors: doctors
+    DoctorDTO:
+      type: object
       properties:
         id:
-          format: int64
           type: integer
-        opd:
           format: int64
-          type: integer
-        idp:
-          format: int64
-          type: integer
         name:
           type: string
         surname:
           type: string
         phoneNumber:
-          type: number
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        profession:
+          type: string
+        latestPatients:
+          type: array
+          items:
+            $ref: "#/components/schemas/PatientDTO"
+    PatientDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        opd:
+          type: integer
+          format: int64
+        idp:
+          type: integer
+          format: int64
+        name:
+          type: string
+        surname:
+          type: string
+        phoneNumber:
+          type: integer
+          format: int64
         address:
           type: string
         email:
@@ -435,7 +347,7 @@ components:
         avatar:
           type: string
         bloodGroup:
-          description: blood type
+          type: string
           enum:
             - ZERO_PLUS
             - ZERO_MINUS
@@ -445,83 +357,64 @@ components:
             - B_MINUS
             - AB_PLUS
             - AB_MINUS
-          type: string
         notes:
           type: string
         chronicPatient:
           type: boolean
         lastAdmission:
-          format: date-time
           type: string
-        lastDoctorVisited:
-          $ref: "#/components/schemas/Doctor"
+          format: date-time
+        lastDoctorVisitedId:
+          type: integer
+          format: int64
         patientRecords:
-          items:
-            format: object
-            $ref: "#/components/schemas/PatientRecord"
           type: array
-        doctors:
           items:
-            format: object
-            $ref: "#/components/schemas/Doctor"
+            $ref: "#/components/schemas/PatientRecordDTO"
+        doctorIds:
           type: array
-    PatientFilter:
-      example:
-        text: Gino Faccioli
+          items:
+            type: integer
+            format: int64
+    PatientRecordDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        patientId:
+          type: integer
+          format: int64
+        doctor:
+          $ref: "#/components/schemas/DoctorDTO"
+        date:
+          type: string
+          format: date-time
+        typeVisit:
+          type: string
+        reasonVisit:
+          type: string
+        treatmentMade:
+          type: string
+    PatientFilterDTO:
+      type: object
       properties:
         text:
           type: string
-      title: PatientFilter
-    Doctor:
-      description: Doctor info
-      example:
-        id: 0
-        name: name
-        surname: surname
-        phoneNumber: phoneNumber
-        profession: profession
-        address: address
-        email: email
-        avatar: avatar
-        lastPatientsVisited: lastPatientsVisited
-        patientRecords: patientRecords
-        patients: patients
-      properties:
         id:
-          format: int64
           type: integer
-        name:
-          type: string
-        surname:
-          type: string
-        phoneNumber:
-          type: string
-        address:
-          type: string
-        email:
-          type: string
-        avatar:
-          type: string
-        patientRecords:
-          items:
-            format: object
-            $ref: "#/components/schemas/PatientRecord"
-          type: array
-        lastPatientsVisited:
-          items:
-            format: object
-            $ref: "#/components/schemas/Patient"
-          type: array
-        patients:
-          items:
-            format: object
-            $ref: "#/components/schemas/Patient"
-          type: array
-    DoctorFilter:
-      example:
-        name: string
-        surname: string
-        profession: string
+          format: int64
+        opd:
+          type: integer
+          format: int64
+        idp:
+          type: integer
+          format: int64
+        doctorId:
+          type: integer
+          format: int64
+    DoctorFilterDTO:
+      type: object
       properties:
         name:
           type: string
@@ -529,33 +422,3 @@ components:
           type: string
         profession:
           type: string
-      title: DoctorFilter
-    PatientRecord:
-      description: Doctor info
-      example:
-        id: 0
-        patientId: 0
-        doctorId: 0
-        date: date
-        typeVisit: typeVisit
-        reasonVisit: reasonVisit
-        treatmentMade: treatmentMade
-      properties:
-        id:
-          format: int64
-          type: integer
-        patientId:
-          format: int64
-          type: integer
-        doctorId:
-          format: int64
-          type: integer
-        date:
-          format: date-time
-          type: string
-        typeVisit:
-          type: string
-        reasonVisit:
-          type: string
-        treatmentMade:
-          type: number
