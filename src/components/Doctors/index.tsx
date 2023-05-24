@@ -1,8 +1,12 @@
-import { CircularProgress, Grid } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../../config/api";
+import { DOCTORS_PATH } from "../../config/paths";
 import { DoctorFilterDTO } from "../../generated/axios";
 import useGetList from "../../hooks/useGetList";
+import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
@@ -33,7 +37,11 @@ const Doctors: React.FC = () => {
       <Breadcrumb>
         <BreadcrumbEl active>Doctors</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="Doctors database" />
+      <SectionHeader title="Doctors database">
+        <Button component={Link} to={getNewDetailPath(DOCTORS_PATH)} variant="outlined" startIcon={<Add />}>
+          Add new doctor
+        </Button>
+      </SectionHeader>
       <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (

@@ -1,8 +1,8 @@
 import { HOME_PATH, PATIENTS_RECORDS_PATH } from "../config/paths";
 import { PatientDTOBloodGroupEnum } from "../generated/axios";
 
-export const generateAvatarImage = (size = 150, type: "d" | "p", id?: number) =>
-  id ? `https://i.pravatar.cc/${size}?u=${type}${id}` : "";
+export const generateAvatarImage = (type: "d" | "p", id?: number) =>
+  id ? `https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${type}${id}` : "";
 
 export function getPath(section: string): string {
   return `${HOME_PATH}${section}`;

@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import React, { FC, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DATE_FORMAT } from "../../../config/date";
 import { PATIENTS_PATH } from "../../../config/paths";
 import { PatientDTO } from "../../../generated/axios";
@@ -34,7 +34,6 @@ type IProps = {
 
 const PatientBox: FC<IProps> = ({ props }) => {
   const { patient } = props;
-  const navigate = useNavigate();
 
   const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
 
@@ -51,12 +50,13 @@ const PatientBox: FC<IProps> = ({ props }) => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              PID: <strong>{patient.id}</strong> - OPD: <strong>{patient.opd}</strong>
+              PID: <strong>{patient.id}</strong> | OPD: <strong>{patient.opd}</strong> | IDP:{" "}
+              <strong>{patient.idp}</strong>
             </Grid>
             <Grid item xs={12}>
               <Avatar
                 alt={`${patient.name} ${patient.surname}`}
-                src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
+                src={generateAvatarImage(DetailType.PATIENT, patient.id)}
                 sx={{ width: 100, height: 100, margin: "auto" }}
               />
             </Grid>
@@ -137,7 +137,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
                   <Stack direction="row" spacing={2}>
                     <Avatar
                       alt="Remy Sharp"
-                      src={generateAvatarImage(200, DetailType.DOCTOR, lastVisit?.doctor?.id)}
+                      src={generateAvatarImage(DetailType.DOCTOR, lastVisit?.doctor?.id)}
                       sx={{ width: 60, height: 60 }}
                     />
                     <Stack direction="column">

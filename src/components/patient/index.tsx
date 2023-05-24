@@ -198,7 +198,7 @@ const StaffMember: React.FC = () => {
                           <Grid item xs={12}>
                             <Avatar
                               alt="Remy Sharp"
-                              src={generateAvatarImage(200, DetailType.DOCTOR, lastVisit?.doctor?.id)}
+                              src={generateAvatarImage(DetailType.DOCTOR, lastVisit?.doctor?.id)}
                               sx={{ width: 50, height: 50 }}
                             />
                             <Stack direction="row" spacing={2}>

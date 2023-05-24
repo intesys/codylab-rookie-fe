@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Button, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
 import { DoctorsFilterContext } from "..";
 
@@ -23,7 +23,7 @@ const FiltersForm: FC = () => {
   );
 
   return (
-    <Box sx={{ background: "white", padding: 4 }}>
+    <Paper sx={{ padding: 4 }}>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -71,7 +71,7 @@ const FiltersForm: FC = () => {
           </Grid>
         </Grid>
       </form>
-    </Box>
+    </Paper>
   );
 };
 

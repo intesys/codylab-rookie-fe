@@ -14,14 +14,16 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../../config/api";
 import { DATE_FORMAT } from "../../../config/date";
 import { PATIENTS_PATH } from "../../../config/paths";
-import { DoctorDTO, PatientRecordDTO } from "../../../generated/axios";
+import { PatientRecordDTO } from "../../../generated/axios";
+import useGetList from "../../../hooks/useGetList";
 import { getDetailPath } from "../../../lib/utils";
 
+const filter = {};
 const createPatientRecord = api.patientRecords.createPatientRecord;
 const updatePatientRecord = api.patientRecords.updatePatientRecord;
 const getListDoctor = api.doctors.getListDoctor;
@@ -41,17 +43,8 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
   const [reasonVisit, setReasonVisit] = useState(record?.reasonVisit ?? "");
   const [treatmentMade, setTreatmentMade] = useState(record?.treatmentMade ?? "");
   const [doctor, setDoctor] = useState(record?.doctor?.id ?? "");
-  const [doctors, setDoctors] = useState<DoctorDTO[]>([]);
 
-  useEffect(() => {
-    getListDoctor(0, 1000, "id,asc", {})
-      .then((response) => {
-        setDoctors(response.data);
-      })
-      .catch((error) => {
-        enqueueSnackbar("Error getting doctors", { variant: "error" });
-      });
-  }, []);
+  const [doctors] = useGetList(getListDoctor, filter);
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {

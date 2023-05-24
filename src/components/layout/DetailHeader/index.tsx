@@ -19,7 +19,7 @@ const DetailHeader: FC<IProps> = ({ record, subTitle, detailType, edit, children
           <Stack direction="row" alignItems="center">
             <Avatar
               alt={`${record?.name} ${record?.surname}`}
-              src={generateAvatarImage(200, detailType, record?.id)}
+              src={generateAvatarImage(detailType, record?.id)}
               sx={{ width: 80, height: 80, margin: 2 }}
             />
             <Stack direction="column">

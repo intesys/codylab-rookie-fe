@@ -1,27 +1,27 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { PATIENTS_PATH } from "../../../config/paths";
+import { DOCTORS_PATH } from "../../../config/paths";
 import { getPath } from "../../../lib/utils";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../../Layout/SectionHeader";
-import PatientForm from "../PatientForm";
+import PatientForm from "../DoctorForm";
 
 const emptyRecord = {};
 
-const PatientNew = () => {
+const DoctorNew = () => {
   return (
     <>
       <Breadcrumb>
         <BreadcrumbEl>
-          <Link to={getPath(PATIENTS_PATH)}>Patients</Link>
+          <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
         </BreadcrumbEl>
         <BreadcrumbEl active>New</BreadcrumbEl>
       </Breadcrumb>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <SectionHeader title="New patient" />
+          <SectionHeader title="New doctor" />
         </Grid>
         <Grid item xs={12}>
           <PatientForm record={emptyRecord} />
@@ -31,4 +31,4 @@ const PatientNew = () => {
   );
 };
 
-export default PatientNew;
+export default DoctorNew;

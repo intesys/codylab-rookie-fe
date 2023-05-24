@@ -1,6 +1,7 @@
+import { Edit } from "@mui/icons-material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Avatar, Box, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Box, CircularProgress, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
@@ -9,7 +10,7 @@ import { DOCTORS_PATH } from "../../config/paths";
 import { DoctorDTO } from "../../generated/axios";
 import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
-import { generateAvatarImage, getPath } from "../../lib/utils";
+import { generateAvatarImage, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
@@ -49,7 +50,16 @@ const Doctor: React.FC = () => {
             </Grid>
           ) : (
             <>
-              <DetailHeader record={doctor} detailType={DetailType.DOCTOR} subTitle={doctor?.profession} />
+              <DetailHeader
+                record={doctor}
+                detailType={DetailType.DOCTOR}
+                subTitle={doctor?.profession}
+                edit={
+                  <IconButton component={Link} to={getEditDetailPath(DOCTORS_PATH, doctor.id)}>
+                    <Edit color="primary" />
+                  </IconButton>
+                }
+              />
               <Grid container>
                 <Grid item xs={3}>
                   <Box sx={{ background: grey[800], padding: 4, color: "white" }}>
@@ -79,7 +89,7 @@ const Doctor: React.FC = () => {
                           <Stack direction="row" spacing={2}>
                             <Avatar
                               alt={patient.name}
-                              src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
+                              src={generateAvatarImage(DetailType.PATIENT, patient.id)}
                               sx={{ width: 35, height: 35 }}
                             />
                             <div>
