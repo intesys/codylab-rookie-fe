@@ -196,29 +196,29 @@ const StaffMember: React.FC = () => {
                           </Grid>
 
                           <Grid item xs={12}>
-                            <Avatar
-                              alt="Remy Sharp"
-                              src={generateAvatarImage(DetailType.DOCTOR, lastVisit?.doctor?.id)}
-                              sx={{ width: 50, height: 50 }}
-                            />
-                            <Stack direction="row" spacing={2}>
-                              <Stack direction="column">
+                            <Stack direction="column" spacing={2}>
+                              <Stack direction="row">
+                                <Avatar
+                                  alt="Remy Sharp"
+                                  src={generateAvatarImage(DetailType.DOCTOR, lastVisit?.doctor?.id)}
+                                  sx={{ width: 50, height: 50, marginRight: 1 }}
+                                />
                                 <Typography variant="h6" mb={1}>
-                                  {lastVisit?.doctor?.name} {lastVisit?.doctor?.surname}
-                                </Typography>
-                                <Typography component="h4" gutterBottom>
-                                  {lastVisit?.doctor?.phoneNumber && (
-                                    <Stack direction="row" mb={1} spacing={1}>
-                                      <PhoneIcon color="primary" /> <span>{lastVisit?.doctor?.phoneNumber}</span>
-                                    </Stack>
-                                  )}
-                                  {lastVisit?.doctor?.email && (
-                                    <Stack direction="row" mb={1} spacing={1}>
-                                      <MailOutlineIcon color="primary" /> <span>{lastVisit?.doctor?.email}</span>
-                                    </Stack>
-                                  )}
+                                  {lastVisit?.doctor?.name} <br /> {lastVisit?.doctor?.surname}
                                 </Typography>
                               </Stack>
+                              <Typography component="h4" gutterBottom>
+                                {lastVisit?.doctor?.phoneNumber && (
+                                  <Stack direction="row" mb={1} spacing={1}>
+                                    <PhoneIcon color="primary" /> <span>{lastVisit?.doctor?.phoneNumber}</span>
+                                  </Stack>
+                                )}
+                                {lastVisit?.doctor?.email && (
+                                  <Stack direction="row" mb={1} spacing={1}>
+                                    <MailOutlineIcon color="primary" /> <span>{lastVisit?.doctor?.email}</span>
+                                  </Stack>
+                                )}
+                              </Typography>
                             </Stack>
                           </Grid>
                         </Grid>

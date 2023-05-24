@@ -1,7 +1,8 @@
 import { HOME_PATH, PATIENTS_RECORDS_PATH } from "../config/paths";
 import { PatientDTOBloodGroupEnum } from "../generated/axios";
+import { DetailType } from "./types";
 
-export const generateAvatarImage = (type: "d" | "p", id?: number) =>
+export const generateAvatarImage = (type: DetailType, id?: number) =>
   id ? `https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${type}${id}` : "";
 
 export function getPath(section: string): string {

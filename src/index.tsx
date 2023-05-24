@@ -5,7 +5,7 @@ import App from "./App";
 const { worker } = require("./mocks/browser");
 worker.start({
   onUnhandledRequest(req: any, print: any) {
-    if (req.url.pathname.startsWith("/api/") || req.url.host.startsWith("i.pravatar.cc")) {
+    if (req.url.pathname.startsWith("/api/") || req.url.host.startsWith("api.dicebear.com")) {
       return;
     }
 

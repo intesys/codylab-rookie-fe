@@ -45,7 +45,7 @@ const Patients: React.FC = () => {
       <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (
-          <Grid direction="row" justifyContent="center" alignItems="center" item>
+          <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
             <CircularProgress />
           </Grid>
         ) : (
