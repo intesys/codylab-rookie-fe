@@ -23,12 +23,13 @@ import {
 import { grey } from "@mui/material/colors";
 import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
 import { PatientDTO } from "../../generated/axios";
+import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
@@ -37,6 +38,8 @@ import DetailHeader from "../Layout/DetailHeader";
 import SectionHeader from "../Layout/SectionHeader";
 import RecordTable from "./RecordsTable";
 
+const emptyRecord = {};
+
 const getPatient = api.patients.getPatient;
 const deletePatient = api.patients.deletePatient;
 
@@ -44,8 +47,7 @@ const StaffMember: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [patient, setPatient] = useState<PatientDTO>({});
-  const [loading, setLoading] = useState(false);
+  const [patient, loading] = useGetDetail(getPatient, emptyRecord as PatientDTO, Number(id));
 
   const lastVisit = useMemo(
     () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : undefined),
@@ -62,20 +64,6 @@ const StaffMember: React.FC = () => {
         enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
       });
   }, [id]);
-
-  useEffect(() => {
-    setLoading(true);
-    getPatient(Number(id))
-      .then((response) => {
-        setPatient(response.data);
-      })
-      .catch((error) => {
-        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [setPatient, setLoading, id]);
 
   if (!id) return null;
 

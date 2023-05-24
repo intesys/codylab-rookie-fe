@@ -11,7 +11,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { DateField } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useEffect, useState } from "react";
@@ -99,17 +99,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
-            <DateField
-              fullWidth
-              label="Date"
-              name="date"
-              size="small"
-              variant="outlined"
-              required
-              value={date}
-              format={DATE_FORMAT}
-              onChange={(newDate) => setDate(newDate ?? "")}
-            />
+            <DatePicker label="Date" value={date} format={DATE_FORMAT} onChange={(newDate) => setDate(newDate ?? "")} />
           </Grid>
           <Grid item xs={4}>
             <TextField
@@ -120,37 +110,6 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
               required
               value={typeVisit}
               onChange={(e) => setTypeVisit(e.target.value)}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={4}></Grid>
-        </Grid>
-        <Grid container spacing={2} marginBottom={2}>
-          <Grid item xs={4}>
-            <TextField
-              fullWidth
-              label="Reason of visit"
-              name="reasonVisit"
-              size="small"
-              multiline
-              rows={3}
-              required
-              value={reasonVisit}
-              onChange={(e) => setReasonVisit(e.target.value)}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-              fullWidth
-              label="Treatment made"
-              name="treatmentMade"
-              size="small"
-              multiline
-              rows={3}
-              required
-              value={treatmentMade}
-              onChange={(e) => setTreatmentMade(e.target.value)}
               variant="outlined"
             />
           </Grid>
@@ -175,6 +134,36 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
                 ))}
               </Select>
             </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} marginBottom={2}>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              label="Reason of visit"
+              name="reasonVisit"
+              size="small"
+              multiline
+              rows={3}
+              required
+              value={reasonVisit}
+              onChange={(e) => setReasonVisit(e.target.value)}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              label="Treatment made"
+              name="treatmentMade"
+              size="small"
+              multiline
+              rows={3}
+              required
+              value={treatmentMade}
+              onChange={(e) => setTreatmentMade(e.target.value)}
+              variant="outlined"
+            />
           </Grid>
         </Grid>
         <Grid container spacing={2} marginBottom={2}>

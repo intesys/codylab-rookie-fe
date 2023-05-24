@@ -1,8 +1,8 @@
 import { CircularProgress, Grid } from "@mui/material";
-import { useSnackbar } from "notistack";
-import React, { Dispatch, useEffect, useMemo, useReducer, useState } from "react";
+import React, { Dispatch, useMemo, useReducer } from "react";
 import { api } from "../../config/api";
-import { DoctorDTO, DoctorFilterDTO } from "../../generated/axios";
+import { DoctorFilterDTO } from "../../generated/axios";
+import useGetList from "../../hooks/useGetList";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
@@ -23,26 +23,10 @@ export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.
 const getListDoctor = api.doctors.getListDoctor;
 
 const Doctors: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar();
   const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
   const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
-  const [doctorsList, setDoctorsList] = useState<DoctorDTO[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getListDoctor(0, 100, "id,asc", filter)
-      .then((response) => {
-        setDoctorsList(response.data);
-      })
-      .catch((error) => {
-        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [setDoctorsList, setLoading, filter]);
+  const [doctorList, loading] = useGetList(getListDoctor, filter);
 
   return (
     <DoctorsFilterContext.Provider value={doctorsContextValue}>
@@ -57,7 +41,7 @@ const Doctors: React.FC = () => {
             <CircularProgress />
           </Grid>
         ) : (
-          doctorsList.map((doctor) => (
+          doctorList.map((doctor) => (
             <Grid item key={doctor.id} xs={4}>
               <DoctorBox props={{ doctor }} />
             </Grid>

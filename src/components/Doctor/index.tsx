@@ -1,43 +1,28 @@
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import MessageIcon from "@mui/icons-material/Message";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Avatar, Box, Button, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Box, CircularProgress, Divider, Grid, Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DOCTORS_PATH } from "../../config/paths";
 import { DoctorDTO } from "../../generated/axios";
+import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
+import PatientsTable from "./PatientsTable";
 
+const emptyRecord = {};
 const getDoctor = api.doctors.getDoctor;
 
 const Doctor: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
-  const [doctor, setDoctor] = useState<DoctorDTO>({});
-  const [loading, setLoading] = useState(false);
+  const [doctor, loading] = useGetDetail(getDoctor, emptyRecord as DoctorDTO, Number(id));
 
   if (!id) return null;
-
-  useEffect(() => {
-    setLoading(true);
-    getDoctor(Number(id))
-      .then((response) => {
-        setDoctor(response.data);
-      })
-      .catch((error) => {
-        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [setDoctor, setLoading, id]);
 
   return (
     <div>
@@ -64,11 +49,7 @@ const Doctor: React.FC = () => {
             </Grid>
           ) : (
             <>
-              <DetailHeader record={doctor} detailType={DetailType.PATIENT}>
-                <Button variant="outlined" type="submit" startIcon={<MessageIcon />}>
-                  Chat with doctor
-                </Button>
-              </DetailHeader>
+              <DetailHeader record={doctor} detailType={DetailType.DOCTOR} subTitle={doctor?.profession} />
               <Grid container>
                 <Grid item xs={3}>
                   <Box sx={{ background: grey[800], padding: 4, color: "white" }}>
@@ -97,7 +78,7 @@ const Doctor: React.FC = () => {
                         <Grid item xs={12} key={patient.id}>
                           <Stack direction="row" spacing={2}>
                             <Avatar
-                              alt="Remy Sharp"
+                              alt={patient.name}
                               src={generateAvatarImage(200, DetailType.PATIENT, patient.id)}
                               sx={{ width: 35, height: 35 }}
                             />
@@ -110,8 +91,8 @@ const Doctor: React.FC = () => {
                     </Grid>
                   </Box>
                 </Grid>
-                <Grid item xs={9}>
-                  <Box sx={{ padding: 2 }}>TODO</Box>
+                <Grid item xs={9} p={6}>
+                  <PatientsTable doctor={doctor} />
                 </Grid>
               </Grid>
             </>

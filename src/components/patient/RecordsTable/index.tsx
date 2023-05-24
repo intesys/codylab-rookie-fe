@@ -1,6 +1,8 @@
+import { DeleteOutline } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import {
   Button,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -12,20 +14,40 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs from "dayjs";
-import React, { FC } from "react";
+import { useSnackbar } from "notistack";
+import React, { FC, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../../../config/api";
 import { DATE_FORMAT } from "../../../config/date";
 import { PATIENTS_PATH } from "../../../config/paths";
 import { PatientDTO } from "../../../generated/axios";
 import { getNewRecordDetailPath } from "../../../lib/utils";
+
+const deletePatientRecord = api.patientRecords.deletePatientRecord;
 
 interface IProps extends React.PropsWithChildren {
   patient: PatientDTO;
 }
 
 const RecordTable: FC<IProps> = ({ patient }) => {
-  const patientRecords = patient?.patientRecords;
-  console.log(patient);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [patientRecords, setSetPatientRecords] = useState(patient?.patientRecords);
+
+  const deleteHandle = useCallback(
+    (id: number) => {
+      deletePatientRecord(id)
+        .then(() => {
+          setSetPatientRecords(patientRecords?.filter((record) => record.id !== id));
+          enqueueSnackbar("Patient record deleted successfully", { variant: "success" });
+        })
+        .catch((error) => {
+          enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+        });
+    },
+    [patientRecords]
+  );
+
   return (
     <Paper>
       <Toolbar
@@ -55,6 +77,7 @@ const RecordTable: FC<IProps> = ({ patient }) => {
               <TableCell align="right">Reason</TableCell>
               <TableCell align="right">Treatment made</TableCell>
               <TableCell align="right">Doctor</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -69,6 +92,11 @@ const RecordTable: FC<IProps> = ({ patient }) => {
                   <TableCell align="right">{row.treatmentMade}</TableCell>
                   <TableCell align="right">
                     {row.doctor?.name} {row.doctor?.surname}
+                  </TableCell>
+                  <TableCell align="right">
+                    <IconButton onClick={() => deleteHandle(Number(row.id))}>
+                      <DeleteOutline />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))
