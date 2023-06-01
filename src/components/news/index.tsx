@@ -6,7 +6,7 @@ const News: React.FC = () => {
   return (
     <div>
       <Breadcrumb>
-        <BreadcrumbEl>News</BreadcrumbEl>
+        <BreadcrumbEl active>News</BreadcrumbEl>
       </Breadcrumb>
     </div>
   );

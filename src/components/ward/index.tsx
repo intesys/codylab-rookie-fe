@@ -6,7 +6,7 @@ const Ward: React.FC = () => {
   return (
     <div>
       <Breadcrumb>
-        <BreadcrumbEl>Ward</BreadcrumbEl>
+        <BreadcrumbEl active>Ward</BreadcrumbEl>
       </Breadcrumb>
     </div>
   );

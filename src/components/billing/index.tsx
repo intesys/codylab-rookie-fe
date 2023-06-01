@@ -6,7 +6,7 @@ const Billing: React.FC = () => {
   return (
     <div>
       <Breadcrumb>
-        <BreadcrumbEl>Billing</BreadcrumbEl>
+        <BreadcrumbEl active>Billing</BreadcrumbEl>
       </Breadcrumb>
     </div>
   );
