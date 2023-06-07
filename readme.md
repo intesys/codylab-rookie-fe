@@ -1,6 +1,6 @@
-# Intesys academy - React course
+# Intesys CodyLab - Rookie - Front-end
 
-This repository contains the code of CodyLab Rookie - FE.
+Questo repositiory contiene il codice del Rookie - FE di CodyLab.
 
 ## Install
 
@@ -8,26 +8,26 @@ This repository contains the code of CodyLab Rookie - FE.
 
 ## Develop
 
-### Prerequisites
+### Prerequisiti
 
-You need **nodejs** and **git** installed on your machine.
+Abbiamo bisogno di **nodejs** e **git** installati sulla propria macchina.
 
-### Starting local dev server
+### Attivare il server di sviluppo
 
     npm start
 
-### Build API client
+### Effettaure la build del API Client
 
-before export TS_POST_PROCESS_FILE enabling prettier on generated files.
+Prima procedere con esportare TS_POST_PROCESS_FILE per abilitare prettier durante la compilazione dei file.
 
 ```shell
 export TS_POST_PROCESS_FILE='./node_modules/.bin/prettier.cmd --write'
 npm run build:api
 ```
 
-Generate API Rest client from openapi specification file (api.yml)
+Questa procedura ci permette di generare il client REST dalle api grazie alle specifiche OpenAPI contenute all'interno del file [api.yml](./api.yml).
 
-### Built with
+### Questa applicazione è stata creata con:
 
 - [React](https://reactjs.org/)
 - [Parcel](https://parceljs.org/)
@@ -40,35 +40,39 @@ Generate API Rest client from openapi specification file (api.yml)
 
 ### Building
 
-Build production bundle with:
+Eseguire il seguente comando quando si vuole creare il bundle finale per il deploy:
 
     npm run build
 
-## Design reference
+## Referenze per lo sviluppo
 
-Refer to png files saved in [/doc](./doc/).
+Per il design applicativo fare riferimento ai file .png salvati nella cartella [/doc](./doc/).
 
-## Sections and functions available for development
+---
 
-- Patient
+## Sezioni disponibili per lo sviluppo
 
-  - List of patients and filters form
-  - Detail of patient
-  - Create patient
-  - Update patient
-  - Delate patient
-  - Records
-    - Create new patient record
-    - Delete patient record
-    - List patient records
+- Patient (Entity)
+  - Lista dei dottori e form di filtro
+  - Dettaglio del paziente
+  - Creazione di un nuovo paziente
+  - Aggiornamento di un paziente
+  - Rimosione di un paziente
+- Records (Entity)
 
-- Doctor
-  - List of doctors and filters form
-  - Detail of doctor
-  - Create doctor
-  - Update doctor
-  - Delate doctor
-  - List of patients assigned to doctor
+  - Creazione di un nuovo record legato ad un paziente
+  - Cancellazione di un record
+  - Lista dei record per paziente
+
+- Doctor (Entity)
+  - Lista dei dottori e form di filtro
+  - Dettaglio del dottore
+  - Creazione di un nuovo dottore
+  - Aggiornamento di un dottore
+  - Rimosione di un dottore
+  - Lista dei pazienti assegnati al dottore
+
+---
 
 ## License
 
