@@ -50,7 +50,7 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
 
 ---
 
-## Sezioni disponibili per lo sviluppo
+## Sezioni disponibili da sviluppare
 
 - Patient (Entity)
   - Lista dei dottori e form di filtro
@@ -73,6 +73,52 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
   - Lista dei pazienti assegnati al dottore
 
 ---
+
+## TO DO LIST - CodyLab Rookie - Front-end
+
+- [ ] Doctors Database
+  - [ ] Lista dei dottori
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creare un componente per la scheda di anteprima di un dottore
+    - [ ] Creare un componente che gestisca la lista dei dottori
+    - [ ] Creare un componente che gestisca il form di filtro
+    - [ ] Agganciare le API per far ritornare la lista dei dottori presenti nel database
+    - [ ] Agganciare le API al filtro di ricerca dei dottori
+  - [ ] Dettaglio del dottore
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creare un componente che gestisca la scheda di dettaglio di un dottore
+    - [ ] Creare un componente che gestica la lista dei pazienti assegnati al dottore
+    - [ ] Agganciare le API per far ritornare il dettaglio del dottore
+    - [ ] Agganciare le API per far ritornare la lista dei pazienti assegnati al dottore
+  - [ ] Form gestione delle informazioni di un dottore
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creazione del componente che gestisce il form per la creazione/modifica di un dottore
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo dottore agganciando le relative API di POST
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un dottore agganciando le relative API di GET e PUT
+- [ ] Patients Database
+  - [ ] Lista dei pazienti
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creare un componente per la scheda di anteprima di un paziente
+    - [ ] Creare un componente che gestisca la lista dei paziente
+    - [ ] Creare un componente che gestisca il form di filtro
+    - [ ] Agganciare le API per far ritornare la lista dei pazienti presenti nel database
+    - [ ] Agganciare le API al filtro di ricerca dei pazienti
+  - [ ] Dettaglio del paziente
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creare un componente che gestisca la scheda di dettaglio di un paziente
+    - [ ] Creare un componente che gestica la lista dei record assegnati al paziente
+    - [ ] Agganciare le API per far ritornare il dettaglio del paziente
+    - [ ] Agganciare le API per far ritornare la lista dei record assegnati al paziente
+  - [ ] Form gestione delle informazioni di un paziente
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creazione del componente che gestisce il form per la creazione/modifica di un paziente
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo paziente agganciando le relative API di POST
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un paziente agganciando le relative API di GET e PUT
+  - [ ] Form gestione delle informazioni di un record di un paziente
+    - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
+    - [ ] Creazione del componente che gestisce il form per la creazione di un record paziente
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per la creazione di un nuovo record paziente agganciando le relative API di POST
+    - [ ] Creazione di una pagina che gestisca il form precedentemente creato per l'aggiornamento di un record paziente agganciando le relative API di GET e PUT
 
 ## License
 
