@@ -1,9 +1,9 @@
 {
-  "name": "intesys-pcto-fe-2023",
+  "name": "codylab-rookie-fe",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/intesys/intesys-pcto-fe-2023.git"
+    "url": "https://github.com/intesys/codylab-rookie-fe.git"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
@@ -17,7 +17,7 @@
     "prestart": "npm run msw:install",
     "msw:install": "msw init ./dist"
   },
-  "author": "Alessandro Falezza",
+  "author": "Filippo Dolci",
   "license": "MIT",
   "dependencies": {
     "@emotion/react": "^11.10.6",
