@@ -40,6 +40,7 @@ Possibilità di installare in maniera diretta NodeJS oppure utilizzare NVM per g
    - Swagger Viewer
    - Emmet
    - YAML
+   - Live Server
 
 2. Copiare la configurazione del file [settings.json](./settings.json) di VSCode all'interno del proprio file di configurazione.
 

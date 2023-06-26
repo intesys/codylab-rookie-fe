@@ -1,16 +1,175 @@
 /* Questo è un commento */
 
-/* .title {
-    color: red;
-    font-size: 50px;
+/* Global */
+
+/* body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #000;
 }
 
-#title {
-    color: blue;
-    font-size: 50px;
+a {
+  text-decoration: none;
+  color: #000;
 }
 
-h1 {
-    color: green;
-    font-size: 50px;
+img {
+  max-width: 100%;
+  height: auto;
+} */
+
+/* Container */
+/* .container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 467px) {
+  .container {
+    width: 100%;
+  }
+} */
+
+/* Header */
+
+/* .header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #000;
+}
+
+.header .logo {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 80px;
+}
+
+.main-menu {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.main-menu ul {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+}
+
+.main-menu ul li {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 5px 10px;
+}
+
+.main-menu ul li a {
+  transition: color 0.3s ease-in-out;
+}
+
+.main-menu ul li a:hover {
+  color: aqua;
+}
+
+@media screen and (max-width: 467px) {
+  .header .logo {
+    width: 40px;
+  }
+  .main-menu ul {
+    font-size: 16px;
+  }
+  .main-menu ul li {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+} */
+
+/* main */
+
+/* .main {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+} */
+
+/* Box list */
+
+/* .box-list {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.box-list .box {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 31.33%;
+  height: 350px;
+  background: #c8c8c8;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+@media screen and (max-width: 467px) {
+  .box-list {
+    flex-direction: column;
+  }
+  .box-list .box {
+    width: auto;
+  }
+} */
+
+/* Footer */
+/* .footer {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid #000;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer .logo {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 40px;
 } */
