@@ -1,16 +1,208 @@
-/* Questo è un commento */
+body, html{
 
-/* .title {
-    color: red;
-    font-size: 50px;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+
 }
 
-#title {
-    color: blue;
-    font-size: 50px;
+.header{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #000;
+
 }
 
-h1 {
-    color: green;
-    font-size: 50px;
-} */
+img{
+
+    max-width: 100%;
+    height: auto;
+
+}
+
+.container{
+
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px auto;
+
+}
+
+.header .logo{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 80px;
+}
+
+.main-menu{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+
+}
+
+ul{
+
+    position: relative;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    font-size: 20px;
+    list-style-type: none;
+
+}
+
+li{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    padding: 5px 10px;
+
+}
+
+a{
+
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+
+}
+
+a:hover{
+
+    color:aqua;
+
+}
+
+.main{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 20px 0px;
+
+}
+
+.box-list{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.box-list .box{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 31%;
+    height: 350px;
+    background: #c8c8c8;
+    margin: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 900;
+
+}
+
+.footer{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border-top: 1px solid #000;
+
+}
+
+.footer .logo{
+
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 40px;
+
+}
+
+@media screen and (max-width:467px){
+
+    .header .logo{
+
+        width: 40px;
+
+    }
+
+    .main-menu ul{
+
+        font-size: 16px;
+
+    }
+
+    .main-menu ul{
+
+        padding-left: 5px;
+        padding-right: 5px;
+
+    }
+
+    .container{
+
+        width: auto;
+
+    }  
+
+    .header .logo{
+
+        width: 40px;
+
+    }
+
+    .main-menu ul{
+
+        font-size: 16px;
+
+    }
+
+    .box-list{
+
+        flex-direction: row;
+
+    }
+
+    .box-list .box{
+
+        width: auto;
+
+    }
+}
