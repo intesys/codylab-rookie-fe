@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Titolo della pagina</title>
+    <!-- Link al foglio di stile -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;600;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../02_HTML_CSS/assets/reset.css" />
+    <link rel="stylesheet" href="../02_HTML_CSS/assets/style.css" />
     <!-- Link al file javascript -->
     <!-- <script src="script.js" type="text/javascript"></script> -->
     <!-- <script type="text/javascript">
@@ -13,5 +19,44 @@
       console.log("Hello World!");
     </style> -->
   </head>
-  <body></body>
+  <body>
+    <!-- Inserire il contenuto della pagina -->
+    <div class="container">
+      <header class="header">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="../02_HTML_CSS/assets/img/logo.png" alt="Logo Instagram" />
+        </div>
+        <!-- Menu -->
+        <nav class="main-menu">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/chi-siamo">Chi siamo</a></li>
+            <li><a href="/contatti">Contatti</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="main">
+        <!-- Lista di box ordinati a 3 per riga -->
+        <section class="box-list">
+          <div class="box"><span>1</span></div>
+          <div class="box"><span>2</span></div>
+          <div class="box"><span>3</span></div>
+          <div class="box"><span>4</span></div>
+          <div class="box"><span>5</span></div>
+          <div class="box"><span>6</span></div>
+        </section>
+      </main>
+      <footer class="footer">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="../02_HTML_CSS/assets/img/logo.png" alt="Logo Instagram" />
+        </div>
+        <!-- Credits -->
+        <div class="credits">
+          <p>2023 - Tutti i diritti riservati</p>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
