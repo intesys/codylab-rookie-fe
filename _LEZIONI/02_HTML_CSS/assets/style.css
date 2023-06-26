@@ -36,6 +36,7 @@ img{
     .container{
         width: auto;
     }  
+
 }
 
 .header .logo{
@@ -149,7 +150,7 @@ a{
 
 @media screen and (max-width: 467px){
     .box-list{
-        flex-direction: row;
+        flex-direction: column;
     }
     .box-list .box{
         width: auto;
