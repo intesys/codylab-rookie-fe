@@ -1,3 +1,11 @@
+/*
+*{
+    position: relative;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+*/
 body,
 html{
     margin: 0;
@@ -21,7 +29,7 @@ img{
     position: relative;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 80%;
     max-width: 1200px;
     margin: 0 auto;
     padding-left: 10px;
