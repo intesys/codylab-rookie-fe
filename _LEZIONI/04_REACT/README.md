@@ -22,6 +22,14 @@ Aprire il link [http://localhost:3000/](http://localhost:3000/) per visionare l'
 
 ## 3) **Gestione dei dati in React**
 
+Creiamo una nuova applicazione React:
+
+```bash
+npx create-react-app dummyapp --template typescript --use-npm
+cd dummyapp
+npm start
+```
+
 Per questa parte utilizzeremo [Axios](https://axios-http.com/) come libreria per effettuare le chiamate HTTP e [React Router](https://reactrouter.com/) per gestire le rotte dell'applicazione.
 
 Per installare Axios e React Router eseguire il comando:
@@ -32,7 +40,7 @@ npm install axios react-router-dom
 
 Come servizio di API Fake utilizziamo [dummyapi.io](https://dummyapi.io/).
 
-Configuriamo Axios per gestire le chiamate alle API andando a creare il file `./tic-tac-toe/src/api.ts`:
+Configuriamo Axios per gestire le chiamate alle API andando a creare il file `./dummyapp/src/api.ts`:
 
 ```typescript
 import axios from "axios";
@@ -41,7 +49,7 @@ import axios from "axios";
 const APP_ID = "60a9b7b4e7f2c4b7a0a0e7d1";
 
 const api = axios.create({
-  baseURL: "https://dummyapi.io/data/api",
+  baseURL: "https://dummyapi.io/data/v1",
   headers: {
     "app-id": APP_ID,
   },
@@ -72,10 +80,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path={"/"} element={/*Componente UserList*/} />
         <Route path={"/user/:id"} element={/*Componente UserDetail*/} />
-        <Route
-          path={"/user/:id/edit"}
-          element={/*Componente UserDetailEdit*/}
-        />
+        <Route path={"/user/:id/edit"} element={/*Componente UserDetailEdit*/} />
       </Routes>
     </BrowserRouter>
   );
@@ -108,10 +113,9 @@ const UserList: React.FC = () => {
 
 Esercizio:
 
-- [ ] Creare una nuova applicazione React (Create React App)
-- [ ] Installare e configurare Axios e React Router
-- [ ] Creare un componente `UserList` che visualizzi la lista degli utenti ottenuti dalla chiamata API `/user`
-- [ ] Creare un componente `UserDetail` che visualizzi i dettagli di un utente ottenuti dalla chiamata API `/user/{id}`
-- [ ] Creare un form per aggiornare i dati di un utente tramite la chiamata API `PUT /user/{id}`
+- [ ] Configurare due nuove voci del routing '/post' e '/post/:id' e associare i componenti `PostList` e `PostDetail`
+- [ ] Creare un componente `PostList` che visualizzi la lista post ottenuti dalla chiamata API `/post`
+- [ ] Creare un componente `PostDetail` che visualizzi i dettagli di un post ottenuti dalla chiamata API `/post/{id}`
+- [ ] Stilare sia il componente `PostList` che `PostDetail` utilizzando il CSS in modo da rendere l'applicazione più gradevole
 
 Per questo esercizio non è importante che la grafica sia perfetta, l'importante è che i dati vengano visualizzati e gestisti correttamente.
