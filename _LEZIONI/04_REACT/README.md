@@ -2,7 +2,7 @@
 
 ## 1) **Thinking in React**
 
-- [React.dev - Thinking in React](https://react.dev/docs/thinking-in-react)
+- [React.dev - Thinking in React](https://react.dev/learn/thinking-in-react)
 
 ## 2) **Tutorial Tic-Tac-Toe**
 
