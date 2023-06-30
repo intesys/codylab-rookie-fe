@@ -9,6 +9,9 @@ for (let i=0; i<stringhe.length; i++){
     box.classList.add("box");
     boxList.appendChild(box);
 }
-
-
+/*
+stringhe.map((item)=>{
+    boxList.innerHTML += `<div class="box"><span>${item}</span></div>`
+})
+*/
 console.log("Hello World");
