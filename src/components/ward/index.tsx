@@ -1,6 +1,6 @@
 import React from "react";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import BreadcrumbEl from "../Breadcumb/BreadcrumbEl";
+import Breadcrumb from "../Breadcumb/breadcrumb";
 
 const Ward: React.FC = () => {
   return (
