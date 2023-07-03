@@ -41,7 +41,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
       createPatient(body)
         .then((response) => {
           enqueueSnackbar("Patient created successfully", { variant: "success" });
-          //navigate(getDetailPath(PATIENTS_PATH, response.data.id));
+          navigate(getDetailPath(PATIENTS_PATH, response.data.id));
         })
         .catch((error) => {
           enqueueSnackbar("Error creating patient", { variant: "error" });
