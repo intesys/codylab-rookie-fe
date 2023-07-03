@@ -3,8 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Billing from "./components/Billing";
 import Doctor from "./components/Doctor";
 import Doctors from "./components/Doctors";
-import Home from "./components/Home";
-import News from "./components/News";
+
 import Patient from "./components/Patient";
 import Patients from "./components/Patients";
 import Pharmacy from "./components/Pharmacy";
@@ -19,6 +18,8 @@ import {
   PHARMACY_PATH,
   WARD_PATH,
 } from "./config/paths";
+import { Home } from "@mui/icons-material";
+import News from "./components/news";
 
 const AppRoutes: React.FC = () => {
   return (

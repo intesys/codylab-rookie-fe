@@ -58,7 +58,7 @@ const FiltersForm: FC = () => {
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label="Inpatient Number (IDP)"
+              label="In patient Number (IDP)"
               onChange={(e) => setIdp(e.target.value)}
               variant="outlined"
               type="number"
