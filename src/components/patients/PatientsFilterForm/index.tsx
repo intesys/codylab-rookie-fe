@@ -81,7 +81,7 @@ const PatientFormFilter: FC = () => {
           </Grid>
 
           <Grid item xs={2}>
-            <Button variant="contained" color="primary" type="submit" fullWidth>
+            <Button variant="outlined" color="primary" type="submit" fullWidth>
               Search
             </Button>
           </Grid>

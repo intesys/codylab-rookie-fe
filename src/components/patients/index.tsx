@@ -1,10 +1,15 @@
-import { Button, CircularProgress, Grid, Toolbar, Typography } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { Button, CircularProgress, Grid, Toolbar } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../../config/api";
+import { PATIENTS_PATH } from "../../config/paths";
 import { PatientFilterDTO } from "../../generated/axios";
 import useGetList from "../../hooks/useGetList";
+import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import SectionHeader from "../Layout/SectionHeader";
 import PatientBox from "./PatientBox";
 import PatientFilterForm from "./PatientsFilterForm";
 import { Action, patientsFilterReducer } from "./lib";
@@ -35,12 +40,11 @@ const Patients: React.FC = () => {
 
       <Grid item xs={15}>
         <Toolbar style={{ padding: "0" }}>
-          <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
-            <strong>PATIENTS DATABASE</strong>
-          </Typography>
-          <Button variant="contained" color="primary">
-            Add new patient
-          </Button>
+          <SectionHeader title="Patients database">
+            <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
+              Add new patient
+            </Button>
+          </SectionHeader>
         </Toolbar>
       </Grid>
 
