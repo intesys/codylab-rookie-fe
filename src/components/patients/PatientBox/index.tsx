@@ -50,8 +50,8 @@ const PatientBox: FC<IProps> = ({ props }) => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              PID: <strong>{patient.id}</strong> | OPD: <strong>{patient.opd}</strong> | IDP:{" "}
-              <strong>{patient.idp}</strong>
+              PID: <strong>{patient.id}</strong> | OPD: <strong>{patient.opd}</strong> | IDP:
+              <strong> {patient.idp}</strong>
             </Grid>
             <Grid item xs={12}>
               <Avatar
@@ -71,7 +71,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
                       <ListItemText
                         primary="Last admission:"
                         secondary={
-                          <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
+                          <Typography sx={{ display: "inline" }} component="span" variant="body2">
                             {dayjs(lastVisit?.date).format(DATE_FORMAT)}
                           </Typography>
                         }
@@ -84,7 +84,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
                       <ListItemText
                         primary="Reason of visit:"
                         secondary={
-                          <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
+                          <Typography sx={{ display: "inline" }} component="span" variant="body2">
                             {lastVisit?.reasonVisit}
                           </Typography>
                         }
@@ -97,7 +97,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
                       <ListItemText
                         primary="Treatment made:"
                         secondary={
-                          <Typography sx={{ display: "inline" }} component="span" variant="body2" color="text.primary">
+                          <Typography sx={{ display: "inline" }} component="span" variant="body2">
                             {lastVisit?.treatmentMade}
                           </Typography>
                         }
@@ -129,9 +129,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
               <Divider sx={{ marginY: 2 }} />
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Typography component="h4" textTransform="uppercase">
-                    Last doctor who visit the patient
-                  </Typography>
+                  <Typography component="h4">LAST DOCTOR WHO VISIT THE PATIENT</Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Stack direction="row" spacing={2}>

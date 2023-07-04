@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Button, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
 import { PatientsFilterContext } from "..";
 
@@ -24,13 +24,13 @@ const FiltersForm: FC = () => {
 
   return (
     <Paper sx={{ padding: 4 }}>
-      <form onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" mr={3}>
-              FIND A PATIENT
-            </Typography>
-            <Typography variant="caption">Insert the information of patient</Typography>
+            <Stack>
+              <Typography variant="h6">FIND A PATIENT</Typography>
+              <Typography>Insert the information of patient</Typography>
+            </Stack>
           </Grid>
           <Grid item xs={3}>
             <TextField
@@ -67,7 +67,7 @@ const FiltersForm: FC = () => {
           </Grid>
           <Grid item xs={2}>
             <Button fullWidth variant="outlined" type="submit" endIcon={<SearchIcon />}>
-              SEARCH
+              Search
             </Button>
           </Grid>
         </Grid>

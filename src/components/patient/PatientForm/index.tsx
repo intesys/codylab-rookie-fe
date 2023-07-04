@@ -98,7 +98,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={4}>
             <TextField
               fullWidth
-              label="Name"
+              placeholder="Name"
               name="name"
               size="small"
               required
@@ -110,7 +110,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={4}>
             <TextField
               fullWidth
-              label="Surname"
+              placeholder="Surname"
               name="surname"
               size="small"
               required
@@ -122,7 +122,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={4}>
             <TextField
               fullWidth
-              label="Address"
+              placeholder="Address"
               name="address"
               size="small"
               required
@@ -136,7 +136,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={4}>
             <TextField
               fullWidth
-              label="OPD"
+              placeholder="OPD"
               name="opd"
               size="small"
               type="number"
@@ -149,7 +149,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={4}>
             <TextField
               fullWidth
-              label="IDP"
+              placeholder="IDP"
               name="idp"
               size="small"
               type="number"
@@ -168,7 +168,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
                 labelId="blood-group-label"
                 id="blood-group-select"
                 value={bloodGroup}
-                label="Blood Group"
+                placeholder="Blood Group"
                 required
                 size="small"
                 onChange={(e: SelectChangeEvent) => setBloodGroup(e.target.value as PatientDTOBloodGroupEnum)}
@@ -218,7 +218,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Notes"
+              placeholder="Notes"
               name="notes"
               size="small"
               rows={4}

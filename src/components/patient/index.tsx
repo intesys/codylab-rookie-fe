@@ -36,6 +36,7 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
 import SectionHeader from "../Layout/SectionHeader";
+import RecordTable from "./RecordsTable";
 // import RecordTable from "./RecordsTable";
 
 const emptyRecord = {};
@@ -111,18 +112,18 @@ const StaffMember: React.FC = () => {
                     <Divider color={grey[500]} />
                     <Stack my={2}>
                       <Typography color={grey[500]}>PATIENT ID</Typography>
-                      <Typography variant="h3">{patient?.id}</Typography>
+                      <Typography variant="h4">{patient?.id}</Typography>
                     </Stack>
                     {patient?.opd && (
                       <Stack my={2}>
                         <Typography color={grey[500]}>OPD</Typography>
-                        <Typography variant="h3">{patient?.opd}</Typography>
+                        <Typography variant="h4">{patient?.opd}</Typography>
                       </Stack>
                     )}
                     {patient?.bloodGroup && (
                       <Stack my={2}>
                         <Typography color={grey[500]}>BLOOD GROUP</Typography>
-                        <Typography variant="h3">{getBloodType(patient?.bloodGroup)}</Typography>
+                        <Typography variant="h4">{getBloodType(patient?.bloodGroup)}</Typography>
                       </Stack>
                     )}
                     <Divider color={grey[500]} />
@@ -216,9 +217,9 @@ const StaffMember: React.FC = () => {
                     )}
                   </Box>
                 </Grid>
-                {/* <Grid item xs={9} p={6}>
+                <Grid item xs={9} p={6}>
                   <RecordTable patient={patient} />
-                </Grid> */}
+                </Grid>
               </Grid>
             </>
           )}
