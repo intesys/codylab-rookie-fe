@@ -18,7 +18,7 @@ export function useGetList<T extends object, F extends object>(
 
   const getList = useCallback(() => {
     setLoading(true);
-    getListApi(0, 100, "id,asc", filter)
+    getListApi(0, 100, "id,desc", filter)
       .then((response) => {
         setRecords(response.data);
       })
