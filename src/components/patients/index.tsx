@@ -1,77 +1,18 @@
-import { Grid } from "@mui/material";
-import React, { Dispatch, useMemo, useReducer, useState } from "react";
-import { PatientDTO, PatientFilterDTO } from "../../generated/axios";
+import { Add } from "@mui/icons-material";
+import { Button, CircularProgress, Grid } from "@mui/material";
+import React, { Dispatch, useMemo, useReducer } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../../config/api";
+import { PATIENTS_PATH } from "../../config/paths";
+import { PatientFilterDTO } from "../../generated/axios";
+import useGetList from "../../hooks/useGetList";
+import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import PatientBox from "./PatientBox/index";
+import SectionHeader from "../Layout/SectionHeader";
+import FiltersForm from "./FilterForm";
+import PatientBox from "./PatientBox";
 import { Action, patientsFilterReducer } from "./lib";
-
-const patientsList: PatientDTO[] = [
-  {
-    id: 1,
-    opd: 2334,
-    idp: 64464,
-    name: "Lionel",
-    surname: "Messi",
-  },
-
-  {
-    id: 2,
-    opd: 2334,
-    idp: 64364,
-    name: "Nicolò",
-    surname: "Barella",
-  },
-  {
-    id: 3,
-    opd: 2334,
-    idp: 64364,
-    name: "Cristiano",
-    surname: "Ronaldo",
-  },
-  {
-    id: 4,
-    opd: 2334,
-    idp: 64364,
-    name: "Kylian",
-    surname: "Mbappè",
-  },
-  {
-    id: 5,
-    opd: 2334,
-    idp: 64364,
-    name: "Lautaro",
-    surname: "Martinez",
-  },
-  {
-    id: 6,
-    opd: 2334,
-    idp: 64364,
-    name: "Paulo",
-    surname: "Dybala",
-  },
-  {
-    id: 7,
-    opd: 2334,
-    idp: 64364,
-    name: "Romelu",
-    surname: "Lukaku",
-  },
-  {
-    id: 8,
-    opd: 2334,
-    idp: 64364,
-    name: "Federico",
-    surname: "Dimarco",
-  },
-  {
-    id: 9,
-    opd: 2334,
-    idp: 64364,
-    name: "Davide",
-    surname: "Frattesi",
-  },
-];
 
 interface IPatientsFilterContext {
   filter: PatientFilterDTO;
@@ -83,21 +24,32 @@ export const PatientsFilterContext: React.Context<IPatientsFilterContext> = Reac
   dispatch: (action) => {},
 });
 
+const getPatientList = api.patients.getListPatient;
+
 const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
-  const [loading, setLoading] = useState(false);
+
+  const [patientList, loading] = useGetList(getPatientList, filter);
+
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
       <Breadcrumb>
-        <BreadcrumbEl active>Patients</BreadcrumbEl>
+        <BreadcrumbEl>Patients</BreadcrumbEl>
       </Breadcrumb>
-
+      <SectionHeader title="Patients database">
+        <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
+          Add new patient
+        </Button>
+      </SectionHeader>
+      <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (
-          <>Loading</>
+          <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
+            <CircularProgress />
+          </Grid>
         ) : (
-          patientsList.map((patient) => (
+          patientList.map((patient) => (
             <Grid item key={patient.id} xs={4}>
               <PatientBox props={{ patient }} />
             </Grid>
