@@ -1,83 +1,63 @@
-import { Grid } from "@mui/material";
-import React, { Dispatch, Reducer } from "react";
-import { DoctorDTO, PatientFilterDTO } from "../../generated/axios";
+import { Add } from "@mui/icons-material";
+import { Button, CircularProgress, Grid } from "@mui/material";
+import React, { Dispatch, useMemo, useReducer } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../../config/api";
+import { DOCTORS_PATH } from "../../config/paths";
+import { DoctorFilterDTO } from "../../generated/axios";
+import useGetList from "../../hooks/useGetList";
+import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import PatientBox from "../Patients/PatientBox";
-import { patientsFilterReducer } from "../Patients/lib";
-import { Action } from "./lib";
+import SectionHeader from "../Layout/SectionHeader";
+import DoctorBox from "./DoctorBox";
+import FiltersForm from "./FiltersForm";
+import { Action, doctorsFilterReducer } from "./lib";
 
-const patientsList: DoctorDTO[] = [
-  {
-    id: 1,
-    name: "Marco",
-    surname: "Pietruzzo",
-  },
-  {
-    id: 2,
-    name: "Giovanni",
-    surname: "Ocneanu",
-  },
-  {
-    id: 3,
-    name: "Maria",
-    surname: "Antonietta",
-  },
-
-  {
-    id: 4,
-    name: "Jhon",
-    surname: "Cena",
-  },
-];
-
-interface IPatientsFilterContext {
-  filter: PatientFilterDTO;
+interface IDoctorsFilterContext {
+  filter: DoctorFilterDTO;
   dispatch: Dispatch<Action>;
 }
 
-export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
+export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
   filter: {},
   dispatch: (action) => {},
 });
 
-const Patients: React.FC = () => {
-  const [filter, dispatch] = useReducer(patientsFilterReducer, {});
-  const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
-  const [loading, setLoading] = useState(false);
-  return (
-    <PatientsFilterContext.Provider value={patientContextValue}>
-      <Breadcrumb>
-        <BreadcrumbEl active>Patients</BreadcrumbEl>
-      </Breadcrumb>
+const getListDoctor = api.doctors.getListDoctor;
 
+const Doctors: React.FC = () => {
+  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
+  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+
+  const [doctorList, loading] = useGetList(getListDoctor, filter);
+
+  return (
+    <DoctorsFilterContext.Provider value={doctorsContextValue}>
+      <Breadcrumb>
+        <BreadcrumbEl active>Doctors</BreadcrumbEl>
+      </Breadcrumb>
+      <SectionHeader title="Doctors database">
+        <Button component={Link} to={getNewDetailPath(DOCTORS_PATH)} variant="outlined" startIcon={<Add />}>
+          Add new doctor
+        </Button>
+      </SectionHeader>
+      <FiltersForm />
       <Grid container mt={4} spacing={2}>
         {loading ? (
-          <>Loading</>
+          <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
+            <CircularProgress />
+          </Grid>
         ) : (
-          patientsList.map((patient) => (
-            <Grid item key={patient.id} xs={4}>
-              <PatientBox props={{ patient }} />
+          doctorList.map((doctor) => (
+            <Grid item key={doctor.id} xs={4}>
+              <DoctorBox props={{ doctor }} />
             </Grid>
           ))
         )}
       </Grid>
-    </PatientsFilterContext.Provider>
+    </DoctorsFilterContext.Provider>
   );
 };
 
-export default Patients;
-function useReducer(
-  patientsFilterReducer: Reducer<PatientFilterDTO, import("../Patients/lib").Action>,
-  arg1: {}
-): [any, any] {
-  throw new Error("Function not implemented.");
-}
-
-function useMemo(arg0: () => { filter: any; dispatch: any }, arg1: any[]) {
-  throw new Error("Function not implemented.");
-}
-
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}
+export default Doctors;
