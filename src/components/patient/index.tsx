@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PATIENTS_PATH } from "../../config/paths";
 import { getPath } from "../../lib/utils";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import BreadcrumbEl from "../Breadcumb/BreadcrumbEl";
+import Breadcrumb from "../Breadcumb/breadcrumb";
 
 const StaffMember: React.FC = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { DoctorFilterDTO } from "../../generated/axios";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import BreadcrumbEl from "../Breadcumb/BreadcrumbEl";
+import Breadcrumb from "../Breadcumb/breadcrumb";
 import { Action, doctorsFilterReducer } from "./lib";
 
 interface IDoctorsFilterContext {
