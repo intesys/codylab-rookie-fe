@@ -8,7 +8,7 @@ import useGetDetail from "../../../hooks/useGetDetail";
 import { getPath } from "../../../lib/utils";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../Layout/SectionHeader";
+import SectionHeader from "../../layout/SectionHeader";
 import PatientForm from "../PatientForm";
 
 const emptyRecord = {};

@@ -13,7 +13,7 @@ import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import DetailHeader from "../Layout/DetailHeader";
+import DetailHeader from "../layout/DetailHeader";
 import PatientsTable from "./PatientsTable";
 
 const emptyRecord = {};
