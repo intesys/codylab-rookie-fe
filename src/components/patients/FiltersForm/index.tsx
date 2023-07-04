@@ -1,8 +1,9 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { Button, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
 import { PatientsFilterContext } from "..";
 
-const PatientFormFilter: FC = () => {
+const FiltersForm: FC = () => {
   const [pid, setPid] = useState("");
   const [opd, setOpd] = useState("");
   const [idp, setIdp] = useState("");
@@ -22,72 +23,59 @@ const PatientFormFilter: FC = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        style={{
-          borderRadius: "4px",
-          height: "11vh",
-          width: "100%",
-          backgroundColor: "#fff",
-          padding: "16px",
-          border: "1px solid #ccc",
-          borderBottom: "3px solid #ccc",
-        }}
-      >
-        <Grid item xs={12} container alignItems="center" spacing={2}>
-          <Grid item>
-            <Typography variant="h6" style={{ marginLeft: "8px" }} component="div">
-              FIND A PATIENT
-            </Typography>
+    <Paper sx={{ padding: 4 }}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Stack direction="row" alignItems="flex-end">
+              <Typography variant="h6" mr={3} textTransform="uppercase">
+                Find a patient
+              </Typography>
+              <Typography variant="caption">Insert the information of patient</Typography>
+            </Stack>
           </Grid>
-          <Grid item>
-            <Typography variant="caption">Insert the information of patient</Typography>
-          </Grid>
-        </Grid>
-
-        <Grid container item xs={11.8} spacing={2} alignItems="center">
           <Grid item xs={3}>
             <TextField
-              size="small"
               label="Patient ID (PID)"
+              onChange={(e) => setPid(e.target.value)}
               variant="outlined"
               type="number"
-              onChange={(e) => setPid(e.target.value)}
+              size="small"
               fullWidth
+              value={pid}
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
-              size="small"
               label="Outpatient Number (OPD)"
+              onChange={(e) => setOpd(e.target.value)}
               variant="outlined"
               type="number"
-              onChange={(e) => setOpd(e.target.value)}
+              size="small"
               fullWidth
+              value={opd}
             />
           </Grid>
           <Grid item xs={4}>
             <TextField
-              size="small"
               label="Inpatient Number (IDP)"
+              onChange={(e) => setIdp(e.target.value)}
               variant="outlined"
               type="number"
-              onChange={(e) => setIdp(e.target.value)}
+              size="small"
               fullWidth
+              value={idp}
             />
           </Grid>
-
           <Grid item xs={2}>
-            <Button variant="outlined" color="primary" type="submit" fullWidth>
+            <Button fullWidth variant="outlined" type="submit" endIcon={<SearchIcon />}>
               Search
             </Button>
           </Grid>
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </Paper>
   );
 };
-export default PatientFormFilter;
+
+export default FiltersForm;
