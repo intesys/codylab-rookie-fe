@@ -37,6 +37,7 @@ const PatientRecordNew = () => {
             {patient.name} {patient.surname}
           </Link>
         </BreadcrumbEl>
+        <BreadcrumbEl active>New record</BreadcrumbEl>
       </Breadcrumb>
       <Grid>
         <Grid>

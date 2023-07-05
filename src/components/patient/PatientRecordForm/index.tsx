@@ -113,7 +113,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
                 labelId="doctors-label"
                 id="doctors-select"
                 value={String(doctor)}
-                label="Doctor"
+                placeholder="Doctor"
                 required
                 size="small"
                 onChange={(e: SelectChangeEvent) => setDoctor(e.target.value)}
