@@ -1,6 +1,5 @@
 {
-    
-    "editor.locale": "it",
+  "editor.locale": "it",
 
   "git.autofetch": true,
   "emmet.triggerExpansionOnTab": true,
@@ -121,5 +120,6 @@
   "diffEditor.maxComputationTime": 0,
   "explorer.confirmDelete": false,
   "editor.inlineSuggest.enabled": true,
-  "typescript.locale": "it"
+  "typescript.locale": "it",
+  "files.autoSave": "onFocusChange"
 }

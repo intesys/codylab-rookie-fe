@@ -36,19 +36,42 @@ const PatientForm: FC<IProps> = ({ record }) => {
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const body = { name, surname, address, opd, idp, bloodGroup, chronicPatient, notes };
+      const body = {
+        name,
+        surname,
+        address,
+        opd,
+        idp,
+        bloodGroup,
+        chronicPatient,
+        notes,
+      };
       setSaveLoading(true);
-      createPatient(body)
-        .then((response) => {
-          enqueueSnackbar("Patient created successfully", { variant: "success" });
-          navigate(getDetailPath(PATIENTS_PATH, response.data.id));
-        })
-        .catch((error) => {
-          enqueueSnackbar("Error creating patient", { variant: "error" });
-        })
-        .finally(() => {
-          setSaveLoading(false);
-        });
+      if (record?.id) {
+        updatePatient(record.id, body)
+          .then((response) => {
+            enqueueSnackbar("Patient updated successfully", { variant: "success" });
+            navigate(getDetailPath(PATIENTS_PATH, record.id));
+          })
+          .catch((error) => {
+            enqueueSnackbar("Error updating patient", { variant: "error" });
+          })
+          .finally(() => {
+            setSaveLoading(false);
+          });
+      } else {
+        createPatient(body)
+          .then((response) => {
+            enqueueSnackbar("Patient created successfully", { variant: "success" });
+            navigate(getDetailPath(PATIENTS_PATH, response.data.id));
+          })
+          .catch((error) => {
+            enqueueSnackbar("Error creating patient", { variant: "error" });
+          })
+          .finally(() => {
+            setSaveLoading(false);
+          });
+      }
     },
     [name, surname, address, opd, idp, bloodGroup, chronicPatient, notes, record, setSaveLoading]
   );
