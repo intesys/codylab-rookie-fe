@@ -6,9 +6,9 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import "./app.scss";
-import Layout from "./components/Layout/Layout";
 import { customTheme } from "./config/themeStyle";
 import { MaterialProvider } from "./lib/MaterialProvider";
+import Layout from "./components/Layout/layout";
 
 const App: React.FC = () => (
   <ThemeProvider theme={customTheme}>

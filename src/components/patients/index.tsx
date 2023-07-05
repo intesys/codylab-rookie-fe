@@ -1,4 +1,3 @@
-import { Add } from "@mui/icons-material";
 import { Button, CircularProgress, Grid, Toolbar } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { Link } from "react-router-dom";
@@ -28,9 +27,8 @@ const getPatientList = api.patients.getListPatient;
 
 const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
-  const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
-
   const [patientList, loading] = useGetList(getPatientList, filter);
+  const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
@@ -41,7 +39,7 @@ const Patients: React.FC = () => {
       <Grid item xs={15}>
         <Toolbar style={{ padding: "0" }}>
           <SectionHeader title="Patients database">
-            <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
+            <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined">
               Add new patient
             </Button>
           </SectionHeader>

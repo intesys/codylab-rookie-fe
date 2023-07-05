@@ -1,4 +1,15 @@
-import { Button, Grid, Paper, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
@@ -103,7 +114,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
             />
           </Grid>
           <Grid item xs={4}>
-            {/* <FormControl fullWidth>
+            <FormControl fullWidth>
               <InputLabel required id="doctors-label">
                 Doctor
               </InputLabel>
@@ -121,7 +132,7 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl> */}
+            </FormControl>
           </Grid>
         </Grid>
         <Grid container spacing={2} marginBottom={2}>

@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid, Toolbar } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../config/api";
@@ -9,6 +9,7 @@ import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
+import DoctorBox from "./DoctorBox";
 import DoctorFilterForm from "./DoctorFilterForm";
 import { Action, doctorsFilterReducer } from "./lib";
 
@@ -26,27 +27,33 @@ const getListDoctor = api.doctors.getListDoctor;
 
 const Doctors: React.FC = () => {
   const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
-  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
-
   const [doctorList, loading] = useGetList(getListDoctor, filter);
+  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
   return (
     <DoctorsFilterContext.Provider value={doctorsContextValue}>
       <Breadcrumb>
         <BreadcrumbEl active>Doctors</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="Doctors database">
-        <Button component={Link} to={getNewDetailPath(DOCTORS_PATH)} variant="outlined">
-          Add new doctor
-        </Button>
-      </SectionHeader>
+
+      <Grid item xs={15}>
+        <Toolbar style={{ padding: "0" }}>
+          <SectionHeader title="Doctors database">
+            <Button component={Link} to={getNewDetailPath(DOCTORS_PATH)} variant="outlined">
+              Add new doctor
+            </Button>
+          </SectionHeader>
+        </Toolbar>
+      </Grid>
 
       {/* doctor filter form */}
-      <DoctorFilterForm />
+      <Grid item xs={12}>
+        <DoctorFilterForm />
+      </Grid>
 
       {/* patient list */}
       <Grid container mt={4} spacing={2}>
-        {/* {loading ? (
+        {loading ? (
           <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
             <CircularProgress />
           </Grid>
@@ -56,7 +63,7 @@ const Doctors: React.FC = () => {
               <DoctorBox props={{ doctor }} />
             </Grid>
           ))
-        )} */}
+        )}
       </Grid>
     </DoctorsFilterContext.Provider>
   );

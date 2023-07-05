@@ -1,15 +1,37 @@
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Button, CircularProgress, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import {
+  Avatar,
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
+import PhoneIcon from "@mui/icons-material/Phone";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { grey } from "@mui/material/colors";
+import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api";
+import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
 import { PatientDTO } from "../../generated/axios";
 import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
-import { getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
+import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
@@ -128,18 +150,91 @@ const StaffMember: React.FC = () => {
                     <Divider color={grey[500]} />
                     {/* DA FARE */}
 
-                    <br />
-                    <Typography textTransform="uppercase">info agg</Typography>
-                    <br />
+                    {lastVisit && (
+                      <>
+                        <List sx={{ width: "100%", my: 2 }} dense>
+                          <ListItem alignItems="flex-start">
+                            <ListItemIcon>
+                              <AccessTimeIcon sx={{ fill: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary="Last admission:"
+                              secondary={
+                                <Typography sx={{ display: "inline" }} component="span" variant="body2">
+                                  {dayjs(lastVisit?.date).format(DATE_FORMAT)}
+                                </Typography>
+                              }
+                            />
+                          </ListItem>
+                          <ListItem alignItems="flex-start">
+                            <ListItemIcon>
+                              <MedicalInformationIcon sx={{ fill: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary="Reason of visit:"
+                              secondary={
+                                <Typography sx={{ display: "inline" }} component="span" variant="body2">
+                                  {lastVisit?.reasonVisit}
+                                </Typography>
+                              }
+                            />
+                          </ListItem>
+                          <ListItem alignItems="flex-start">
+                            <ListItemIcon>
+                              <VaccinesIcon sx={{ fill: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary="Treatment made:"
+                              secondary={
+                                <Typography sx={{ display: "inline" }} component="span" variant="body2">
+                                  {lastVisit?.treatmentMade}
+                                </Typography>
+                              }
+                            />
+                          </ListItem>
+                        </List>
 
-                    {/* Last Doctor */}
-                    <Divider color={grey[500]} />
-                    <Typography my={4} textTransform="uppercase">
-                      LAST DOCTOR WHO VISITED THE PATIENT
-                    </Typography>
+                        <Divider color={grey[500]} />
+                        <Grid container spacing={2} mt={2}>
+                          <Grid item xs={12}>
+                            <Typography component="h4" textTransform="uppercase">
+                              Last doctor who visit the patient
+                            </Typography>
+                          </Grid>
+
+                          <Grid item xs={12}>
+                            <Stack direction="column" spacing={2}>
+                              <Stack direction="row">
+                                <Avatar
+                                  alt="Remy Sharp"
+                                  src={generateAvatarImage(DetailType.DOCTOR, lastVisit?.doctor?.id)}
+                                  sx={{ width: 50, height: 50, marginRight: 1 }}
+                                />
+                                <Typography variant="h6" mb={1}>
+                                  {lastVisit?.doctor?.name} <br /> {lastVisit?.doctor?.surname}
+                                </Typography>
+                              </Stack>
+                              <Typography component="h4" gutterBottom>
+                                {lastVisit?.doctor?.phoneNumber && (
+                                  <Stack direction="row" mb={1} spacing={1}>
+                                    <PhoneIcon color="primary" /> <span>{lastVisit?.doctor?.phoneNumber}</span>
+                                  </Stack>
+                                )}
+                                {lastVisit?.doctor?.email && (
+                                  <Stack direction="row" mb={1} spacing={1}>
+                                    <MailOutlineIcon color="primary" /> <span>{lastVisit?.doctor?.email}</span>
+                                  </Stack>
+                                )}
+                              </Typography>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </>
+                    )}
                   </Box>
                 </Grid>
 
+                {/* Tabella records */}
                 <Grid item xs={9} p={6}>
                   <PatientRecordTable patient={patient} />
                 </Grid>

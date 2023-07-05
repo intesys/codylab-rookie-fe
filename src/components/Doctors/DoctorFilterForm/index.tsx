@@ -1,29 +1,28 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useCallback, useContext, useState } from "react";
 import { DoctorsFilterContext } from "..";
 
 const DoctorFormFilter: FC = () => {
-  const [pid, setPid] = useState("");
-  const [opd, setOpd] = useState("");
-  const [idp, setIdp] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [profession, setProfession] = useState("");
   const { dispatch } = useContext(DoctorsFilterContext);
 
-  //   const handleSubmit = useCallback(
-  //     (event: React.FormEvent<HTMLFormElement>) => {
-  //       event.preventDefault();
-  //       const filter = {
-  //         ...(pid && { id: Number(pid) }),
-  //         ...(opd && { opd: Number(opd) }),
-  //         ...(idp && { idp: Number(idp) }),
-  //       };
-  //       dispatch({ type: "SET_FILTER", payload: filter });
-  //     },
-  //     [pid, opd, idp]
-  //   );
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const filter = {
+        ...(name && { name }),
+        ...(surname && { surname }),
+        ...(profession && { profession }),
+      };
+      dispatch({ type: "SET_FILTER", payload: filter });
+    },
+    [name, surname, profession]
+  );
 
   return (
-    // <form onSubmit={handleSubmit}>
-    <form>
+    <form onSubmit={handleSubmit}>
       <Grid
         container
         justifyContent="center"
@@ -52,37 +51,36 @@ const DoctorFormFilter: FC = () => {
         <Grid container item xs={11.8} spacing={2} alignItems="center">
           <Grid item xs={3}>
             <TextField
-              size="small"
               label="Name"
+              onChange={(e) => setName(e.target.value)}
               variant="outlined"
-              type="number"
-              onChange={(e) => setPid(e.target.value)}
+              size="small"
               fullWidth
+              value={name}
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
-              size="small"
               label="Surname"
+              onChange={(e) => setSurname(e.target.value)}
               variant="outlined"
-              type="number"
-              onChange={(e) => setOpd(e.target.value)}
+              size="small"
               fullWidth
+              value={surname}
             />
           </Grid>
           <Grid item xs={4}>
             <TextField
-              size="small"
               label="Specialization"
+              onChange={(e) => setProfession(e.target.value)}
               variant="outlined"
-              type="number"
-              onChange={(e) => setIdp(e.target.value)}
+              size="small"
               fullWidth
+              value={profession}
             />
           </Grid>
-
           <Grid item xs={2}>
-            <Button variant="outlined" color="primary" type="submit" fullWidth>
+            <Button fullWidth variant="outlined" type="submit">
               Search
             </Button>
           </Grid>
