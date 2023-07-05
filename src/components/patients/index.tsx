@@ -9,7 +9,7 @@ import useGetList from "../../hooks/useGetList";
 import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../Layout/SectionHeader";
+import SectionHeader from "../layout/SectionHeader";
 import FiltersForm from "./FiltersForm";
 import PatientBox from "./PatientBox";
 import { Action, patientsFilterReducer } from "./lib";
