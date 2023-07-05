@@ -1,9 +1,9 @@
 import { Box, Card, Grid, Typography } from "@mui/material";
 import React from "react";
 import CallToActions from "./CallToActions";
-import MaterialList from "./Materials/MaterialList";
 import Calendar from "./calendar";
 import "./index.scss";
+import MaterialList from "./materials/MaterialList";
 
 const Home: React.FC = () => {
   return (

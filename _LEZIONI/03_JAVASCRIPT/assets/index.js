@@ -33,44 +33,13 @@ for(let j=0; j<lista.length; j++){
 }
 
 
-
-
-
-
 /*
+versione migliore
+
 const lista = ["a", "b", "c", "d", "e", "f", "g", "h"];
-console.log(lista);
 const posizione = document.getElementsByClassName("box-list")[0];
-// creo box
-for(let i=0; i<lista.length; i++){
-    // creo div sotto box-list
-    lista[i]=document.createElement("div");
-    // ci aggiungo l'array
-    posizione.appendChild(lista[i]);
-    // do class box ad ogni div
-    lista[i].classList.add('box');
 
-    // aggiungo testo dentro box
-    let textStringBox = document.createTextNode(i+1);
-    // scrivo testo
-    lista[i].appendChild(textStringBox);
-}
-
-
-
-
-
-for(let i=0; i<lista.length; i++){
-    lista[i]=document.createElement("div");
-    const testo = document.createTextNode(i);
-    lista[i].appendChild(testo);
-    posizione.appendChild(lista[i]);
-}
-
-
-
-lista[i]=document.createElement("div");
-    posizione.appendChild(lista[i]);
-    lista[i].classList.add('box');
-    const testo = document.createTextNode(i);
+lista.map((item)=>{
+    posizione.innerHTML += `<div class="box"><span>${item}</span></div>`
+})
 */
