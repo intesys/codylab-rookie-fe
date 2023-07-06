@@ -9,6 +9,8 @@ import useGetList from "../../hooks/useGetList";
 import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+
+//errore strano
 import SectionHeader from "../layout/SectionHeader";
 import FiltersForm from "./FiltersForm";
 import PatientBox from "./PatientBox";
