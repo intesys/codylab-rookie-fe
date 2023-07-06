@@ -1,28 +1,16 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React, { FC, useCallback, useContext, useState } from "react";
-import { PatientsFilterContext } from "..";
+import React, { FC, useContext, useState } from "react";
+import { DoctorsFilterContext } from "..";
 
-const FiltersForm: FC = () => {
+const DoctorFormFilter: FC = () => {
   const [pid, setPid] = useState("");
   const [opd, setOpd] = useState("");
   const [idp, setIdp] = useState("");
-  const { dispatch } = useContext(PatientsFilterContext);
-
-  const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const filter = {
-        ...(pid && { id: Number(pid) }),
-        ...(opd && { opd: Number(opd) }),
-        ...(idp && { idp: Number(idp) }),
-      };
-      dispatch({ type: "SET_FILTER", payload: filter });
-    },
-    [pid, opd, idp]
-  );
+  const { dispatch } = useContext(DoctorsFilterContext);
 
   return (
-    <form onSubmit={handleSubmit}>
+    // <form onSubmit={handleSubmit}>
+    <form>
       <Grid
         container
         justifyContent="center"
@@ -40,11 +28,11 @@ const FiltersForm: FC = () => {
         <Grid item xs={12} container alignItems="center" spacing={2}>
           <Grid item>
             <Typography variant="h6" style={{ marginLeft: "8px" }} component="div">
-              FIND A PATIENT
+              FIND A DOCTOR
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="caption">Insert the information of patient</Typography>
+            <Typography variant="caption">Insert the information of doctor</Typography>
           </Grid>
         </Grid>
 
@@ -52,7 +40,7 @@ const FiltersForm: FC = () => {
           <Grid item xs={3}>
             <TextField
               size="small"
-              label="Patient ID (PID)"
+              label="Name"
               variant="outlined"
               type="number"
               onChange={(e) => setPid(e.target.value)}
@@ -62,7 +50,7 @@ const FiltersForm: FC = () => {
           <Grid item xs={3}>
             <TextField
               size="small"
-              label="Outpatient Number (OPD)"
+              label="Surname"
               variant="outlined"
               type="number"
               onChange={(e) => setOpd(e.target.value)}
@@ -72,7 +60,7 @@ const FiltersForm: FC = () => {
           <Grid item xs={4}>
             <TextField
               size="small"
-              label="Inpatient Number (IDP)"
+              label="Specialization"
               variant="outlined"
               type="number"
               onChange={(e) => setIdp(e.target.value)}
@@ -90,4 +78,4 @@ const FiltersForm: FC = () => {
     </form>
   );
 };
-export default FiltersForm;
+export default DoctorFormFilter;

@@ -1,8 +1,10 @@
-import { Avatar, Grid, Typography } from "@mui/material";
+import { Avatar, Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
+import { PATIENTS_PATH } from "../../../config/paths";
 import { PatientDTO } from "../../../generated/axios";
 import { DetailType } from "../../../lib/types";
-import { generateAvatarImage } from "../../../lib/utils";
+import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {
@@ -13,49 +15,62 @@ type IProps = {
 const PatientBox: React.FC<IProps> = ({ props }) => {
   const { patient } = props;
 
+  // const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
+
   return (
-    <Grid
-      container
-      spacing={0.1}
-      sx={{
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        padding: "25px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "#fff",
-        borderBottom: "3px solid #ccc",
-        transition: "background-color 0.3s",
-        cursor: "pointer",
-        ":hover": {
-          backgroundColor: "#f1f1f1",
-        },
-      }}
-    >
-      {/* Nome */}
-      <Grid item xs={12}>
-        <Typography variant="h5" component="div" align="center">
-          {patient.name} {patient.surname}
-        </Typography>
-      </Grid>
+    <Card>
+      <CardActionArea
+        component={Link}
+        to={getDetailPath(PATIENTS_PATH, patient.id)}
+        sx={{
+          border: "1px solid #ccc",
+          borderBottom: "3px solid #ccc",
+          transition: "background-color 0.3s",
+          cursor: "pointer",
+          ":hover": {
+            backgroundColor: "#f1f1f1",
+          },
+          borderRadius: "4px",
+        }}
+      >
+        <CardContent>
+          <Grid
+            container
+            spacing={0.1}
+            sx={{
+              padding: "15px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {/* Nome */}
+            <Grid item xs={12}>
+              <Typography variant="h5" component="div" align="center">
+                {patient.name} {patient.surname}
+              </Typography>
+            </Grid>
 
-      {/* PID, OPID, IDP */}
-      <Grid item xs={12}>
-        <Typography variant="body2" color="textSecondary">
-          PID: <strong>{patient.id}</strong> | OPD: <strong>{patient.opd}</strong> | IDP: <strong>{patient.idp}</strong>
-        </Typography>
-      </Grid>
+            {/* PID, OPID, IDP */}
+            <Grid item xs={12}>
+              <Typography variant="body2" color="textSecondary">
+                PID: <strong>{patient.id}</strong> | OPD: <strong>{patient.opd}</strong> | IDP:{" "}
+                <strong>{patient.idp}</strong>
+              </Typography>
+            </Grid>
 
-      {/* Avatar */}
-      <Grid item xs={12}>
-        <Avatar
-          alt={`${patient.name} ${patient.surname}`}
-          src={generateAvatarImage(DetailType.PATIENT, patient.id)}
-          sx={{ width: 80, height: 80, marginTop: "16px" }}
-        />
-      </Grid>
-    </Grid>
+            {/* Avatar */}
+            <Grid item xs={12}>
+              <Avatar
+                alt={`${patient.name} ${patient.surname}`}
+                src={generateAvatarImage(DetailType.PATIENT, patient.id)}
+                sx={{ width: 95, height: 95, marginTop: "16px" }}
+              />
+            </Grid>
+          </Grid>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
