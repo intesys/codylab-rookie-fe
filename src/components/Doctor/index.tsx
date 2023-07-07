@@ -1,8 +1,18 @@
+import { Edit } from "@mui/icons-material";
+import { Avatar, Box, CircularProgress, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../../config/api";
+import { DOCTORS_PATH } from "../../config/paths";
 import { DoctorDTO } from "../../generated/axios";
 import useGetDetail from "../../hooks/useGetDetail";
+import { DetailType } from "../../lib/types";
+import { generateAvatarImage, getEditDetailPath, getPath } from "../../lib/utils";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import DetailHeader from "../Layout/DetailHeader";
+import PatientsTable from "./PatientTable";
 //import PatientsTable from "./PatientsTable";
 
 const emptyRecord = {};
@@ -16,7 +26,7 @@ const Doctor: React.FC = () => {
 
   return (
     <div>
-      {/* <Breadcrumb>
+      <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
         </BreadcrumbEl>
@@ -59,17 +69,17 @@ const Doctor: React.FC = () => {
                     <Typography component="h4" gutterBottom my={2}>
                       {doctor?.phoneNumber && (
                         <Stack direction="row" mb={1} spacing={2}>
-                          <PhoneIcon color="primary" /> <span>{doctor.phoneNumber}</span>
+                          <span>{doctor.phoneNumber}</span>
                         </Stack>
                       )}
                       {doctor?.phoneNumber && (
                         <Stack direction="row" mb={1} spacing={2}>
-                          <MailOutlineIcon color="primary" /> <span>{doctor.email}</span>
+                          <span>{doctor.email}</span>
                         </Stack>
                       )}
                     </Typography>
                     <Typography mt={6} variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
-                      Last visited patients
+                      Last patients
                     </Typography>
                     <Divider color={grey[500]} />
                     <Grid container direction="row" my={2} spacing={2}>
@@ -79,7 +89,7 @@ const Doctor: React.FC = () => {
                             <Avatar
                               alt={patient.name}
                               src={generateAvatarImage(DetailType.PATIENT, patient.id)}
-                              sx={{ width: 35, height: 35 }}
+                              sx={{ width: 40, height: 40 }}
                             />
                             <div>
                               {patient.name} <br /> {patient.surname}
@@ -91,13 +101,13 @@ const Doctor: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={9} p={6}>
-                   <PatientsTable doctor={doctor} /> 
+                  <PatientsTable doctor={doctor} />
                 </Grid>
               </Grid>
             </>
           )}
         </Grid>
-      </Grid> */}
+      </Grid>
     </div>
   );
 };

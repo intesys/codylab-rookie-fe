@@ -29,7 +29,7 @@ const PatientFormFilter: FC = () => {
         alignItems="center"
         style={{
           borderRadius: "4px",
-          height: "11vh",
+          //height: "11vh",
           width: "100%",
           backgroundColor: "#fff",
           padding: "16px",
