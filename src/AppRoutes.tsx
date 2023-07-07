@@ -44,8 +44,6 @@ const AppRoutes: React.FC = () => {
           <Route path=":id" element={<Doctor />} />
           <Route path="new" element={<DoctorNew />} />
           <Route path=":id/edit" element={<DoctorEdit />} />
-          {/* <Route path=":id/edit" element={<DoctorEdit />} />
-          <Route path="new" element={<DoctorNew />} /> */}
         </Route>
         <Route path={PHARMACY_PATH} element={<Pharmacy />} />
         <Route path={WARD_PATH} element={<Ward />} />
