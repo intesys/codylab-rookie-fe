@@ -15,8 +15,6 @@ type IProps = {
 const PatientBox: React.FC<IProps> = ({ props }) => {
   const { patient } = props;
 
-  // const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
-
   return (
     <Card>
       <CardActionArea

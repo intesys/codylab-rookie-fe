@@ -1,5 +1,4 @@
 import EditIcon from "@mui/icons-material/Edit";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import {
   Avatar,
   Box,
@@ -18,7 +17,6 @@ import {
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
-import PhoneIcon from "@mui/icons-material/Phone";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { grey } from "@mui/material/colors";
 import dayjs from "dayjs";
@@ -110,6 +108,7 @@ const StaffMember: React.FC = () => {
                       Health information
                     </Typography>
                     <Divider color={grey[500]} />
+
                     {/* Patient ID */}
                     <Stack my={2}>
                       <Typography textTransform="uppercase" color={grey[500]}>
@@ -117,6 +116,7 @@ const StaffMember: React.FC = () => {
                       </Typography>
                       <Typography variant="h4">{patient?.id}</Typography>
                     </Stack>
+
                     {/* Patient odp */}
                     {patient?.opd && (
                       <Stack my={2}>
@@ -126,6 +126,7 @@ const StaffMember: React.FC = () => {
                         <Typography variant="h4">{patient?.opd}</Typography>
                       </Stack>
                     )}
+
                     {/* Blood Group */}
                     {patient?.bloodGroup && (
                       <Stack my={2}>
@@ -136,19 +137,22 @@ const StaffMember: React.FC = () => {
                       </Stack>
                     )}
                     <Divider color={grey[500]} />
+
                     {/* Notes */}
                     <Typography component="p" my={2}>
                       <strong color={grey[500]}>Notes</strong> <br />
                       {patient?.note}
                     </Typography>
                     <Divider color={grey[500]} />
+
                     {/* Chronic patient */}
                     <Typography textTransform="uppercase" my={2}>
                       Chronic patient: {patient.chronicPatient ? "YES" : "NO"}
                     </Typography>
 
                     <Divider color={grey[500]} />
-                    {/* DA FARE */}
+
+                    {/* Last Visit */}
 
                     {lastVisit && (
                       <>
@@ -194,6 +198,8 @@ const StaffMember: React.FC = () => {
                           </ListItem>
                         </List>
 
+                        {/* Last doctor */}
+
                         <Divider color={grey[500]} />
                         <Grid container spacing={2} mt={2}>
                           <Grid item xs={12}>
@@ -217,12 +223,12 @@ const StaffMember: React.FC = () => {
                               <Typography component="h4" gutterBottom>
                                 {lastVisit?.doctor?.phoneNumber && (
                                   <Stack direction="row" mb={1} spacing={1}>
-                                    <PhoneIcon color="primary" /> <span>{lastVisit?.doctor?.phoneNumber}</span>
+                                    <span>{lastVisit?.doctor?.phoneNumber}</span>
                                   </Stack>
                                 )}
                                 {lastVisit?.doctor?.email && (
                                   <Stack direction="row" mb={1} spacing={1}>
-                                    <MailOutlineIcon color="primary" /> <span>{lastVisit?.doctor?.email}</span>
+                                    <span>{lastVisit?.doctor?.email}</span>
                                   </Stack>
                                 )}
                               </Typography>
@@ -235,6 +241,7 @@ const StaffMember: React.FC = () => {
                 </Grid>
 
                 {/* Tabella records */}
+
                 <Grid item xs={9} p={6}>
                   <PatientRecordTable patient={patient} />
                 </Grid>

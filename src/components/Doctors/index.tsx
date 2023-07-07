@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid, Toolbar } from "@mui/material";
+import { Button, CircularProgress, Grid, Toolbar, Typography } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../config/api";
@@ -46,23 +46,27 @@ const Doctors: React.FC = () => {
         </Toolbar>
       </Grid>
 
-      {/* doctor filter form */}
+      {/* docotr filter form */}
       <Grid item xs={12}>
         <DoctorFilterForm />
       </Grid>
 
-      {/* patient list */}
+      {/* doctor list */}
       <Grid container mt={4} spacing={2}>
         {loading ? (
           <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
             <CircularProgress />
           </Grid>
-        ) : (
+        ) : doctorList.length > 0 ? (
           doctorList.map((doctor) => (
             <Grid item key={doctor.id} xs={4}>
               <DoctorBox props={{ doctor }} />
             </Grid>
           ))
+        ) : (
+          <Typography variant="body1" textAlign="center">
+            No doctor list
+          </Typography>
         )}
       </Grid>
     </DoctorsFilterContext.Provider>

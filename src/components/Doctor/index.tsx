@@ -13,7 +13,6 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
 import PatientsTable from "./PatientTable";
-//import PatientsTable from "./PatientsTable";
 
 const emptyRecord = {};
 const getDoctor = api.doctors.getDoctor;
@@ -49,6 +48,8 @@ const Doctor: React.FC = () => {
             </Grid>
           ) : (
             <>
+              {/* Dettagli dottore */}
+
               <DetailHeader
                 record={doctor}
                 detailType={DetailType.DOCTOR}
@@ -62,11 +63,13 @@ const Doctor: React.FC = () => {
               <Grid container>
                 <Grid item xs={3}>
                   <Box sx={{ background: grey[800], padding: 4, color: "white" }}>
+                    {/* Contatti  */}
+
                     <Typography variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
                       Contacts
                     </Typography>
                     <Divider color={grey[500]} />
-                    <Typography component="h4" gutterBottom my={2}>
+                    <Typography component="h4" gutterBottom my={4}>
                       {doctor?.phoneNumber && (
                         <Stack direction="row" mb={1} spacing={2}>
                           <span>{doctor.phoneNumber}</span>
@@ -78,10 +81,14 @@ const Doctor: React.FC = () => {
                         </Stack>
                       )}
                     </Typography>
-                    <Typography mt={6} variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
+
+                    {/* Ultimi pazienti */}
+
+                    <Typography mt={4} variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
                       Last patients
                     </Typography>
                     <Divider color={grey[500]} />
+
                     <Grid container direction="row" my={2} spacing={2}>
                       {doctor?.latestPatients?.map((patient) => (
                         <Grid item xs={12} key={patient.id}>
@@ -100,6 +107,9 @@ const Doctor: React.FC = () => {
                     </Grid>
                   </Box>
                 </Grid>
+
+                {/* Tabella patients */}
+
                 <Grid item xs={9} p={6}>
                   <PatientsTable doctor={doctor} />
                 </Grid>

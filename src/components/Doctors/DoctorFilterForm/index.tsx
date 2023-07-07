@@ -5,8 +5,8 @@ import { DoctorsFilterContext } from "..";
 const DoctorFormFilter: FC = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [profession, setProfession] = useState("");
   const { dispatch } = useContext(DoctorsFilterContext);
+  const [profession, setProfession] = useState("");
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +29,6 @@ const DoctorFormFilter: FC = () => {
         alignItems="center"
         style={{
           borderRadius: "4px",
-          //height: "11vh",
           width: "100%",
           backgroundColor: "#fff",
           padding: "16px",
@@ -72,11 +71,11 @@ const DoctorFormFilter: FC = () => {
           <Grid item xs={4}>
             <TextField
               label="Specialization"
-              onChange={(e) => setProfession(e.target.value)}
               variant="outlined"
               size="small"
               fullWidth
               value={profession}
+              onChange={(e) => setProfession(e.target.value)}
             />
           </Grid>
           <Grid item xs={2}>

@@ -20,17 +20,17 @@ interface IProps extends React.PropsWithChildren {
 
 const PatientForm: FC<IProps> = ({ record }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
 
-  const [saveLoading, setSaveLoading] = useState(false);
-  const [name, setName] = useState(record?.name ?? "");
-  const [surname, setSurname] = useState(record?.surname ?? "");
-  const [address, setAddress] = useState(record?.address ?? "");
-  const [opd, setOpd] = useState(record?.opd);
-  const [idp, setIdp] = useState(record?.idp);
   const [bloodGroup, setBloodGroup] = useState<PatientDTOBloodGroupEnum | undefined>(record?.bloodGroup);
   const [chronicPatient, setChronicPatient] = useState(record?.chronicPatient ?? false);
   const [notes, setNotes] = useState(record?.note);
+  const [opd, setOpd] = useState(record?.opd);
+  const navigate = useNavigate();
+  const [surname, setSurname] = useState(record?.surname ?? "");
+  const [address, setAddress] = useState(record?.address ?? "");
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [name, setName] = useState(record?.name ?? "");
+  const [idp, setIdp] = useState(record?.idp);
 
   const backPath = useMemo(
     () => (record.id ? getDetailPath(PATIENTS_PATH, record.id) : getPath(PATIENTS_PATH)),
@@ -94,6 +94,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
       >
         <Grid container spacing={3}>
           {/* Name */}
+
           <Grid item xs={4}>
             <TextField
               label="Name"
@@ -105,7 +106,9 @@ const PatientForm: FC<IProps> = ({ record }) => {
               required
             />
           </Grid>
+
           {/* Surname */}
+
           <Grid item xs={4}>
             <TextField
               label="Surname"
@@ -117,7 +120,9 @@ const PatientForm: FC<IProps> = ({ record }) => {
               required
             />
           </Grid>
+
           {/* Address */}
+
           <Grid item xs={4}>
             <TextField
               label="Address"
@@ -129,7 +134,9 @@ const PatientForm: FC<IProps> = ({ record }) => {
               required
             />
           </Grid>
+
           {/* OPD */}
+
           <Grid item xs={4}>
             <TextField
               label="Outpatient Number (OPD)"
@@ -142,7 +149,9 @@ const PatientForm: FC<IProps> = ({ record }) => {
               required
             />
           </Grid>
+
           {/* IDP */}
+
           <Grid item xs={4}>
             <TextField
               label="Inpatient Number (IDP)"
@@ -155,7 +164,9 @@ const PatientForm: FC<IProps> = ({ record }) => {
               required
             />
           </Grid>
+
           {/* Blood Group */}
+
           <Grid item xs={4}>
             <Select
               label="Blood Group"
@@ -185,12 +196,16 @@ const PatientForm: FC<IProps> = ({ record }) => {
               </MenuItem>
             </Select>
           </Grid>
+
           {/* Chronic Patient */}
+
           <Grid item xs={4}>
             <Typography variant="subtitle1">Chronic Patient</Typography>
             <Switch checked={chronicPatient} onChange={() => setChronicPatient(!chronicPatient)} />
           </Grid>
+
           {/* Notes */}
+
           <Grid item xs={12}>
             <TextField
               label="Notes"

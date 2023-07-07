@@ -1,4 +1,5 @@
 import { DeleteOutline } from "@mui/icons-material";
+
 import {
   Button,
   IconButton,
@@ -57,7 +58,7 @@ const PatientRecordTable: FC<IProps> = ({ patient }) => {
           +Record
         </Button>
       </Toolbar>
-      {/* {patientRecords && patientRecords.length > 0 ? ( */}
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

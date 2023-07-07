@@ -92,12 +92,12 @@ const DoctorForm: FC<IProps> = ({ record }) => {
             <TextField
               fullWidth
               label="Name"
-              name="name"
-              size="small"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               variant="outlined"
+              name="name"
+              size="small"
             />
           </Grid>
           <Grid item xs={4}>
@@ -105,11 +105,11 @@ const DoctorForm: FC<IProps> = ({ record }) => {
               fullWidth
               label="Surname"
               name="surname"
-              size="small"
-              required
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
               variant="outlined"
+              size="small"
+              required
             />
           </Grid>
           <Grid item xs={4}>
@@ -117,10 +117,10 @@ const DoctorForm: FC<IProps> = ({ record }) => {
               fullWidth
               label="Profession"
               name="profession"
+              onChange={(e) => setProfession(e.target.value)}
               size="small"
               required
               value={profession}
-              onChange={(e) => setProfession(e.target.value)}
               variant="outlined"
             />
           </Grid>
@@ -130,13 +130,13 @@ const DoctorForm: FC<IProps> = ({ record }) => {
             <TextField
               fullWidth
               label="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
               name="email"
               size="small"
               type="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              variant="outlined"
               error={emailError}
               helperText={emailError && "Email is invalid"}
             />
@@ -145,11 +145,11 @@ const DoctorForm: FC<IProps> = ({ record }) => {
             <TextField
               fullWidth
               label="Phone number"
+              onChange={(e) => setPhoneNumber(e.target.value)}
               name="phoneNumber"
               size="small"
               required
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
               variant="outlined"
             />
           </Grid>
