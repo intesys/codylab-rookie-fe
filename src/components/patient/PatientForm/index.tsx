@@ -25,8 +25,12 @@ import { getBloodType, getDetailPath, getPath } from "../../../lib/utils";
 const createPatient = api.patients.createPatient;
 const updatePatient = api.patients.updatePatient;
 
+export interface PatientDTOextend extends PatientDTO {
+  note?: string;
+}
+
 interface IProps extends React.PropsWithChildren {
-  record: PatientDTO;
+  record: PatientDTOextend;
 }
 
 const PatientForm: FC<IProps> = ({ record }) => {
@@ -41,7 +45,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
   const [idp, setIdp] = useState(record?.idp);
   const [bloodGroup, setBloodGroup] = useState<PatientDTOBloodGroupEnum | undefined>(record?.bloodGroup);
   const [chronicPatient, setChronicPatient] = useState(record?.chronicPatient ?? false);
-  const [notes, setNotes] = useState(record?.notes);
+  const [notes, setNotes] = useState(record?.note);
 
   const backPath = useMemo(
     () => (record.id ? getDetailPath(PATIENTS_PATH, record.id) : getPath(PATIENTS_PATH)),
@@ -59,7 +63,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
         idp,
         bloodGroup,
         chronicPatient,
-        notes,
+        note: notes,
       };
       setSaveLoading(true);
       if (record?.id) {

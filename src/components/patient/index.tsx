@@ -28,7 +28,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
-import { PatientDTO } from "../../generated/axios";
 import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
@@ -36,6 +35,7 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import DetailHeader from "../Layout/DetailHeader";
 import SectionHeader from "../Layout/SectionHeader";
+import { PatientDTOextend } from "./PatientForm";
 import RecordTable from "./RecordsTable";
 // import RecordTable from "./RecordsTable";
 
@@ -48,7 +48,7 @@ const StaffMember: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [patient, loading] = useGetDetail(getPatient, emptyRecord as PatientDTO, Number(id));
+  const [patient, loading] = useGetDetail<PatientDTOextend>(getPatient, emptyRecord as PatientDTOextend, Number(id));
 
   const lastVisit = useMemo(
     () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : undefined),
@@ -129,7 +129,7 @@ const StaffMember: React.FC = () => {
                     <Divider color={grey[500]} />
                     <Typography component="p" my={2}>
                       <strong color={grey[500]}>Notes</strong> <br />
-                      {patient?.notes}
+                      {patient?.note}
                     </Typography>
                     <Divider color={grey[500]} />
                     <Stack direction="row" my={2}>
