@@ -20,17 +20,17 @@ import { DoctorDTO } from "../../../generated/axios";
 import useGetList from "../../../hooks/useGetList";
 import { getDetailPath } from "../../../lib/utils";
 
-const getListDoctor = api.patients.getListPatient;
+const getListPatient = api.patients.getListPatient;
 
 interface IProps extends React.PropsWithChildren {
   doctor: DoctorDTO;
 }
 
-const DoctorsTable: FC<IProps> = ({ doctor }) => {
+const PatientsTable: FC<IProps> = ({ doctor }) => {
   const navigate = useNavigate();
   const filters = useMemo(() => ({ doctorId: doctor.id }), [doctor]);
 
-  const [DoctorList, loading] = useGetList(getListDoctor, filters);
+  const [patientList, loading] = useGetList(getListPatient, filters);
 
   return (
     <Paper>
@@ -38,12 +38,7 @@ const DoctorsTable: FC<IProps> = ({ doctor }) => {
         <CircularProgress />
       ) : (
         <>
-          <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 },
-            }}
-          >
+          <Toolbar>
             <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div">
               Patients
             </Typography>
@@ -53,20 +48,22 @@ const DoctorsTable: FC<IProps> = ({ doctor }) => {
               <TableHead>
                 <TableRow>
                   <TableCell>PID</TableCell>
-              
+                  <TableCell align="right">OPD</TableCell>
+                  <TableCell align="right">IDP</TableCell>
                   <TableCell align="right">Name</TableCell>
                   <TableCell align="right">Surname</TableCell>
                   <TableCell align="right">Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {DoctorList && DoctorList.length > 0 ? (
-               DoctorList.map((row) => (
+                {patientList && patientList.length > 0 ? (
+                  patientList.map((row) => (
                     <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                       <TableCell component="th" scope="row">
                         {row.id}
                       </TableCell>
-                   
+                      <TableCell align="right">{row.opd}</TableCell>
+                      <TableCell align="right">{row.idp}</TableCell>
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.surname}</TableCell>
                       <TableCell align="right">
@@ -92,4 +89,4 @@ const DoctorsTable: FC<IProps> = ({ doctor }) => {
   );
 };
 
-export default DoctorsTable;
+export default PatientsTable;

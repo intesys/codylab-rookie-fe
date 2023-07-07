@@ -1,4 +1,3 @@
-import { Save } from "@mui/icons-material";
 import { Button, Grid, Paper, Stack, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
@@ -78,7 +77,15 @@ const DoctorForm: FC<IProps> = ({ record }) => {
   );
 
   return (
-    <Paper sx={{ p: 4 }}>
+    <Paper
+      style={{
+        backgroundColor: "#FFFFFF",
+        borderRadius: "4px",
+        padding: "16px",
+        border: "1px solid #ccc",
+        borderBottom: "3px solid #ccc",
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
@@ -151,7 +158,7 @@ const DoctorForm: FC<IProps> = ({ record }) => {
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={12} textAlign="right">
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" endIcon={<Save />} disabled={saveLoading}>
+              <Button variant="contained" type="submit" disabled={saveLoading}>
                 Save
               </Button>
               <Button variant="outlined" component={Link} to={backPath}>

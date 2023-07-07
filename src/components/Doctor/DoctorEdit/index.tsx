@@ -6,10 +6,11 @@ import { DOCTORS_PATH } from "../../../config/paths";
 import { DoctorDTO } from "../../../generated/axios";
 import useGetDetail from "../../../hooks/useGetDetail";
 import { getPath } from "../../../lib/utils";
-import Breadcrumb from "../../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../Layout/SectionHeader";
-import DoctorForm from "../DoctorForm";
+import Breadcrumb from "../../../src/components/Breadcumb/breadcrumb";
+import BreadcrumbEl from "../../../src/components/Breadcrumb/BreadcrumbEl";
+import SectionHeader from "../../../src/components/Layout/SectionHeader";
+import DoctorForm from "../../../src/components/Doctor/DoctorForm";
+
 
 const emptyRecord = {};
 const getDoctor = api.doctors.getDoctor;
