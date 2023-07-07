@@ -59,7 +59,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
         idp,
         bloodGroup,
         chronicPatient,
-        notes,
+        note: notes,
       };
       setSaveLoading(true);
       if (record?.id) {
