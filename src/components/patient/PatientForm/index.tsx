@@ -1,22 +1,7 @@
-import { Save } from "@mui/icons-material";
-import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  SelectChangeEvent,
-  Stack,
-  Switch,
-  TextField,
-} from "@mui/material";
+import { Button, Grid, MenuItem, Paper, Select, SelectChangeEvent, Switch, TextField, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../../config/api";
 import { PATIENTS_PATH } from "../../../config/paths";
 import { PatientDTO, PatientDTOBloodGroupEnum } from "../../../generated/axios";
@@ -25,8 +10,12 @@ import { getBloodType, getDetailPath, getPath } from "../../../lib/utils";
 const createPatient = api.patients.createPatient;
 const updatePatient = api.patients.updatePatient;
 
+export interface PatientDTOextend extends PatientDTO {
+  note?: string;
+}
+
 interface IProps extends React.PropsWithChildren {
-  record: PatientDTO;
+  record: PatientDTOextend;
 }
 
 const PatientForm: FC<IProps> = ({ record }) => {
@@ -41,7 +30,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
   const [idp, setIdp] = useState(record?.idp);
   const [bloodGroup, setBloodGroup] = useState<PatientDTOBloodGroupEnum | undefined>(record?.bloodGroup);
   const [chronicPatient, setChronicPatient] = useState(record?.chronicPatient ?? false);
-  const [notes, setNotes] = useState(record?.notes);
+  const [notes, setNotes] = useState(record?.note);
 
   const backPath = useMemo(
     () => (record.id ? getDetailPath(PATIENTS_PATH, record.id) : getPath(PATIENTS_PATH)),
@@ -92,157 +81,144 @@ const PatientForm: FC<IProps> = ({ record }) => {
   );
 
   return (
-    <Paper sx={{ p: 4 }}>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2} marginBottom={2}>
+    <form onSubmit={handleSubmit} style={{ backgroundColor: "#FFFFFF" }}>
+      <Paper
+        elevation={0}
+        style={{
+          backgroundColor: "#FFFFFF",
+          borderRadius: "4px",
+          padding: "16px",
+          border: "1px solid #ccc",
+          borderBottom: "3px solid #ccc",
+        }}
+      >
+        <Grid container spacing={3}>
+          {/* Name */}
           <Grid item xs={4}>
             <TextField
-              fullWidth
               label="Name"
-              name="name"
+              variant="outlined"
               size="small"
-              required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              variant="outlined"
+              fullWidth
+              required
             />
           </Grid>
+          {/* Surname */}
           <Grid item xs={4}>
             <TextField
-              fullWidth
               label="Surname"
-              name="surname"
+              variant="outlined"
               size="small"
-              required
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
-              variant="outlined"
+              fullWidth
+              required
             />
           </Grid>
+          {/* Address */}
           <Grid item xs={4}>
             <TextField
-              fullWidth
               label="Address"
-              name="address"
+              variant="outlined"
               size="small"
-              required
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              variant="outlined"
+              fullWidth
+              required
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2} marginBottom={2}>
+          {/* OPD */}
           <Grid item xs={4}>
             <TextField
-              fullWidth
-              label="OPD"
-              name="opd"
-              size="small"
+              label="Outpatient Number (OPD)"
+              variant="outlined"
               type="number"
-              required
+              size="small"
               value={opd}
               onChange={(e) => setOpd(Number(e.target.value))}
-              variant="outlined"
+              fullWidth
+              required
             />
           </Grid>
+          {/* IDP */}
           <Grid item xs={4}>
             <TextField
-              fullWidth
-              label="IDP"
-              name="idp"
+              label="Inpatient Number (IDP)"
+              variant="outlined"
               size="small"
-              type="number"
-              required
               value={idp}
               onChange={(e) => setIdp(Number(e.target.value))}
-              variant="outlined"
+              fullWidth
+              type="number"
+              required
             />
           </Grid>
+          {/* Blood Group */}
           <Grid item xs={4}>
-            <FormControl fullWidth>
-              <InputLabel required size="small" id="blood-group-label">
-                Blood Group
-              </InputLabel>
-              <Select
-                labelId="blood-group-label"
-                id="blood-group-select"
-                value={bloodGroup}
-                label="Blood Group"
-                required
-                size="small"
-                onChange={(e: SelectChangeEvent) => setBloodGroup(e.target.value as PatientDTOBloodGroupEnum)}
-              >
-                <MenuItem value={PatientDTOBloodGroupEnum.APlus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.APlus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.BMinus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.BMinus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.BPlus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.BPlus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.AbMinus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.AbMinus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.AbPlus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.AbPlus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.ZeroMinus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.ZeroMinus)}
-                </MenuItem>
-                <MenuItem value={PatientDTOBloodGroupEnum.ZeroPlus}>
-                  {getBloodType(PatientDTOBloodGroupEnum.ZeroPlus)}
-                </MenuItem>
-              </Select>
-            </FormControl>
+            <Select
+              label="Blood Group"
+              variant="outlined"
+              size="small"
+              value={bloodGroup}
+              onChange={(e: SelectChangeEvent) => setBloodGroup(e.target.value as PatientDTOBloodGroupEnum)}
+              fullWidth
+              required
+            >
+              <MenuItem value={PatientDTOBloodGroupEnum.APlus}>{getBloodType(PatientDTOBloodGroupEnum.APlus)}</MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.BMinus}>
+                {getBloodType(PatientDTOBloodGroupEnum.BMinus)}
+              </MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.BPlus}>{getBloodType(PatientDTOBloodGroupEnum.BPlus)}</MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.AbMinus}>
+                {getBloodType(PatientDTOBloodGroupEnum.AbMinus)}
+              </MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.AbPlus}>
+                {getBloodType(PatientDTOBloodGroupEnum.AbPlus)}
+              </MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.ZeroMinus}>
+                {getBloodType(PatientDTOBloodGroupEnum.ZeroMinus)}
+              </MenuItem>
+              <MenuItem value={PatientDTOBloodGroupEnum.ZeroPlus}>
+                {getBloodType(PatientDTOBloodGroupEnum.ZeroPlus)}
+              </MenuItem>
+            </Select>
           </Grid>
-        </Grid>
-        <Grid container spacing={2} marginBottom={2}>
+          {/* Chronic Patient */}
           <Grid item xs={4}>
-            <FormControl>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChronicPatient(e.target.checked)}
-                    />
-                  }
-                  label="Chronic patient"
-                />
-              </FormGroup>
-            </FormControl>
+            <Typography variant="subtitle1">Chronic Patient</Typography>
+            <Switch checked={chronicPatient} onChange={() => setChronicPatient(!chronicPatient)} />
           </Grid>
-        </Grid>
-        <Grid container spacing={2} marginBottom={2}>
+          {/* Notes */}
           <Grid item xs={12}>
             <TextField
-              fullWidth
               label="Notes"
-              name="notes"
-              size="small"
-              rows={4}
-              multiline
-              value={record?.notes}
-              onChange={(e) => setNotes(e.target.value)}
               variant="outlined"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              fullWidth
+              multiline
+              rows={4}
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2} marginBottom={2}>
-          <Grid item xs={12} textAlign="right">
-            <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" endIcon={<Save />} disabled={saveLoading}>
-                Save
-              </Button>
-              <Button variant="outlined" component={Link} to={backPath}>
-                Back
-              </Button>
-            </Stack>
+          <Grid item xs={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={saveLoading}
+              style={{ marginRight: "16px" }}
+            >
+              Save
+            </Button>
+            <Button variant="outlined" onClick={() => navigate(backPath)}>
+              Back
+            </Button>
           </Grid>
         </Grid>
-      </form>
-    </Paper>
+      </Paper>
+    </form>
   );
 };
 

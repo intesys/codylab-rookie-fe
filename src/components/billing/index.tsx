@@ -1,6 +1,6 @@
 import React from "react";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
+import Breadcrumb from "../Breadcrumb/breadcrumb";
 
 const Billing: React.FC = () => {
   return (

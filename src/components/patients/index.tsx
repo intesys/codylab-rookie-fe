@@ -1,5 +1,4 @@
-import { Add } from "@mui/icons-material";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid, Toolbar } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../config/api";
@@ -10,8 +9,8 @@ import { getNewDetailPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../Layout/SectionHeader";
-import FiltersForm from "./FiltersForm";
 import PatientBox from "./PatientBox";
+import PatientFilterForm from "./PatientsFilterForm";
 import { Action, patientsFilterReducer } from "./lib";
 
 interface IPatientsFilterContext {
@@ -28,29 +27,38 @@ const getPatientList = api.patients.getListPatient;
 
 const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
-  const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
-
   const [patientList, loading] = useGetList(getPatientList, filter);
+  const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
 
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
       <Breadcrumb>
-        <BreadcrumbEl>Patients</BreadcrumbEl>
+        <BreadcrumbEl active>Patients</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="Patients database">
-        <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
-          Add new patient
-        </Button>
-      </SectionHeader>
-      <FiltersForm />
+
+      <Grid item xs={15}>
+        <Toolbar style={{ padding: "0" }}>
+          <SectionHeader title="Patients database">
+            <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined">
+              Add new patient
+            </Button>
+          </SectionHeader>
+        </Toolbar>
+      </Grid>
+
+      {/* patient filter form */}
+
+      <Grid item xs={12}>
+        <PatientFilterForm />
+      </Grid>
+
+      {/* patient list */}
       <Grid container mt={4} spacing={2}>
         {loading ? (
-          <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
-            <CircularProgress />
-          </Grid>
+          <CircularProgress />
         ) : (
           patientList.map((patient) => (
-            <Grid item key={patient.id} xs={4}>
+            <Grid item xs={4} key={patient.id}>
               <PatientBox props={{ patient }} />
             </Grid>
           ))

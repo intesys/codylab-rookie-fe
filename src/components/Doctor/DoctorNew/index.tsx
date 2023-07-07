@@ -3,10 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DOCTORS_PATH } from "../../../config/paths";
 import { getPath } from "../../../lib/utils";
-import Breadcrumb from "../../Breadcrumb/Breadcrumb";
+import Breadcrumb from "../../Breadcrumb/breadcrumb";
 import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
 import SectionHeader from "../../Layout/SectionHeader";
-import PatientForm from "../DoctorForm";
+import DoctorForm from "../DoctorForm/Index";
 
 const emptyRecord = {};
 
@@ -24,7 +24,7 @@ const DoctorNew = () => {
           <SectionHeader title="New doctor" />
         </Grid>
         <Grid item xs={12}>
-          <PatientForm record={emptyRecord} />
+          <DoctorForm record={emptyRecord} />
         </Grid>
       </Grid>
     </>
