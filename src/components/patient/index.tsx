@@ -1,10 +1,5 @@
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
-import PhoneIcon from "@mui/icons-material/Phone";
-import VaccinesIcon from "@mui/icons-material/Vaccines";
 import {
   Avatar,
   Box,
@@ -20,6 +15,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
+import PhoneIcon from "@mui/icons-material/Phone";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { grey } from "@mui/material/colors";
 import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
@@ -28,26 +28,26 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../config/api";
 import { DATE_FORMAT } from "../../config/date";
 import { PATIENTS_PATH } from "../../config/paths";
-import { PatientDTO } from "../../generated/axios";
 import useGetDetail from "../../hooks/useGetDetail";
 import { DetailType } from "../../lib/types";
 import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import DetailHeader from "../layout/DetailHeader";
-import SectionHeader from "../layout/SectionHeader";
-import RecordTable from "./RecordsTable";
-
-const emptyRecord = {};
+import DetailHeader from "../Layout/DetailHeader";
+import SectionHeader from "../Layout/SectionHeader";
+import { PatientDTOextend } from "./PatientForm";
+import PatientRecordTable from "./PatientRecordsTable/index";
 
 const getPatient = api.patients.getPatient;
 const deletePatient = api.patients.deletePatient;
 
+const emptyRecord = {};
+
 const StaffMember: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [patient, loading] = useGetDetail(getPatient, emptyRecord as PatientDTO, Number(id));
+  const [patient, loading] = useGetDetail<PatientDTOextend>(getPatient, emptyRecord as PatientDTOextend, Number(id));
+  const { enqueueSnackbar } = useSnackbar();
 
   const lastVisit = useMemo(
     () => (patient?.patientRecords && patient?.patientRecords?.length > 0 ? patient.patientRecords?.[0] : undefined),
@@ -80,14 +80,14 @@ const StaffMember: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <SectionHeader title="Patient details">
-            <Button variant="outlined" type="submit" startIcon={<DeleteIcon />} onClick={handleDelete}>
+            <Button variant="outlined" type="submit" onClick={handleDelete}>
               Delete
             </Button>
           </SectionHeader>
         </Grid>
         <Grid item xs={12}>
           {loading ? (
-            <Grid direction="row" justifyContent="center" alignItems="center" item>
+            <Grid container direction="row" justifyContent="center" alignItems="center">
               <CircularProgress />
             </Grid>
           ) : (
@@ -104,45 +104,52 @@ const StaffMember: React.FC = () => {
               />
               <Grid container>
                 <Grid item xs={3}>
-                  <Box sx={{ background: grey[800], padding: 4, color: "white" }}>
+                  <Box sx={{ background: grey[800], padding: 2.5, color: "white" }}>
+                    {/* Health information */}
                     <Typography variant="subtitle1" textTransform="uppercase" component="h1" gutterBottom>
                       Health information
                     </Typography>
                     <Divider color={grey[500]} />
+                    {/* Patient ID */}
                     <Stack my={2}>
                       <Typography textTransform="uppercase" color={grey[500]}>
                         Patient ID
                       </Typography>
-                      <Typography variant="h3">{patient?.id}</Typography>
+                      <Typography variant="h4">{patient?.id}</Typography>
                     </Stack>
+                    {/* Patient odp */}
                     {patient?.opd && (
                       <Stack my={2}>
                         <Typography textTransform="uppercase" color={grey[500]}>
                           OPD
                         </Typography>
-                        <Typography variant="h3">{patient?.opd}</Typography>
+                        <Typography variant="h4">{patient?.opd}</Typography>
                       </Stack>
                     )}
+                    {/* Blood Group */}
                     {patient?.bloodGroup && (
                       <Stack my={2}>
                         <Typography textTransform="uppercase" color={grey[500]}>
                           Blood group
                         </Typography>
-                        <Typography variant="h3">{getBloodType(patient?.bloodGroup)}</Typography>
+                        <Typography variant="h4">{getBloodType(patient?.bloodGroup)}</Typography>
                       </Stack>
                     )}
                     <Divider color={grey[500]} />
+                    {/* Notes */}
                     <Typography component="p" my={2}>
                       <strong color={grey[500]}>Notes</strong> <br />
-                      {patient?.notes}
+                      {patient?.note}
                     </Typography>
                     <Divider color={grey[500]} />
-                    <Stack direction="row" my={2}>
-                      <Typography textTransform="uppercase">
-                        Chronic patient: {patient.chronicPatient ? "YES" : "NO"}
-                      </Typography>
-                    </Stack>
+                    {/* Chronic patient */}
+                    <Typography textTransform="uppercase" my={2}>
+                      Chronic patient: {patient.chronicPatient ? "YES" : "NO"}
+                    </Typography>
+
                     <Divider color={grey[500]} />
+                    {/* DA FARE */}
+
                     {lastVisit && (
                       <>
                         <List sx={{ width: "100%", my: 2 }} dense>
@@ -226,8 +233,10 @@ const StaffMember: React.FC = () => {
                     )}
                   </Box>
                 </Grid>
+
+                {/* Tabella records */}
                 <Grid item xs={9} p={6}>
-                  <RecordTable patient={patient} />
+                  <PatientRecordTable patient={patient} />
                 </Grid>
               </Grid>
             </>

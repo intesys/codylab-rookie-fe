@@ -8,7 +8,7 @@ import { PatientDTO } from "../../../generated/axios";
 import { getDetailPath, getPath } from "../../../lib/utils";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../layout/SectionHeader";
+import SectionHeader from "../../Layout/SectionHeader";
 import PatientRecordForm from "../PatientRecordForm";
 
 const getPatient = api.patients.getPatient;

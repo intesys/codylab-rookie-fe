@@ -1,5 +1,3 @@
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Card, CardActionArea, CardContent, Divider, Grid, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
@@ -17,10 +15,19 @@ type IProps = {
 const DoctorBox: FC<IProps> = ({ props }) => {
   const { doctor } = props;
   return (
-    <Card>
+    <Card
+      style={{
+        backgroundColor: "#FFFFFF",
+        borderRadius: "4px",
+        padding: "16px",
+        border: "1px solid #ccc",
+        borderBottom: "3px solid #ccc",
+      }}
+    >
       <CardActionArea sx={{ padding: 2 }} component={Link} to={getDetailPath(DOCTORS_PATH, doctor.id)}>
         <CardContent>
           <Grid container direction="row" justifyContent="center" alignItems="center" textAlign="center" spacing={2}>
+            {/* Avatar */}
             <Grid item xs={12}>
               <Avatar
                 alt={`${doctor.name} ${doctor.surname}`}
@@ -28,6 +35,8 @@ const DoctorBox: FC<IProps> = ({ props }) => {
                 sx={{ width: 100, height: 100, margin: "auto" }}
               />
             </Grid>
+
+            {/* Nome e cognome*/}
             <Grid item xs={12}>
               <Typography component="h4" variant="h5">
                 {doctor.name} <strong>{doctor.surname}</strong>
@@ -36,27 +45,25 @@ const DoctorBox: FC<IProps> = ({ props }) => {
                 {doctor.profession}
               </Typography>
             </Grid>
+
+            {/* Num di telefono ed email */}
             <Grid item xs={12}>
               <Typography component="h4" gutterBottom color="primary">
-                {doctor.phoneNumber && (
-                  <Stack direction="row" justifyContent="center" alignItems="center" mb={1} spacing={2}>
-                    <PhoneIcon /> <span>{doctor.phoneNumber}</span>
-                  </Stack>
-                )}
-                {doctor.email && (
-                  <Stack direction="row" justifyContent="center" alignItems="center" mb={1} spacing={2}>
-                    <MailOutlineIcon /> <span>{doctor.email}</span>
-                  </Stack>
-                )}
+                {doctor.phoneNumber}
+              </Typography>
+              <Typography component="h4" gutterBottom color="primary">
+                {doctor.email}
               </Typography>
             </Grid>
           </Grid>
 
-          <Divider sx={{ marginY: 2 }} />
+          <Divider sx={{ marginY: 1 }} />
+
+          {/* Ultimi pazienti visitati */}
           <Grid container spacing={2}>
             <Grid item xs={12} textAlign="center">
               <Typography component="h4" textTransform="uppercase">
-                Last patients visited
+                Last patients
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -69,9 +76,9 @@ const DoctorBox: FC<IProps> = ({ props }) => {
                         src={generateAvatarImage(DetailType.PATIENT, patient.id)}
                         sx={{ width: 35, height: 35 }}
                       />
-                      <div>
+                      <Grid>
                         {patient.name} <br /> {patient.surname}
-                      </div>
+                      </Grid>
                     </Stack>
                   </Grid>
                 ))}

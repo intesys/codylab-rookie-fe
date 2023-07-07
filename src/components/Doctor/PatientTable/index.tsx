@@ -38,12 +38,7 @@ const PatientsTable: FC<IProps> = ({ doctor }) => {
         <CircularProgress />
       ) : (
         <>
-          <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 },
-            }}
-          >
+          <Toolbar>
             <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div">
               Patients
             </Typography>

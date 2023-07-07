@@ -1,19 +1,19 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Billing from "./components/Billing";
 import Doctor from "./components/Doctor";
 import DoctorEdit from "./components/Doctor/DoctorEdit";
 import DoctorNew from "./components/Doctor/DoctorNew";
 import Doctors from "./components/Doctors";
+import Home from "./components/Home";
+import News from "./components/News";
+import Patient from "./components/Patient";
+import PatientEdit from "./components/Patient/PatientEdit";
+import PatientNew from "./components/Patient/PatientNew";
+import PatientRecordNew from "./components/Patient/PatientRecordNew";
 import Patients from "./components/Patients";
-import Billing from "./components/billing";
-import Home from "./components/home";
-import News from "./components/news";
-import Patient from "./components/patient";
-import PatientEdit from "./components/patient/PatientEdit";
-import PatientNew from "./components/patient/PatientNew";
-import PatientRecordNew from "./components/patient/PatientRecordNew";
-import Pharmacy from "./components/pharmacy";
-import Ward from "./components/ward";
+import Pharmacy from "./components/Pharmacy";
+import Ward from "./components/Ward";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,

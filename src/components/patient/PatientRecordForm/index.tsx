@@ -1,4 +1,3 @@
-import { Save } from "@mui/icons-material";
 import {
   Button,
   FormControl,
@@ -88,7 +87,16 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
   );
 
   return (
-    <Paper sx={{ p: 4 }}>
+    <Paper
+      sx={{
+        p: 3,
+        backgroundColor: "#FFFFFF",
+        borderRadius: "4px",
+        padding: "16px",
+        border: "1px solid #ccc",
+        borderBottom: "3px solid #ccc",
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
@@ -99,26 +107,24 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
               fullWidth
               label="Type of visit"
               name="typeVisit"
-              size="small"
-              required
               value={typeVisit}
               onChange={(e) => setTypeVisit(e.target.value)}
               variant="outlined"
+              required
             />
           </Grid>
           <Grid item xs={4}>
             <FormControl fullWidth>
-              <InputLabel required size="small" id="doctors-label">
+              <InputLabel required id="doctors-label">
                 Doctor
               </InputLabel>
               <Select
                 labelId="doctors-label"
                 id="doctors-select"
+                onChange={(e: SelectChangeEvent) => setDoctor(e.target.value)}
                 value={String(doctor)}
                 label="Doctor"
                 required
-                size="small"
-                onChange={(e: SelectChangeEvent) => setDoctor(e.target.value)}
               >
                 {doctors.map((doctor) => (
                   <MenuItem key={doctor.id} value={String(doctor.id)}>
@@ -135,34 +141,32 @@ const PatientRecordForm: FC<IProps> = ({ record, patientId }) => {
               fullWidth
               label="Reason of visit"
               name="reasonVisit"
-              size="small"
-              multiline
-              rows={3}
-              required
-              value={reasonVisit}
               onChange={(e) => setReasonVisit(e.target.value)}
               variant="outlined"
+              rows={3}
+              required
+              multiline
+              value={reasonVisit}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               fullWidth
               label="Treatment made"
-              name="treatmentMade"
-              size="small"
-              multiline
-              rows={3}
-              required
               value={treatmentMade}
               onChange={(e) => setTreatmentMade(e.target.value)}
               variant="outlined"
+              name="treatmentMade"
+              rows={3}
+              required
+              multiline
             />
           </Grid>
         </Grid>
         <Grid container spacing={2} marginBottom={2}>
-          <Grid item xs={12} textAlign="right">
-            <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" endIcon={<Save />} disabled={saveLoading}>
+          <Grid item xs={3} textAlign="right">
+            <Stack direction="row" spacing={3}>
+              <Button variant="contained" type="submit" disabled={saveLoading}>
                 Save
               </Button>
               <Button variant="outlined" component={Link} to={getDetailPath(PATIENTS_PATH, patientId)}>

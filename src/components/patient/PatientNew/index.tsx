@@ -5,7 +5,7 @@ import { PATIENTS_PATH } from "../../../config/paths";
 import { getPath } from "../../../lib/utils";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../layout/SectionHeader";
+import SectionHeader from "../../Layout/SectionHeader";
 import PatientForm from "../PatientForm";
 
 const emptyRecord = {};
