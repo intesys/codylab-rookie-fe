@@ -1,5 +1,4 @@
 import { DeleteOutline } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
 import {
   Button,
   IconButton,
@@ -29,7 +28,7 @@ interface IProps extends React.PropsWithChildren {
   patient: PatientDTO;
 }
 
-const RecordTable: FC<IProps> = ({ patient }) => {
+const PatientRecordTable: FC<IProps> = ({ patient }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [patientRecords, setSetPatientRecords] = useState(patient?.patientRecords);
@@ -50,32 +49,23 @@ const RecordTable: FC<IProps> = ({ patient }) => {
 
   return (
     <Paper>
-      <Toolbar
-        sx={{
-          pl: { sm: 2 },
-          pr: { xs: 1, sm: 1 },
-        }}
-      >
+      <Toolbar>
         <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div">
           Records
         </Typography>
-        <Button
-          variant="outlined"
-          startIcon={<AddIcon />}
-          component={Link}
-          to={getNewRecordDetailPath(PATIENTS_PATH, patient?.id)}
-        >
-          record
+        <Button variant="outlined" component={Link} to={getNewRecordDetailPath(PATIENTS_PATH, patient?.id)}>
+          +Record
         </Button>
       </Toolbar>
+      {/* {patientRecords && patientRecords.length > 0 ? ( */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
-              <TableCell align="right">Type of</TableCell>
-              <TableCell align="right">Reason</TableCell>
-              <TableCell align="right">Treatment made</TableCell>
+              <TableCell align="right">Type of Visit</TableCell>
+              <TableCell align="right">Reason of Visit</TableCell>
+              <TableCell align="right">Treatment Made</TableCell>
               <TableCell align="right">Doctor</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -103,7 +93,7 @@ const RecordTable: FC<IProps> = ({ patient }) => {
             ) : (
               <TableRow key={"noRecord"} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center" colSpan={5}>
-                  No records
+                  No records available
                 </TableCell>
               </TableRow>
             )}
@@ -114,4 +104,4 @@ const RecordTable: FC<IProps> = ({ patient }) => {
   );
 };
 
-export default RecordTable;
+export default PatientRecordTable;
