@@ -6,5 +6,5 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["./src", "./src/declarations.d.ts"]
+  "include": ["./src/*", "./src/declarations.d.ts"]
 }
