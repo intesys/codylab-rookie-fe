@@ -15,14 +15,12 @@ Creare all'interno del proprio ambiente di lavoro una cartella dove andremo a co
 - [Windows](https://git-scm.com/download/win)
 - [Mac](https://git-scm.com/download/mac)
 
-### _Installazione di NVM/NODE_
+### _Installazione di VOLTA/NODE_
 
-Possibilità di installare in maniera diretta NodeJS oppure utilizzare NVM per gestire le versioni di NodeJS. La seconda opzione sarebbe preferibile in quanto la possibilità di avere più versioni di NodeJS installate e di poterle gestire in maniera semplice.
+Possibilità di installare in maniera diretta NodeJS oppure utilizzare VOLTA per gestire le versioni di NodeJS. La seconda opzione sarebbe preferibile in quanto la possibilità di avere più versioni di NodeJS installate e di poterle gestire in maniera semplice.
 
 - [NODEJS](https://nodejs.org/en)
-- NVM
-  - [Windows](https://learn.microsoft.com/it-it/windows/dev-environment/javascript/nodejs-on-windows)
-  - [Mac](https://collabnix.com/how-to-install-and-configure-nvm-on-mac-os/)
+- [VOLTA](https://volta.sh/)
 
 ### _Configurazione VSCode_
 
