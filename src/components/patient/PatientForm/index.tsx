@@ -1,3 +1,7 @@
+import { api } from "@config/api";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientDTO, PatientDTOBloodGroupEnum } from "@generated/axios";
+import { getBloodType, getDetailPath, getPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
 import {
   Button,
@@ -17,10 +21,6 @@ import {
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../../config/api";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { PatientDTO, PatientDTOBloodGroupEnum } from "../../../generated/axios";
-import { getBloodType, getDetailPath, getPath } from "../../../lib/utils";
 
 const createPatient = api.patients.createPatient;
 const updatePatient = api.patients.updatePatient;

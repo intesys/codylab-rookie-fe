@@ -1,8 +1,8 @@
+import Calendar from "@components/Home/Calendar";
+import CallToActions from "@components/Home/CallToActions";
+import MaterialList from "@components/Home/Materials/MaterialList";
 import { Box, Card, Grid, Typography } from "@mui/material";
 import React from "react";
-import CallToActions from "./CallToActions";
-import MaterialList from "./Materials/MaterialList";
-import Calendar from "./calendar";
 import "./index.scss";
 
 const Home: React.FC = () => {

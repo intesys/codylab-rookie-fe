@@ -1,3 +1,13 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import PatientsTable from "@components/Doctor/PatientsTable";
+import DetailHeader from "@components/Layout/DetailHeader";
+import { api } from "@config/api";
+import { DOCTORS_PATH } from "@config/paths";
+import { DoctorDTO } from "@generated/axios";
+import useGetDetail from "@hooks/useGetDetail";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
 import { Edit } from "@mui/icons-material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -5,16 +15,6 @@ import { Avatar, Box, CircularProgress, Divider, Grid, IconButton, Stack, Typogr
 import { grey } from "@mui/material/colors";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { api } from "../../config/api";
-import { DOCTORS_PATH } from "../../config/paths";
-import { DoctorDTO } from "../../generated/axios";
-import useGetDetail from "../../hooks/useGetDetail";
-import { DetailType } from "../../lib/types";
-import { generateAvatarImage, getEditDetailPath, getPath } from "../../lib/utils";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import DetailHeader from "../Layout/DetailHeader";
-import PatientsTable from "./PatientsTable";
 
 const emptyRecord = {};
 const getDoctor = api.doctors.getDoctor;

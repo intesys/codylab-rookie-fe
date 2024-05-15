@@ -1,6 +1,6 @@
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import React from "react";
 import { Link } from "react-router-dom";
-import BreadcrumbEl from "./BreadcrumbEl";
 import "./breadcrumb.scss";
 
 interface IProps extends React.PropsWithChildren {}

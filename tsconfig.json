@@ -1,10 +1,37 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "module": "esnext",
     "target": "es5",
-    "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true
+    "lib": ["es5", "es6", "es7", "es2017", "dom", "es2015.promise"],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "paths": {
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@hooks/*": ["hooks/*"],
+      "@lib/*": ["lib/*"],
+      "@mocks/*": ["mocks/*"],
+      "@generated/*": ["generated/*"],
+      "@assets/*": ["assets/*"],
+      "@context/*": ["context/*"]
+    }
   },
-  "include": ["./src/*", "./src/declarations.d.ts"]
+  "include": ["src/**/*"]
 }

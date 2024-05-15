@@ -1,11 +1,11 @@
+import { DoctorDTO, PatientDTO } from "@generated/axios";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage } from "@lib/utils";
 import { Avatar, Card, Grid, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { Doctor, Patient } from "../../../generated/axios";
-import { DetailType } from "../../../lib/types";
-import { generateAvatarImage } from "../../../lib/utils";
 
 interface IProps extends React.PropsWithChildren {
-  record: Patient | Doctor;
+  record: PatientDTO | DoctorDTO;
   subTitle?: string;
   edit?: React.ReactElement;
   detailType: DetailType;

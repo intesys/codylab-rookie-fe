@@ -1,3 +1,8 @@
+import { DATE_FORMAT } from "@config/date";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientDTO } from "@generated/axios";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getDetailPath } from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
@@ -18,13 +23,8 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs from "dayjs";
-import React, { FC, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { DATE_FORMAT } from "../../../config/date";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { PatientDTO } from "../../../generated/axios";
-import { DetailType } from "../../../lib/types";
-import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {

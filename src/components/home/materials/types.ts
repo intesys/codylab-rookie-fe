@@ -7,6 +7,5 @@ export interface IMaterialItem {
 }
 
 export interface IMaterialList {
-  drugs: IMaterialItem[];
-  nursing: IMaterialItem[];
+  [key: string]: IMaterialItem[];
 }

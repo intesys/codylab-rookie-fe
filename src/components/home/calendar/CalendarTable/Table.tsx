@@ -1,8 +1,8 @@
+import { CalendarContext } from "@components/Home/Calendar";
+import { CalendarTableData, IDay } from "@components/Home/Calendar/CalendarTable/lib";
+import { week_subs } from "@components/Home/Calendar/utils";
 import dayjs from "dayjs";
 import React, { useContext } from "react";
-import { CalendarContext } from "..";
-import { week_subs } from "../utils";
-import { CalendarTableData, IDay } from "./lib";
 import "./table.scss";
 
 const Table: React.FC = () => {

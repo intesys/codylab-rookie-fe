@@ -1,3 +1,8 @@
+import { api } from "@config/api";
+import { DATE_FORMAT } from "@config/date";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientDTO } from "@generated/axios";
+import { getNewRecordDetailPath } from "@lib/utils";
 import { DeleteOutline } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -17,11 +22,6 @@ import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from "../../../config/api";
-import { DATE_FORMAT } from "../../../config/date";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { PatientDTO } from "../../../generated/axios";
-import { getNewRecordDetailPath } from "../../../lib/utils";
 
 const deletePatientRecord = api.patientRecords.deletePatientRecord;
 

@@ -1,3 +1,8 @@
+import { api } from "@config/api";
+import { PATIENTS_PATH } from "@config/paths";
+import { DoctorDTO } from "@generated/axios";
+import useGetList from "@hooks/useGetList";
+import { getDetailPath } from "@lib/utils";
 import { ArrowForwardIos } from "@mui/icons-material";
 import {
   CircularProgress,
@@ -14,11 +19,6 @@ import {
 } from "@mui/material";
 import React, { FC, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../config/api";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { DoctorDTO } from "../../../generated/axios";
-import useGetList from "../../../hooks/useGetList";
-import { getDetailPath } from "../../../lib/utils";
 
 const getListPatient = api.patients.getListPatient;
 

@@ -1,12 +1,12 @@
+import { DOCTORS_PATH } from "@config/paths";
+import { DoctorDTO } from "@generated/axios";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getDetailPath } from "@lib/utils";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Avatar, Card, CardActionArea, CardContent, Divider, Grid, Stack, Typography } from "@mui/material";
-import React, { FC } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { DOCTORS_PATH } from "../../../config/paths";
-import { DoctorDTO } from "../../../generated/axios";
-import { DetailType } from "../../../lib/types";
-import { generateAvatarImage, getDetailPath } from "../../../lib/utils";
 
 type IProps = {
   props: {
@@ -14,7 +14,7 @@ type IProps = {
   };
 };
 
-const DoctorBox: FC<IProps> = ({ props }) => {
+const DoctorBox: React.FC<IProps> = ({ props }) => {
   const { doctor } = props;
   return (
     <Card>

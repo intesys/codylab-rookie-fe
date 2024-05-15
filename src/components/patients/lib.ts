@@ -1,5 +1,5 @@
+import { PatientFilterDTO } from "@generated/axios";
 import { Reducer } from "react";
-import { PatientFilterDTO } from "../../generated/axios";
 
 export interface Action {
   type: "SET_FILTER";

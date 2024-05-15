@@ -1,19 +1,17 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import Billing from "./components/Billing";
-import Doctor from "./components/Doctor";
-import DoctorEdit from "./components/Doctor/DoctorEdit";
-import DoctorNew from "./components/Doctor/DoctorNew";
-import Doctors from "./components/Doctors";
-import Home from "./components/Home";
-import News from "./components/News";
-import Patient from "./components/Patient";
-import PatientEdit from "./components/Patient/PatientEdit";
-import PatientNew from "./components/Patient/PatientNew";
-import PatientRecordNew from "./components/Patient/PatientRecordNew";
-import Patients from "./components/Patients";
-import Pharmacy from "./components/Pharmacy";
-import Ward from "./components/Ward";
+import Billing from "@components/Billing";
+import Doctor from "@components/Doctor";
+import DoctorEdit from "@components/Doctor/DoctorEdit";
+import DoctorNew from "@components/Doctor/DoctorNew";
+import Doctors from "@components/Doctors";
+import Home from "@components/Home";
+import News from "@components/News";
+import Patient from "@components/Patient";
+import PatientEdit from "@components/Patient/PatientEdit";
+import PatientNew from "@components/Patient/PatientNew";
+import PatientRecordNew from "@components/Patient/PatientRecordNew";
+import Patients from "@components/Patients";
+import Pharmacy from "@components/Pharmacy";
+import Ward from "@components/Ward";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
@@ -24,7 +22,9 @@ import {
   PATIENTS_RECORDS_PATH,
   PHARMACY_PATH,
   WARD_PATH,
-} from "./config/paths";
+} from "@config/paths";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 const AppRoutes: React.FC = () => {
   return (

@@ -1,3 +1,15 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import DetailHeader from "@components/Layout/DetailHeader";
+import SectionHeader from "@components/Layout/SectionHeader";
+import RecordTable from "@components/Patient/RecordsTable";
+import { api } from "@config/api";
+import { DATE_FORMAT } from "@config/date";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientDTO } from "@generated/axios";
+import useGetDetail from "@hooks/useGetDetail";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,18 +37,6 @@ import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { api } from "../../config/api";
-import { DATE_FORMAT } from "../../config/date";
-import { PATIENTS_PATH } from "../../config/paths";
-import { PatientDTO } from "../../generated/axios";
-import useGetDetail from "../../hooks/useGetDetail";
-import { DetailType } from "../../lib/types";
-import { generateAvatarImage, getBloodType, getEditDetailPath, getPath } from "../../lib/utils";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import DetailHeader from "../Layout/DetailHeader";
-import SectionHeader from "../Layout/SectionHeader";
-import RecordTable from "./RecordsTable";
 
 const emptyRecord = {};
 

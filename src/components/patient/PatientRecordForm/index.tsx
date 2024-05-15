@@ -1,3 +1,9 @@
+import { api } from "@config/api";
+import { DATE_FORMAT } from "@config/date";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientRecordDTO } from "@generated/axios";
+import useGetList from "@hooks/useGetList";
+import { getDetailPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
 import {
   Button,
@@ -16,12 +22,6 @@ import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../../config/api";
-import { DATE_FORMAT } from "../../../config/date";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { PatientRecordDTO } from "../../../generated/axios";
-import useGetList from "../../../hooks/useGetList";
-import { getDetailPath } from "../../../lib/utils";
 
 const filter = {};
 const createPatientRecord = api.patientRecords.createPatientRecord;

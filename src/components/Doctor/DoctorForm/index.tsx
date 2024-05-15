@@ -1,13 +1,13 @@
+import { api } from "@config/api";
+import { DOCTORS_PATH } from "@config/paths";
+import { EMAIL_VALIDATION_REGEX } from "@config/regex";
+import { DoctorDTO } from "@generated/axios";
+import { getDetailPath, getPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
 import { Button, Grid, Paper, Stack, TextField } from "@mui/material";
 import { useSnackbar } from "notistack";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../../config/api";
-import { DOCTORS_PATH } from "../../../config/paths";
-import { EMAIL_VALIDATION_REGEX } from "../../../config/regex";
-import { DoctorDTO } from "../../../generated/axios";
-import { getDetailPath, getPath } from "../../../lib/utils";
 
 const createDoctor = api.doctors.createDoctor;
 const updateDoctor = api.doctors.updateDoctor;

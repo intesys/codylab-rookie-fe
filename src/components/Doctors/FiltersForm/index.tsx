@@ -1,7 +1,7 @@
+import { DoctorsFilterContext } from "@components/Doctors";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
 import React, { FC, useCallback, useContext, useState } from "react";
-import { DoctorsFilterContext } from "..";
 
 const FiltersForm: FC = () => {
   const [name, setName] = useState("");

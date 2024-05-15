@@ -1,15 +1,15 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import SectionHeader from "@components/Layout/SectionHeader";
+import PatientRecordForm from "@components/Patient/PatientRecordForm";
+import { api } from "@config/api";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientDTO } from "@generated/axios";
+import { getDetailPath, getPath } from "@lib/utils";
 import { Grid } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api } from "../../../config/api";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { PatientDTO } from "../../../generated/axios";
-import { getDetailPath, getPath } from "../../../lib/utils";
-import Breadcrumb from "../../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../Layout/SectionHeader";
-import PatientRecordForm from "../PatientRecordForm";
 
 const getPatient = api.patients.getPatient;
 
@@ -28,7 +28,7 @@ const PatientRecordNew = () => {
   }, [setPatient, id]);
 
   return (
-    <>
+    <React.Fragment>
       <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(PATIENTS_PATH)}>Patients</Link>
@@ -48,7 +48,7 @@ const PatientRecordNew = () => {
           <PatientRecordForm record={{}} patientId={id} />
         </Grid>
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
 

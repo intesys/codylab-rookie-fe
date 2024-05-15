@@ -1,18 +1,18 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import SectionHeader from "@components/Layout/SectionHeader";
+import FiltersForm from "@components/Patients/FiltersForm";
+import PatientBox from "@components/Patients/PatientBox";
+import { Action, patientsFilterReducer } from "@components/Patients/lib";
+import { api } from "@config/api";
+import { PATIENTS_PATH } from "@config/paths";
+import { PatientFilterDTO } from "@generated/axios";
+import useGetList from "@hooks/useGetList";
+import { getNewDetailPath } from "@lib/utils";
 import { Add } from "@mui/icons-material";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer } from "react";
 import { Link } from "react-router-dom";
-import { api } from "../../config/api";
-import { PATIENTS_PATH } from "../../config/paths";
-import { PatientFilterDTO } from "../../generated/axios";
-import useGetList from "../../hooks/useGetList";
-import { getNewDetailPath } from "../../lib/utils";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../Layout/SectionHeader";
-import FiltersForm from "./FiltersForm";
-import PatientBox from "./PatientBox";
-import { Action, patientsFilterReducer } from "./lib";
 
 interface IPatientsFilterContext {
   filter: PatientFilterDTO;

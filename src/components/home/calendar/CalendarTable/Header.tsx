@@ -1,8 +1,8 @@
 // import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { CalendarContext } from "@components/Home/Calendar";
+import { monthName } from "@components/Home/Calendar/utils";
 import { Button, Grid } from "@mui/material";
 import React, { useContext } from "react";
-import { CalendarContext } from "..";
-import { monthName } from "../utils";
 import "./Header.scss";
 
 const Header: React.FC = () => {

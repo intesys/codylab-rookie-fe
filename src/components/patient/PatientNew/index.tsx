@@ -1,18 +1,18 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import SectionHeader from "@components/Layout/SectionHeader";
+import PatientForm from "@components/Patient/PatientForm";
+import { PATIENTS_PATH } from "@config/paths";
+import { getPath } from "@lib/utils";
 import { Grid } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { PATIENTS_PATH } from "../../../config/paths";
-import { getPath } from "../../../lib/utils";
-import Breadcrumb from "../../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../../Breadcrumb/BreadcrumbEl";
-import SectionHeader from "../../Layout/SectionHeader";
-import PatientForm from "../PatientForm";
 
 const emptyRecord = {};
 
 const PatientNew = () => {
   return (
-    <>
+    <React.Fragment>
       <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(PATIENTS_PATH)}>Patients</Link>
@@ -27,7 +27,7 @@ const PatientNew = () => {
           <PatientForm record={emptyRecord} />
         </Grid>
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
 
