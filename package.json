@@ -57,5 +57,8 @@
   },
   "msw": {
     "workerDirectory": "dist"
+  },
+  "volta": {
+    "node": "20.13.1"
   }
 }
