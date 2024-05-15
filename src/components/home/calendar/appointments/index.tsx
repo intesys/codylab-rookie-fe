@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import React, { useContext } from "react";
-import { CalendarContext } from "..";
-import { AppointmentsContext, IAppointment } from "../AppointmentsProvider";
-import Appointment from "./Appointment";
+
+import { CalendarContext } from "@components/Home/Calendar";
+import Appointment from "@components/Home/Calendar/Appointments/Appointment";
+import { AppointmentsContext, IAppointment } from "@context/AppointmentsProvider";
 import "./index.scss";
 
 const Appointments: React.FC = () => {

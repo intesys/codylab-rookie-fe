@@ -1,7 +1,7 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import { PatientFilterDTO } from "@generated/axios";
 import React, { Dispatch, useMemo, useReducer } from "react";
-import { PatientFilterDTO } from "../../generated/axios";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import { Action, patientsFilterReducer } from "./lib";
 
 interface IPatientsFilterContext {

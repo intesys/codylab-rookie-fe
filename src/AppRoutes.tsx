@@ -1,14 +1,12 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import Billing from "./components/Billing";
-import Doctor from "./components/Doctor";
-import Doctors from "./components/Doctors";
-import Home from "./components/Home";
-import News from "./components/News";
-import Patient from "./components/Patient";
-import Patients from "./components/Patients";
-import Pharmacy from "./components/Pharmacy";
-import Ward from "./components/Ward";
+import Billing from "@components/Billing";
+import Doctor from "@components/Doctor";
+import Doctors from "@components/Doctors";
+import Home from "@components/Home";
+import News from "@components/News";
+import Patient from "@components/Patient";
+import Patients from "@components/Patients";
+import Pharmacy from "@components/Pharmacy";
+import Ward from "@components/Ward";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
@@ -18,7 +16,9 @@ import {
   PATIENTS_PATH,
   PHARMACY_PATH,
   WARD_PATH,
-} from "./config/paths";
+} from "@config/paths";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 const AppRoutes: React.FC = () => {
   return (

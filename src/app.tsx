@@ -1,3 +1,6 @@
+import Layout from "@components/Layout/Layout";
+import { customTheme } from "@config/themeStyle";
+import { MaterialProvider } from "@context/MaterialProvider";
 import { ThemeProvider } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -6,9 +9,6 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import "./app.scss";
-import Layout from "./components/Layout/Layout";
-import { customTheme } from "./config/themeStyle";
-import { MaterialProvider } from "./lib/MaterialProvider";
 
 const App: React.FC = () => (
   <ThemeProvider theme={customTheme}>

@@ -1,5 +1,5 @@
+import { IAppointmentList } from "@context/AppointmentsProvider";
 import dayjs from "dayjs";
-import { IAppointmentList } from "../../components/Home/calendar/AppointmentsProvider";
 
 export const appointments: IAppointmentList = {
   [dayjs().subtract(2, "days").format("YYYY-MM-DD")]: [

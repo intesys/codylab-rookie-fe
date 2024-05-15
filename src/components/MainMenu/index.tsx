@@ -1,5 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
@@ -8,7 +6,9 @@ import {
   PATIENTS_PATH,
   PHARMACY_PATH,
   WARD_PATH,
-} from "../../config/paths";
+} from "@config/paths";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MainMenu: React.FC = () => {
   return (

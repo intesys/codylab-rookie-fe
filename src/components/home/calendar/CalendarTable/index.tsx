@@ -1,8 +1,8 @@
+import Header from "@components/Home/Calendar/CalendarTable/Header";
+import SelectedDate from "@components/Home/Calendar/CalendarTable/SelectedDate";
+import Table from "@components/Home/Calendar/CalendarTable/Table";
 import { Grid } from "@mui/material";
 import React from "react";
-import SelectedDate from "./SelectedDate";
-import Header from "./header";
-import Table from "./table";
 
 const CalendarTable: React.FC = () => (
   <Grid container spacing={4}>

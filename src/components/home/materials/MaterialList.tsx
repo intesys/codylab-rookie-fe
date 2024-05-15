@@ -1,8 +1,8 @@
+import MaterialItem from "@components/Home/Materials/MaterialItem";
+import { IMaterialItem } from "@components/Home/Materials/Types";
+import { MaterialContext } from "@context/MaterialProvider";
 import { Tab, Tabs } from "@mui/material";
 import React, { useContext, useState } from "react";
-import { MaterialContext } from "../../../lib/MaterialProvider";
-import MaterialItem from "./MaterialItem";
-import { IMaterialItem } from "./Types";
 
 const MaterialList: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -21,12 +21,7 @@ const MaterialList: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Tabs
-        className="drug_list__header"
-        value={activeTab}
-        variant="fullWidth"
-        onChange={handleChange}
-      >
+      <Tabs className="drug_list__header" value={activeTab} variant="fullWidth" onChange={handleChange}>
         <Tab label="Running out drugs" />
         <Tab label="Running out nursing material" />
       </Tabs>
@@ -35,10 +30,7 @@ const MaterialList: React.FC = () => {
         <MaterialItem {...item} key={item.id} />
       ))}
 
-      <Tab
-        className="drug_list__see_all_button"
-        label="See all materials"
-      ></Tab>
+      <Tab className="drug_list__see_all_button" label="See all materials"></Tab>
     </React.Fragment>
   );
 };

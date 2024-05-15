@@ -1,9 +1,9 @@
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
+import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
+import { DOCTORS_PATH } from "@config/paths";
+import { getPath } from "@lib/utils";
 import React from "react";
 import { Link } from "react-router-dom";
-import { DOCTORS_PATH } from "../../config/paths";
-import { getPath } from "../../lib/utils";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 
 const Doctor: React.FC = () => {
   return (

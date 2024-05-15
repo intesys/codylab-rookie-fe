@@ -1,6 +1,6 @@
+import { IMaterialList } from "@components/Home/Materials/Types";
+import { basePathSW } from "@config/api";
 import React, { useEffect, useState } from "react";
-import { IMaterialList } from "../components/Home/Materials/Types";
-import { basePathSW } from "../config/api";
 
 const apiEndpoint = `${basePathSW}/materials`;
 

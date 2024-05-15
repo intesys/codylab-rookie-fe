@@ -1,5 +1,5 @@
+import { basePathSW } from "@config/api";
 import React, { useEffect, useState } from "react";
-import { basePathSW } from "../../../config/api";
 
 const apiEndpoint = `${basePathSW}/appointmentsByDate`;
 
@@ -20,7 +20,7 @@ const AppointmentsProvider: React.FC<React.PropsWithChildren> = ({ children }) =
   const [appointments, setAppointments] = useState({});
 
   useEffect(() => {
-    getAppointments().then(({ appointmentList }) => setAppointments(appointmentList));
+    getAppointments().then((appointmentList) => setAppointments(appointmentList));
   }, []);
 
   return <AppointmentsContext.Provider value={appointments}>{children}</AppointmentsContext.Provider>;

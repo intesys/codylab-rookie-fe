@@ -1,8 +1,8 @@
+import Body from "@components/Layout/Body";
+import Footer from "@components/Layout/Footer";
+import Header from "@components/Layout/Header/Header";
 import { Grid } from "@mui/material";
 import React from "react";
-import Header from "./Header/Header";
-import Body from "./body";
-import Footer from "./footer";
 import "./layout.scss";
 
 interface IProps extends React.PropsWithChildren {}

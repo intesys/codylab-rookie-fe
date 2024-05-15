@@ -1,5 +1,5 @@
+import { Configuration, DoctorApiApi, PatientApiApi, PatientRecordApiApi } from "@generated/axios";
 import axios from "axios";
-import { Configuration, DoctorApiApi, PatientApiApi, PatientRecordApiApi } from "../generated/axios";
 
 /**
  * Api endpoint

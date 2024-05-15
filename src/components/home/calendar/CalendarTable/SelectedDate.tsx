@@ -1,7 +1,7 @@
+import { CalendarContext } from "@components/Home/Calendar";
+import { isToday } from "@components/Home/Calendar/utils";
 import dayjs from "dayjs";
 import React, { useContext } from "react";
-import { CalendarContext } from "..";
-import { isToday } from "../utils";
 import "./selected_date.scss";
 
 const SelectedDate: React.FC = () => {

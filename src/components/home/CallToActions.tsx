@@ -1,9 +1,9 @@
+import { PATIENTS_PATH } from "@config/paths";
+import { getNewDetailPath, getPath } from "@lib/utils";
 import { Add, Search } from "@mui/icons-material";
 import { Button, Grid, SxProps } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PATIENTS_PATH } from "../../config/paths";
-import { getNewDetailPath, getPath } from "../../lib/utils";
 
 const IconSx: SxProps = {
   position: "relative",
