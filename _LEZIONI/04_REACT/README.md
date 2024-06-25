@@ -25,9 +25,9 @@ Aprire il link [http://localhost:3000/](http://localhost:3000/) per visionare l'
 Creiamo una nuova applicazione React:
 
 ```bash
-npx create-react-app dummyapp --template typescript --use-npm
+npm create vite@latest dummyapp -- --template react-ts
 cd dummyapp
-npm start
+npm run dev
 ```
 
 Per questa parte utilizzeremo [Axios](https://axios-http.com/) come libreria per effettuare le chiamate HTTP e [React Router](https://reactrouter.com/) per gestire le rotte dell'applicazione.
