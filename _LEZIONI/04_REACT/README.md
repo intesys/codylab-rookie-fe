@@ -2,16 +2,16 @@
 
 ## 1) **Thinking in React**
 
-- [React.dev - Thinking in React](https://react.dev/learn/thinking-in-react)
+- [React.dev - Thinking in React](https://it.react.dev/learn/thinking-in-react)
 
 ## 2) **Tutorial Tic-Tac-Toe**
 
 ### **Create React App**
 
 ```bash
-npx create-react-app tic-tac-toe --template typescript --use-npm
+npm create vite@latest tic-tac-toe -- --template react-ts
 cd tic-tac-toe
-npm start
+npm run dev
 ```
 
 Aprire il link [http://localhost:3000/](http://localhost:3000/) per visionare l'applicazione.
