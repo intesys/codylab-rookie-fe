@@ -5,7 +5,7 @@ import { api } from "@config/api";
 import { DOCTORS_PATH } from "@config/paths";
 import { DoctorDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getPath } from "@lib/utils";
+import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
 import CallIcon from "@mui/icons-material/Call";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
@@ -13,13 +13,18 @@ import EmailIcon from "@mui/icons-material/Email";
 import { Avatar, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./index.scss";
 
 const DoctorDetail: React.FC = () => {
   const [doctor, setDoctor] = useState<DoctorDTO>();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const handleEditClick = (id: string) => {
+    navigate(getEditDetailPath(DOCTORS_PATH, id));
+  };
 
   useEffect(() => {
     if (!loading) {
@@ -54,12 +59,13 @@ const DoctorDetail: React.FC = () => {
               className="avatar"
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <Typography variant="h5">
-              {doctor.name} <b>{doctor.surname}</b> <EditIcon className="icons" />
+              {doctor.name} <b>{doctor.surname}</b>
+              <EditIcon className="icons" onClick={() => handleEditClick(String(id))} />
               <br />
-              <Typography variant="body1">{doctor.profession}</Typography>
             </Typography>
+            <Typography variant="body1">{doctor.profession}</Typography>
           </Grid>
         </Grid>
       </Paper>
@@ -95,9 +101,8 @@ const DoctorDetail: React.FC = () => {
         </Grid>
         <Grid item xs={9}>
           <Paper className="detailPaper">
-            <Typography variant="h6" className="patientsheader">
-              Patients
-            </Typography>
+            <Typography variant="h6">Patients</Typography>
+            <br />
             <Grid container columnSpacing={2}>
               <Grid item xs={3}>
                 <Typography variant="body1">PID</Typography>

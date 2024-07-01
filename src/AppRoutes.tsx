@@ -1,4 +1,5 @@
 import DoctorDetail from "@components/Doctor/DoctorDetail";
+import DoctorEdit from "@components/Doctor/DoctorEdit";
 import DoctorNew from "@components/Doctor/DoctorNew";
 import Doctors from "@components/Doctors";
 import Billing from "@components/billing";
@@ -38,6 +39,7 @@ const AppRoutes: React.FC = () => {
           <Route index element={<Doctors />} />
           <Route path=":id" element={<DoctorDetail />} />
           <Route path="new" element={<DoctorNew />} />
+          <Route path=":id/edit" element={<DoctorEdit />} />
           {/* <Route path=":id/edit" element={<DoctorEdit />} />
           <Route path="new" element={<DoctorNew />} /> */}
         </Route>
