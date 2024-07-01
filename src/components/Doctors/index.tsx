@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 import { Avatar, Card, CardContent, Grid, Paper, TextField, Typography } from "@mui/material";
-import React, { Dispatch, useMemo, useReducer } from "react";
+import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { DoctorFilterDTO } from "../../generated/axios";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
@@ -52,15 +52,29 @@ const Doctors: React.FC = () => {
   const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
   const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
   const [doctors, loading] = useGetList(doctorListApi, filter);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [profession, setProfession] = useState("");
+  
   const navigate = useNavigate();
   
   const handleNewDoctorClick = () =>{
     navigate(getNewDetailPath(DOCTORS_PATH));
   }
 
-  const handleDoctorDetailClick = () => {
-    navigate(getDetailPath(DOCTORS_PATH));
+  const handleDoctorDetailClick = (id: string) => {
+    navigate(getDetailPath(DOCTORS_PATH, id));
   }
+
+  const handleSubmitClick = () => {
+    const newFilter = {};
+    if (name) newFilter.name = name;
+    if (surname) newFilter.surname = surname;
+    if (name) newFilter.profession = profession;
+    dispatch({ type:"SET_FILTER", payload:newFilter});
+  
+  }
+
 
 
   return (
@@ -82,19 +96,19 @@ const Doctors: React.FC = () => {
           <Typography variant="h6">FIND DOCTORS</Typography>
           <Typography variant="body1" id="info">Insert the information of your colleagues</Typography>
           </div>
-          <form className="doctorsFormBody">
+          <form className="doctorsFormBody" onSubmit={handleSubmitClick}>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={3}>
-                <TextField label="Name" variant="outlined" fullWidth size="small"/>
+                <TextField label="Name" variant="outlined" fullWidth size="small" onChange={(e) => setName(e.target.value)}/>
               </Grid>
               <Grid item xs={3}>
-                <TextField label="Surname" variant="outlined" fullWidth size="small"/>
+                <TextField label="Surname" variant="outlined" fullWidth size="small" onChange={(e) => setSurname(e.target.value)}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField label="Profession/ Specialization" variant="outlined" fullWidth size="small" />
+                <TextField label="Profession/ Specialization" variant="outlined" fullWidth size="small" onChange={(e) => setProfession(e.target.value)}/>
               </Grid>
               <Grid item xs={2}>
-                <Button variant="outlined" fullWidth>
+                <Button variant="outlined" fullWidth type="submit">
                   SEARCH
                 <SearchIcon className="searchIcon"/>
                 </Button>
@@ -110,15 +124,15 @@ const Doctors: React.FC = () => {
                 <Card>
                   <CardContent>
                     <center>
+                    <div onClick={() => handleDoctorDetailClick(String(doctor.id))}>
                       <Avatar src={generateAvatarImage(DetailType.DOCTOR, doctor.id)} sx={{ height: 100, width: 100 }} />
                       <Typography variant="h6">
-                        <div onClick={handleDoctorDetailClick}>
                         {doctor.name} <b>{doctor.surname}</b>  
-                        </div>                   
                         </Typography >
                       <Typography variant="body1"></Typography>
                       {doctor.profession}
                       <br />
+                      </div>   
                       <Typography variant="body1" className="contacts">
                         <CallIcon /> {doctor.phoneNumber}
                       </Typography>

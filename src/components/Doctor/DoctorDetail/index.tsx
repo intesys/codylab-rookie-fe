@@ -1,38 +1,63 @@
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
-import { Action, doctorsFilterReducer } from "@components/Doctors/lib";
+import SectionHeader from "@components/layout/SectionHeader";
+import { api } from "@config/api";
 import { DOCTORS_PATH } from "@config/paths";
-import { DoctorFilterDTO } from "@generated/axios";
-import { getDetailPath, getPath } from "@lib/utils";
-import React, { Dispatch, useMemo, useReducer } from "react";
-import { Link } from "react-router-dom";
-
-interface IDoctorsFilterContext {
-  filter: DoctorFilterDTO;
-  dispatch: Dispatch<Action>;
-}
-
-export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
-  filter: {},
-  dispatch: (action) => {},
-});
+import { DoctorDTO } from "@generated/axios";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getPath } from "@lib/utils";
+import EditIcon from "@mui/icons-material/Edit";
+import { Avatar, Grid, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import "./index.scss";
 
 const DoctorDetail: React.FC = () => {
-  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
-  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+  const [doctor, setDoctor] = useState<DoctorDTO>();
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!loading) {
+      return;
+    }
+    api.doctors.getDoctor(Number(id)).then((response) => {
+      setDoctor(response.data);
+    });
+    setLoading(false);
+  }, [loading, id]);
+
+  if (!doctor) {
+    return <>Doctor not found</>;
+  }
   return (
-    <DoctorsFilterContext.Provider value={doctorsContextValue}>
+    <div>
       <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
         </BreadcrumbEl>
-        <BreadcrumbEl active>{getDetailPath(DOCTORS_PATH)}</BreadcrumbEl>
+        <BreadcrumbEl active>
+          {doctor.name} {doctor.surname}
+        </BreadcrumbEl>
       </Breadcrumb>
-      <div>
-        <h1>test</h1>
-        <h2>test</h2>
-      </div>
-    </DoctorsFilterContext.Provider>
+      <SectionHeader title="DOCTOR DETAILS" />
+      <Paper>
+        <Grid container rowSpacing={2} columnSpacing={2} alignItems="center">
+          <Grid item>
+            <Avatar src={generateAvatarImage(DetailType.DOCTOR, doctor.id)} sx={{ height: 100, width: 100 }} />
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h5">
+              {doctor.name} <b>{doctor.surname}</b>
+              <br />
+              <Typography variant="body1">{doctor.profession}</Typography>
+            </Typography>
+          </Grid>
+          <EditIcon className="editIcon" />
+        </Grid>
+      </Paper>
+    </div>
   );
 };
 
