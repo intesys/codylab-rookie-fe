@@ -1,0 +1,70 @@
+/* src/DoctorDetail.css */
+.doctor-details-container {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  /*  margin-bottom: 16px; */
+  background-color: #f5f5f5;
+}
+
+.avatar {
+  margin-right: 16px;
+}
+
+.doctor-info {
+  flex-grow: 1;
+}
+
+.contacts-section,
+.patients-section {
+  margin-bottom: 16px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.contact-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+.patients-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patients-section th,
+.patients-section td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.edit {
+  color: red;
+  size: 120%;
+}
+
+.contacts-section {
+  background-color: #3d3b3b;
+  padding-left: 35px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  width: 300px;
+  color: white;
+}
+
+.separatore {
+  width: 80%;
+  color: rgb(161, 145, 145);
+}
+
+/* .contacts-section {
+    color: white;
+    width: 300px;
+    padding: 16px;
+  }
+   */
