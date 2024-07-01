@@ -1,38 +1,30 @@
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
-import { Action, doctorsFilterReducer } from "@components/Doctors/lib";
+import SectionHeader from "@components/layout/SectionHeader";
 import { DOCTORS_PATH } from "@config/paths";
-import { DoctorFilterDTO } from "@generated/axios";
-import { getDetailPath, getPath } from "@lib/utils";
-import React, { Dispatch, useMemo, useReducer } from "react";
+import { DoctorDTO } from "@generated/axios";
+import { getPath } from "@lib/utils";
+import { Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-interface IDoctorsFilterContext {
-  filter: DoctorFilterDTO;
-  dispatch: Dispatch<Action>;
-}
-
-export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
-  filter: {},
-  dispatch: (action) => {},
-});
-
 const DoctorDetail: React.FC = () => {
-  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
-  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+  const [doctor, setDoctor] = useState<DoctorDTO>();
+
   return (
-    <DoctorsFilterContext.Provider value={doctorsContextValue}>
+    <div>
       <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
         </BreadcrumbEl>
-        <BreadcrumbEl active>{getDetailPath(DOCTORS_PATH)}</BreadcrumbEl>
+        <BreadcrumbEl active></BreadcrumbEl>
       </Breadcrumb>
-      <div>
-        <h1>test</h1>
-        <h2>test</h2>
-      </div>
-    </DoctorsFilterContext.Provider>
+      <SectionHeader title="DOCTOR DETAILS" />
+      <Paper>
+        <Typography variant="h6">FIND DOCTORS</Typography>
+      </Paper>
+    </div>
   );
 };
 
