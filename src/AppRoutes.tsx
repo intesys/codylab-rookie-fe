@@ -1,12 +1,13 @@
-import Billing from "@components/Billing";
 import Doctor from "@components/Doctor";
+import DoctorNew from "@components/Doctor/DoctorNew";
 import Doctors from "@components/Doctors";
-import Home from "@components/Home";
-import News from "@components/News";
-import Patient from "@components/Patient";
-import Patients from "@components/Patients";
-import Pharmacy from "@components/Pharmacy";
-import Ward from "@components/Ward";
+import Billing from "@components/billing";
+import Home from "@components/home";
+import News from "@components/news";
+import Patient from "@components/patient";
+import Patients from "@components/patients";
+import Pharmacy from "@components/pharmacy";
+import Ward from "@components/ward";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,
@@ -36,6 +37,7 @@ const AppRoutes: React.FC = () => {
         <Route path={DOCTORS_PATH}>
           <Route index element={<Doctors />} />
           <Route path=":id" element={<Doctor />} />
+          <Route path="new" element={<DoctorNew />} />
           {/* <Route path=":id/edit" element={<DoctorEdit />} />
           <Route path="new" element={<DoctorNew />} /> */}
         </Route>

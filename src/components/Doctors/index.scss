@@ -1,0 +1,38 @@
+@import "../../variables.scss";
+
+.doctorsFormTitle {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.doctorsFormTitle #info {
+  font-size: smaller;
+}
+
+.doctorsFormBody {
+  margin-top: 20px;
+}
+.searchIcon {
+  font-size: 18px;
+  margin-left: 6px;
+}
+.addIcon {
+  margin-right: 6px;
+}
+
+.contacts {
+  color: red;
+}
+
+.paper {
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.latestPatients {
+  margin-top: 20px;
+  margin-left: 20px;
+  align-items: center;
+}
