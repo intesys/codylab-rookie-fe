@@ -6,8 +6,10 @@ import { DOCTORS_PATH } from "@config/paths";
 import { DoctorDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getPath } from "@lib/utils";
+import CallIcon from "@mui/icons-material/Call";
 import EditIcon from "@mui/icons-material/Edit";
-import { Avatar, Grid, Typography } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -32,7 +34,7 @@ const DoctorDetail: React.FC = () => {
     return <>Doctor not found</>;
   }
   return (
-    <div>
+    <>
       <Breadcrumb>
         <BreadcrumbEl>
           <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
@@ -45,19 +47,49 @@ const DoctorDetail: React.FC = () => {
       <Paper>
         <Grid container rowSpacing={2} columnSpacing={2} alignItems="center">
           <Grid item>
-            <Avatar src={generateAvatarImage(DetailType.DOCTOR, doctor.id)} sx={{ height: 100, width: 100 }} />
+            <Avatar
+              src={generateAvatarImage(DetailType.DOCTOR, doctor.id)}
+              sx={{ height: 100, width: 100 }}
+              className="avatar"
+            />
           </Grid>
           <Grid item xs={2}>
             <Typography variant="h5">
-              {doctor.name} <b>{doctor.surname}</b>
+              {doctor.name} <b>{doctor.surname}</b> <EditIcon className="icons" />
               <br />
               <Typography variant="body1">{doctor.profession}</Typography>
             </Typography>
           </Grid>
-          <EditIcon className="editIcon" />
         </Grid>
       </Paper>
-    </div>
+      <Grid container>
+        <Grid item xs={3}>
+          <Card>
+            <CardContent className="card">
+              <Typography variant="body1">CONTACTS</Typography>
+              <Typography variant="body1">
+                <CallIcon className="icons" />
+                {doctor.phoneNumber}
+              </Typography>
+              <Typography variant="body1">
+                <EmailIcon className="icons" />
+                {doctor.email}
+              </Typography>
+              {doctor.latestPatients?.map((patient) => (
+                <div>
+                  <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
+                  <div className="latestPatients">
+                    <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)} />
+                    <Typography variant="body1">{patient.name}</Typography>
+                    <Typography variant="body1">{patient.surname}</Typography>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
