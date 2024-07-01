@@ -7,9 +7,10 @@ import { DoctorDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getPath } from "@lib/utils";
 import CallIcon from "@mui/icons-material/Call";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import EmailIcon from "@mui/icons-material/Email";
-import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -67,6 +68,7 @@ const DoctorDetail: React.FC = () => {
           <Card>
             <CardContent className="card">
               <Typography variant="body1">CONTACTS</Typography>
+              <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">
                 <CallIcon className="icons" />
                 {doctor.phoneNumber}
@@ -75,18 +77,67 @@ const DoctorDetail: React.FC = () => {
                 <EmailIcon className="icons" />
                 {doctor.email}
               </Typography>
+              <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               {doctor.latestPatients?.map((patient) => (
-                <div>
+                <>
                   <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
                   <div className="latestPatients">
-                    <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)} />
-                    <Typography variant="body1">{patient.name}</Typography>
-                    <Typography variant="body1">{patient.surname}</Typography>
+                    <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)} className="patientAvatar" />
+                    <Typography variant="body1">
+                      {patient.name}
+                      <br /> {patient.surname}
+                    </Typography>
                   </div>
-                </div>
+                </>
               ))}
             </CardContent>
           </Card>
+        </Grid>
+        <Grid item xs={9}>
+          <Paper className="detailPaper">
+            <Typography variant="h6" className="patientsheader">
+              Patients
+            </Typography>
+            <Grid container columnSpacing={2}>
+              <Grid item xs={3}>
+                <Typography variant="body1">PID</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body1">OPD</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body1">IDP</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body1">Name</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant="body1">Actions</Typography>
+              </Grid>
+              {doctor.latestPatients?.map((patient) => (
+                <>
+                  <Divider style={{ width: "100%", margin: "10px", backgroundColor: "#e0e0e0" }} />
+                  <Grid item xs={3}>
+                    <Typography variant="body1">{patient.id}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{patient.opd}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{patient.idp}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{patient.name}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">
+                      <ChevronRightIcon />
+                    </Typography>
+                  </Grid>
+                </>
+              ))}
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
     </>

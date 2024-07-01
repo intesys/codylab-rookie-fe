@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-import { Avatar, Card, CardContent, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { DoctorFilterDTO } from "../../generated/axios";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
@@ -139,15 +139,17 @@ const Doctors: React.FC = () => {
                       <Typography variant="body1" className="contacts">
                         <EmailIcon /> {doctor.email}
                         </Typography>
+                        <Divider
+                          style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }}
+                        />
                         {doctor.latestPatients?.map((patient) => (
-                          <div>
+                            <>
                           <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
                           <div className="latestPatients">
                           <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)}/>
-                          <Typography variant="body1">{patient.name}</Typography>
-                          <Typography variant="body1">{patient.surname}</Typography>
+                          <Typography variant="body1">{patient.name}<br/>{patient.surname}</Typography>
                           </div>
-                        </div>
+                          </>
                         ))}
                     </center>
                   </CardContent>
