@@ -1,0 +1,63 @@
+#finddoc {
+  font-size: 16px;
+  font-weight: 700;
+  padding-right: 20px;
+  margin-top: 30px;
+}
+#doctor-line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+#docfilter {
+  margin-bottom: 50px;
+}
+
+/*.outlined-basic {
+  padding-right: 10px;
+}
+ */
+
+.card {
+  text-align: center;
+}
+
+.avatar {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.red-card {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenitore-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px); /* Ogni card occupa un terzo dello spazio, con uno spazio tra loro */
+  max-width: calc(33.33% - 20px); /* Larghezza massima di una card */
+  margin-bottom: 20px; /* Spazio sotto ogni card */
+}
+
+.card hr {
+  width: 80%; /* Larghezza dell'hr */
+  margin: 10px auto; /* Margine per centrare l'hr */
+  color: lightgray;
+}
+
+.pat-last {
+  display: flex;
+}
+
+#lastpatcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
