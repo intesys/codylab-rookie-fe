@@ -1,6 +1,6 @@
-import CallToActions from "@components/home/CallToActions";
-import Calendar from "@components/home/calendar";
-import MaterialList from "@components/home/materials/MaterialList";
+import Calendar from "@components/Home/Calendar";
+import CallToActions from "@components/Home/CallToActions";
+import MaterialList from "@components/Home/Materials/MaterialList";
 import { Box, Card, Grid, Typography } from "@mui/material";
 import React from "react";
 import "./index.scss";

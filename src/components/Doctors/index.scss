@@ -1,38 +1,63 @@
-@import "../../variables.scss";
-
-.doctorsFormTitle {
+#finddoc {
+  font-size: 16px;
+  font-weight: 700;
+  padding-right: 20px;
+  margin-top: 30px;
+}
+#doctor-line {
   display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+#docfilter {
+  margin-bottom: 50px;
 }
 
-.doctorsFormTitle #info {
-  font-size: smaller;
+/*.outlined-basic {
+  padding-right: 10px;
+}
+ */
+
+.card {
+  text-align: center;
 }
 
-.doctorsFormBody {
-  margin-top: 20px;
-}
-.searchIcon {
-  font-size: 18px;
-  margin-left: 6px;
-}
-.addIcon {
-  margin-right: 6px;
+.avatar {
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
-.contacts {
+.red-card {
   color: red;
-}
-
-.paper {
-  padding: 40px;
-  margin-bottom: 40px;
-}
-
-.latestPatients {
-  margin-top: 20px;
-  margin-left: 20px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.contenitore-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px); /* Ogni card occupa un terzo dello spazio, con uno spazio tra loro */
+  max-width: calc(33.33% - 20px); /* Larghezza massima di una card */
+  margin-bottom: 20px; /* Spazio sotto ogni card */
+}
+
+.card hr {
+  width: 80%; /* Larghezza dell'hr */
+  margin: 10px auto; /* Margine per centrare l'hr */
+  color: lightgray;
+}
+
+.pat-last {
+  display: flex;
+}
+
+#lastpatcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
