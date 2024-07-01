@@ -113,7 +113,7 @@ const Doctors: React.FC = () => {
                       <Avatar src={generateAvatarImage(DetailType.DOCTOR, doctor.id)} sx={{ height: 100, width: 100 }} />
                       <Typography variant="h6">
                         <div onClick={handleDoctorDetailClick}>
-                        {doctor.name}<b>{doctor.surname}</b>  
+                        {doctor.name} <b>{doctor.surname}</b>  
                         </div>                   
                         </Typography >
                       <Typography variant="body1"></Typography>
