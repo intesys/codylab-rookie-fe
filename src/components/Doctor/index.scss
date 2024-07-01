@@ -2,10 +2,17 @@
   position: relative;
   padding: 20px;
 }
-
+.doctor-details-wrapper {
+  position: relative;
+  display: flex;
+}
 .details-paper {
   padding: 10px;
   margin-bottom: -1px;
+}
+.patients-section {
+  margin-top: 20px;
+  width: 100%;
 }
 
 .details-box {
