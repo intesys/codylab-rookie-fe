@@ -1,27 +1,31 @@
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
-import { DOCTORS_PATH } from "@config/paths";
+import { api } from "@config/api";
+import { PATIENTS_PATH } from "@config/paths";
 import { getPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
-import { Box, Button, Grid, Paper, TextField } from "@mui/material";
-import axios from "axios";
+import { Box, Button, FormControlLabel, Grid, Paper, Switch, TextField } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const PatientNew: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [surname, setSurname] = useStatee("");
+  const [surname, setSurname] = useState("");
   const [address, setAddress] = useState("");
   const [OPD, setOPD] = useState("");
   const [IDP, setIDP] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
+  const [chronicPatient, setChronicPatient] = useState(false);
 
   const handlePostClick = () => {
-    navigate("/doctors");
+    navigate("/patients");
   };
 
+  const handleSwitchChange = (event) => {
+    setChronicPatient(event.target.checked);
+  };
   const handleSaveClick = async () => {
     if (!name || !surname || !address || !OPD || !IDP || !bloodGroup) {
       alert("Please fill out all required fields.");
@@ -29,40 +33,33 @@ const PatientNew: React.FC = () => {
     }
 
     try {
-      // Creazione dell'oggetto doctor con i dati dal form
-      const newDoctor = {
+      const newPatient = {
         name: name,
         surname: surname,
         address: address,
-        opd: OPD,
-        idp: IDP,
+        opd: Number(OPD),
+        idp: Number(IDP),
       };
+      /* sistemare idp, opd sono numeri */
+      /* await axios.post("/api/patient", newPatient); */
+      api.patients.createPatient(newPatient);
 
-      // Effettua la richiesta POST per creare un nuovo dottore
-      await axios.post("/api/patient", newPatient);
+      updatePatientsList();
 
-      // Dopo aver creato il dottore con successo, aggiorna la lista dei dottori nel componente Doctors
-      updateDoctorsList();
-
-      // Reindirizza l'utente alla pagina dei dottori dopo aver salvato
-      navigate("/doctors");
+      navigate("/patients");
     } catch (error) {
       console.error("Errore durante il salvataggio del nuovo dottore:", error);
-      // Gestione dell'errore, ad esempio mostrando un messaggio all'utente
     }
   };
 
-  const updateDoctorsList = () => {
-    // Forza l'aggiornamento della lista dei dottori nel componente Doctors
-    // Questo può essere fatto tramite un meccanismo di stato o un effetto che rilegge i dati
-  };
+  const updatePatientsList = () => {};
 
   return (
     <>
       <div>
         <Breadcrumb>
           <BreadcrumbEl>
-            <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
+            <Link to={getPath(PATIENTS_PATH)}>Patients</Link>
           </BreadcrumbEl>
           <BreadcrumbEl active>new</BreadcrumbEl>
         </Breadcrumb>
@@ -70,7 +67,7 @@ const PatientNew: React.FC = () => {
       {/* titolo */}
       <SectionHeader title="NEW PATIENT"></SectionHeader>
       {/* box form */}
-      <div id="docfilter">
+      <div id="patfilter">
         <Paper elevation={1}>
           <Box component="section" sx={{ p: 5 }}>
             <Grid id="textfieldspace" container spacing={3}>
@@ -103,11 +100,11 @@ const PatientNew: React.FC = () => {
                   className="outlined-basic"
                   required
                   fullWidth
-                  label="Profession/Specialization"
+                  label="Address"
                   variant="outlined"
                   size="small"
-                  value={profession}
-                  onChange={(e) => setProfession(e.target.value)}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -115,11 +112,11 @@ const PatientNew: React.FC = () => {
                   className="outlined-basic"
                   required
                   fullWidth
-                  label="Email"
+                  label="OPD"
                   variant="outlined"
                   size="small"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={OPD}
+                  onChange={(e) => setOPD(e.target.value)}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -127,21 +124,48 @@ const PatientNew: React.FC = () => {
                   className="outlined-basic"
                   required
                   fullWidth
-                  label="Phone Number"
+                  label="IDP"
                   variant="outlined"
                   size="small"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  value={IDP}
+                  onChange={(e) => setIDP(e.target.value)}
                 />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  className="outlined-basic"
+                  required
+                  fullWidth
+                  label="BloodGroup"
+                  variant="outlined"
+                  size="small"
+                  value={bloodGroup}
+                  onChange={(e) => setBloodGroup(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  value="Chronic Patient"
+                  control={<Switch />}
+                  label="Chronic Patient"
+                  onChange={handleSwitchChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField label="Notes" fullWidth multiline rows={3}></TextField>
+              </Grid>
+              {/* inserire funzione salva "crea" doctor */}
+              <Grid item xs={1}>
+                <Button className="savebt" variant="contained" onClick={handleSaveClick}>
+                  SAVE <Save className="save"></Save>
+                </Button>
+              </Grid>
+              <Grid item xs={1}>
+                <Button className="backbt" variant="outlined" onClick={handlePostClick}>
+                  BACK
+                </Button>
               </Grid>
             </Grid>
-            {/* inserire funzione salva "crea" doctor */}
-            <Button className="savebt" variant="contained" sx={{ mt: 2 }} onClick={handleSaveClick}>
-              SAVE <Save className="save"></Save>
-            </Button>
-            <Button className="backbt" variant="outlined" onClick={handlePostClick} sx={{ mt: 2, ml: 2 }}>
-              BACK
-            </Button>
           </Box>
         </Paper>
       </div>

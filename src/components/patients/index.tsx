@@ -5,8 +5,9 @@ import { api } from "@config/api";
 import { PATIENTS_PATH } from "@config/paths";
 import { PatientFilterDTO } from "@generated/axios";
 import useGetList from "@hooks/useGetList";
-import { getNewDetailPath } from "@lib/utils";
-import { Box, Button, Grid, Paper, TextField } from "@mui/material";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getNewDetailPath } from "@lib/utils";
+import { Avatar, Box, Button, Card, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Action, patientsFilterReducer } from "./lib";
@@ -16,10 +17,10 @@ interface IPatientsFilterContext {
   dispatch: Dispatch<Action>;
 }
 
-export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
+/* export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
   filter: {},
   dispatch: () => {},
-});
+}); */
 
 const patientListApi = api.patients.getListPatient;
 
@@ -27,22 +28,29 @@ const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
   const [patients, loading] = useGetList(patientListApi, filter);
+  const [pid, setPid] = useState("");
+  const [opd, setOpd] = useState("");
+  const [idp, setIdp] = useState("");
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [profession, setProfession] = useState("");
-
+  /*   const [profession, setProfession] = useState("");
+   */
   const handleSearch = () => {
     const newFilter: any = {};
     if (name) newFilter.name = name;
     if (surname) newFilter.surname = surname;
-    if (profession) newFilter.profession = profession;
+    /*  if (profession) newFilter.profession = profession; */
     dispatch({ type: "SET_FILTER", payload: newFilter });
   };
 
   const handlePostClick = () => {
     navigate(getNewDetailPath(PATIENTS_PATH));
+  };
+
+  const handlePatientClick = (id) => {
+    navigate(`/patients/${id}`);
   };
 
   return (
@@ -72,8 +80,8 @@ const Patients: React.FC = () => {
                   label="Patient ID (PID)"
                   variant="outlined"
                   size="small"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={pid}
+                  onChange={(e) => setPid(e.target.value)}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -83,8 +91,8 @@ const Patients: React.FC = () => {
                   label="Outpatient Number (OPD)"
                   variant="outlined"
                   size="small"
-                  value={surname}
-                  onChange={(e) => setSurname(e.target.value)}
+                  value={opd}
+                  onChange={(e) => setOpd(e.target.value)}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -94,8 +102,8 @@ const Patients: React.FC = () => {
                   label="Inpatient Number (IDP)"
                   variant="outlined"
                   size="small"
-                  value={profession}
-                  onChange={(e) => setProfession(e.target.value)}
+                  value={idp}
+                  onChange={(e) => setIdp(e.target.value)}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -107,7 +115,34 @@ const Patients: React.FC = () => {
           </Box>
         </Paper>
       </div>
-      {/* Patients list */}
+      <div className="contenitore-card">
+        {patients.map((patient) => (
+          <div className="card" /* key={patient.id} */ onClick={() => handlePatientClick(String(patient.id))}>
+            <Card style={{ margin: "1rem", maxWidth: 350 }} variant="outlined">
+              <p>
+                <Typography variant="h6">
+                  {patient.name}
+                  <b> {patient.surname}</b>
+                </Typography>
+                <Typography variant="body1" className="contacts">
+                  {patient.opd}
+                </Typography>
+                <Typography variant="body1" className="contacts">
+                  {patient.idp}
+                </Typography>
+              </p>
+              <center>
+                <Avatar
+                  className="avatar"
+                  alt="icona"
+                  sx={{ width: 88, height: 88 }}
+                  src={generateAvatarImage(DetailType.PATIENT, patient.id)}
+                />
+              </center>
+            </Card>
+          </div>
+        ))}
+      </div>
     </PatientsFilterContext.Provider>
   );
 };
