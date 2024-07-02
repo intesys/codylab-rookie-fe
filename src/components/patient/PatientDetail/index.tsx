@@ -6,7 +6,7 @@ import { DATE_FORMAT } from "@config/date";
 import { PATIENTS_PATH } from "@config/paths";
 import { DoctorDTO, PatientDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getBloodType, getPath } from "@lib/utils";
+import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -41,6 +41,18 @@ const PatientDetail: React.FC = () => {
   if (!patient) {
     return <>Patient not found</>;
   }
+
+  const handleDeleteClick = () => {
+    api.patients.deletePatient(Number(id));
+  };
+
+  const handleEditClick = () => {
+    navigate(getEditDetailPath(PATIENTS_PATH, id));
+  };
+
+  const handleNewRecordClick = () => {
+    navigate(getNewRecordDetailPath(PATIENTS_PATH, id));
+  };
   return (
     <>
       <Breadcrumb>
@@ -52,7 +64,7 @@ const PatientDetail: React.FC = () => {
         </BreadcrumbEl>
       </Breadcrumb>
       <SectionHeader title="PATIENT DETAILS">
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={handleDeleteClick}>
           <DeleteIcon style={{ marginRight: 7 }} /> DELETE
         </Button>
       </SectionHeader>
@@ -68,7 +80,7 @@ const PatientDetail: React.FC = () => {
           <Grid item xs={4}>
             <Typography variant="h5">
               {patient.name} <b>{patient.surname}</b>
-              <EditIcon className="icons" onClick={() => handleEditClick(String(id))} />
+              <EditIcon className="icons" onClick={() => handleEditClick()} />
               <br />
             </Typography>
             <Typography variant="body1">{patient.address}</Typography>
@@ -117,7 +129,7 @@ const PatientDetail: React.FC = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6} style={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button variant="outlined">
+                <Button variant="outlined" onClick={handleNewRecordClick}>
                   <AddIcon />
                   RECORD
                 </Button>
@@ -188,5 +200,4 @@ const PatientDetail: React.FC = () => {
     </>
   );
 };
-
 export default PatientDetail;
