@@ -1,9 +1,10 @@
 // Doctors.js
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
+import { DOCTORS_PATH } from "@config/paths";
 import useGetList from "@hooks/useGetList";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage } from "@lib/utils";
+import { generateAvatarImage, getNewDetailPath } from "@lib/utils";
 import { MailOutline, Phone } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Box, Button, Card, Grid, Paper, TextField, Typography } from "@mui/material";
@@ -40,7 +41,7 @@ const Doctors = () => {
   };
 
   const handlePostClick = () => {
-    navigate("/doctors/new");
+    navigate(getNewDetailPath(DOCTORS_PATH));
   };
 
   const handleDoctorClick = (id) => {

@@ -1,10 +1,12 @@
 import Billing from "@components/Billing";
 import DoctorDetail from "@components/DoctorDetail.tsx/doctorDetail";
+import DoctorEdit from "@components/DoctorEdit/doctorEdit";
 import DoctorNew from "@components/DoctorNew/doctorNew";
 import Doctors from "@components/Doctors";
 import Home from "@components/Home";
 import News from "@components/News";
 import Patient from "@components/Patient";
+import PatientNew from "@components/PatientNew/patientNew";
 import Patients from "@components/Patients";
 import Pharmacy from "@components/Pharmacy";
 import Ward from "@components/Ward";
@@ -30,7 +32,7 @@ const AppRoutes: React.FC = () => {
         <Route path={PATIENTS_PATH}>
           <Route index element={<Patients />} />
           <Route path=":id" element={<Patient />} />
-          {/* <Route path="new" element={<PatientNew />} /> */}
+          <Route path="new" element={<PatientNew />} />
           {/* <Route path="new" element={<PatientNew />} />
           <Route path=":id/edit" element={<PatientEdit />} />
           <Route path={`:id/${PATIENTS_RECORDS_PATH}/new`} element={<PatientRecordNew />} /> */}
@@ -39,8 +41,8 @@ const AppRoutes: React.FC = () => {
           <Route index element={<Doctors />} />
           <Route path=":id" element={<DoctorDetail />} />
           <Route path="new" element={<DoctorNew />} />
-          {/* <Route path=":id/edit" element={<DoctorEdit />} /> */}
-          <Route path="new" element={<DoctorNew />} />
+          <Route path=":id/edit" element={<DoctorEdit />} />
+          {/*  <Route path="new" element={<DoctorNew />} /> */}
         </Route>
         <Route path={PHARMACY_PATH} element={<Pharmacy />} />
         <Route path={WARD_PATH} element={<Ward />} />
