@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 const PatientNew: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [surname, setSurname] = useStatee("");
   const [address, setAddress] = useState("");
   const [OPD, setOPD] = useState("");
   const [IDP, setIDP] = useState("");
