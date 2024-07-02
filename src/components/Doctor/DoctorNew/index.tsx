@@ -33,7 +33,7 @@ const DoctorNew: React.FC = () => {
         </BreadcrumbEl>
         <BreadcrumbEl active>New</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="EDIT DOCTOR" />
+      <SectionHeader title="NEW DOCTOR" />
       <form onSubmit={handleSaveButton}>
         <Paper className="paper">
           <Grid container columnSpacing={2} rowSpacing={2} alignItems="center">

@@ -34,7 +34,7 @@ const PatientNew: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    api.patients.createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient });
+    api.patients.createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient, notes });
   };
 
   return (
