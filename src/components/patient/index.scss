@@ -1,0 +1,63 @@
+.patient-details-container {
+  position: relative;
+  padding: 20px;
+}
+.patient-details-wrapper {
+  position: relative;
+  display: flex;
+}
+.details-paper {
+  padding: 10px;
+  margin-bottom: -1px;
+}
+.patients-section {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.details-box {
+  width: 20%;
+  max-width: 800px;
+  background-color: #2e2e2e;
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.details-header {
+  margin-bottom: 10px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.latest-patient-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.patient-avatar {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+.opd-field {
+  color: gray; /* Colore della label "OPD" */
+  font-size: 0.9rem; /* Dimensione del testo della label "OPD" */
+
+  .opd-value {
+    color: white; /* Colore del valore "OPD" */
+    font-size: 1.2rem; /* Dimensione del testo del valore "OPD" */
+    font-weight: bold; /* Peso del font del valore "OPD" */
+    background-color: #3f51b5; /* Colore di sfondo del valore "OPD" */
+    padding: 2px 6px; /* Padding del valore "OPD" */
+    border-radius: 4px; /* Bordi arrotondati del valore "OPD" */
+  }
+}

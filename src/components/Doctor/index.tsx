@@ -20,8 +20,8 @@ const Doctor: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
-  const handleEditClick = () => {
-    navigate(getEditDetailPath(DOCTORS_PATH));
+  const handleEditClick = (id) => {
+    navigate(getEditDetailPath(DOCTORS_PATH, id));
   };
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Doctor: React.FC = () => {
             <Grid item xs={4}>
               <Typography variant="h5">
                 {doctor.name} <b>{doctor.surname}</b>
-                <EditIcon className="icons" style={{ color: "red" }} onClick={handleEditClick} />
+                <EditIcon className="icons" style={{ color: "red" }} onClick={() => handleEditClick(id)} />
                 <Typography variant="body1">{doctor.profession}</Typography>
               </Typography>
             </Grid>

@@ -11,22 +11,22 @@
   background-color: #fff;
 }
 
-.doctorsHeader {
+.patientHeader {
   display: flex;
   flex-direction: row;
   column-gap: 20px;
   align-items: flex-start;
   margin-bottom: 1rem;
 }
-.doctorsHeader #info {
+.patientHeader #info {
   font-size: smaller;
 }
 .box .searchButtonIcon {
   margin-left: 8px;
   font-size: 18px;
 }
-.doctorsHeader h6 {
-  margin-top: -20px;
+.patientHeader h6 {
+  margin-top: -20px; /* Adjust this value as needed */
 }
 
 .box2 {

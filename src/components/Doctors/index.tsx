@@ -63,7 +63,7 @@ const Doctors: React.FC = () => {
       <Breadcrumb>
         <BreadcrumbEl active>Doctors</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="DOCTORS DATABASE">
+      <SectionHeader title={<b>DOCTORS DATABASE</b>}>
         <Button variant="outlined" onClick={handleNewClick}>
           <AddIcon /> ADD NEW DOCTOR
         </Button>
@@ -72,7 +72,9 @@ const Doctors: React.FC = () => {
       <div className="box">
         <Box>
           <div className="doctorsHeader">
-            <Typography variant="h6">FIND A DOCTOR</Typography>
+            <Typography variant="h6">
+              <b>FIND A DOCTOR</b>
+            </Typography>
             <Typography variant="body1" id="info">
               Insert the information of your colleagues
             </Typography>
