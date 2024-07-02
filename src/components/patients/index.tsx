@@ -1,12 +1,15 @@
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
+import { api } from "@config/api";
 import { PATIENTS_PATH } from "@config/paths";
 import { PatientFilterDTO } from "@generated/axios";
-import { getNewDetailPath } from "@lib/utils";
+import useGetList from "@hooks/useGetList";
+import { DetailType } from "@lib/types";
+import { generateAvatarImage, getDetailPath, getNewDetailPath } from "@lib/utils";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardContent, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Action, patientsFilterReducer } from "./lib";
@@ -21,9 +24,12 @@ export const PatientsFilterContext: React.Context<IPatientsFilterContext> = Reac
   dispatch: (action) => {},
 });
 
+const patientListApi = api.patients.getListPatient;
+
 const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+  const [patients, loading] = useGetList(patientListApi, filter);
   const [pid, setPid] = useState("");
   const [opd, setOpd] = useState("");
   const [idp, setIdp] = useState("");
@@ -31,6 +37,10 @@ const Patients: React.FC = () => {
 
   const handleNewPatientClick = () => {
     navigate(getNewDetailPath(PATIENTS_PATH));
+  };
+
+  const handlePatientDetailClick = (id: string) => {
+    navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
   const handleSubmitClick = () => {};
@@ -93,7 +103,35 @@ const Patients: React.FC = () => {
           </form>
         </Paper>
       </div>
-      <Grid container spacing={2}></Grid>
+      <Grid container spacing={3}>
+        {patients.map((patient) => (
+          <Grid item xs={4}>
+            <Card>
+              <center>
+                <CardContent>
+                  <div onClick={() => handlePatientDetailClick(String(patient.id))}>
+                    <Typography variant="h5">
+                      <b>
+                        {patient.name} {patient.surname}
+                      </b>
+                    </Typography>
+                    <Typography variant="body1" style={{ marginTop: "15px" }}>
+                      <b>PID:</b>
+                      {patient.id} | <b>OPD:</b>
+                      {patient.opd} | <b>IDP:</b>
+                      {patient.idp}
+                    </Typography>
+                    <Avatar
+                      src={generateAvatarImage(DetailType.PATIENT, patient.id)}
+                      sx={{ height: 100, width: 100 }}
+                    />
+                  </div>
+                </CardContent>
+              </center>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </PatientsFilterContext.Provider>
   );
 };
