@@ -100,7 +100,7 @@ const PatientDetail: React.FC = () => {
       <Grid container>
         <Grid item xs={3}>
           <Card style={{ backgroundColor: "rgb(56, 53, 53)" }}>
-            <CardContent className="card">
+            <CardContent>
               <Typography variant="body1" style={{ color: "white" }}>
                 HEALTH INFORMATION
               </Typography>
