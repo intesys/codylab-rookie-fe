@@ -12,7 +12,9 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
+import PhoneIcon from "@mui/icons-material/Phone";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { Avatar, Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
@@ -25,40 +27,43 @@ const Patient: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
-  /*
-    Typography variant="body1">{patient.lastDoctorVisitedId.name}</Typography>
-    <Typography variant="body1">{patient.lastDoctorVisitedId.contact}</Typography>
-    <Typography variant="body1">{patient.lastDoctorVisitedId.email}</Typography>
-    */
-  const handleEditClick = (id) => {
-    navigate(getEditDetailPath(PATIENTS_PATH, id));
-  };
-  const handleDeleteClick = () => {
-    api.patients.deletePatient(Number(id));
-    navigate("/patients");
-    window.location.reload();
-  };
-  const handleNewRecordClick = () => {
-    navigate(getNewRecordDetailPath(PATIENTS_PATH, id));
-  };
-
-  const handleDeleteRecordClick = (id: number) => {
-    api.patientRecords.deletePatientRecord(id);
-    window.location.reload();
-  };
   useEffect(() => {
     if (!loading) {
       return;
     }
-    api.patients.getPatient(Number(id)).then((response: { data: any }) => {
+    api.patients.getPatient(Number(id)).then((response) => {
       setPatient(response.data);
-      setLoading(false);
     });
+    if (!patient) {
+      return;
+    }
+    setLoading(false);
   }, [loading, id]);
 
   if (!patient) {
     return <>Patient not found</>;
   }
+
+  const handleDeleteClick = () => {
+    api.patients.deletePatient(Number(id));
+    navigate("/patients");
+    window.location.reload();
+  };
+
+  const handleDeleteRecordClick = (id: number) => {
+    api.patientRecords.deletePatientRecord(id);
+  };
+
+  const handleEditClick = () => {
+    navigate(getEditDetailPath(PATIENTS_PATH, id));
+  };
+  const handleDoctorClick = (id: string) => {
+    navigate(getDetailPath(DOCTORS_PATH, id));
+  };
+
+  const handleNewRecordClick = () => {
+    navigate(getNewRecordDetailPath(PATIENTS_PATH, id));
+  };
 
   return (
     <div>
@@ -136,24 +141,53 @@ const Patient: React.FC = () => {
               CHRONIC PATIENT: {patient.chronicPatient ? "YES" : "NO"}
             </Typography>
             <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
-            <Typography variant="body2" className="contact-item" color="white">
-              <AccessTimeIcon /> Last admission:
+            <Typography variant="body1">
+              <AccessTimeIcon /> Last admission <br />
+              {patient.patientRecords &&
+                patient.patientRecords?.length > 0 &&
+                dayjs(patient.patientRecords[0].date).format(DATE_FORMAT)}
             </Typography>
-            <Typography variant="body1" className="contact-item" color="white">
-              {patient.lastAdmission}
+            <Typography variant="body1">
+              <MedicalInformationIcon /> Reason of visit: <br />
+              {patient.patientRecords && patient.patientRecords?.length > 0 && patient.patientRecords[0].reasonVisit}
             </Typography>
-            <Typography variant="body2" className="contact-item" color="white">
-              <MedicalInformationIcon /> Reason of visit:
+            <Typography>
+              <VaccinesIcon /> Treatment made: <br />
+              {patient.patientRecords && patient.patientRecords?.length > 0 && patient.patientRecords[0].treatmentMade}
             </Typography>
-            <Typography variant="body1" className="contact-item" color="white"></Typography>
-            <Typography variant="body2" className="contact-item" color="white">
-              <VaccinesIcon /> Treatment made:
-            </Typography>
-            <Typography variant="body1" className="contact-item" color="white"></Typography>
+
             <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
             <Typography variant="h7" className="details-header">
               LAST DOCTOR WHO VISITED THE PATIENT
             </Typography>
+            <Grid container spacing={2} style={{ marginRight: 15, marginLeft: 15 }}>
+              {patient.patientRecords && patient.patientRecords.length > 0 && patient.patientRecords[0].doctor && (
+                <>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ display: "flex", alignItems: "center" }}
+                    onClick={() => handleDoctorClick(String(patient.patientRecords[0].doctor.id))}
+                  >
+                    <Avatar src={generateAvatarImage(DetailType.DOCTOR, patient.patientRecords[0].doctor.id)} />
+                    <Typography variant="body1">
+                      {patient.patientRecords[0].doctor.name}
+                      <br />
+                      {patient.patientRecords[0].doctor.surname}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant="body1">
+                      <PhoneIcon className="contacts" style={{ color: "red" }} />
+                      {patient.patientRecords[0].doctor.phoneNumber}
+                      <br />
+                      <MailOutlineIcon className="contacts" style={{ color: "red" }} />
+                      {patient.patientRecords[0].doctor.email}
+                    </Typography>
+                  </Grid>
+                </>
+              )}
+            </Grid>
             <Box className="last-doctor"></Box>
           </Box>
           <Grid item xs={9}>

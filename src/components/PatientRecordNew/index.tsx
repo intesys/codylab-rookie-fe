@@ -2,11 +2,15 @@ import { doctorsFilterReducer } from "@components/Doctors/lib";
 import BreadcrumbEl from "@components/breadcrumb/BreadcrumbEl";
 import Breadcrumb from "@components/breadcrumb/breadcrumb";
 import { api } from "@config/api";
+import { DATE_FORMAT } from "@config/date";
 import { PATIENTS_PATH } from "@config/paths";
 import { PatientDTO } from "@generated/axios";
 import useGetList from "@hooks/useGetList";
 import { getDetailPath, getPath } from "@lib/utils";
-import { Typography } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
+import { Box, Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import { useEffect, useReducer, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -18,10 +22,10 @@ const PatientRecordNew: React.FC = () => {
   const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
 
   const [date, setDate] = useState();
-  const [typeVisit, setTypeVisit] = useState();
+  const [typeVisit, setTypeVisit] = useState("");
   const [doctor, setDoctor] = useState();
-  const [reasonVisit, setReasonVisit] = useState();
-  const [treatmentMade, setTreatmentMade] = useState();
+  const [reasonVisit, setReasonVisit] = useState("");
+  const [treatmentMade, setTreatmentMade] = useState("");
   const [doctors, loading2] = useGetList(doctorListApi, filter);
 
   const navigate = useNavigate();
@@ -65,6 +69,76 @@ const PatientRecordNew: React.FC = () => {
           {patient.name} {patient.surname}: NEW PATIENT RECORD
         </b>
       </Typography>
+      <div className="box">
+        <Box>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={4}>
+                <DatePicker defaultValue={dayjs()} format={DATE_FORMAT} onChange={(e) => setDate(e)} />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  label="Type of visit"
+                  variant="outlined"
+                  fullWidth
+                  size="small"
+                  required
+                  onChange={(e) => setTypeVisit(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  id="outlined-address"
+                  label="Doctor"
+                  required
+                  select
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => setDoctor(e.target.value)}
+                >
+                  {doctors.map((doctor) => (
+                    <MenuItem key={doctor} value={doctor}>
+                      {doctor.name} {doctor.surname}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  id="outlined-idp"
+                  label="Reaso of visit"
+                  required
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => setReasonVisit(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  id="outlined-opd"
+                  label="Treatment Made"
+                  required
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => setTreatmentMade(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} container justifyContent="flex-start">
+                <Grid item>
+                  <Button variant="contained" color="primary" type="submit">
+                    SAVE <SaveIcon style={{ marginLeft: "8px" }} />
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" style={{ marginLeft: "8px" }} onClick={() => handleBackButton()}>
+                    BACK
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </form>
+        </Box>
+      </div>
     </div>
   );
 };
