@@ -3,9 +3,10 @@ import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { PATIENTS_PATH } from "@config/paths";
-import { getPath } from "@lib/utils";
+import { PatientDTOBloodGroupEnum } from "@generated/axios";
+import { getBloodType, getPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
-import { Box, Button, FormControlLabel, Grid, Paper, Switch, TextField } from "@mui/material";
+import { Box, Button, FormControlLabel, Grid, MenuItem, Paper, Switch, TextField } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,6 +19,10 @@ const PatientNew: React.FC = () => {
   const [IDP, setIDP] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [chronicPatient, setChronicPatient] = useState(false);
+
+  const handleBloodGroupChange = (event) => {
+    setBloodGroup(event.target.value);
+  };
 
   const handlePostClick = () => {
     navigate("/patients");
@@ -47,6 +52,7 @@ const PatientNew: React.FC = () => {
       updatePatientsList();
 
       navigate("/patients");
+      window.location.reload(); //aggiorna in automatico la pagina
     } catch (error) {
       console.error("Errore durante il salvataggio del nuovo dottore:", error);
     }
@@ -133,15 +139,20 @@ const PatientNew: React.FC = () => {
               </Grid>
               <Grid item xs={4}>
                 <TextField
-                  className="outlined-basic"
-                  required
-                  fullWidth
-                  label="BloodGroup"
+                  label="Blood Group"
                   variant="outlined"
+                  fullWidth
                   size="small"
-                  value={bloodGroup}
-                  onChange={(e) => setBloodGroup(e.target.value)}
-                />
+                  required
+                  select
+                  onChange={handleBloodGroupChange}
+                >
+                  {Object.values(PatientDTOBloodGroupEnum).map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {getBloodType(option)}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

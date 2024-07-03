@@ -6,8 +6,10 @@ import { PATIENTS_PATH } from "@config/paths";
 import { PatientFilterDTO } from "@generated/axios";
 import useGetList from "@hooks/useGetList";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getNewDetailPath } from "@lib/utils";
-import { Avatar, Box, Button, Card, Grid, Paper, TextField, Typography } from "@mui/material";
+import { generateAvatarImage, getDetailPath, getNewDetailPath } from "@lib/utils";
+import AddIcon from "@mui/icons-material/Add";
+import SearchIcon from "@mui/icons-material/Search";
+import { Avatar, Button, Card, CardContent, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Action, patientsFilterReducer } from "./lib";
@@ -17,10 +19,10 @@ interface IPatientsFilterContext {
   dispatch: Dispatch<Action>;
 }
 
-/* export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
+export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
   filter: {},
-  dispatch: () => {},
-}); */
+  dispatch: (action) => {},
+});
 
 const patientListApi = api.patients.getListPatient;
 
@@ -33,116 +35,103 @@ const Patients: React.FC = () => {
   const [idp, setIdp] = useState("");
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  /*   const [profession, setProfession] = useState("");
-   */
-  const handleSearch = () => {
-    const newFilter: any = {};
-    if (name) newFilter.name = name;
-    if (surname) newFilter.surname = surname;
-    /*  if (profession) newFilter.profession = profession; */
-    dispatch({ type: "SET_FILTER", payload: newFilter });
-  };
-
-  const handlePostClick = () => {
+  const handleNewPatientClick = () => {
     navigate(getNewDetailPath(PATIENTS_PATH));
   };
 
-  const handlePatientClick = (id) => {
-    navigate(`/patients/${id}`);
+  const handlePatientDetailClick = (id: string) => {
+    navigate(getDetailPath(PATIENTS_PATH, id));
   };
+
+  const handleSubmitClick = () => {};
 
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
       <Breadcrumb>
         <BreadcrumbEl active>Patients</BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="PATIENTS DATABASE">
-        <Button variant="outlined" onClick={handlePostClick}>
-          + ADD NEW PATIENT
+      <SectionHeader title="PATIENT DATABASE">
+        <Button variant="outlined" onClick={handleNewPatientClick}>
+          <AddIcon className="addIcon" />
+          ADD NEW PATIENT
         </Button>
       </SectionHeader>
-      <div id="patfilter">
-        <Paper elevation={1}>
-          <Box sx={{ px: 3 }}>
-            <p id="doctor-line">
-              <p id="finddoc">FIND A PATIENT</p>
-              <sub> Insert the information of the colleagues</sub>
-            </p>
-          </Box>
-          <Box component="section" sx={{ p: 5 }}>
-            <Grid container spacing={3}>
+      <div className="doctorsForm">
+        <Paper className="paper" elevation={1}>
+          <div className="doctorsFormTitle">
+            <Typography variant="h6">FIND A PATIENT</Typography>
+            <Typography variant="body1" id="info">
+              Insert the information of a patient
+            </Typography>
+          </div>
+          <form className="doctorsFormBody" onSubmit={handleSubmitClick}>
+            <Grid container spacing={2} alignItems="center">
               <Grid item xs={3}>
                 <TextField
-                  className="outlined-basic"
-                  fullWidth
                   label="Patient ID (PID)"
                   variant="outlined"
+                  fullWidth
                   size="small"
-                  value={pid}
                   onChange={(e) => setPid(e.target.value)}
                 />
               </Grid>
               <Grid item xs={3}>
                 <TextField
-                  className="outlined-basic"
-                  fullWidth
                   label="Outpatient Number (OPD)"
                   variant="outlined"
+                  fullWidth
                   size="small"
-                  value={opd}
                   onChange={(e) => setOpd(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <TextField
-                  className="outlined-basic"
-                  fullWidth
                   label="Inpatient Number (IDP)"
                   variant="outlined"
+                  fullWidth
                   size="small"
-                  value={idp}
                   onChange={(e) => setIdp(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={3}>
-                <Button variant="outlined" onClick={handleSearch}>
+              <Grid item xs={2}>
+                <Button variant="outlined" fullWidth type="submit">
                   SEARCH
+                  <SearchIcon className="searchIcon" />
                 </Button>
               </Grid>
             </Grid>
-          </Box>
+          </form>
         </Paper>
       </div>
-      <div className="contenitore-card">
+      <Grid container spacing={3}>
         {patients.map((patient) => (
-          <div className="card" /* key={patient.id} */ onClick={() => handlePatientClick(String(patient.id))}>
-            <Card style={{ margin: "1rem", maxWidth: 350 }} variant="outlined">
-              <p>
-                <Typography variant="h6">
-                  {patient.name}
-                  <b> {patient.surname}</b>
-                </Typography>
-                <Typography variant="body1" className="contacts">
-                  {patient.opd}
-                </Typography>
-                <Typography variant="body1" className="contacts">
-                  {patient.idp}
-                </Typography>
-              </p>
+          <Grid item xs={4}>
+            <Card>
               <center>
-                <Avatar
-                  className="avatar"
-                  alt="icona"
-                  sx={{ width: 88, height: 88 }}
-                  src={generateAvatarImage(DetailType.PATIENT, patient.id)}
-                />
+                <CardContent>
+                  <div onClick={() => handlePatientDetailClick(String(patient.id))}>
+                    <Typography variant="h5">
+                      <b>
+                        {patient.name} {patient.surname}
+                      </b>
+                    </Typography>
+                    <Typography variant="body1" style={{ marginTop: "15px" }}>
+                      <b>PID:</b>
+                      {patient.id} | <b>OPD:</b>
+                      {patient.opd} | <b>IDP:</b>
+                      {patient.idp}
+                    </Typography>
+                    <Avatar
+                      src={generateAvatarImage(DetailType.PATIENT, patient.id)}
+                      sx={{ height: 100, width: 100 }}
+                    />
+                  </div>
+                </CardContent>
               </center>
             </Card>
-          </div>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </PatientsFilterContext.Provider>
   );
 };
