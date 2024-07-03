@@ -73,7 +73,7 @@ const PatientEdit: React.FC = () => {
         <BreadcrumbEl active>Edit</BreadcrumbEl>
       </Breadcrumb>
       <SectionHeader title="EDIT PATIENT" />
-      <Paper className="paper">
+      <Paper className="paper" style={{ padding: "30px" }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={4}>

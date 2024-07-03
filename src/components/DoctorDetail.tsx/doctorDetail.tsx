@@ -9,7 +9,7 @@ import { DetailType } from "@lib/types";
 import { generateAvatarImage, getEditDetailPath } from "@lib/utils";
 import { Edit, MailOutline, Phone } from "@mui/icons-material";
 import { Avatar, Box, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./doctorDetail.scss";
 
@@ -22,23 +22,21 @@ const DoctorDetail = () => {
   const [loadingPatients, setLoadingPatients] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const response = await api.doctors.getPatients(id);
-        console.log("Fetched patients:", response.data); // Verifica i dati
-        setPatients(response.data);
-      } catch (error) {
-        console.error("Error fetching patients:", error);
-      } finally {
-        setLoadingPatients(false);
-      }
-    };
-
-    if (id) {
-      fetchPatients();
+  /* useEffect(() => {
+    if (!loading) {
+      return;
     }
-  }, [id]);
+    api.patients.getPatient(Number(id)).then((response) => {
+      setPatient(response.data);
+    });
+    if (!patient) {
+      return;
+    }
+    setMostRecentRecord(
+      patient.patientRecords?.reduce((maxDate, record) => (record.date > maxDate.date ? record : maxDate))
+    );
+    setLoading(false);
+  }, [loading, id]); */
 
   const handleEditClick = (id: string) => {
     navigate(getEditDetailPath(DOCTORS_PATH, id));
@@ -103,35 +101,34 @@ const DoctorDetail = () => {
         </div>
         <div className="patients-section">
           <Paper>
-            <Typography variant="h6">Patients</Typography>
+            {/* <Typography variant="h6">Patients</Typography>
             {loadingPatients ? (
               <Typography>Loading...</Typography>
             ) : patients.length === 0 ? (
               <Typography>No patients found.</Typography>
-            ) : (
-              <table>
-                <thead>
-                  <tr>
-                    <th>PID</th>
-                    <th>OPD</th>
-                    <th>IDP</th>
-                    <th>Name</th>
-                    <th>Surname</th>
+            ) : ( */}
+            <table>
+              <thead>
+                <tr>
+                  <th>PID</th>
+                  <th>OPD</th>
+                  <th>IDP</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                </tr>
+              </thead>
+              <tbody>
+                {doctor.latestPatients?.map((patient) => (
+                  <tr key={patient.pid}>
+                    <td>{patient.id}</td>
+                    <td>{patient.opd}</td>
+                    <td>{patient.idp}</td>
+                    <td>{patient.name}</td>
+                    <td>{patient.surname}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {patients.map((patient) => (
-                    <tr key={patient.pid}>
-                      <td>{patient.pid}</td>
-                      <td>{patient.opd}</td>
-                      <td>{patient.idp}</td>
-                      <td>{patient.name}</td>
-                      <td>{patient.surname}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+                ))}
+              </tbody>
+            </table>
           </Paper>
         </div>
       </Box>
