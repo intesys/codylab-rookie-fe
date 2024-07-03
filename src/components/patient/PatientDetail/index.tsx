@@ -4,13 +4,15 @@ import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { DATE_FORMAT } from "@config/date";
 import { PATIENTS_PATH } from "@config/paths";
-import { DoctorDTO, PatientDTO, PatientRecordDTO } from "@generated/axios";
+import { PatientDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
+import CallIcon from "@mui/icons-material/Call";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import EmailIcon from "@mui/icons-material/Email";
 import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { Avatar, Button, Card, CardContent, Divider, Grid, Paper, Typography } from "@mui/material";
@@ -21,8 +23,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 const PatientDetail: React.FC = () => {
   const [patient, setPatient] = useState<PatientDTO>();
   const [loading, setLoading] = useState(true);
-  const [doctor, setDoctor] = useState<DoctorDTO>();
-  const [mostRecentRecord, setMostRecentRecord] = useState<PatientRecordDTO>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -36,9 +36,6 @@ const PatientDetail: React.FC = () => {
     if (!patient) {
       return;
     }
-    setMostRecentRecord(
-      patient.patientRecords?.reduce((maxDate, record) => (record.date > maxDate.date ? record : maxDate))
-    );
     setLoading(false);
   }, [loading, id]);
 
@@ -48,6 +45,7 @@ const PatientDetail: React.FC = () => {
 
   const handleDeleteClick = () => {
     api.patients.deletePatient(Number(id));
+    navigate(getPath(PATIENTS_PATH));
   };
 
   const handleDeleteRecordClick = (id: number) => {
@@ -114,16 +112,46 @@ const PatientDetail: React.FC = () => {
               <Typography variant="body1">CHRONIC PATIENT: {patient.chronicPatient ? "YES" : "NO"}</Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">
-                <AccessTimeIcon /> Last admission: {dayjs(mostRecentRecord?.date).format(DATE_FORMAT)}
+                <AccessTimeIcon /> Last admission <br />
+                {patient.patientRecords &&
+                  patient.patientRecords?.length > 0 &&
+                  dayjs(patient.patientRecords[0].date).format(DATE_FORMAT)}
               </Typography>
               <Typography variant="body1">
-                <MedicalInformationIcon /> Reason of visit: {mostRecentRecord?.reasonVisit}
+                <MedicalInformationIcon /> Reason of visit: <br />
+                {patient.patientRecords && patient.patientRecords?.length > 0 && patient.patientRecords[0].reasonVisit}
               </Typography>
               <Typography>
-                <VaccinesIcon /> Treatment made: {mostRecentRecord?.treatmentMade}
+                <VaccinesIcon /> Treatment made: <br />
+                {patient.patientRecords &&
+                  patient.patientRecords?.length > 0 &&
+                  patient.patientRecords[0].treatmentMade}
               </Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">LAST DOCTOR WHO VISITED THE PATIENT</Typography>
+              <Grid container spacing={2} style={{ marginRight: 15, marginLeft: 15 }}>
+                {patient.patientRecords && patient.patientRecords.length > 0 && patient.patientRecords[0].doctor && (
+                  <>
+                    <Grid item xs={12} style={{ display: "flex", alignItems: "center" }}>
+                      <Avatar src={generateAvatarImage(DetailType.DOCTOR, patient.patientRecords[0].doctor.id)} />
+                      <Typography variant="body1">
+                        {patient.patientRecords[0].doctor.name}
+                        <br />
+                        {patient.patientRecords[0].doctor.surname}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="body1">
+                        <CallIcon className="contacts" />
+                        {patient.patientRecords[0].doctor.phoneNumber}
+                        <br />
+                        <EmailIcon className="contacts" />
+                        {patient.patientRecords[0].doctor.email}
+                      </Typography>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
