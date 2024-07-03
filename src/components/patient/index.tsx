@@ -2,15 +2,23 @@ import BreadcrumbEl from "@components/breadcrumb/BreadcrumbEl";
 import Breadcrumb from "@components/breadcrumb/breadcrumb";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
+import { DATE_FORMAT } from "@config/date";
 import { PATIENTS_PATH } from "@config/paths";
 import { PatientDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
+import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
-import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
+import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
+import { Avatar, Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./index.scss"; // Assicurati di avere i tuoi stili personalizzati qui
+import "./index.scss";
 
 const Patient: React.FC = () => {
   const [patient, setPatient] = useState<PatientDTO>();
@@ -18,14 +26,26 @@ const Patient: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   /*
-  Typography variant="body1">{patient.lastDoctorVisitedId.name}</Typography>
-  <Typography variant="body1">{patient.lastDoctorVisitedId.contact}</Typography>
-  <Typography variant="body1">{patient.lastDoctorVisitedId.email}</Typography>
-  */
+    Typography variant="body1">{patient.lastDoctorVisitedId.name}</Typography>
+    <Typography variant="body1">{patient.lastDoctorVisitedId.contact}</Typography>
+    <Typography variant="body1">{patient.lastDoctorVisitedId.email}</Typography>
+    */
   const handleEditClick = (id) => {
     navigate(getEditDetailPath(PATIENTS_PATH, id));
   };
+  const handleDeleteClick = () => {
+    api.patients.deletePatient(Number(id));
+    navigate("/patients");
+    window.location.reload();
+  };
+  const handleNewRecordClick = () => {
+    navigate(getNewRecordDetailPath(PATIENTS_PATH, id));
+  };
 
+  const handleDeleteRecordClick = (id: number) => {
+    api.patientRecords.deletePatientRecord(id);
+    window.location.reload();
+  };
   useEffect(() => {
     if (!loading) {
       return;
@@ -50,7 +70,11 @@ const Patient: React.FC = () => {
           {patient.name} {patient.surname}
         </BreadcrumbEl>
       </Breadcrumb>
-      <SectionHeader title="PATIENT DETAILS"></SectionHeader>
+      <SectionHeader title={<b>PATIENT DETAILS</b>}>
+        <Button variant="outlined" onClick={handleDeleteClick}>
+          <DeleteIcon /> DELETE
+        </Button>
+      </SectionHeader>
       <div className="patient-details-content">
         <Paper className="details-paper">
           <Grid container rowSpacing={2} columnSpacing={2} alignItems="center">
@@ -76,60 +100,141 @@ const Patient: React.FC = () => {
         </Paper>
         <div className="patient-details-wrapper">
           <Box className="details-box">
-            <Typography variant="h6" className="details-header">
+            <Typography variant="h7" className="details-header">
               HEALTH INFORMATION
             </Typography>
             <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
-            <Typography variant="body1" className="contact-item">
-              PATIENT ID: {patient.id}
+            <Typography variant="body1" className="contact-item" color="gray">
+              PATIENT ID
             </Typography>
-            <Typography variant="body1" className="contact-item">
-              OPD <span className="opd-value">{patient.opd}</span>
+            <Typography variant="h4" className="contact-item" color="white">
+              {patient.id}
             </Typography>
-            <Typography variant="body1" className="contact-item">
-              BLOOD GROUP: {patient.bloodGroup}
+            <Typography variant="body1" className="contact-item" color="gray">
+              <br></br>
+              OPD
             </Typography>
-            <Divider sx={{ my: 2, bgcolor: "#e0e0e0" }} />
-            <Typography variant="body1" className="contact-item">
-              Notes: {patient.notes}
+            <Typography variant="h4" className="contact-item" color="white">
+              {patient.opd}
+            </Typography>
+            <Typography variant="body1" className="contact-item" color="gray">
+              <br></br>
+              BLOOD GROUP
+            </Typography>
+            <Typography variant="h4" className="contact-item" color="white">
+              {getBloodType(patient.bloodGroup)}
+            </Typography>
+            <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
+            <Typography variant="body1" className="contact-item" color="white">
+              <b>Notes</b>
+            </Typography>
+            <Typography variant="body1" className="contact-item" color="white">
+              {patient.notes}
             </Typography>
             <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
             <Typography variant="body1" className="contact-item">
               CHRONIC PATIENT: {patient.chronicPatient ? "YES" : "NO"}
             </Typography>
             <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
-            <Typography variant="h6" className="details-header">
+            <Typography variant="body2" className="contact-item" color="white">
+              <AccessTimeIcon /> Last admission:
+            </Typography>
+            <Typography variant="body1" className="contact-item" color="white">
+              {patient.lastAdmission}
+            </Typography>
+            <Typography variant="body2" className="contact-item" color="white">
+              <MedicalInformationIcon /> Reason of visit:
+            </Typography>
+            <Typography variant="body1" className="contact-item" color="white"></Typography>
+            <Typography variant="body2" className="contact-item" color="white">
+              <VaccinesIcon /> Treatment made:
+            </Typography>
+            <Typography variant="body1" className="contact-item" color="white"></Typography>
+            <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
+            <Typography variant="h7" className="details-header">
               LAST DOCTOR WHO VISITED THE PATIENT
             </Typography>
             <Box className="last-doctor"></Box>
           </Box>
-        </div>
-        <div className="records-section">
-          <Box className="records-box">
-            <Typography variant="h6" className="details-header">
-              Records
-            </Typography>
-            <Box className="records-list">
-              {patient.patientRecords.map((patientRecord) => (
-                <Paper key={patientRecord.id} className="record-item">
-                  <Grid container spacing={2} alignItems="center">
+          <Grid item xs={9}>
+            <Paper style={{ margin: 30, padding: 10 }}>
+              <Grid container justifyContent={"space-between"} style={{ marginBottom: 20 }}>
+                <Grid item xs={6}>
+                  <Typography variant="h6">
+                    <b>Records</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button variant="outlined" onClick={handleNewRecordClick}>
+                    <AddIcon />
+                    RECORD
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid container columnSpacing={2}>
+                <Grid item xs={2}>
+                  <Typography variant="body1">
+                    <b>Date</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="body1">
+                    <b>Type of</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="body1">
+                    <b>Reason</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body1">
+                    <b>Treatment made</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2} justifyContent={{ display: "flex", justifyContent: "center" }}>
+                  <Typography variant="body1">
+                    <b>Doctor</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={1} justifyContent={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Typography variant="body1">
+                    <b>Actions</b>
+                  </Typography>
+                </Grid>
+                {patient.patientRecords?.map((patientRecord) => (
+                  <>
+                    <Divider
+                      style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }}
+                    />
                     <Grid item xs={2}>
-                      <Typography variant="body1">{patientRecord.date}</Typography>
+                      <Typography variant="body1">{dayjs(patientRecord.date).format(DATE_FORMAT)}</Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Typography variant="body1">{patientRecord.typeVisit}</Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Typography variant="body1">{patientRecord.reasonVisit}</Typography>
                     </Grid>
-                    <Grid item xs={2}>
-                      <Typography variant="body1">{patientRecord.doctor.name}</Typography>
+                    <Grid item xs={3}>
+                      <Typography variant="body1">{patientRecord.treatmentMade}</Typography>
                     </Grid>
-                  </Grid>
-                </Paper>
-              ))}
-            </Box>
-          </Box>
+                    <Grid item xs={2} justifyContent={{ display: "flex", justifyContent: "center" }}>
+                      <Typography variant="body1">
+                        {patientRecord.doctor?.name} {patientRecord.doctor?.surname}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={1} justifyContent={{ display: "flex", justifyContent: "center" }}>
+                      <DeleteOutlineIcon
+                        onClick={() => handleDeleteRecordClick(Number(patientRecord.id))}
+                        style={{ color: "grey" }}
+                      />
+                    </Grid>
+                  </>
+                ))}
+              </Grid>
+            </Paper>
+          </Grid>
         </div>
       </div>
     </div>
