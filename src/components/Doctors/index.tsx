@@ -70,8 +70,8 @@ const Doctors: React.FC = () => {
     const newFilter = {};
     if (name) newFilter.name = name;
     if (surname) newFilter.surname = surname;
-    if (name) newFilter.profession = profession;
-    dispatch({ type:"SET_FILTER", payload:newFilter});
+    if (profession) newFilter.profession = profession;
+    dispatch({ type: "SET_FILTER", payload: newFilter });
   
   }
 
@@ -141,16 +141,19 @@ const Doctors: React.FC = () => {
                         </Typography>
                         <Divider
                           style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }}
-                        />
+                        />                          
+                        <Typography variant="body1">LATEST PATIENTS VISITED</Typography>                        
+                        <Grid container spacing={2} style={{marginRight:15, marginLeft: 15}}>
                         {doctor.latestPatients?.map((patient) => (
                             <>
-                          <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
-                          <div className="latestPatients">
+                          <Grid item xs={6} style={{ display: 'flex', alignItems: 'center' }}>
                           <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)}/>
                           <Typography variant="body1">{patient.name}<br/>{patient.surname}</Typography>
-                          </div>
+                          </Grid>
+
                           </>
-                        ))}
+                        ))}                          
+                        </Grid>
                     </center>
                   </CardContent>
                 </Card>

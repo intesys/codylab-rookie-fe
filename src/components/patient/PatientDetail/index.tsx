@@ -4,14 +4,14 @@ import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { DATE_FORMAT } from "@config/date";
 import { PATIENTS_PATH } from "@config/paths";
-import { DoctorDTO, PatientDTO } from "@generated/axios";
+import { DoctorDTO, PatientDTO, PatientRecordDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { Avatar, Button, Card, CardContent, Divider, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
@@ -22,6 +22,7 @@ const PatientDetail: React.FC = () => {
   const [patient, setPatient] = useState<PatientDTO>();
   const [loading, setLoading] = useState(true);
   const [doctor, setDoctor] = useState<DoctorDTO>();
+  const [mostRecentRecord, setMostRecentRecord] = useState<PatientRecordDTO>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -35,6 +36,9 @@ const PatientDetail: React.FC = () => {
     if (!patient) {
       return;
     }
+    setMostRecentRecord(
+      patient.patientRecords?.reduce((maxDate, record) => (record.date > maxDate.date ? record : maxDate))
+    );
     setLoading(false);
   }, [loading, id]);
 
@@ -44,6 +48,10 @@ const PatientDetail: React.FC = () => {
 
   const handleDeleteClick = () => {
     api.patients.deletePatient(Number(id));
+  };
+
+  const handleDeleteRecordClick = (id: number) => {
+    api.patientRecords.deletePatientRecord(id);
   };
 
   const handleEditClick = () => {
@@ -106,14 +114,13 @@ const PatientDetail: React.FC = () => {
               <Typography variant="body1">CHRONIC PATIENT: {patient.chronicPatient ? "YES" : "NO"}</Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">
-                <AccessTimeIcon /> Last admission:
-                {patient.lastAdmission}
+                <AccessTimeIcon /> Last admission: {dayjs(mostRecentRecord?.date).format(DATE_FORMAT)}
               </Typography>
               <Typography variant="body1">
-                <MedicalServicesIcon /> Reason of visit:
+                <MedicalInformationIcon /> Reason of visit: {mostRecentRecord?.reasonVisit}
               </Typography>
               <Typography>
-                <VaccinesIcon /> Treatment made:
+                <VaccinesIcon /> Treatment made: {mostRecentRecord?.treatmentMade}
               </Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">LAST DOCTOR WHO VISITED THE PATIENT</Typography>
@@ -189,7 +196,9 @@ const PatientDetail: React.FC = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={1} justifyContent={{ display: "flex", justifyContent: "center" }}>
-                    <DeleteIcon />
+                    <Button onClick={() => handleDeleteRecordClick(Number(patientRecord.id))}>
+                      <DeleteIcon />
+                    </Button>
                   </Grid>
                 </>
               ))}
