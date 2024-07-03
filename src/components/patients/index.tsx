@@ -3,47 +3,48 @@ import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { PATIENTS_PATH } from "@config/paths";
-import { PatientFilterDTO } from "@generated/axios";
 import useGetList from "@hooks/useGetList";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getDetailPath, getNewDetailPath } from "@lib/utils";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Button, Card, CardContent, Grid, Paper, TextField, Typography } from "@mui/material";
-import React, { Dispatch, useMemo, useReducer, useState } from "react";
+import React, { useMemo, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Action, patientsFilterReducer } from "./lib";
+import { patientsFilterReducer } from "./lib";
 
-interface IPatientsFilterContext {
-  filter: PatientFilterDTO;
-  dispatch: Dispatch<Action>;
-}
+const patientListApi = api.patients.getListPatient;
 
-export const PatientsFilterContext: React.Context<IPatientsFilterContext> = React.createContext({
+export const PatientsFilterContext = React.createContext({
   filter: {},
   dispatch: (action) => {},
 });
-
-const patientListApi = api.patients.getListPatient;
 
 const Patients: React.FC = () => {
   const [filter, dispatch] = useReducer(patientsFilterReducer, {});
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
   const [patients, loading] = useGetList(patientListApi, filter);
+  const navigate = useNavigate();
+
   const [pid, setPid] = useState("");
   const [opd, setOpd] = useState("");
   const [idp, setIdp] = useState("");
-  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const newFilter = {};
+    if (pid) newFilter.id = pid;
+    if (opd) newFilter.opd = opd;
+    if (idp) newFilter.idp = idp;
+    dispatch({ type: "SET_FILTER", payload: newFilter });
+  };
 
   const handleNewPatientClick = () => {
     navigate(getNewDetailPath(PATIENTS_PATH));
   };
 
-  const handlePatientDetailClick = (id: string) => {
+  const handlePatientDetailClick = (id) => {
     navigate(getDetailPath(PATIENTS_PATH, id));
   };
-
-  const handleSubmitClick = () => {};
 
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
@@ -56,15 +57,31 @@ const Patients: React.FC = () => {
           ADD NEW PATIENT
         </Button>
       </SectionHeader>
-      <div className="doctorsForm">
-        <Paper className="paper" elevation={1}>
+      <div className="doctorsForm" style={{ marginBottom: "50px" }}>
+        <Paper className="paper" elevation={1} style={{ padding: "15px" }}>
           <div className="doctorsFormTitle">
-            <Typography variant="h6">FIND A PATIENT</Typography>
+            <Typography
+              variant="h6"
+              style={{
+                fontSize: 16,
+                fontWeight: 700,
+                paddingRight: "20px",
+                marginTop: "30px",
+              }}
+            >
+              FIND A PATIENT
+            </Typography>
             <Typography variant="body1" id="info">
               Insert the information of a patient
             </Typography>
           </div>
-          <form className="doctorsFormBody" onSubmit={handleSubmitClick}>
+          <form
+            className="doctorsFormBody"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+          >
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={3}>
                 <TextField
@@ -72,6 +89,7 @@ const Patients: React.FC = () => {
                   variant="outlined"
                   fullWidth
                   size="small"
+                  value={pid}
                   onChange={(e) => setPid(e.target.value)}
                 />
               </Grid>
@@ -81,6 +99,7 @@ const Patients: React.FC = () => {
                   variant="outlined"
                   fullWidth
                   size="small"
+                  value={opd}
                   onChange={(e) => setOpd(e.target.value)}
                 />
               </Grid>
@@ -90,6 +109,7 @@ const Patients: React.FC = () => {
                   variant="outlined"
                   fullWidth
                   size="small"
+                  value={idp}
                   onChange={(e) => setIdp(e.target.value)}
                 />
               </Grid>
@@ -105,7 +125,7 @@ const Patients: React.FC = () => {
       </div>
       <Grid container spacing={3}>
         {patients.map((patient) => (
-          <Grid item xs={4}>
+          <Grid item xs={4} key={patient.id}>
             <Card>
               <center>
                 <CardContent>
