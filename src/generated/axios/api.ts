@@ -678,7 +678,7 @@ export const DoctorApiApiFactory = function (configuration?: Configuration, base
  * @extends {BaseAPI}
  */
 export class DoctorApiApi extends BaseAPI {
-  static getList<T, U>(getList: any, filter: any): [any, any, any] {
+  getPatients(id: string | undefined) {
     throw new Error("Method not implemented.");
   }
   /**

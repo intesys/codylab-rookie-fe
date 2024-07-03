@@ -6,16 +6,36 @@ import { getPath } from "@lib/utils";
 import { Save } from "@mui/icons-material";
 import { Box, Button, Grid, Paper, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const DoctorNew: React.FC = () => {
+const DoctorEdit: React.FC = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // Get the doctor ID from the URL params
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    // Recupera i dati del medico in base all'ID e li sostituisce con i dati vuoiti (nei textfield)
+    const fetchDoctor = async () => {
+      try {
+        const response = await axios.get(`/api/doctor/${id}`);
+        const doctor = response.data;
+        setName(doctor.name);
+        setSurname(doctor.surname);
+        setProfession(doctor.profession);
+        setEmail(doctor.email);
+        setPhoneNumber(doctor.phoneNumber);
+      } catch (error) {
+        console.error("Error fetching doctor data:", error);
+      }
+    };
+
+    fetchDoctor();
+  }, [id]);
 
   const handlePostClick = () => {
     navigate("/doctors");
@@ -28,8 +48,8 @@ const DoctorNew: React.FC = () => {
     }
 
     try {
-      // Creazione dell'oggetto doctor con i dati dal form
-      const newDoctor = {
+      // Creare l'oggetto doctorDTO con i dati del modulo
+      const updatedDoctor = {
         name: name,
         surname: surname,
         profession: profession,
@@ -37,23 +57,15 @@ const DoctorNew: React.FC = () => {
         phoneNumber: phoneNumber,
       };
 
-      // Effettua la richiesta POST per creare un nuovo dottore
-      await axios.post("/api/doctor", newDoctor);
+      // Eseguire la richiesta PUT per aggiornare i dati del medico
+      await axios.put(`/api/doctor/${id}`, updatedDoctor);
 
-      // Dopo aver creato il dottore con successo, aggiorna la lista dei dottori nel componente Doctors
-      updateDoctorsList();
-
-      // Reindirizza l'utente alla pagina dei dottori dopo aver salvato
+      // una volta finito riporta l'utente nella schermata "home doctor"
       navigate("/doctors");
     } catch (error) {
-      console.error("Errore durante il salvataggio del nuovo dottore:", error);
-      // Gestione dell'errore, ad esempio mostrando un messaggio all'utente
+      console.error("Error updating doctor:", error);
+      // in caso di errori lo dice
     }
-  };
-
-  const updateDoctorsList = () => {
-    // Forza l'aggiornamento della lista dei dottori nel componente Doctors
-    // Questo può essere fatto tramite un meccanismo di stato o un effetto che rilegge i dati
   };
 
   return (
@@ -63,12 +75,10 @@ const DoctorNew: React.FC = () => {
           <BreadcrumbEl>
             <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
           </BreadcrumbEl>
-          <BreadcrumbEl active>new</BreadcrumbEl>
+          <BreadcrumbEl active>edit</BreadcrumbEl>
         </Breadcrumb>
       </div>
-      {/* titolo */}
-      <SectionHeader title="NEW DOCTOR"></SectionHeader>
-      {/* box form */}
+      <SectionHeader title="EDIT DOCTOR"></SectionHeader>
       <div id="docfilter">
         <Paper elevation={1}>
           <Box component="section" sx={{ p: 5 }}>
@@ -134,7 +144,6 @@ const DoctorNew: React.FC = () => {
                 />
               </Grid>
             </Grid>
-            {/* inserire funzione salva "crea" doctor */}
             <Button className="savebt" variant="contained" sx={{ mt: 2 }} onClick={handleSaveClick}>
               SAVE <Save className="save"></Save>
             </Button>
@@ -148,4 +157,4 @@ const DoctorNew: React.FC = () => {
   );
 };
 
-export default DoctorNew;
+export default DoctorEdit;
