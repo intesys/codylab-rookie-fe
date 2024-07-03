@@ -3,12 +3,13 @@ import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
+import { DOCTORS_PATH } from "@config/paths";
 import useGetDetail from "@hooks/useGetDetail";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage } from "@lib/utils";
+import { generateAvatarImage, getEditDetailPath } from "@lib/utils";
 import { Edit, MailOutline, Phone } from "@mui/icons-material";
 import { Avatar, Box, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./doctorDetail.scss";
 
@@ -18,25 +19,27 @@ const DoctorDetail = () => {
   const { id } = useParams();
   const [doctor, loading] = useGetDetail(api.doctors.getDoctor, newRecord, Number(id));
   const [patients, setPatients] = useState([]);
+  const [loadingPatients, setLoadingPatients] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const response = await api.doctors.getPatients(id);
-        setPatients(response.data);
-      } catch (error) {
-        console.error("Error fetching patients:", error);
-      }
-    };
-
-    if (id) {
-      fetchPatients();
+  /* useEffect(() => {
+    if (!loading) {
+      return;
     }
-  }, [id]);
+    api.patients.getPatient(Number(id)).then((response) => {
+      setPatient(response.data);
+    });
+    if (!patient) {
+      return;
+    }
+    setMostRecentRecord(
+      patient.patientRecords?.reduce((maxDate, record) => (record.date > maxDate.date ? record : maxDate))
+    );
+    setLoading(false);
+  }, [loading, id]); */
 
-  const handleEditClick = (id) => {
-    navigate(`:${id}/edit`);
+  const handleEditClick = (id: string) => {
+    navigate(getEditDetailPath(DOCTORS_PATH, id));
   };
 
   return (
@@ -57,7 +60,7 @@ const DoctorDetail = () => {
         <div className="doctor-info">
           <Typography variant="h4">
             {doctor.name} <b>{doctor.surname}</b>
-            <Edit className="edit" onClick={() => handleEditClick(doctor.id)}></Edit>
+            <Edit className="edit" onClick={() => handleEditClick(String(id))}></Edit>
           </Typography>
           <Typography variant="subtitle1">{doctor.profession}</Typography>
         </div>
@@ -98,7 +101,12 @@ const DoctorDetail = () => {
         </div>
         <div className="patients-section">
           <Paper>
-            <Typography variant="h6">Patients</Typography>
+            {/* <Typography variant="h6">Patients</Typography>
+            {loadingPatients ? (
+              <Typography>Loading...</Typography>
+            ) : patients.length === 0 ? (
+              <Typography>No patients found.</Typography>
+            ) : ( */}
             <table>
               <thead>
                 <tr>
@@ -110,9 +118,9 @@ const DoctorDetail = () => {
                 </tr>
               </thead>
               <tbody>
-                {patients.map((patient) => (
+                {doctor.latestPatients?.map((patient) => (
                   <tr key={patient.pid}>
-                    <td>{patient.pid}</td>
+                    <td>{patient.id}</td>
                     <td>{patient.opd}</td>
                     <td>{patient.idp}</td>
                     <td>{patient.name}</td>

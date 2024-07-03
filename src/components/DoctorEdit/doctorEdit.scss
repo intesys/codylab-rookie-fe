@@ -1,0 +1,17 @@
+#textfieldspace {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px; /* Spazio tra gli elementi */
+  width: 100%;
+}
+
+.savebt {
+  margin-top: 20px;
+}
+
+.backbt {
+  margin-top: 20px;
+}
+
+.save {
+  margin-left: 4px;
+}
