@@ -50,6 +50,7 @@ const PatientEdit: React.FC = () => {
 
   const handleSubmit = () => {
     api.patients.updatePatient(Number(id), { name, surname, address, opd, idp, bloodGroup, chronicPatient, notes });
+    navigate(getDetailPath(PATIENTS_PATH, id));
   };
   const handleBloodGroupChange = (event) => {
     setBloodGroup(event.target.value);

@@ -44,6 +44,8 @@ const DoctorEdit: React.FC = () => {
 
   const handleSaveButton = () => {
     api.doctors.updateDoctor(Number(id), { name, surname, profession, email, phoneNumber });
+    navigate(getDetailPath(DOCTORS_PATH, id));
+    window.location.reload();
   };
 
   const handleBackButton = () => {

@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 >>>>>>> 89e314f (Update tsconfig with alias and refactoring som part of application)
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
-import { DOCTORS_PATH } from "@config/paths";
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
 import useGetList from "@hooks/useGetList";
 import { DetailType } from "@lib/types";
 import { generateAvatarImage, getDetailPath, getNewDetailPath } from "@lib/utils";
@@ -66,6 +66,10 @@ const Doctors: React.FC = () => {
     navigate(getDetailPath(DOCTORS_PATH, id));
   }
 
+  const handlePatientClick = (id: string) => {
+    navigate(getDetailPath(PATIENTS_PATH, id))
+  }
+
   const handleSubmitClick = () => {
     const newFilter = {};
     if (name) newFilter.name = name;
@@ -96,7 +100,7 @@ const Doctors: React.FC = () => {
           <Typography variant="h6">FIND DOCTORS</Typography>
           <Typography variant="body1" id="info">Insert the information of your colleagues</Typography>
           </div>
-          <form className="doctorsFormBody" onSubmit={handleSubmitClick}>
+          <div className="doctorsFormBody">
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={3}>
                 <TextField label="Name" variant="outlined" fullWidth size="small" onChange={(e) => setName(e.target.value)}/>
@@ -108,13 +112,13 @@ const Doctors: React.FC = () => {
                 <TextField label="Profession/ Specialization" variant="outlined" fullWidth size="small" onChange={(e) => setProfession(e.target.value)}/>
               </Grid>
               <Grid item xs={2}>
-                <Button variant="outlined" fullWidth type="submit">
+                <Button variant="outlined" fullWidth onClick={handleSubmitClick}>
                   SEARCH
                 <SearchIcon className="searchIcon"/>
                 </Button>
               </Grid>
             </Grid>
-          </form>
+            </div>
         </Paper>
         </div>
         <div className="doctorsList">
@@ -145,13 +149,10 @@ const Doctors: React.FC = () => {
                         <Typography variant="body1">LATEST PATIENTS VISITED</Typography>                        
                         <Grid container spacing={2} style={{marginRight:15, marginLeft: 15}}>
                         {doctor.latestPatients?.map((patient) => (
-                            <>
-                          <Grid item xs={6} style={{ display: 'flex', alignItems: 'center' }}>
+                          <Grid item xs={6} style={{ display: 'flex', alignItems: 'center' }} onClick={() =>handlePatientClick(String(patient.id))}>                            
                           <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)}/>
-                          <Typography variant="body1">{patient.name}<br/>{patient.surname}</Typography>
+                          <Typography variant="body1">{patient.name}<br/>{patient.surname}</Typography>                          
                           </Grid>
-
-                          </>
                         ))}                          
                         </Grid>
                     </center>

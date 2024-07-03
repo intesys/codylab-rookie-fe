@@ -50,6 +50,8 @@ const PatientRecordNew: React.FC = () => {
 
   const handleSubmit = () => {
     api.patientRecords.createPatientRecord({ date, typeVisit, doctor, reasonVisit, treatmentMade, patientId });
+    navigate(getDetailPath(PATIENTS_PATH, id));
+    window.location.reload();
   };
   return (
     <>
@@ -65,7 +67,7 @@ const PatientRecordNew: React.FC = () => {
         <BreadcrumbEl active>New Record</BreadcrumbEl>
       </Breadcrumb>
       <Typography variant="h6" style={{ marginBottom: 20 }}>
-        <b>
+        <b style={{ textTransform: "uppercase" }}>
           {patient.name} {patient.surname}: NEW PATIENT RECORD
         </b>
       </Typography>

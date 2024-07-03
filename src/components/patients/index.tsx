@@ -43,7 +43,13 @@ const Patients: React.FC = () => {
     navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
-  const handleSubmitClick = () => {};
+  const handleSubmitClick = () => {
+    const newFilter = {};
+    if (pid) newFilter.id = pid;
+    if (opd) newFilter.opd = opd;
+    if (idp) newFilter.idp = idp;
+    dispatch({ type: "SET_FILTER", payload: newFilter });
+  };
 
   return (
     <PatientsFilterContext.Provider value={patientContextValue}>
@@ -64,43 +70,41 @@ const Patients: React.FC = () => {
               Insert the information of a patient
             </Typography>
           </div>
-          <form className="doctorsFormBody" onSubmit={handleSubmitClick}>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={3}>
-                <TextField
-                  label="Patient ID (PID)"
-                  variant="outlined"
-                  fullWidth
-                  size="small"
-                  onChange={(e) => setPid(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  label="Outpatient Number (OPD)"
-                  variant="outlined"
-                  fullWidth
-                  size="small"
-                  onChange={(e) => setOpd(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TextField
-                  label="Inpatient Number (IDP)"
-                  variant="outlined"
-                  fullWidth
-                  size="small"
-                  onChange={(e) => setIdp(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Button variant="outlined" fullWidth type="submit">
-                  SEARCH
-                  <SearchIcon className="searchIcon" />
-                </Button>
-              </Grid>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={3}>
+              <TextField
+                label="Patient ID (PID)"
+                variant="outlined"
+                fullWidth
+                size="small"
+                onChange={(e) => setPid(e.target.value)}
+              />
             </Grid>
-          </form>
+            <Grid item xs={3}>
+              <TextField
+                label="Outpatient Number (OPD)"
+                variant="outlined"
+                fullWidth
+                size="small"
+                onChange={(e) => setOpd(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                label="Inpatient Number (IDP)"
+                variant="outlined"
+                fullWidth
+                size="small"
+                onChange={(e) => setIdp(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Button variant="outlined" fullWidth onClick={handleSubmitClick}>
+                SEARCH
+                <SearchIcon className="searchIcon" />
+              </Button>
+            </Grid>
+          </Grid>
         </Paper>
       </div>
       <Grid container spacing={3}>

@@ -2,10 +2,10 @@ import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
-import { DOCTORS_PATH } from "@config/paths";
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
 import { DoctorDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
+import { generateAvatarImage, getDetailPath, getEditDetailPath, getPath } from "@lib/utils";
 import CallIcon from "@mui/icons-material/Call";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
@@ -24,6 +24,10 @@ const DoctorDetail: React.FC = () => {
 
   const handleEditClick = (id: string) => {
     navigate(getEditDetailPath(DOCTORS_PATH, id));
+  };
+
+  const handlePatientClick = (id: string) => {
+    navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
   useEffect(() => {
@@ -84,18 +88,26 @@ const DoctorDetail: React.FC = () => {
                 {doctor.email}
               </Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
-              {doctor.latestPatients?.map((patient) => (
-                <>
-                  <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
-                  <div className="latestPatients">
-                    <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)} className="patientAvatar" />
-                    <Typography variant="body1">
-                      {patient.name}
-                      <br /> {patient.surname}
-                    </Typography>
-                  </div>
-                </>
-              ))}
+              <Typography variant="body1">LATEST PATIENTS VISITED</Typography>
+              <Grid container spacing={2} style={{ marginRight: 15, marginLeft: 15 }}>
+                {doctor.latestPatients?.map((patient) => (
+                  <>
+                    <Grid
+                      item
+                      xs={12}
+                      style={{ display: "flex", alignItems: "center" }}
+                      onClick={() => handlePatientClick(String(patient.id))}
+                    >
+                      <Avatar src={generateAvatarImage(DetailType.PATIENT, patient.id)} />
+                      <Typography variant="body1">
+                        {patient.name}
+                        <br />
+                        {patient.surname}
+                      </Typography>
+                    </Grid>
+                  </>
+                ))}
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
