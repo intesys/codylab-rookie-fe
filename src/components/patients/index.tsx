@@ -23,6 +23,9 @@ const Patients: React.FC = () => {
       <Breadcrumb>
         <BreadcrumbEl active>Patients</BreadcrumbEl>
       </Breadcrumb>
+      <div>
+        <h1>PATIENT DATABASE</h1>
+      </div>
       {/* Patients filter form */}
       {/* Patients list */}
     </PatientsFilterContext.Provider>

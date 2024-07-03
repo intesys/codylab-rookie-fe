@@ -1,1 +1,9 @@
-/* Questo è un commento */
+body,
+.html {
+  margin: 0;
+  padding: 0;
+  font-family: "roboto", "Arial Narrow", Arial, sans-serif;
+}
+.header .logo {
+  width: 40px;
+}
