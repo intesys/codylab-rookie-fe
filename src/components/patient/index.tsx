@@ -31,14 +31,14 @@ import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./index.scss";
 
-const newrecord = {} as DoctorDTO;
+const newRecord = {} as DoctorDTO;
 
 const Patient: React.FC = () => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const [patient, loading, getDetail] = useGetDetail(api.patients.getPatient, newrecord, Number(id));
+  const [patient, loading, getDetail] = useGetDetail(api.patients.getPatient, newRecord, Number(id));
 
   if (!patient) {
     return <>Patient not found</>;
@@ -58,10 +58,15 @@ const Patient: React.FC = () => {
   };
 
   const handleDeleteRecordClick = (id: number) => {
-    api.patientRecords.deletePatientRecord(id).then(() => {
-      enqueueSnackbar("Patient record deleted successfully!", { variant: "success" });
-      getDetail();
-    });
+    api.patientRecords
+      .deletePatientRecord(id)
+      .then(() => {
+        enqueueSnackbar("Patient record deleted successfully!", { variant: "success" });
+        getDetail();
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
 
   const handleEditClick = () => {
