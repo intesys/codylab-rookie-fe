@@ -3,10 +3,18 @@ import Breadcrumb from "@components/breadcrumb/breadcrumb";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { DATE_FORMAT } from "@config/date";
-import { PATIENTS_PATH } from "@config/paths";
-import { PatientDTO } from "@generated/axios";
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
+import { DoctorDTO } from "@generated/axios";
+import useGetDetail from "@hooks/useGetDetail";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
+import {
+  generateAvatarImage,
+  getBloodType,
+  getDetailPath,
+  getEditDetailPath,
+  getNewRecordDetailPath,
+  getPath,
+} from "@lib/utils";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,40 +26,42 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { Avatar, Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./index.scss";
 
+const newrecord = {} as DoctorDTO;
+
 const Patient: React.FC = () => {
-  const [patient, setPatient] = useState<PatientDTO>();
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!loading) {
-      return;
-    }
-    api.patients.getPatient(Number(id)).then((response) => {
-      setPatient(response.data);
-    });
-    if (!patient) {
-      return;
-    }
-    setLoading(false);
-  }, [loading, id]);
+
+  const [patient, loading, getDetail] = useGetDetail(api.patients.getPatient, newrecord, Number(id));
 
   if (!patient) {
     return <>Patient not found</>;
   }
 
-  const handleDeleteClick = () => {
-    api.patients.deletePatient(Number(id));
-    navigate("/patients");
-    window.location.reload();
+  const handleDeleteClick = (e: React.FormEvent) => {
+    e.preventDefault();
+    api.patients
+      .deletePatient(Number(id))
+      .then(() => {
+        enqueueSnackbar("Patient deleted successfully!", { variant: "success" });
+        navigate(getPath(PATIENTS_PATH));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
 
   const handleDeleteRecordClick = (id: number) => {
-    api.patientRecords.deletePatientRecord(id);
+    api.patientRecords.deletePatientRecord(id).then(() => {
+      enqueueSnackbar("Patient record deleted successfully!", { variant: "success" });
+      getDetail();
+    });
   };
 
   const handleEditClick = () => {

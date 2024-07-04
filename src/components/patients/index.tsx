@@ -10,7 +10,7 @@ import { generateAvatarImage, getDetailPath, getNewDetailPath } from "@lib/utils
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Box, Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
-import React, { ChangeEvent, Dispatch, FormEvent, useMemo, useReducer, useState } from "react";
+import React, { Dispatch, useMemo, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.scss";
 import { Action, patientsFilterReducer } from "./lib";
@@ -30,7 +30,10 @@ const Patients: React.FC = () => {
   const navigate = useNavigate();
   const patientContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
   const [patients, loading] = useGetList(api.patients.getListPatient, filter);
-  const [localFilter, setLocalFilter] = useState<PatientFilterDTO>({});
+
+  const [pid, setPid] = useState("");
+  const [opd, setOpd] = useState("");
+  const [idp, setIdp] = useState("");
 
   const handleNewClick = () => {
     navigate(getNewDetailPath(PATIENTS_PATH));
@@ -40,20 +43,12 @@ const Patients: React.FC = () => {
     navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLocalFilter((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    const filteredValues = Object.entries(localFilter)
-      .filter(([_, value]) => value !== "")
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-    dispatch({ type: "SET_FILTER", payload: filteredValues });
+  const handleSearch = () => {
+    const newFilter = {};
+    if (pid) newFilter.id = pid;
+    if (opd) newFilter.opd = opd;
+    if (idp) newFilter.idp = idp;
+    dispatch({ type: "SET_FILTER", payload: newFilter });
   };
 
   return (
@@ -77,36 +72,42 @@ const Patients: React.FC = () => {
               Insert the information of the patient
             </Typography>
           </div>
-          <form className="patientSearchForm" onSubmit={handleSearch}>
+          <form
+            className="doctorsFormBody"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+          >
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={3}>
                 <TextField
-                  id="outlined-id"
-                  name="PID"
                   label="Patient ID (PID)"
                   variant="outlined"
                   fullWidth
-                  onChange={handleInputChange}
+                  size="small"
+                  value={pid}
+                  onChange={(e) => setPid(e.target.value)}
                 />
               </Grid>
               <Grid item xs={3}>
                 <TextField
-                  id="outlined-surname"
-                  name="OPD"
                   label="Outpatient Number (OPD)"
                   variant="outlined"
                   fullWidth
-                  onChange={handleInputChange}
+                  size="small"
+                  value={opd}
+                  onChange={(e) => setOpd(e.target.value)}
                 />
               </Grid>
               <Grid item xs={4}>
                 <TextField
-                  id="outlined-profession"
-                  name="IDP"
                   label="Inpatient Number (IDP)"
                   variant="outlined"
                   fullWidth
-                  onChange={handleInputChange}
+                  size="small"
+                  value={idp}
+                  onChange={(e) => setIdp(e.target.value)}
                 />
               </Grid>
               <Grid item xs={2}>

@@ -7,6 +7,7 @@ import { DoctorDTO } from "@generated/axios";
 import { getDetailPath, getPath } from "@lib/utils";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, TextField } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const DoctorEdit: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const { enqueueSnackbar } = useSnackbar();
   const [doctor, setDoctor] = useState<DoctorDTO>();
 
   useEffect(() => {
@@ -42,10 +44,18 @@ const DoctorEdit: React.FC = () => {
     setPhoneNumber(doctor.phoneNumber);
   }, [doctor]);
 
-  const handleSaveButton = () => {
-    api.doctors.updateDoctor(Number(id), { name, surname, profession, email, phoneNumber });
+  const handleSaveButton = (e: React.FormEvent) => {
+    e.preventDefault();
+    api.doctors
+      .createDoctor({ name, surname, profession, email, phoneNumber })
+      .then(() => {
+        enqueueSnackbar("Doctor edited successfully!", { variant: "success" });
+        navigate(getDetailPath(DOCTORS_PATH, id));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
-
   const handleBackButton = () => {
     navigate(getDetailPath(DOCTORS_PATH, id));
   };

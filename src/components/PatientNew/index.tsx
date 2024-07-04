@@ -9,6 +9,7 @@ import { PatientDTOBloodGroupEnum } from "@generated/axios";
 import { getBloodType, getPath } from "@lib/utils";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, FormControlLabel, Grid, MenuItem, Switch, TextField } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
 
@@ -30,8 +31,17 @@ const PatientNew: React.FC = () => {
   const handleNewClick = () => {
     navigate(getPath(PATIENTS_PATH));
   };
-  const handleSubmit = () => {
-    api.patients.createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient, notes });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    api.patients
+      .createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient, notes })
+      .then(() => {
+        enqueueSnackbar("Patient created successfully!", { variant: "success" });
+        navigate(getPath(PATIENTS_PATH));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
   const handleSwitchChange = (event) => {
     setChronicPatient(event.target.checked);

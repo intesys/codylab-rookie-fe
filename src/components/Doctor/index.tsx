@@ -97,28 +97,45 @@ const Doctor: React.FC = () => {
           <div className="patients-section">
             <Paper className="detailPaper" style={{ marginLeft: "30px" }}>
               <Typography variant="h6" className="patientsheader">
-                Patients
+                <b>Patients</b>
               </Typography>
+              <br></br>
               <Grid container columnSpacing={2}>
-                <Grid item xs={3}>
-                  <Typography variant="body1">PID</Typography>
+                <Grid item xs={2}>
+                  <Typography variant="body1">
+                    {" "}
+                    <b>PID</b>
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1">OPD</Typography>
+                  <Typography variant="body1">
+                    <b>OPD</b>
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1">IDP</Typography>
+                  <Typography variant="body1">
+                    <b>IDP</b>
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1">Name</Typography>
+                  <Typography variant="body1">
+                    <b>Name</b>
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography variant="body1">Actions</Typography>
+                  <Typography variant="body1">
+                    <b>Surname</b>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="body1">
+                    <b>Actions</b>
+                  </Typography>
                 </Grid>
                 {doctor.latestPatients?.map((patient) => (
                   <React.Fragment key={patient.id}>
                     <Divider style={{ width: "100%", margin: "10px", backgroundColor: "#e0e0e0" }} />
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                       <Typography variant="body1">{patient.id}</Typography>
                     </Grid>
                     <Grid item xs={2}>
@@ -129,6 +146,9 @@ const Doctor: React.FC = () => {
                     </Grid>
                     <Grid item xs={2}>
                       <Typography variant="body1">{patient.name}</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Typography variant="body1">{patient.surname}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                       <Typography variant="body1">

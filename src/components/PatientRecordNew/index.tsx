@@ -11,12 +11,14 @@ import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, MenuItem, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import { useSnackbar } from "notistack";
 import { useEffect, useReducer, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const doctorListApi = api.doctors.getListDoctor;
 
 const PatientRecordNew: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(true);
   const [patient, setPatient] = useState<PatientDTO>();
   const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
@@ -48,8 +50,17 @@ const PatientRecordNew: React.FC = () => {
     navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
-  const handleSubmit = () => {
-    api.patientRecords.createPatientRecord({ date, typeVisit, doctor, reasonVisit, treatmentMade, patientId });
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    api.patientRecords
+      .createPatientRecord({ date, typeVisit, doctor, reasonVisit, treatmentMade, patientId })
+      .then(() => {
+        enqueueSnackbar("Patient Record created successfully!", { variant: "success" });
+        navigate(getDetailPath(PATIENTS_PATH, id));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
   return (
     <div>
@@ -91,6 +102,7 @@ const PatientRecordNew: React.FC = () => {
                   id="outlined-address"
                   label="Doctor"
                   required
+                  size="small"
                   select
                   variant="outlined"
                   fullWidth
@@ -103,21 +115,25 @@ const PatientRecordNew: React.FC = () => {
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   id="outlined-idp"
-                  label="Reaso of visit"
+                  label="Reason of visit"
                   required
+                  multiline
+                  rows={3}
                   variant="outlined"
                   fullWidth
                   onChange={(e) => setReasonVisit(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   id="outlined-opd"
                   label="Treatment Made"
                   required
+                  multiline
+                  rows={3}
                   variant="outlined"
                   fullWidth
                   onChange={(e) => setTreatmentMade(e.target.value)}

@@ -8,6 +8,7 @@ import { DOCTORS_PATH } from "@config/paths";
 import { getPath } from "@lib/utils";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, TextField } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
 
@@ -18,15 +19,24 @@ const DoctorNew: React.FC = () => {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleNewClick = () => {
     navigate(getPath(DOCTORS_PATH));
   };
 
-  const handleSubmit = () => {
-    api.doctors.createDoctor({ name, surname, profession, email, phoneNumber });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    api.doctors
+      .createDoctor({ name, surname, profession, email, phoneNumber })
+      .then(() => {
+        enqueueSnackbar("Doctor created successfully!", { variant: "success" });
+        navigate(getPath(DOCTORS_PATH));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
-
   return (
     <div>
       <Breadcrumb>

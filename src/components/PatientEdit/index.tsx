@@ -7,6 +7,7 @@ import { PatientDTO, PatientDTOBloodGroupEnum } from "@generated/axios";
 import { getBloodType, getDetailPath, getPath } from "@lib/utils";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, Button, Grid, MenuItem, TextField } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const PatientEdit: React.FC = () => {
   const [idp, setIdp] = useState(0);
   const [bloodGroup, setBloodGroup] = useState();
   const [chronicPatient, setChronicPatient] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const [notes, setNotes] = useState("");
 
   const handleBloodGroupChange = (event) => {
@@ -52,8 +54,17 @@ const PatientEdit: React.FC = () => {
     setNotes(patient.notes);
   }, [patient]);
 
-  const handleSaveButton = () => {
-    api.patients.updatePatient(Number(id), { name, surname, address, opd, idp, bloodGroup, chronicPatient, notes });
+  const handleSaveButton = (e: React.FormEvent) => {
+    e.preventDefault();
+    api.patients
+      .updatePatient(Number(id), { name, surname, address, opd, idp, bloodGroup, chronicPatient, notes })
+      .then(() => {
+        enqueueSnackbar("Patient edited successfully!", { variant: "success" });
+        navigate(getDetailPath(PATIENTS_PATH, id));
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      });
   };
 
   const handleBackButton = () => {
@@ -129,22 +140,24 @@ const PatientEdit: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={4}>
-                <TextField
-                  id="outlined-bloodgroup"
-                  label="Blood Group"
-                  required
-                  variant="outlined"
-                  fullWidth
-                  select
-                  value={bloodGroup}
-                  onChange={handleBloodGroupChange}
-                >
-                  {Object.values(PatientDTOBloodGroupEnum).map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {getBloodType(option)}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                {bloodGroup && (
+                  <TextField
+                    id="outlined-bloodgroup"
+                    label="Blood Group"
+                    required
+                    variant="outlined"
+                    fullWidth
+                    select
+                    value={bloodGroup}
+                    onChange={handleBloodGroupChange}
+                  >
+                    {Object.values(PatientDTOBloodGroupEnum).map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {getBloodType(option)}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
