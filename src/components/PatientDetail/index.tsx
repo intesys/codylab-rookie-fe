@@ -4,7 +4,8 @@ import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { DATE_FORMAT } from "@config/date";
 import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
-import { DoctorDTO, PatientDTO, PatientRecordDTO } from "@generated/axios";
+import { DoctorDTO, PatientRecordDTO } from "@generated/axios";
+import { useGetDetail } from "@hooks/useGetDetail";
 import { DetailType } from "@lib/types";
 import {
   generateAvatarImage,
@@ -23,32 +24,17 @@ import MedicalInformationIcon from "@mui/icons-material/MedicalInformation";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import { Avatar, Button, Card, CardContent, Divider, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { enqueueSnackbar } from "notistack";
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+const newrecord = {} as DoctorDTO;
 const PatientDetail: React.FC = () => {
-  const [patient, setPatient] = useState<PatientDTO>();
-  const [loading, setLoading] = useState(true);
   const [doctor, setDoctor] = useState<DoctorDTO>();
   const [mostRecentRecord, setMostRecentRecord] = useState<PatientRecordDTO>();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!loading) {
-      return;
-    }
-    api.patients.getPatient(Number(id)).then((response) => {
-      setPatient(response.data);
-    });
-    if (!patient) {
-      return;
-    }
-    setMostRecentRecord(
-      patient.patientRecords?.reduce((maxDate, record) => (record.date > maxDate.date ? record : maxDate))
-    );
-    setLoading(false);
-  }, [loading, id]);
+  const [patient, loading, getDetail] = useGetDetail(api.patients.getPatient, newrecord, Number(id));
 
   if (!patient) {
     return <>Patient not found</>;
@@ -57,12 +43,14 @@ const PatientDetail: React.FC = () => {
   const handleDeleteClick = () => {
     api.patients.deletePatient(Number(id));
     navigate("/patients");
-    window.location.reload();
+    enqueueSnackbar("Patient record deleted successfully!", { variant: "success" });
   };
 
   const handleDeleteRecordClick = (id: number) => {
-    api.patientRecords.deletePatientRecord(id);
-    window.location.reload();
+    api.patientRecords.deletePatientRecord(id).then(() => {
+      enqueueSnackbar("Patient record deleted successfully!", { variant: "success" });
+      getDetail();
+    });
   };
 
   const handleEditClick = () => {
