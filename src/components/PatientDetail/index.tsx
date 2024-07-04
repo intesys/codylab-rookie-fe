@@ -54,6 +54,8 @@ const PatientDetail: React.FC = () => {
 
   const handleDeleteRecordClick = (id: number) => {
     api.patientRecords.deletePatientRecord(id);
+    /* navigate(getDetailPath(PATIENTS_PATH, id));
+    window.location.reload(); */
   };
 
   const handleEditClick = () => {
