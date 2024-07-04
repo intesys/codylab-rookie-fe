@@ -1,5 +1,5 @@
 import Billing from "@components/Billing";
-import DoctorDetail from "@components/DoctorDetail.tsx/doctorDetail";
+import DoctorDetail from "@components/DoctorDetail/doctorDetail";
 import DoctorEdit from "@components/DoctorEdit/doctorEdit";
 import DoctorNew from "@components/DoctorNew/doctorNew";
 import Doctors from "@components/Doctors";

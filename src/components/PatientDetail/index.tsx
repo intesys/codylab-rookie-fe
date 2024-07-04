@@ -3,10 +3,18 @@ import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import SectionHeader from "@components/layout/SectionHeader";
 import { api } from "@config/api";
 import { DATE_FORMAT } from "@config/date";
-import { PATIENTS_PATH } from "@config/paths";
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
 import { DoctorDTO, PatientDTO, PatientRecordDTO } from "@generated/axios";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getBloodType, getEditDetailPath, getNewRecordDetailPath, getPath } from "@lib/utils";
+import {
+  generateAvatarImage,
+  getBloodType,
+  getDetailPath,
+  getEditDetailPath,
+  getNewRecordDetailPath,
+  getPath,
+} from "@lib/utils";
+import { Call, Email } from "@mui/icons-material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -54,7 +62,6 @@ const PatientDetail: React.FC = () => {
 
   const handleDeleteRecordClick = (id: number) => {
     api.patientRecords.deletePatientRecord(id);
-    /* navigate(getDetailPath(PATIENTS_PATH, id)); */
     window.location.reload();
   };
 
@@ -64,6 +71,10 @@ const PatientDetail: React.FC = () => {
 
   const handleNewRecordClick = () => {
     navigate(getNewRecordDetailPath(PATIENTS_PATH, id));
+  };
+
+  const handleDoctorClick = (id: string) => {
+    navigate(getDetailPath(DOCTORS_PATH, id));
   };
   return (
     <>
@@ -150,6 +161,34 @@ const PatientDetail: React.FC = () => {
               <Typography variant="body1" style={{ color: "white" }}>
                 LAST DOCTOR WHO VISITED THE PATIENT
               </Typography>
+              <Grid container spacing={2} style={{ marginRight: 15, marginLeft: 15 }}>
+                {patient.patientRecords && patient.patientRecords.length > 0 && patient.patientRecords[0].doctor && (
+                  <>
+                    <Grid
+                      item
+                      xs={12}
+                      style={{ display: "flex", alignItems: "center" }}
+                      onClick={() => handleDoctorClick(String(patient.patientRecords[0].doctor.id))}
+                    >
+                      <Avatar src={generateAvatarImage(DetailType.DOCTOR, patient.patientRecords[0].doctor.id)} />
+                      <Typography variant="body1" style={{ color: "white" }}>
+                        {patient.patientRecords[0].doctor.name}
+                        <br />
+                        {patient.patientRecords[0].doctor.surname}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="body1" style={{ color: "white" }}>
+                        <Call className="contacts" />
+                        {patient.patientRecords[0].doctor.phoneNumber}
+                        <br />
+                        <Email className="contacts" />
+                        {patient.patientRecords[0].doctor.email}
+                      </Typography>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
