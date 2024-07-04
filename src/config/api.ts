@@ -1,6 +1,13 @@
 import { Configuration, DoctorApiApi, PatientApiApi, PatientRecordApiApi } from "@generated/axios";
 import axios from "axios";
 
+export interface DoctorPreview {
+  id: string;
+  firstName: string;
+  lastName: string;
+  picture: string;
+}
+
 /**
  * Api endpoint
  */

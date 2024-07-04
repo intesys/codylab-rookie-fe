@@ -12,24 +12,20 @@
  * Do not edit the class manually.
  */
 
+import globalAxios, { AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
 import { Configuration } from "./configuration";
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
   DUMMY_BASE_URL,
   assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
-  setSearchParams,
-  serializeDataIfNeeded,
-  toPathString,
   createRequestFunction,
+  serializeDataIfNeeded,
+  setSearchParams,
+  toPathString,
 } from "./common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from "./base";
+import { BASE_PATH, BaseAPI, RequestArgs, RequiredError } from "./base";
 
 /**
  *
@@ -45,7 +41,7 @@ export interface DoctorDTO {
   id?: number;
   /**
    *
-   * @type {string}
+   * @type {number}
    * @memberof DoctorDTO
    */
   name?: string;
@@ -682,6 +678,9 @@ export const DoctorApiApiFactory = function (configuration?: Configuration, base
  * @extends {BaseAPI}
  */
 export class DoctorApiApi extends BaseAPI {
+  deletePatient(arg0: number) {
+    throw new Error("Method not implemented.");
+  }
   /**
    *
    * @param {DoctorDTO} doctorDTO

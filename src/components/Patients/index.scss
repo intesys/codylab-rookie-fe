@@ -1,0 +1,64 @@
+//////////////////////////////////////////////
+//HEADER
+//////////////////////////////////////////////
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//////////////////////////////////////////////
+//FORM
+//////////////////////////////////////////////
+.form {
+  background-color: white;
+  box-shadow: 0 2px 1px #9d9d9d72;
+  border-radius: 3px;
+  padding: 30px;
+}
+
+.form-title {
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+}
+
+.title_form-title {
+  margin-right: 25px;
+  margin-top: auto;
+}
+
+.subtitle_form-title {
+  font-size: 13px;
+}
+
+//////////////////////////////////////////////
+//HEADER
+//////////////////////////////////////////////
+
+.box-doctor {
+  box-shadow: 0 2px 1px #9d9d9d72;
+  border-radius: 3px;
+  background-color: white;
+  width: 320;
+  height: auto;
+  padding: 40px;
+}
+
+.box-doctor .avatar,
+.patient-info {
+  text-align: center;
+}
+
+.avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #0000009e;
+}
+
+.name {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
