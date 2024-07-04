@@ -117,7 +117,7 @@ const Patient: React.FC = () => {
           <h4 className="patient-info-title">OPD</h4>
           <h1 className="patient-info-detail">{patient.opd}</h1>
           <h4 className="patient-info-title">BLOOD GROUP</h4>
-          <h1 className="patient-info-detail">{getBloodType(patient.bloodGroup)}</h1>
+          <h1 className="patient-info-detail">{patient.bloodGroup ? getBloodType(patient.bloodGroup) : "N/A"}</h1>
           <div className="border"></div>
           <h4>Notes: {patient.notes}</h4>
           <div className="border"></div>
