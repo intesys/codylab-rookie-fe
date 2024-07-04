@@ -172,6 +172,7 @@ const PatientEdit: React.FC = () => {
               value={idp}
               onChange={(e) => setIdp(Number(e.target.value))}
             />
+
             {bloodGroup && (
               <FormControl sx={{ gridRow: "2", gridColumn: "span 7" }}>
                 <InputLabel id="demo-controlled-open-select-label">Blood group</InputLabel>
@@ -201,7 +202,6 @@ const PatientEdit: React.FC = () => {
               control={<Switch checked={chronicPatient} onChange={handleChangeSlide} name="jason" />}
               label="Chronic patient"
             />
-
             <TextField
               sx={{ gridRow: "4", gridColumn: "span 21" }}
               id="outlined-multiline-static"
@@ -210,7 +210,6 @@ const PatientEdit: React.FC = () => {
               value={notes}
               rows={4}
             />
-
             <Button
               type="submit"
               className="button-save"
