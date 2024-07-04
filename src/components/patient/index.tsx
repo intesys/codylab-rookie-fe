@@ -89,12 +89,13 @@ const Patient: React.FC = () => {
           <DeleteIcon style={{ marginRight: 7 }} /> DELETE
         </Button>
       </SectionHeader>
-      <Paper>
+      <Paper style={{ marginTop: 30 }}>
         <Grid container rowSpacing={2} columnSpacing={2} alignItems="center">
           <Grid item>
             <Avatar
               src={generateAvatarImage(DetailType.PATIENT, patient.id)}
-              sx={{ height: 100, width: 100 }}
+              sx={{ height: 90, width: 90 }}
+              style={{ marginLeft: 10, marginBottom: 10 }}
               className="avatar"
             />
           </Grid>
@@ -114,11 +115,17 @@ const Patient: React.FC = () => {
             <CardContent>
               <Typography variant="body1">HEALTH INFORMATION</Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
-              <Typography variant="body1">PATIENT ID</Typography>
+              <Typography variant="body1" style={{ color: "#bababa" }}>
+                PATIENT ID
+              </Typography>
               <Typography variant="h4">{patient.id}</Typography>
-              <Typography variant="body1">OPD</Typography>
+              <Typography variant="body1" style={{ color: "#bababa" }}>
+                OPD
+              </Typography>
               <Typography variant="h4">{patient.opd}</Typography>
-              <Typography variant="body1">BLOOD GROUP</Typography>
+              <Typography variant="body1" style={{ color: "#bababa" }}>
+                BLOOD GROUP
+              </Typography>
               <Typography variant="h4">{getBloodType(patient.bloodGroup)}</Typography>
               <Divider style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem", backgroundColor: "#e0e0e0" }} />
               <Typography variant="body1">Notes</Typography>

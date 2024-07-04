@@ -35,6 +35,8 @@ const PatientNew: React.FC = () => {
 
   const handleSubmit = () => {
     api.patients.createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient, notes });
+    navigate(getPath(PATIENTS_PATH));
+    window.location.reload;
   };
 
   return (

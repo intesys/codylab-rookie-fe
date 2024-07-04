@@ -54,12 +54,13 @@ const Doctor: React.FC = () => {
         </BreadcrumbEl>
       </Breadcrumb>
       <SectionHeader title="DOCTOR DETAILS" />
-      <Paper>
+      <Paper style={{ marginTop: 30 }}>
         <Grid container rowSpacing={2} columnSpacing={2} alignItems="center">
           <Grid item>
             <Avatar
               src={generateAvatarImage(DetailType.DOCTOR, doctor.id)}
-              sx={{ height: 100, width: 100 }}
+              sx={{ height: 90, width: 90 }}
+              style={{ marginBottom: 10, marginLeft: 10 }}
               className="avatar"
             />
           </Grid>
@@ -115,8 +116,8 @@ const Doctor: React.FC = () => {
           <Paper className="detailPaper">
             <Typography variant="h6">Patients</Typography>
             <br />
-            <Grid container columnSpacing={2}>
-              <Grid item xs={3}>
+            <Grid container justifyContent={"space-between"}>
+              <Grid item xs={2}>
                 <Typography variant="body1">PID</Typography>
               </Grid>
               <Grid item xs={2}>
@@ -129,12 +130,15 @@ const Doctor: React.FC = () => {
                 <Typography variant="body1">Name</Typography>
               </Grid>
               <Grid item xs={2}>
+                <Typography variant="body1">Surname</Typography>
+              </Grid>
+              <Grid item xs={2} style={{ display: "flex", alignContent: "flex-end" }}>
                 <Typography variant="body1">Actions</Typography>
               </Grid>
               {doctor.latestPatients?.map((patient) => (
                 <>
                   <Divider style={{ width: "100%", margin: "10px", backgroundColor: "#e0e0e0" }} />
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     <Typography variant="body1">{patient.id}</Typography>
                   </Grid>
                   <Grid item xs={2}>
@@ -147,6 +151,9 @@ const Doctor: React.FC = () => {
                     <Typography variant="body1">{patient.name}</Typography>
                   </Grid>
                   <Grid item xs={2}>
+                    <Typography variant="body1">{patient.surname}</Typography>
+                  </Grid>
+                  <Grid item xs={2} style={{ display: "flex", alignContent: "flex-end" }}>
                     <Typography variant="body1">
                       <ChevronRightIcon />
                     </Typography>

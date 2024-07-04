@@ -64,8 +64,10 @@ const Patients: React.FC = () => {
       </SectionHeader>
       <div className="doctorsForm">
         <Paper className="paper">
-          <div className="doctorsFormTitle">
-            <Typography variant="h6">FIND A PATIENT</Typography>
+          <div className="doctorsFormTitle" style={{ marginBottom: 15 }}>
+            <Typography variant="h6" style={{ fontWeight: 600 }}>
+              FIND A PATIENT
+            </Typography>
             <Typography variant="body1" id="info">
               Insert the information of a patient
             </Typography>
@@ -128,6 +130,7 @@ const Patients: React.FC = () => {
                     <Avatar
                       src={generateAvatarImage(DetailType.PATIENT, patient.id)}
                       sx={{ height: 100, width: 100 }}
+                      style={{ marginTop: 10 }}
                     />
                   </div>
                 </CardContent>
