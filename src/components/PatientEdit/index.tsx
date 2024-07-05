@@ -132,22 +132,24 @@ const PatientEdit: React.FC = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <TextField
-                label="Blood Group"
-                variant="outlined"
-                fullWidth
-                size="small"
-                required
-                select
-                value={bloodGroup}
-                onChange={handleBloodGroupChange}
-              >
-                {Object.values(PatientDTOBloodGroupEnum).map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {getBloodType(option)}
-                  </MenuItem>
-                ))}
-              </TextField>
+              {bloodGroup && (
+                <TextField
+                  label="Blood Group"
+                  variant="outlined"
+                  fullWidth
+                  size="small"
+                  required
+                  select
+                  value={bloodGroup}
+                  onChange={handleBloodGroupChange}
+                >
+                  {Object.values(PatientDTOBloodGroupEnum).map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {getBloodType(option)}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
