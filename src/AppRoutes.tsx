@@ -9,9 +9,9 @@ import PatientDetail from "@components/PatientDetail";
 import PatientEdit from "@components/PatientEdit";
 import PatientNew from "@components/PatientNew/patientNew";
 import PatientRecordNew from "@components/PatientRecordNew";
-import Patients from "@components/Patients";
 import Pharmacy from "@components/Pharmacy";
 import Ward from "@components/Ward";
+import Patients from "@components/patients";
 import {
   BILLING_PATH,
   DASHBOARD_PATH,

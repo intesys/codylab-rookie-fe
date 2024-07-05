@@ -99,8 +99,8 @@ const DoctorDetail = () => {
             ))}
           </div>
         </div>
-        <div className="patients-section">
-          <Paper>
+        <div className="patients-section" style={{ marginTop: "30px", marginLeft: "30px" }}>
+          <Paper style={{ width: "250%" }}>
             {/* <Typography variant="h6">Patients</Typography>
             {loadingPatients ? (
               <Typography>Loading...</Typography>
