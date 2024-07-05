@@ -6,9 +6,10 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
 import { Action, doctorsFilterReducer } from "./lib";
 
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
 import useGetList from "@hooks/useGetList";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage } from "@lib/utils";
+import { generateAvatarImage, getDetailPath } from "@lib/utils";
 import { useNavigate } from "react-router-dom";
 import "./index.scss";
 
@@ -35,11 +36,15 @@ const Doctors: React.FC = () => {
   const navigate = useNavigate();
 
   const handleDoctorClick = (id: number) => {
-    navigate(`/doctors/${id}`);
+    navigate(getDetailPath(DOCTORS_PATH, id));
   };
 
   const handlAddNewDoctorClick = () => {
     navigate(`/doctors/new`);
+  };
+
+  const handlePatientClick = (id: number) => {
+    navigate(getDetailPath(PATIENTS_PATH, id));
   };
 
   const handleSearch = () => {
@@ -109,16 +114,18 @@ const Doctors: React.FC = () => {
       <br />
       <Box sx={{ columnGap: 3, rowGap: 4, display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
         {doctors.map((doctor) => (
-          <div className="box-doctor" key={doctor.id} onClick={() => handleDoctorClick(doctor.id ?? 0)}>
-            <div className="avatar">
+          <div className="box-doctor" key={doctor.id}>
+            <div className="avatar" onClick={() => handleDoctorClick(doctor.id ?? 0)}>
               <img src={generateAvatarImage(DetailType.DOCTOR, doctor.id)} alt="" />
             </div>
             <div className="box-info">
-              <p className="name">
+              <p className="name" onClick={() => handleDoctorClick(doctor.id ?? 0)}>
                 {doctor.name} <strong>{doctor.surname}</strong>
               </p>
-              <p className="profession">{doctor.profession}</p>
-              <p className="phone">
+              <p className="profession" onClick={() => handleDoctorClick(doctor.id ?? 0)}>
+                {doctor.profession}
+              </p>
+              <p className="phone" onClick={() => handleDoctorClick(doctor.id ?? 0)}>
                 <img
                   className="img-phone"
                   src="https://img.icons8.com/ios-filled/50/FA5252/phone.png"
@@ -126,7 +133,7 @@ const Doctors: React.FC = () => {
                 />
                 {doctor.phoneNumber}
               </p>
-              <p className="email">
+              <p className="email" onClick={() => handleDoctorClick(doctor.id ?? 0)}>
                 <img
                   className="img-email"
                   src="https://img.icons8.com/material-outlined/24/FA5252/new-post.png"
@@ -139,7 +146,13 @@ const Doctors: React.FC = () => {
               <section className="box-list_last-patient">
                 {doctor.latestPatients?.map((patient) => (
                   <div className="post" key={patient.id}>
-                    <div className="box-last-patient">
+                    <div
+                      className="box-last-patient"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handlePatientClick(Number(patient.id))}
+                    >
                       <div className="last-patient_avatar">
                         <img src={generateAvatarImage(DetailType.PATIENT, patient.id)} alt="" />
                       </div>

@@ -39,6 +39,7 @@ const PatientNew: React.FC = () => {
   const [address, setAddress] = React.useState("");
   const [opd, setOpd] = React.useState(Number);
   const [idp, setIdp] = React.useState(Number);
+  const [notes, setNotes] = React.useState("");
   const [bloodGroup, setBloudGroop] = React.useState<PatientDTOBloodGroupEnum>();
   const [chronicPatient, setChronicPatient] = React.useState(false);
   const navigate = useNavigate();
@@ -58,9 +59,22 @@ const PatientNew: React.FC = () => {
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      api.patients.createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient });
-      enqueueSnackbar(`Success: Paziente AGGIUNTO`, { variant: "success" });
-      setName("");
+      api.patients
+        .createPatient({ name, surname, address, opd, idp, bloodGroup, chronicPatient, notes })
+        .then(() => {
+          enqueueSnackbar(`Success: Paziente AGGIUNTO`, { variant: "success" });
+          setName("");
+          setSurname("");
+          setAddress("");
+          setOpd(0);
+          setIdp(0);
+          setBloudGroop(undefined);
+          setChronicPatient(false);
+          setNotes("");
+        })
+        .catch((error) => {
+          enqueueSnackbar(`Error: ${error}`, { variant: "error" });
+        });
     },
     [name, surname, address, opd, idp, bloodGroup, chronicPatient]
   );
@@ -136,7 +150,7 @@ const PatientNew: React.FC = () => {
             />
             <FormControl sx={{ gridRow: "2", gridColumn: "span 7" }}>
               <InputLabel required id="demo-simple-select-label">
-                Name
+                Blood Group
               </InputLabel>
               <Select
                 required
@@ -144,7 +158,7 @@ const PatientNew: React.FC = () => {
                 labelId="demo-multiple-name-label"
                 id="demo-multiple-name"
                 onChange={handleChangeForm}
-                input={<OutlinedInput label="Name" />}
+                input={<OutlinedInput label="Blood Group" />}
                 MenuProps={MenuProps}
               >
                 {Object.values(PatientDTOBloodGroupEnum).map((bloodGroup) => (
@@ -166,6 +180,8 @@ const PatientNew: React.FC = () => {
               label="Notes"
               multiline
               rows={4}
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
             />
 
             <Button

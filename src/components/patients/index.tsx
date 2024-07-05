@@ -82,6 +82,7 @@ const Patients: React.FC = () => {
             size="small"
             onChange={(e) => setPid(Number(e.target.value))}
           />
+
           <TextField
             sx={{ gridArea: "opd" }}
             id="outlined-basic"
@@ -109,7 +110,14 @@ const Patients: React.FC = () => {
       <br />
       <Box sx={{ columnGap: 3, rowGap: 4, display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
         {patients.map((patient) => (
-          <div className="box-doctor" key={patient.id} onClick={() => handlePatientClick(patient.id ?? 0)}>
+          <div
+            className="box-doctor"
+            key={patient.id}
+            onClick={() => handlePatientClick(patient.id ?? 0)}
+            style={{
+              cursor: "pointer",
+            }}
+          >
             <div className="box-info">
               <p className="name">
                 <strong>

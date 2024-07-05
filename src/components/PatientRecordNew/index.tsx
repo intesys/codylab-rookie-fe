@@ -75,16 +75,21 @@ const PatientRecordNew: React.FC = () => {
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setPatientId(Number(id));
-      api.patientRecords.createPatientRecord({
-        patientId,
-        doctor: doctors.find((doctor) => doctor.id === doctorId),
-        date: date.toISOString(),
-        typeVisit,
-        reasonVisit,
-        treatmentMade,
-      });
-      console.log(date.toISOString());
-      enqueueSnackbar(`Success: Paziente AGGIUNTO`, { variant: "success" });
+      api.patientRecords
+        .createPatientRecord({
+          patientId,
+          doctor: doctors.find((doctor) => doctor.id === doctorId),
+          date: date.toISOString(),
+          typeVisit,
+          reasonVisit,
+          treatmentMade,
+        })
+        .then(() => {
+          enqueueSnackbar(`Success: Patient Record ADDED`, { variant: "success" });
+        })
+        .catch((error) => {
+          enqueueSnackbar(`Error: ${error}`, { variant: "error" });
+        });
     },
     [patientId, doctorId, date, typeVisit, reasonVisit, treatmentMade]
   );

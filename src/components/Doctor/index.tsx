@@ -1,9 +1,9 @@
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
 import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
 import { api } from "@config/api";
-import { DOCTORS_PATH } from "@config/paths";
+import { DOCTORS_PATH, PATIENTS_PATH } from "@config/paths";
 import { DetailType } from "@lib/types";
-import { generateAvatarImage, getEditDetailPath, getPath } from "@lib/utils";
+import { generateAvatarImage, getDetailPath, getEditDetailPath, getPath } from "@lib/utils";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -38,6 +38,10 @@ const Doctor: React.FC = () => {
     navigate(getEditDetailPath(DOCTORS_PATH, id));
   }, [navigate]);
 
+  const handlePatientClick = (id: number) => {
+    navigate(getDetailPath(PATIENTS_PATH, id));
+  };
+
   useEffect(() => {
     if (!loading) {
       return;
@@ -55,7 +59,7 @@ const Doctor: React.FC = () => {
   }, [loading, id]);
 
   if (!doctor) {
-    return <>Patient not found</>;
+    return <>Doctor not found</>;
   }
 
   return (
@@ -91,6 +95,9 @@ const Doctor: React.FC = () => {
               sx={{ color: red[500] }}
               fontSize="small"
               onClick={() => handlEditDoctorClick()}
+              style={{
+                cursor: "pointer",
+              }}
             ></ModeEditOutlineIcon>
           </p>
           <p className="doctor-profession">{doctor.profession}</p>
@@ -118,7 +125,13 @@ const Doctor: React.FC = () => {
           <br />
           <div>
             {doctor.latestPatients && doctor.latestPatients.length > 0 && doctor.latestPatients[0].name && (
-              <div className="box-last-patient">
+              <div
+                className="box-last-patient"
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => handlePatientClick(doctor.latestPatients[0].id)}
+              >
                 <div>
                   <Avatar
                     alt="Remy Sharp"
@@ -132,7 +145,13 @@ const Doctor: React.FC = () => {
               </div>
             )}
             {doctor.latestPatients && doctor.latestPatients.length > 0 && doctor.latestPatients[1].name && (
-              <div className="box-last-patient">
+              <div
+                className="box-last-patient"
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => handlePatientClick(doctor.latestPatients[1].id)}
+              >
                 <div>
                   <Avatar
                     alt="Remy Sharp"
