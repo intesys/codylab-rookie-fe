@@ -1,21 +1,22 @@
 {
-  "git.autofetch": true,
-  "emmet.triggerExpansionOnTab": true,
+  // Editor settings
+  "editor.autoClosingBrackets": "always",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "javascript.preferences.quoteStyle": "double",
-  "typescript.preferences.quoteStyle": "double",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "gitlens.gitCommands.skipConfirmations": [
-    "fetch:command",
-    "switch:command",
-    "stash-apply:command",
-    "branch-create:command"
-  ],
-  "explorer.confirmDragAndDrop": false,
-  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.inlineSuggest.enabled": true,
   "editor.largeFileOptimizations": false,
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
   "editor.wordWrap": "on",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+
+  // Code formatting & quality
+  "emmet.triggerExpansionOnTab": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 0,
+
+  // File handling
   "files.associations": {
     ".env*": "dotenv",
     "*.html": "hubl",
@@ -24,9 +25,24 @@
   "files.exclude": {
     "**/.git": false
   },
+
+  // Git settings
+  "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.ignoreRebaseWarning": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "switch:command",
+    "stash-apply:command",
+    "branch-create:command"
+  ],
+
+  // Terminal settings
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+  // Explorer settings
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.js, ${capture}.typegen.ts",
@@ -38,14 +54,13 @@
     "*.mts": "${capture}.typegen.ts",
     "*.cts": "${capture}.typegen.ts"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
-  "editor.autoClosingBrackets": "always",
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "diffEditor.maxComputationTime": 0,
-  "explorer.confirmDelete": false,
-  "editor.inlineSuggest.enabled": true
+
+  // Language-specific settings
+  "javascript.preferences.quoteStyle": "double",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Other settings
+  "liveServer.settings.donotShowInfoMsg": true
 }
