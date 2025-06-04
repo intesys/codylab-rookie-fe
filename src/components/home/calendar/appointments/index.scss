@@ -1,4 +1,5 @@
-@import "../../../../variables";
+@use "sass:color";
+@use "../../../../variables" as *;
 
 // appointments
 .calendar__appointment_list {
@@ -8,7 +9,7 @@
     padding: 15px 20px;
     // border-bottom: 1px solid #eee;
     &:hover {
-      background: lighten($mdc-theme-primary, 36);
+      background: color.adjust($mdc-theme-primary, $lightness: 36%);
     }
     &__hour {
       font-weight: bold;
