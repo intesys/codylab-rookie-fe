@@ -1,0 +1,4 @@
+[submodule ".github/defaults"]
+	path = .github/defaults
+	url = https://gitlab.intesys.it/frontend/templates/github-copilot.git
+	branch = main
