@@ -1,4 +1,4 @@
-import Menu from "@components/Layout/Header/Menu";
+import Menu from "@components/Layout/Header/menu";
 import Toolbar from "@components/Layout/Header/Toolbar";
 import { Container } from "@mui/material";
 import React from "react";

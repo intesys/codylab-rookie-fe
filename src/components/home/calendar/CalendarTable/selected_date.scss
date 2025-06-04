@@ -1,4 +1,4 @@
-@import "../../../../variables";
+@use "../../../../variables" as *;
 
 .calendar__selected_date {
   background: $app-footer-background;

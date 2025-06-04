@@ -5,6 +5,9 @@
       "@parcel/transformer-raw"
     ]
   },
+  "optimizers": {
+    "*.{jpg,jpeg,png}": []
+  },
   "resolvers": [
     "@parcel/resolver-glob",
     "..."

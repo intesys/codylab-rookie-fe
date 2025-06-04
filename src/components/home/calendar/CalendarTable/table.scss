@@ -1,4 +1,5 @@
-@import "../../../../variables";
+@use "../../../../variables" as *;
+@use "sass:color";
 
 $cell-size: 2.5em;
 
@@ -21,7 +22,7 @@ $cell-size: 2.5em;
       line-height: $cell-size;
       width: $cell-size;
       &:hover {
-        background: lighten($mdc-theme-secondary, 35);
+        background: color.adjust($mdc-theme-secondary, $lightness: 35%);
       }
       &.selected {
         background: $mdc-theme-primary;
