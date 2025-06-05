@@ -1,6 +1,6 @@
 # Intesys CodyLab - Rookie - Front-end
 
-Questo repositiory contiene il codice del corso CodyLab Rookie - Front-end.
+Questo repository contiene il codice del corso CodyLab Rookie - Front-end.
 
 ---
 
@@ -24,9 +24,9 @@ Abbiamo bisogno di **nodejs** e **git** installati sulla propria macchina.
 
     npm start
 
-### Effettaure la build del API Client
+### Effettuare la build dell'API Client
 
-Prima procedere con esportare TS_POST_PROCESS_FILE per abilitare prettier durante la compilazione dei file.
+Prima di procedere, esportare TS_POST_PROCESS_FILE per abilitare prettier durante la compilazione dei file.
 
 ```shell
 export TS_POST_PROCESS_FILE='./node_modules/.bin/prettier.cmd --write'
@@ -61,11 +61,11 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
 ## Sezioni disponibili da sviluppare
 
 - Patient (Entity)
-  - Lista dei dottori e form di filtro
+  - Lista dei pazienti e form di filtro
   - Dettaglio del paziente
   - Creazione di un nuovo paziente
   - Aggiornamento di un paziente
-  - Rimosione di un paziente
+  - Rimozione di un paziente
 - Records (Entity)
 
   - Creazione di un nuovo record legato ad un paziente
@@ -77,7 +77,7 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
   - Dettaglio del dottore
   - Creazione di un nuovo dottore
   - Aggiornamento di un dottore
-  - Rimosione di un dottore
+  - Rimozione di un dottore
   - Lista dei pazienti assegnati al dottore
 
 ---
@@ -95,7 +95,7 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
   - [ ] Dettaglio del dottore
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creare un componente che gestisca la scheda di dettaglio di un dottore
-    - [ ] Creare un componente che gestica la lista dei pazienti assegnati al dottore
+    - [ ] Creare un componente che gestisca la lista dei pazienti assegnati al dottore
     - [ ] Agganciare le API per far ritornare il dettaglio del dottore
     - [ ] Agganciare le API per far ritornare la lista dei pazienti assegnati al dottore
   - [ ] Form gestione delle informazioni di un dottore
@@ -107,14 +107,14 @@ Per il design applicativo fare riferimento ai file .png salvati nella cartella [
   - [ ] Lista dei pazienti
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creare un componente per la scheda di anteprima di un paziente
-    - [ ] Creare un componente che gestisca la lista dei paziente
+    - [ ] Creare un componente che gestisca la lista dei pazienti
     - [ ] Creare un componente che gestisca il form di filtro
     - [ ] Agganciare le API per far ritornare la lista dei pazienti presenti nel database
     - [ ] Agganciare le API al filtro di ricerca dei pazienti
   - [ ] Dettaglio del paziente
     - [ ] Analizzare come suddividere a livello di componenti le varie sezioni o elementi delle pagine da sviluppare
     - [ ] Creare un componente che gestisca la scheda di dettaglio di un paziente
-    - [ ] Creare un componente che gestica la lista dei record assegnati al paziente
+    - [ ] Creare un componente che gestisca la lista dei record assegnati al paziente
     - [ ] Agganciare le API per far ritornare il dettaglio del paziente
     - [ ] Agganciare le API per far ritornare la lista dei record assegnati al paziente
   - [ ] Form gestione delle informazioni di un paziente

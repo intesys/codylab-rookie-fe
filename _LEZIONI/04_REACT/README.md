@@ -1,5 +1,7 @@
 # 04 - REACT
 
+> **Nota**: In questo tutorial utilizziamo Vite come build tool invece di Create React App (CRA). Vite offre tempi di compilazione più rapidi e una migliore esperienza di sviluppo.
+
 ## 1) **Thinking in React**
 
 - [React.dev - Thinking in React](https://it.react.dev/learn/thinking-in-react)
@@ -14,7 +16,7 @@ cd tic-tac-toe
 npm run dev
 ```
 
-Aprire il link [http://localhost:3000/](http://localhost:3000/) per visionare l'applicazione.
+Aprire il link [http://localhost:5173/](http://localhost:5173/) per visionare l'applicazione.
 
 - IMPORTANTE: importare il file `./assets/style.css` all'interno della cartella `./tic-tac-toe/src`
 
@@ -45,8 +47,10 @@ Configuriamo Axios per gestire le chiamate alle API andando a creare il file `./
 ```typescript
 import axios from "axios";
 
-// Questo valore è un valore di prova, per ottenere il proprio valore registrarsi su https://dummyapi.io/
-const APP_ID = "60a9b7b4e7f2c4b7a0a0e7d1";
+// Questo è un valore di esempio. Per ottenere un APP_ID valido:
+// 1. Registrarsi su https://dummyapi.io/
+// 2. Dopo il login, copiare l'APP_ID dalla dashboard
+const APP_ID = "60a9b7b4e7f2c4b7a0a0e7d1"; // Sostituire con il proprio APP_ID
 
 const api = axios.create({
   baseURL: "https://dummyapi.io/data/v1",
@@ -103,7 +107,7 @@ const UserList: React.FC = () => {
     <div>
       <h1>User List</h1>
       <ul>
-        <li onClick={() => handleUserClick(1)}>User 1</li>
+        <li onClick={() => handleUserClick("1")}>User 1</li>
         {/* ... */}
       </ul>
     </div>
@@ -111,11 +115,93 @@ const UserList: React.FC = () => {
 };
 ```
 
-Esercizio:
+## 4) **Esercizio pratico: Gestione dei Post**
+
+In questo esercizio metteremo in pratica quanto appreso creando nuovi componenti e configurando il routing:
+
+### Requisiti:
 
 - [ ] Configurare due nuove voci del routing '/post' e '/post/:id' e associare i componenti `PostList` e `PostDetail`
 - [ ] Creare un componente `PostList` che visualizzi la lista post ottenuti dalla chiamata API `/post`
 - [ ] Creare un componente `PostDetail` che visualizzi i dettagli di un post ottenuti dalla chiamata API `/post/{id}`
 - [ ] Stilare sia il componente `PostList` che `PostDetail` utilizzando il CSS in modo da rendere l'applicazione più gradevole
 
-Per questo esercizio non è importante che la grafica sia perfetta, l'importante è che i dati vengano visualizzati e gestisti correttamente.
+### Suggerimento di implementazione:
+
+Per il componente `PostList`, potete strutturarlo in questo modo:
+
+```typescript
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "./api";
+
+// Definire i tipi per i dati
+interface Post {
+  id: string;
+  title: string;
+  // altri campi in base alla struttura dei dati restituiti dall'API
+}
+
+interface PostResponse {
+  data: Post[];
+  // altri campi della risposta API
+}
+
+const PostList: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Recuperare i posts all'avvio del componente
+    api.get("/post").then((response) => {
+      setPosts(response.data.data);
+    });
+  }, []);
+
+  const handlePostClick = (id: string) => {
+    navigate(`/post/${id}`);
+  };
+
+  return (
+    <div className="post-list">
+      <h1>Post List</h1>
+      {posts.map((post) => (
+        <div key={post.id} onClick={() => handlePostClick(post.id)} className="post-item">
+          <h2>{post.title}</h2>
+          {/* Altri dettagli del post */}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default PostList;
+```
+
+Per questo esercizio non è importante che la grafica sia perfetta, l'importante è che i dati vengano visualizzati e gestiti correttamente.
+
+## 5) **Verifica finale**
+
+Una volta completato l'esercizio, il tuo routing dovrebbe includere tutte queste rotte:
+
+```typescript
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<UserList />} />
+        <Route path={"/user/:id"} element={<UserDetail />} />
+        <Route path={"/user/:id/edit"} element={<UserDetailEdit />} />
+        <Route path={"/post"} element={<PostList />} />
+        <Route path={"/post/:id"} element={<PostDetail />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+```
+
+Per testare la tua applicazione:
+
+1. Verifica che la navigazione tra le diverse pagine funzioni correttamente
+2. Controlla che i dati vengano caricati e visualizzati correttamente
+3. Assicurati che il CSS applicato renda l'interfaccia utente gradevole e usabile
