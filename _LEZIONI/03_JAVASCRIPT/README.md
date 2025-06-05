@@ -80,14 +80,19 @@ console.log((x += y));
 // Expected output: 7
 
 console.log((x -= y));
+// Expected output: 5
 
 console.log((x *= y));
+// Expected output: 10
 
 console.log((x /= y));
+// Expected output: 5
 
 console.log((x %= y));
+// Expected output: 1
 
 console.log((x **= y));
+// Expected output: 1
 
 // Incremento e decremento
 
@@ -120,7 +125,7 @@ console.log(x == y);
 // Expected output: false
 
 console.log(x === y);
-// Expected output: falsE
+// Expected output: false
 
 console.log(x != y);
 // Expected output: true
@@ -172,7 +177,7 @@ console.log(x[0]);
 console.log(x[1]);
 // Expected output: h
 
-copnsole.log(`${x} ${y}`);
+console.log(`${x} ${y}`);
 // Expected output: SheCodes Pro
 ```
 
@@ -214,9 +219,7 @@ let x = 5;
 let y = 2;
 
 // ternary operator
-x > y
-  ? console.log("x è maggiore di y")
-  : console.log("x è minore o uguale a y");
+x > y ? console.log("x è maggiore di y") : console.log("x è minore o uguale a y");
 ```
 
 ## 5) **Ciclo for**
@@ -358,6 +361,8 @@ array.filter((item, index) => item === "Pro");
 
 ## 8) **Object**
 
+Gli oggetti in JavaScript sono contenitori per valori identificati da chiavi, permettendo di organizzare dati correlati.
+
 - [MDN - Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 ```javascript
@@ -374,8 +379,6 @@ const person = {
   },
 };
 ```
-
-<!--  -->
 
 ```javascript
 // Object methods
@@ -427,9 +430,31 @@ console.log(person["firstName"]);
 // Expected output: Jane
 ```
 
+## 9) **JSON**
+
+JavaScript Object Notation (JSON) è un formato di scambio dati leggero e indipendente dal linguaggio.
+
+```javascript
+// Conversione da oggetto JavaScript a stringa JSON
+const person = {
+  firstName: "Jane",
+  lastName: "Doe",
+  age: 30,
+};
+
+const jsonString = JSON.stringify(person);
+console.log(jsonString);
+// Expected output: {"firstName":"Jane","lastName":"Doe","age":30}
+
+// Conversione da stringa JSON a oggetto JavaScript
+const jsonObj = JSON.parse(jsonString);
+console.log(jsonObj.firstName);
+// Expected output: Jane
+```
+
 ## 10) **Funzioni**
 
-<!-- Function statement -->
+Le funzioni sono blocchi di codice riutilizzabili che eseguono un'operazione specifica e possono essere richiamate quando necessario.
 
 - [MDN - Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)
 
@@ -440,7 +465,6 @@ function sum(a, b) {
 }
 
 console.log(sum(1, 2));
-
 // Expected output: 3
 ```
 
@@ -451,211 +475,214 @@ const sum = function (a, b) {
 };
 
 console.log(sum(1, 2));
-
 // Expected output: 3
 ```
 
 ```javascript
 // Arrow function
-
 const sum = (a, b) => {
   return a + b;
 };
 
 console.log(sum(1, 2));
-
 // Expected output: 3
 ```
 
 # BONUS - TYPESCRIPT
 
-Typescript è un linguaggio di programmazione open source sviluppato da Microsoft. È un super-set di Javascript, ovvero un linguaggio che estende Javascript aggiungendo nuove funzionalità.
+## 1) **Introduzione a TypeScript**
 
-## **Installazione**
+TypeScript è un linguaggio di programmazione open source sviluppato da Microsoft. È un super-set di JavaScript, ovvero un linguaggio che estende JavaScript aggiungendo tipizzazione statica e altre funzionalità avanzate. Questo permette di trovare errori durante la fase di sviluppo, prima dell'esecuzione del codice.
+
+**Principali vantaggi di TypeScript:**
+
+- Rilevamento degli errori in fase di compilazione
+- Migliore supporto IDE (completamento automatico, suggerimenti)
+- Codice più manutenibile e documentato
+- Refactoring più sicuro
+
+## 2) **Installazione e compilazione**
 
 ```bash
+# Installazione
 npm install -g typescript
-```
 
-## **Compilazione**
-
-```bash
+# Compilazione
 tsc nome_file.ts
 ```
 
-## **Variabili**
+## 3) **Variabili tipizzate**
 
 ```typescript
-// Variabili
+// Variabili con tipo esplicito
 let x: number = 5;
 let y: number = 2;
 
 console.log(x + y);
-
 // Expected output: 7
 
 // esempio di errore
-
 console.log(x + " " + y);
-
 // Expected output: error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
 ```
 
 ```typescript
-// Variabili
-
-let school: string = "SheCodes";
-let fullPackage: string = "SheCodes Pro";
-
+// Altri esempi di variabili tipizzate
+let school: string = "Coding Bootcamp";
+let fullPackage: string = "Full Stack Course";
 let projects: number = 4;
-
 let awesome: boolean = true;
-
-let array: string[] = ["SheCodes", "Pro", "awesome"];
+let array: string[] = ["HTML", "CSS", "JavaScript"];
 ```
 
-```typescript
-// Funzioni
+## 4) **Funzioni tipizzate**
 
+```typescript
+// Funzione con parametri e valore di ritorno tipizzati
 function sum(a: number, b: number): number {
   return a + b;
 }
 
 console.log(sum(1, 2));
-
 // Expected output: 3
 
 // esempio di errore
-
 console.log(sum("1", "2"));
-
 // Expected output: error TS2345: Argument of type '"1"' is not assignable to parameter of type 'number'.
 ```
 
-```typescript
-// Types or Interfaces
+## 5) **Types e Interfaces**
 
-// NB: Type aliases and interfaces are very similar, and in many cases you can choose between them freely. Almost all features of an interface are available in type, the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable.
+In TypeScript, i types e le interfaces sono strumenti per definire la forma degli oggetti. La differenza principale è che un'interfaccia può essere estesa dopo la sua definizione, mentre un type è immutabile una volta definito.
 
-type School = {
-  name: string;
-  package: string;
-  projects?: number;
-  awesome?: boolean;
-};
-
-interface School {
-  name: string;
-  package: string;
-  projects?: number;
-  awesome?: boolean;
-}
-
-let sheCodes: School = {
-  name: "SheCodes",
-  package: "SheCodes Pro",
-  projects: 4,
-  awesome: true,
-};
-
-// inteface - type extends
-
-interface School {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-}
-
-interface SheCodes extends School {
-  students: number;
-}
-
-type School = {
-  name: string;
-  package: string;
-  projects?: number;
-  awesome?: boolean;
-};
-
-type SheCodes = School & {
-  students: number;
-};
-
-// Interface - type omit
-
-interface School {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-}
-
-interface SheCodes extends Omit<School, "projects"> {
-  students: number;
-}
-
-type School = {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-};
-
-type SheCodes = Omit<School, "projects"> & {
-  students: number;
-};
-
-// Interface - type pick
-
-interface School {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-}
-
-interface SheCodes extends Pick<School, "name" | "package"> {}
-
-type School = {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-};
-
-type SheCodes = Pick<School, "name" | "package"> & {};
-
-// interface - type partial
-
-interface School {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-}
-
-interface SheCodes extends Partial<School> {}
-
-type School = {
-  name: string;
-  package: string;
-  projects: number;
-  awesome: boolean;
-};
-
-type SheCodes = Partial<School> & {};
-```
+### 5.1) **Definizione base**
 
 ```typescript
-// enum
+// Definizione di un Type
+type Course = {
+  name: string;
+  duration: number;
+  isActive?: boolean; // Proprietà opzionale
+};
 
-enum School {
-  SheCodes = "SheCodes",
-  SheCodesPro = "SheCodes Pro",
+// Definizione di un'Interface
+interface Student {
+  name: string;
+  age: number;
+  courses?: string[]; // Proprietà opzionale
 }
 
-console.log(School.SheCodes);
+// Utilizzo
+let webDevelopment: Course = {
+  name: "Web Development",
+  duration: 12,
+  isActive: true,
+};
+
+let student: Student = {
+  name: "Alice",
+  age: 25,
+  courses: ["HTML", "CSS", "JavaScript"],
+};
 ```
 
-- [Typescript - Basic Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+### 5.2) **Estensione**
+
+```typescript
+// Estensione di Interface
+interface BasicCourse {
+  name: string;
+  duration: number;
+}
+
+// L'interfaccia AdvancedCourse eredita tutte le proprietà di BasicCourse
+interface AdvancedCourse extends BasicCourse {
+  advanced: boolean;
+  topics: string[];
+}
+
+// Estensione di Type
+type BasicCourseType = {
+  name: string;
+  duration: number;
+};
+
+// Il tipo AdvancedCourseType combina le proprietà di BasicCourseType con nuove proprietà
+type AdvancedCourseType = BasicCourseType & {
+  advanced: boolean;
+  topics: string[];
+};
+```
+
+### 5.3) **Utility Types**
+
+TypeScript fornisce diversi utility types per trasformare i tipi:
+
+```typescript
+// Omit - Rimuove proprietà specifiche
+interface FullCourse {
+  name: string;
+  duration: number;
+  advanced: boolean;
+  price: number;
+}
+
+// Crea un tipo che omette 'price'
+interface ShortCourse extends Omit<FullCourse, "price"> {
+  // Ha name, duration, advanced ma non price
+}
+
+// Pick - Seleziona solo alcune proprietà
+interface CoursePreview extends Pick<FullCourse, "name" | "duration"> {
+  // Contiene solo name e duration
+}
+
+// Partial - Rende tutte le proprietà opzionali
+interface CourseUpdate extends Partial<FullCourse> {
+  // Tutte le proprietà diventano opzionali
+}
+```
+
+## 6) **Enum**
+
+Gli enum permettono di definire un insieme di costanti con nome:
+
+```typescript
+// Definizione di un enum
+enum CourseCategory {
+  WebDevelopment = "Web Development",
+  MobileDevelopment = "Mobile Development",
+  DataScience = "Data Science",
+}
+
+console.log(CourseCategory.WebDevelopment);
+// Expected output: Web Development
+```
+
+## 7) **Confronto JavaScript vs TypeScript**
+
+Ecco alcuni esempi di codice JavaScript e le loro controparti in TypeScript:
+
+| JavaScript                             | TypeScript                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------------ | ------ | ------------------------------- |
+| `function sum(a, b) { return a + b; }` | `function sum(a: number, b: number): number { return a + b; }`                 |
+| `const person = { name: "Alice" };`    | `interface Person { name: string; } const person: Person = { name: "Alice" };` |
+| `let items = [1, "two", true];`        | `let items: (number                                                            | string | boolean)[] = [1, "two", true];` |
+
+## 8) **Risorse utili**
+
+- [TypeScript - Basic Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+- [TypeScript Playground](https://www.typescriptlang.org/play) - Per testare il codice TypeScript online
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) - Documentazione completa
+- [JavaScript to TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) - Guida alla migrazione
+
+## 9) **Esercizi pratici**
+
+### Esercizio 1 - JavaScript
+
+Crea una funzione che accetti un array di numeri e restituisca la somma di tutti gli elementi.
+
+### Esercizio 2 - TypeScript
+
+Crea un'interfaccia `Product` con le proprietà: name (string), price (number), inStock (boolean).
+Quindi crea una funzione tipizzata che accetti un array di `Product` e restituisca solo i prodotti in stock.
