@@ -1,7 +1,8 @@
-import informatici from "@assets/informatici_senza_frontiere.png";
 import { Grid } from "@mui/material";
 import React from "react";
 import "./index.scss";
+
+const informaticiUrl = new URL("../../../assets/informatici_senza_frontiere.png", import.meta.url);
 
 interface IProps extends React.PropsWithChildren {}
 
@@ -16,7 +17,7 @@ const Footer: React.FC<IProps> = () => (
               Novembre, 100 - 31100 Treviso - Italy C.F. 94106980264
             </Grid>
             <Grid item xs={8} className="layout-footer__logo-informatici">
-              <img src={informatici} alt="Informatici Senza Frontiere - Logo" />
+              <img src={informaticiUrl.href} alt="Informatici Senza Frontiere - Logo" />
             </Grid>
           </Grid>
         </div>
