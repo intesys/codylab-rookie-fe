@@ -93,7 +93,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
 
   return (
     <Paper sx={{ p: 4 }}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-cy="patient-form">
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
             <TextField
@@ -105,6 +105,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               variant="outlined"
+              data-cy="patient-name-input"
             />
           </Grid>
           <Grid item xs={4}>
@@ -117,6 +118,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
               variant="outlined"
+              data-cy="patient-surname-input"
             />
           </Grid>
           <Grid item xs={4}>
@@ -129,6 +131,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               variant="outlined"
+              data-cy="patient-address-input"
             />
           </Grid>
         </Grid>
@@ -144,6 +147,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
               value={opd}
               onChange={(e) => setOpd(Number(e.target.value))}
               variant="outlined"
+              data-cy="patient-opd-input"
             />
           </Grid>
           <Grid item xs={4}>
@@ -157,6 +161,7 @@ const PatientForm: FC<IProps> = ({ record }) => {
               value={idp}
               onChange={(e) => setIdp(Number(e.target.value))}
               variant="outlined"
+              data-cy="patient-idp-input"
             />
           </Grid>
           <Grid item xs={4}>
@@ -166,12 +171,14 @@ const PatientForm: FC<IProps> = ({ record }) => {
               </InputLabel>
               <Select
                 labelId="blood-group-label"
+                name="bloodGroup"
                 id="blood-group-select"
                 value={bloodGroup}
                 label="Blood Group"
                 required
                 size="small"
                 onChange={(e: SelectChangeEvent) => setBloodGroup(e.target.value as PatientDTOBloodGroupEnum)}
+                data-cy="patient-blood-group-select"
               >
                 <MenuItem value={PatientDTOBloodGroupEnum.APlus}>
                   {getBloodType(PatientDTOBloodGroupEnum.APlus)}
@@ -232,7 +239,13 @@ const PatientForm: FC<IProps> = ({ record }) => {
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={12} textAlign="right">
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" endIcon={<Save />} disabled={saveLoading}>
+              <Button
+                variant="contained"
+                type="submit"
+                endIcon={<Save />}
+                disabled={saveLoading}
+                data-cy="patient-form-submit"
+              >
                 Save
               </Button>
               <Button variant="outlined" component={Link} to={backPath}>

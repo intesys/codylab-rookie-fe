@@ -1,0 +1,345 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Mario",
+      "surname": "Rossi",
+      "phoneNumber": "3451234567",
+      "address": "Via Roma 123, Milano",
+      "email": "mario.rossi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+      "profession": "Cardiology",
+      "latestPatients": [
+        {
+          "id": 1,
+          "opd": 10001,
+          "idp": 50001,
+          "name": "Paolo",
+          "surname": "Ferrari",
+          "phoneNumber": 3491234567,
+          "address": "Via Verdi 45, Roma",
+          "email": "paolo.ferrari@example.com",
+          "avatar": "https://randomuser.me/api/portraits/men/10.jpg",
+          "bloodGroup": "A_PLUS",
+          "notes": "Needs regular check-ups",
+          "chronicPatient": false,
+          "lastAdmission": "2025-05-10T09:30:00",
+          "lastDoctorVisitedId": 1,
+          "doctorIds": [1]
+        },
+        {
+          "id": 2,
+          "opd": 10002,
+          "idp": 50002,
+          "name": "Giulia",
+          "surname": "Romano",
+          "phoneNumber": 3482345678,
+          "address": "Via Mazzini 67, Firenze",
+          "email": "giulia.romano@example.com",
+          "avatar": "https://randomuser.me/api/portraits/women/10.jpg",
+          "bloodGroup": "B_MINUS",
+          "notes": "Allergic to penicillin",
+          "chronicPatient": true,
+          "lastAdmission": "2025-05-15T14:00:00",
+          "lastDoctorVisitedId": 1,
+          "doctorIds": [1, 3]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Anna",
+      "surname": "Verdi",
+      "phoneNumber": "3467654321",
+      "address": "Via Dante 45, Torino",
+      "email": "anna.verdi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+      "profession": "Neurology",
+      "latestPatients": [
+        {
+          "id": 3,
+          "opd": 10003,
+          "idp": 50003,
+          "name": "Marco",
+          "surname": "Esposito",
+          "phoneNumber": 3473456789,
+          "address": "Via Garibaldi 12, Napoli",
+          "email": "marco.esposito@example.com",
+          "avatar": "https://randomuser.me/api/portraits/men/12.jpg",
+          "bloodGroup": "ZERO_PLUS",
+          "notes": "Hypertension patient",
+          "chronicPatient": true,
+          "lastAdmission": "2025-05-20T11:15:00",
+          "lastDoctorVisitedId": 2,
+          "doctorIds": [2, 1]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Luca",
+      "surname": "Bianchi",
+      "phoneNumber": "3498765432",
+      "address": "Via Marconi 78, Bologna",
+      "email": "luca.bianchi@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/3.jpg",
+      "profession": "Pediatrics",
+      "latestPatients": []
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "opd": 10001,
+      "idp": 50001,
+      "name": "Paolo",
+      "surname": "Ferrari",
+      "phoneNumber": 3491234567,
+      "address": "Via Verdi 45, Roma",
+      "email": "paolo.ferrari@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/10.jpg",
+      "bloodGroup": "A_PLUS",
+      "notes": "Needs regular check-ups",
+      "chronicPatient": false,
+      "lastAdmission": "2025-05-10T09:30:00",
+      "lastDoctorVisitedId": 1,
+      "patientRecords": [
+        {
+          "id": 101,
+          "patientId": 1,
+          "doctor": {
+            "id": 1,
+            "name": "Mario",
+            "surname": "Rossi",
+            "phoneNumber": "3451234567",
+            "address": "Via Roma 123, Milano",
+            "email": "mario.rossi@example.com",
+            "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+            "profession": "Cardiology"
+          },
+          "date": "2025-05-10T09:30:00",
+          "typeVisit": "Regular check-up",
+          "reasonVisit": "Annual health examination",
+          "treatmentMade": "Blood pressure test, ECG"
+        }
+      ],
+      "doctorIds": [1]
+    },
+    {
+      "id": 2,
+      "opd": 10002,
+      "idp": 50002,
+      "name": "Giulia",
+      "surname": "Romano",
+      "phoneNumber": 3482345678,
+      "address": "Via Mazzini 67, Firenze",
+      "email": "giulia.romano@example.com",
+      "avatar": "https://randomuser.me/api/portraits/women/10.jpg",
+      "bloodGroup": "B_MINUS",
+      "notes": "Allergic to penicillin",
+      "chronicPatient": true,
+      "lastAdmission": "2025-05-15T14:00:00",
+      "lastDoctorVisitedId": 1,
+      "patientRecords": [
+        {
+          "id": 102,
+          "patientId": 2,
+          "doctor": {
+            "id": 1,
+            "name": "Mario",
+            "surname": "Rossi",
+            "phoneNumber": "3451234567",
+            "address": "Via Roma 123, Milano",
+            "email": "mario.rossi@example.com",
+            "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+            "profession": "Cardiology"
+          },
+          "date": "2025-05-15T14:00:00",
+          "typeVisit": "Follow-up",
+          "reasonVisit": "Chronic condition monitoring",
+          "treatmentMade": "Adjusted medication, blood tests"
+        },
+        {
+          "id": 103,
+          "patientId": 2,
+          "doctor": {
+            "id": 3,
+            "name": "Luca",
+            "surname": "Bianchi",
+            "phoneNumber": "3498765432",
+            "address": "Via Marconi 78, Bologna",
+            "email": "luca.bianchi@example.com",
+            "avatar": "https://randomuser.me/api/portraits/men/3.jpg",
+            "profession": "Pediatrics"
+          },
+          "date": "2025-04-10T11:30:00",
+          "typeVisit": "Consultation",
+          "reasonVisit": "Secondary opinion",
+          "treatmentMade": "Treatment plan review"
+        }
+      ],
+      "doctorIds": [1, 3]
+    },
+    {
+      "id": 3,
+      "opd": 10003,
+      "idp": 50003,
+      "name": "Marco",
+      "surname": "Esposito",
+      "phoneNumber": 3473456789,
+      "address": "Via Garibaldi 12, Napoli",
+      "email": "marco.esposito@example.com",
+      "avatar": "https://randomuser.me/api/portraits/men/12.jpg",
+      "bloodGroup": "ZERO_PLUS",
+      "notes": "Hypertension patient",
+      "chronicPatient": true,
+      "lastAdmission": "2025-05-20T11:15:00",
+      "lastDoctorVisitedId": 2,
+      "patientRecords": [
+        {
+          "id": 104,
+          "patientId": 3,
+          "doctor": {
+            "id": 2,
+            "name": "Anna",
+            "surname": "Verdi",
+            "phoneNumber": "3467654321",
+            "address": "Via Dante 45, Torino",
+            "email": "anna.verdi@example.com",
+            "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+            "profession": "Neurology"
+          },
+          "date": "2025-05-20T11:15:00",
+          "typeVisit": "Emergency",
+          "reasonVisit": "Severe headache",
+          "treatmentMade": "CT scan, pain medication"
+        },
+        {
+          "id": 105,
+          "patientId": 3,
+          "doctor": {
+            "id": 1,
+            "name": "Mario",
+            "surname": "Rossi",
+            "phoneNumber": "3451234567",
+            "address": "Via Roma 123, Milano",
+            "email": "mario.rossi@example.com",
+            "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+            "profession": "Cardiology"
+          },
+          "date": "2025-03-05T10:00:00",
+          "typeVisit": "Consultation",
+          "reasonVisit": "Blood pressure concerns",
+          "treatmentMade": "Prescribed hypertension medication"
+        }
+      ],
+      "doctorIds": [2, 1]
+    }
+  ],
+  "patientRecords": [
+    {
+      "id": 101,
+      "patientId": 1,
+      "doctor": {
+        "id": 1,
+        "name": "Mario",
+        "surname": "Rossi",
+        "phoneNumber": "3451234567",
+        "address": "Via Roma 123, Milano",
+        "email": "mario.rossi@example.com",
+        "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+        "profession": "Cardiology"
+      },
+      "date": "2025-05-10T09:30:00",
+      "typeVisit": "Regular check-up",
+      "reasonVisit": "Annual health examination",
+      "treatmentMade": "Blood pressure test, ECG"
+    },
+    {
+      "id": 102,
+      "patientId": 2,
+      "doctor": {
+        "id": 1,
+        "name": "Mario",
+        "surname": "Rossi",
+        "phoneNumber": "3451234567",
+        "address": "Via Roma 123, Milano",
+        "email": "mario.rossi@example.com",
+        "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+        "profession": "Cardiology"
+      },
+      "date": "2025-05-15T14:00:00",
+      "typeVisit": "Follow-up",
+      "reasonVisit": "Chronic condition monitoring",
+      "treatmentMade": "Adjusted medication, blood tests"
+    },
+    {
+      "id": 103,
+      "patientId": 2,
+      "doctor": {
+        "id": 3,
+        "name": "Luca",
+        "surname": "Bianchi",
+        "phoneNumber": "3498765432",
+        "address": "Via Marconi 78, Bologna",
+        "email": "luca.bianchi@example.com",
+        "avatar": "https://randomuser.me/api/portraits/men/3.jpg",
+        "profession": "Pediatrics"
+      },
+      "date": "2025-04-10T11:30:00",
+      "typeVisit": "Consultation",
+      "reasonVisit": "Secondary opinion",
+      "treatmentMade": "Treatment plan review"
+    },
+    {
+      "id": 104,
+      "patientId": 3,
+      "doctor": {
+        "id": 2,
+        "name": "Anna",
+        "surname": "Verdi",
+        "phoneNumber": "3467654321",
+        "address": "Via Dante 45, Torino",
+        "email": "anna.verdi@example.com",
+        "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+        "profession": "Neurology"
+      },
+      "date": "2025-05-20T11:15:00",
+      "typeVisit": "Emergency",
+      "reasonVisit": "Severe headache",
+      "treatmentMade": "CT scan, pain medication"
+    },
+    {
+      "id": 105,
+      "patientId": 3,
+      "doctor": {
+        "id": 1,
+        "name": "Mario",
+        "surname": "Rossi",
+        "phoneNumber": "3451234567",
+        "address": "Via Roma 123, Milano",
+        "email": "mario.rossi@example.com",
+        "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+        "profession": "Cardiology"
+      },
+      "date": "2025-03-05T10:00:00",
+      "typeVisit": "Consultation",
+      "reasonVisit": "Blood pressure concerns",
+      "treatmentMade": "Prescribed hypertension medication"
+    }
+  ],
+  "filters": {
+    "patientFilter": {
+      "text": "",
+      "id": null,
+      "opd": null,
+      "idp": null,
+      "doctorId": null
+    },
+    "doctorFilter": {
+      "name": "",
+      "surname": "",
+      "profession": ""
+    }
+  }
+}

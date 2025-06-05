@@ -15,7 +15,7 @@ const App: React.FC = () => (
     <div className="__show-structure">
       <MaterialProvider>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
+          <SnackbarProvider maxSnack={3} autoHideDuration={2000} data-cy="snackbar">
             <BrowserRouter>
               <Layout>
                 <AppRoutes />

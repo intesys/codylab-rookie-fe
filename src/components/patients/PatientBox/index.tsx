@@ -38,7 +38,7 @@ const PatientBox: FC<IProps> = ({ props }) => {
   const lastVisit = useMemo(() => patient.patientRecords?.[0], [patient]);
 
   return (
-    <Card>
+    <Card data-cy="patient-card">
       <CardActionArea sx={{ padding: 2 }} component={Link} to={getDetailPath(PATIENTS_PATH, patient.id)}>
         <CardContent>
           <Grid container direction="row" justifyContent="center" alignItems="center" textAlign="center" spacing={2}>

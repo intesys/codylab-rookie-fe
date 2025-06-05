@@ -38,7 +38,13 @@ const Patients: React.FC = () => {
         <BreadcrumbEl>Patients</BreadcrumbEl>
       </Breadcrumb>
       <SectionHeader title="Patients database">
-        <Button component={Link} to={getNewDetailPath(PATIENTS_PATH)} variant="outlined" startIcon={<Add />}>
+        <Button
+          component={Link}
+          to={getNewDetailPath(PATIENTS_PATH)}
+          variant="outlined"
+          startIcon={<Add />}
+          data-cy="add-patient-button"
+        >
           Add new patient
         </Button>
       </SectionHeader>

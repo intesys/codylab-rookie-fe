@@ -24,7 +24,7 @@ const FiltersForm: FC = () => {
 
   return (
     <Paper sx={{ padding: 4 }}>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit} data-cy="patient-filter-form">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Stack direction="row" alignItems="flex-end">
@@ -41,8 +41,10 @@ const FiltersForm: FC = () => {
               variant="outlined"
               type="number"
               size="small"
+              name="pid"
               fullWidth
               value={pid}
+              data-cy="patient-filter-pid"
             />
           </Grid>
           <Grid item xs={3}>
@@ -52,6 +54,7 @@ const FiltersForm: FC = () => {
               variant="outlined"
               type="number"
               size="small"
+              name="opd"
               fullWidth
               value={opd}
             />
@@ -63,6 +66,7 @@ const FiltersForm: FC = () => {
               variant="outlined"
               type="number"
               size="small"
+              name="idp"
               fullWidth
               value={idp}
             />

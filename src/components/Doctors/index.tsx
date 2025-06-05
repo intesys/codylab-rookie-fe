@@ -43,7 +43,7 @@ const Doctors: React.FC = () => {
         </Button>
       </SectionHeader>
       <FiltersForm />
-      <Grid container mt={4} spacing={2}>
+      <Grid container mt={4} spacing={2} data-cy="doctors-list">
         {loading ? (
           <Grid xs={12} item justifyContent="center" alignItems="center" textAlign="center">
             <CircularProgress />

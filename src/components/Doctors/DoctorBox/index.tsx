@@ -17,7 +17,7 @@ type IProps = {
 const DoctorBox: React.FC<IProps> = ({ props }) => {
   const { doctor } = props;
   return (
-    <Card>
+    <Card data-cy="doctor-item">
       <CardActionArea sx={{ padding: 2 }} component={Link} to={getDetailPath(DOCTORS_PATH, doctor.id)}>
         <CardContent>
           <Grid container direction="row" justifyContent="center" alignItems="center" textAlign="center" spacing={2}>
@@ -29,7 +29,7 @@ const DoctorBox: React.FC<IProps> = ({ props }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Typography component="h4" variant="h5">
+              <Typography component="h4" variant="h5" data-cy="doctor-name">
                 {doctor.name} <strong>{doctor.surname}</strong>
               </Typography>
               <Typography component="h5" variant="subtitle1" gutterBottom>

@@ -38,7 +38,7 @@ const Doctor: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Stack direction="row" alignItems="flex-end">
-            <Typography variant="h5" mr={3} textTransform="uppercase">
+            <Typography variant="h5" mr={3} textTransform="uppercase" data-cy="doctor-details-title">
               Doctor details
             </Typography>
           </Stack>
@@ -102,6 +102,7 @@ const Doctor: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={9} p={6}>
+                  {" "}
                   <PatientsTable doctor={doctor} />
                 </Grid>
               </Grid>

@@ -24,7 +24,7 @@ const FiltersForm: FC = () => {
 
   return (
     <Paper sx={{ padding: 4 }}>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit} data-cy="filters-form">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Stack direction="row" alignItems="flex-end">
@@ -37,11 +37,13 @@ const FiltersForm: FC = () => {
           <Grid item xs={3}>
             <TextField
               label="Name"
+              name="name"
               onChange={(e) => setName(e.target.value)}
               variant="outlined"
               size="small"
               fullWidth
               value={name}
+              data-cy="doctor-name-input"
             />
           </Grid>
           <Grid item xs={3}>
@@ -52,6 +54,7 @@ const FiltersForm: FC = () => {
               size="small"
               fullWidth
               value={surname}
+              data-cy="doctor-surname-input"
             />
           </Grid>
           <Grid item xs={4}>
@@ -62,10 +65,11 @@ const FiltersForm: FC = () => {
               size="small"
               fullWidth
               value={profession}
+              data-cy="doctor-profession-input"
             />
           </Grid>
           <Grid item xs={2}>
-            <Button fullWidth variant="outlined" type="submit" endIcon={<SearchIcon />}>
+            <Button fullWidth variant="outlined" type="submit" endIcon={<SearchIcon />} data-cy="filter-submit-button">
               Search
             </Button>
           </Grid>

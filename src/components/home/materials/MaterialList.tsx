@@ -21,14 +21,22 @@ const MaterialList: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Tabs className="drug_list__header" value={activeTab} variant="fullWidth" onChange={handleChange}>
-        <Tab label="Running out drugs" />
-        <Tab label="Running out nursing material" />
+      <Tabs
+        className="drug_list__header"
+        value={activeTab}
+        variant="fullWidth"
+        onChange={handleChange}
+        data-cy="material-tabs"
+      >
+        <Tab label="Running out drugs" data-cy="drugs-tab" />
+        <Tab label="Running out nursing material" data-cy="nursing-tab" />
       </Tabs>
 
-      {list.map((item) => (
-        <MaterialItem {...item} key={item.id} />
-      ))}
+      <div data-cy="material-items-list">
+        {list.map((item) => (
+          <MaterialItem {...item} key={item.id} />
+        ))}
+      </div>
 
       <Tab className="drug_list__see_all_button" label="See all materials"></Tab>
     </React.Fragment>

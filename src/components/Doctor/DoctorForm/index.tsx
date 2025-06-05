@@ -79,7 +79,7 @@ const DoctorForm: FC<IProps> = ({ record }) => {
 
   return (
     <Paper sx={{ p: 4 }}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-cy="doctor-form">
         <Grid container spacing={2} marginBottom={2}>
           <Grid item xs={4}>
             <TextField
@@ -91,6 +91,7 @@ const DoctorForm: FC<IProps> = ({ record }) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               variant="outlined"
+              data-cy="doctor-name-input"
             />
           </Grid>
           <Grid item xs={4}>

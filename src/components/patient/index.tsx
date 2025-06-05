@@ -80,7 +80,13 @@ const StaffMember: React.FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <SectionHeader title="Patient details">
-            <Button variant="outlined" type="submit" startIcon={<DeleteIcon />} onClick={handleDelete}>
+            <Button
+              variant="outlined"
+              type="submit"
+              startIcon={<DeleteIcon />}
+              onClick={handleDelete}
+              data-cy="delete-patient-button"
+            >
               Delete
             </Button>
           </SectionHeader>

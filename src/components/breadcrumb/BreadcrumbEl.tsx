@@ -7,7 +7,11 @@ export interface IBreadcrumbEl extends React.PropsWithChildren {
 const BreadcrumbEl: React.FC<IBreadcrumbEl> = ({ active, children }) => {
   const activeClass = active && "breadcrumb_el--active";
   const className = ["breadcrumb_el", activeClass].join(" ");
-  return <li className={className}>{children}</li>;
+  return (
+    <li className={className} data-cy={active ? "breadcrumb-active" : "breadcrumb-item"}>
+      {children}
+    </li>
+  );
 };
 
 export default BreadcrumbEl;

@@ -9,7 +9,7 @@ const SectionHeader: FC<IProps> = ({ title, children }) => {
   return (
     <Grid container spacing={2} mb={2}>
       <Grid item xs={6}>
-        <Typography component="h1" variant="h6" textTransform="uppercase">
+        <Typography component="h1" variant="h6" textTransform="uppercase" data-cy="page-title">
           {title}
         </Typography>
       </Grid>

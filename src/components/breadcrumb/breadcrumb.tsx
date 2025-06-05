@@ -6,10 +6,12 @@ import "./breadcrumb.scss";
 interface IProps extends React.PropsWithChildren {}
 
 const Breadcrumb: React.FC<IProps> = ({ children }) => (
-  <div className="breadcrumb">
+  <div className="breadcrumb" data-cy="breadcrumb">
     <ul>
       <BreadcrumbEl>
-        <Link to="/">Home</Link>
+        <Link to="/" data-cy="breadcrumb-home">
+          Home
+        </Link>
       </BreadcrumbEl>
       {children}
     </ul>

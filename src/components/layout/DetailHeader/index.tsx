@@ -13,7 +13,7 @@ interface IProps extends React.PropsWithChildren {
 
 const DetailHeader: FC<IProps> = ({ record, subTitle, detailType, edit, children }) => {
   return (
-    <Card>
+    <Card data-cy="doctor-header">
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={6}>
           <Stack direction="row" alignItems="center">

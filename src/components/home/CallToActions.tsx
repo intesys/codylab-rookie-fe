@@ -24,9 +24,15 @@ const CallToActions: React.FC = () => {
       direction="row"
       justifyContent="center"
       alignItems="center"
+      data-cy="call-to-actions"
     >
       <Grid item xs={6} display="flex" justifyContent="flex-end" alignItems="center">
-        <Button variant="contained" sx={IconSx} onClick={() => navigate(getNewDetailPath(PATIENTS_PATH))}>
+        <Button
+          variant="contained"
+          sx={IconSx}
+          onClick={() => navigate(getNewDetailPath(PATIENTS_PATH))}
+          data-cy="register-patient-button"
+        >
           <Add sx={{ width: 60, height: 60 }} />
           Register new patient
         </Button>
