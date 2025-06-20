@@ -1,1 +1,88 @@
 /* Questo è un commento */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid black;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
+}
+
+/* NAV MENU */
+.main-menu ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.main-menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+/* MAIN GRID */
+.box-list {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  grid-template-rows: repeat(2, 260px);
+  gap: 30px;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.box {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-top: 1px solid black;
+  font-size: 12px;
+}
+
+.footer .logo img {
+  width: 24px;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .box-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  
+  
+  
+
+}
