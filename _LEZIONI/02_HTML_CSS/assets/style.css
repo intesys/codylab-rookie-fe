@@ -1,1 +1,32 @@
-/* Questo è un commento */
+.box {
+    background: #c6c6c6;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #111;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #222;
+    margin-top: 48px;
+    padding: 16px 0 0 0;
+}
+
+.footer .logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.credits {
+    font-size: 1rem;
+    color: #111;
+    margin-right: 8px;
+}
+
