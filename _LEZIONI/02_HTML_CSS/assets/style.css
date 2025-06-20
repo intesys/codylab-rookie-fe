@@ -1,1 +1,81 @@
-/* Questo è un commento */
+.container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+  width: 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+  padding-left: 20px;
+  padding-right: 30px;
+  position: relative;
+}
+
+.main-menu ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.box-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 30px 0;
+}
+
+.box {
+  aspect-ratio: 1 / 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #ccc; 
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;  
+  padding-right: 30px; 
+  border-top: 2px solid #000; 
+  height: 60px; 
+}
+
+.footer .logo img {
+  width: 40px; 
+  height: auto;
+}
+
+.footer .credits p {
+  margin: 0;
+  font-weight: 500;
+  color: #000;
+}
+
+@media screen and (max-width: 600px) {
+  .box-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
