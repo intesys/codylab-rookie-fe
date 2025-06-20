@@ -43,7 +43,7 @@ La seconda opzione è preferibile in quanto permette di avere più versioni di N
    - Path Autocomplete - Completamento automatico dei percorsi
    - Prettier - Code formatter - Formattazione automatica del codice
    - Swagger Viewer - Visualizzazione e testing di API REST
-   - Emmet - Scrittura rapida di HTML e CSS
+   - GitLens - Estensione avanzata per Git
    - YAML - Supporto per file YAML
    - Live Server - Server locale per visualizzare pagine HTML in tempo reale
 
