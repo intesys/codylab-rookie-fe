@@ -1,16 +1,31 @@
-// Questo è un commento in JavaScript riga singola
-/* 
-    Questo è un commento in JavaScript multi riga 
-*/
-/* 
+// Esercizio 1
 
-Esercizio 1
+/*let nome = "Enea";
+let eta = 18;
+console.log(nome + eta);*/
 
-1) Creare una costante che contiene una lista di strighe
-2) Intercettare la div che contiene la lista dei box
-3) Creare un ciclo for che cicla la lista di stringhe
-4) Per ogni stringa creare un box con il contenuto della stringa appendendolo alla div che contiente la lista dei box
+//Esercizio 2
 
-*/
+/*let a = 2, b = 5, risultato = a+b;
+console.log(risultato);*/
 
-console.log("Hello World");
+//Esercizio 3
+/*let frutti = ["Banana", "Mela", "Pera"];
+console.log("Primo frutto: " + frutti[0] + ", l'ultimo : " + frutti[2]);*/
+
+//Esercizio 4
+/*frutti.push("Mango");
+console.log(frutti);
+frutti.shift(0);
+console.log(frutti);*/
+
+//Esercizio 5
+
+let Studente = {
+    name: "Enea",
+    surname: "Pjetri",
+    eta: 18
+}
+
+console.log("nome completo: " + Studente.name + " " + Studente.surname);
+
