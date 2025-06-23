@@ -1,16 +1,41 @@
-// Questo è un commento in JavaScript riga singola
-/* 
-    Questo è un commento in JavaScript multi riga 
-*/
-/* 
+//Esercizio 1
+/*let nome = "Thomas";
+let età = 17;
+console.log(nome);
+console.log(età);*/
 
-Esercizio 1
+//Esercizio 2
+/*let x = 3;
+let y = 1;
+console.log(x + y);
+console.log(x * y);*/
 
-1) Creare una costante che contiene una lista di strighe
-2) Intercettare la div che contiene la lista dei box
-3) Creare un ciclo for che cicla la lista di stringhe
-4) Per ogni stringa creare un box con il contenuto della stringa appendendolo alla div che contiente la lista dei box
+//Esercizio 3
+/*let frutti = ["Pesca","Pera","Mela"];
+console.log(frutti[0]);
+console.log(frutti[2]);*/
 
-*/
+//Esercizio 4
+/*let frutti = ["Pesca","Pera","Mela"];
+frutti.push("Arancia");
+console.log(frutti);
+frutti.shift();
+console.log(frutti);*/
 
-console.log("Hello World");
+//Esercizio 5
+const studente = {
+    nome: "Thomas",
+    cognome: "Forestieri",
+    età: 17,
+};
+console.log(studente.nome, studente.cognome, console.età);
+
+
+
+
+
+
+
+
+
+
