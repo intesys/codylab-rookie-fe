@@ -14,3 +14,30 @@ Esercizio 1
 */
 
 console.log("Hello World");
+window.addEventListener("DOMContentLoaded", () => {
+
+  const paroleMagiche = [
+    "noooooo",
+    "il",
+    "js",
+    "nooooooooo",
+    "ooooooooo"
+  ];
+
+
+  const contenitoreBox = document.querySelector(".box-list");
+
+
+  for (let i = 0; i < paroleMagiche.length; i++) {
+
+    const box = document.createElement("div");
+    box.className = "box";
+    
+    const span = document.createElement("span");
+    span.textContent = paroleMagiche[i];
+
+    box.appendChild(span);
+    contenitoreBox.appendChild(box);
+  }
+});
+
