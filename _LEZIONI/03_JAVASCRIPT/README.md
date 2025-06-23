@@ -702,3 +702,9 @@ Crea un oggetto `studente` con le proprietà: `nome`, `cognome` e `eta`. Stampa 
 
 Crea un'interfaccia `Product` con le proprietà: name (string), price (number), inStock (boolean).
 Quindi crea una funzione tipizzata che accetti un array di `Product` e restituisca solo i prodotti in stock.
+
+
+
+let nome = "Elia";
+let eta = 25;
+console.log(nome, eta);
