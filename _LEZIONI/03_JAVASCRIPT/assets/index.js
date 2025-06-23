@@ -18,7 +18,7 @@ console.log("il primo frutto è:", frutti[0]);
 console.log("l'Ultimo frutto è:", frutti[frutti.length - 1]);*/
 
 /*Esercizio 4
-let frutti = ["Pera", "Mango", "Mela"]; 
+let frutti = ["Pera", "Manzzgo", "Mela"]; 
 frutti.push("Banana");
 console.log(frutti);  
 frutti.shift();
@@ -38,7 +38,7 @@ interface Product {
   price: number;
   inStock: boolean;
 }
-function getInStock(products: Product[]) {
+function getInStock(products: Product[]):Product[] {
   return products.filter(p => p.inStock);
 }
 const items = [
