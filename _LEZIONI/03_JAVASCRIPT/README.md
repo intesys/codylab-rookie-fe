@@ -664,10 +664,10 @@ console.log(CourseCategory.WebDevelopment);
 Ecco alcuni esempi di codice JavaScript e le loro controparti in TypeScript:
 
 | JavaScript                             | TypeScript                                                                     |
-| -------------------------------------- | ------------------------------------------------------------------------------ | ------ | ------------------------------- |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
 | `function sum(a, b) { return a + b; }` | `function sum(a: number, b: number): number { return a + b; }`                 |
 | `const person = { name: "Alice" };`    | `interface Person { name: string; } const person: Person = { name: "Alice" };` |
-| `let items = [1, "two", true];`        | `let items: (number                                                            | string | boolean)[] = [1, "two", true];` |
+| `let items = [1, "two", true];`        | `let items: (number \| string \| boolean)[] = [1, "two", true];`               |
 
 ## 8) **Risorse utili**
 
@@ -678,11 +678,27 @@ Ecco alcuni esempi di codice JavaScript e le loro controparti in TypeScript:
 
 ## 9) **Esercizi pratici**
 
-### Esercizio 1 - JavaScript
+### Esercizio 1 - Tipi di dato e variabili
 
-Crea una funzione che accetti un array di numeri e restituisca la somma di tutti gli elementi.
+Crea una variabile `nome` di tipo stringa e una variabile `eta` di tipo numero. Stampa entrambe in console.
 
-### Esercizio 2 - TypeScript
+### Esercizio 2 - Operatori
+
+Dichiara due variabili numeriche, sommale e stampa il risultato. Poi moltiplicale e stampa il risultato.
+
+### Esercizio 3 - Array
+
+Crea un array chiamato `frutti` con almeno 3 nomi di frutta. Stampa il primo e l'ultimo elemento dell'array.
+
+### Esercizio 4 - Metodi degli array
+
+Aggiungi un nuovo frutto all'array `frutti` usando il metodo appropriato e poi rimuovi il primo elemento. Stampa l'array dopo ogni operazione.
+
+### Esercizio 5 - Oggetti
+
+Crea un oggetto `studente` con le proprietà: `nome`, `cognome` e `eta`. Stampa il nome completo dello studente usando le proprietà dell'oggetto.
+
+### Esercizio 6 - Interfacce e Funzioni
 
 Crea un'interfaccia `Product` con le proprietà: name (string), price (number), inStock (boolean).
 Quindi crea una funzione tipizzata che accetti un array di `Product` e restituisca solo i prodotti in stock.
