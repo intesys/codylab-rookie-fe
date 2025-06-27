@@ -6,7 +6,7 @@ Questo repository contiene il codice del corso CodyLab Rookie - Front-end.
 
 ## **!! Importante !!**
 
-Al fine di poter utilizzare correttamente il progetto è necessario che vi sia un server di backend in esecuzione sulla porta 8090. Per maggiori informazioni fare riferimento al repository: [codylab-rookie-be](https://github.com/intesys/codylab-rookie-be).
+Al fine di poter utilizzare correttamente il progetto è necessario che vi sia un server di backend in esecuzione sulla porta 8080. Per maggiori informazioni fare riferimento al repository: [codylab-rookie-be](https://github.com/intesys/codylab-rookie-be).
 
 ---
 
