@@ -1,0 +1,171 @@
+.wrapper {
+  background: #faf6f6;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.breadcrumb {
+  color: #d16b6b;
+  font-size: 1rem;
+  margin: 32px 0 0 0;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 24px 0 16px 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px #0001;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-bottom: 32px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 32px 16px 32px;
+  border-bottom: 1px solid #eee;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e0e0e0;
+}
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit {
+  color: #fe4641;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.role {
+  color: #888;
+  font-size: 1.1rem;
+  margin-top: 2px;
+}
+
+.body {
+  display: flex;
+}
+
+.sidebar {
+  background: #393939;
+  color: #fff;
+  width: 230px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 320px;
+}
+
+.sectionTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #888;
+  padding-bottom: 6px;
+}
+
+.sectionDivider {
+  border-bottom: 1px solid #888;
+  margin: 18px 0;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.icon {
+  font-size: 1.1rem;
+  color: #fe4641;
+}
+
+.patient {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.patientAvatar {
+  font-size: 1.3rem;
+  background: #bdbdbd;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patientsSection {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+.patientsTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px #0001;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.patientsTable th,
+.patientsTable td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.patientsTable th {
+  background: #faf6f6;
+  font-weight: 500;
+  color: #393939;
+  border-bottom: 1px solid #eee;
+}
+
+.patientsTable tr {
+  border-bottom: 1px solid #eee;
+}
+
+.patientsTable td:last-child {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #888;
+}
+
+.patientsTable tr:last-child {
+  border-bottom: none;
+}

@@ -1,31 +1,35 @@
-import React, { Dispatch, useMemo, useReducer } from "react";
-import { DoctorFilterDTO } from "../../generated/axios";
-import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "../Breadcrumb/BreadcrumbEl";
-import { Action, doctorsFilterReducer } from "./lib";
-
-interface IDoctorsFilterContext {
-  filter: DoctorFilterDTO;
-  dispatch: Dispatch<Action>;
-}
-
-export const DoctorsFilterContext: React.Context<IDoctorsFilterContext> = React.createContext({
-  filter: {},
-  dispatch: (action) => {},
-});
+import { api } from "@config/api";
+import { DoctorDTO } from "@generated/axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Doctors: React.FC = () => {
-  const [filter, dispatch] = useReducer(doctorsFilterReducer, {});
-  const doctorsContextValue = useMemo(() => ({ filter, dispatch }), [filter, dispatch]);
+  const [doctors, setDoctors] = useState<DoctorDTO[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.doctors
+      .getListDoctor(0, 50, "id,asc", {})
+      .then((res) => setDoctors(res.data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (!doctors.length) return <div>No doctors found</div>;
 
   return (
-    <DoctorsFilterContext.Provider value={doctorsContextValue}>
-      <Breadcrumb>
-        <BreadcrumbEl active>Doctors</BreadcrumbEl>
-      </Breadcrumb>
-      {/* Doctors filter form */}
-      {/* Doctors list */}
-    </DoctorsFilterContext.Provider>
+    <div style={{ padding: 32 }}>
+      <h2>Doctors Database</h2>
+      <ul>
+        {doctors.map((doctor) => (
+          <li key={doctor.id}>
+            <Link to={`/doctors/${doctor.id}`}>
+              {doctor.name} {doctor.surname}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

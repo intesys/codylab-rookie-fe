@@ -1,21 +1,39 @@
-import Breadcrumb from "@components/Breadcrumb/Breadcrumb";
-import BreadcrumbEl from "@components/Breadcrumb/BreadcrumbEl";
-import { DOCTORS_PATH } from "@config/paths";
-import { getPath } from "@lib/utils";
-import React from "react";
-import { Link } from "react-router-dom";
+import { api } from "@config/api";
+import React, { useEffect, useState } from "react";
+import { DoctorDTO } from "../../generated/axios";
+import DoctorFilterForm from "./DoctorFilterForm";
+import DoctorList from "./DoctorList";
 
-const Doctor: React.FC = () => {
+const Doctors: React.FC = () => {
+  const [doctors, setDoctors] = useState<DoctorDTO[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchDoctors = (criteria = {}) => {
+    setLoading(true);
+    api.doctors
+      .filterDoctor({
+        page: 0,
+        size: 50,
+        sort: ["id,asc"],
+        criteria,
+      })
+      .then((res) => setDoctors(res.data.content || []))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
   return (
-    <div>
-      <Breadcrumb>
-        <BreadcrumbEl>
-          <Link to={getPath(DOCTORS_PATH)}>Doctors</Link>
-        </BreadcrumbEl>
-        <BreadcrumbEl active>{/* Doctor name and surname */}</BreadcrumbEl>
-      </Breadcrumb>
+    <div style={{ padding: 32 }}>
+      <h2>Doctors Database</h2>
+      <DoctorFilterForm onFilter={fetchDoctors} />
+      {loading && <div>Loading...</div>}
+      {!loading && !doctors.length && <div>No doctors found</div>}
+      {!loading && <DoctorList doctors={doctors} />}
     </div>
   );
 };
 
-export default Doctor;
+export default Doctors;

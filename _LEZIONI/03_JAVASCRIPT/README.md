@@ -705,6 +705,3 @@ Quindi crea una funzione tipizzata che accetti un array di `Product` e restituis
 
 
 
-let nome = "Elia";
-let eta = 25;
-console.log(nome, eta);
