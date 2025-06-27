@@ -1,6 +1,6 @@
 //Esercizio 1
 /*let nome = "Thomas";
-let età = 17;
+let eta = 17;
 console.log(nome);
 console.log(età);*/
 
@@ -13,7 +13,7 @@ console.log(x * y);*/
 //Esercizio 3
 /*let frutti = ["Pesca","Pera","Mela"];
 console.log(frutti[0]);
-console.log(frutti[2]);*/
+console.log(frutti.length - 1);*/
 
 //Esercizio 4
 /*let frutti = ["Pesca","Pera","Mela"];
@@ -23,19 +23,28 @@ frutti.shift();
 console.log(frutti);*/
 
 //Esercizio 5
-const studente = {
+/*const studente = {
     nome: "Thomas",
     cognome: "Forestieri",
     età: 17,
 };
-console.log(studente.nome, studente.cognome, console.età);
+console.log(studente.nome, studente.cognome);*/
 
+//Esercizio 6
+/*interface Product {
+  name: string;
+  price: number;
+  inStock: boolean;
+}
 
-
-
-
-
-
-
-
+function getAvailableProducts(products: Product[]): Product[] {
+  return products.filter(product => product.inStock);
+}
+const prodotti: Product[] = [
+  { name: "Pasta", price: 2, inStock: true },
+   { name: "Pasta", price: 2, inStock: true },
+    { name: "Pasta", price: 2, inStock: true },
+  { name: "Quadro", price: 5, inStock: false },
+];
+console.log(getProducts(prodotti));*/
 
